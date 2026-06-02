@@ -1,0 +1,11 @@
+# .graphifyignore — what to exclude from the knowledge graph (README Section 4)
+# Same syntax as .gitignore, including ! negation.
+
+.git/
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+*.generated.*

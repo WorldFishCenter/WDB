@@ -1,0 +1,13 @@
+# Graphify local-only files (README Section 7)
+# These are machine-specific and break when shared, so don't commit them.
+graphify-out/manifest.json   # mtime-based, invalid after clone
+graphify-out/cost.json       # local token tracking
+# graphify-out/cache/        # optional: commit for speed, omit to keep repo small
+
+# OS / editor cruft
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
