@@ -2,6 +2,14 @@
 
 A shared Graphify knowledge graph for the WorldFish Digital Brain (WDB) project. This README is the working standard for the repo: it explains how to set up Graphify and how to organize files so every team member works from the same map of our code, datasets, and documents.
 
+### 🧠 Open the knowledge graph
+
+**[▶ Explore the interactive graph →](graphify-out/graph.html)**
+
+Clone the repo and open that file in any browser to explore the full WDB map — nodes, communities, and search. It's regenerated on every `/graphify .` or `/graphify . --update` run, so the committed copy always reflects the latest graph. (On github.com the link shows the file's source; download or clone the repo to open it live — GitHub can't render interactive HTML inline.)
+
+> **Not a coder?** To add a file, dataset, or idea without touching the command line, follow **[USER_GUIDE.md](USER_GUIDE.md)** instead — a click-by-click walkthrough with no graph-tool setup.
+
 ## Contents
 
 - [1. One-time setup (each team member)](#1-one-time-setup-each-team-member)
@@ -27,6 +35,8 @@ Graphify is an open-source skill for AI coding assistants (Claude Code, Codex, C
 - `graph.json` — the full graph, queryable without re-reading files
 
 **How extraction works (so expectations are correct):** code is parsed locally with Tree-sitter (no API calls); docs, PDFs, and images are sent to your assistant's model for semantic extraction; relationships are clustered and each one is tagged `EXTRACTED`, `INFERRED`, or `AMBIGUOUS`. It is *not* keyword/filename matching.
+
+Graphify is open-source (MIT) — official project: **[graphifylabs.ai](https://graphifylabs.ai/)** · source & issues: **[github.com/safishamsi/graphify](https://github.com/safishamsi/graphify)** · PyPI package: `graphifyy`.
 
 ---
 
@@ -157,12 +167,20 @@ This is what keeps everyone on the same map.
 
 4. **When docs or papers change**, run `/graphify . --update` to refresh those nodes.
 
-**Add to `.gitignore`** (these are local-only and break when shared):
+**Add to `.gitignore`** (these are local-only and break when shared). Keep each comment on its **own line** — an inline `# ...` after a pattern becomes part of the pattern, so the rule silently never matches:
 
 ```
-graphify-out/manifest.json   # mtime-based, invalid after clone
-graphify-out/cost.json        # local token tracking
-# graphify-out/cache/         # optional: commit for speed, omit to keep repo small
+# manifest.json + cache/stat-index.json are mtime/path-based (invalid after clone);
+# cost.json is local token tracking; .graphify_root/.graphify_python are absolute paths.
+graphify-out/manifest.json
+graphify-out/cost.json
+graphify-out/cache/stat-index.json
+graphify-out/.graphify_root
+graphify-out/.graphify_python
+
+# The content-hashed cache (cache/ast, cache/semantic) is committed so teammates skip
+# re-extraction. To keep the repo small instead, ignore the whole cache:
+# graphify-out/cache/
 ```
 
 ---

@@ -1,0 +1,286 @@
+{
+  "communities": {
+    "0": [
+      "fasa_asns_nutrition_specification_database_dict_asns_database",
+      "fasa_asns_nutrition_specification_database_dict_restriction_type",
+      "fasa_asns_nutrition_specification_database_dict_spec_code",
+      "fasa_asns_nutrition_specification_database_dict_stage_weight",
+      "fasa_fasa_git_readme_chance_constrained_handling",
+      "fasa_fasa_git_readme_crosswalk",
+      "fasa_fasa_git_readme_fasa_feed_formulation_engine",
+      "fasa_fasa_git_readme_fastapi_surface",
+      "fasa_fasa_git_readme_ingredient_pool_africa",
+      "fasa_fasa_git_readme_interaction_layer_hua_bureau_2012",
+      "fasa_fasa_git_readme_toxin_hard_ceilings",
+      "fasa_fasa_git_readme_validator",
+      "fasa_ficd_feed_ingredient_composition_database_dict_composition_parameter",
+      "fasa_ficd_feed_ingredient_composition_database_dict_digestible_energy_variants",
+      "fasa_ficd_feed_ingredient_composition_database_dict_ficd_database",
+      "fasa_ficd_feed_ingredient_composition_database_dict_ingredient_code",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_calculated_composition",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_correctness_target",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_nutrient",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_benchmark_gate",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_feed_formulations",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_iaffd_code",
+      "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_inclusion_percent"
+    ],
+    "1": [
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_baci_design",
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_beach_management_units",
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_behavioral_models",
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_context_digital_feedback_study",
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_kap_framework",
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_paper",
+      "ssf_research_digital_feedback_fisher_behavior_kenya_2025_peskas_toolkit",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_child_stunting_malnutrition",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_cluster_rct_2x2_factorial",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_context_fish_consumption_rct",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_fad_intervention",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_integrated_food_system",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_paper",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_peskas_monitoring",
+      "ssf_research_fish_consumption_rct_timor_leste_2026_sbc_intervention"
+    ],
+    "2": [
+      "pondcube_about",
+      "pondcube_ammonia_lookup",
+      "pondcube_data_dictionary",
+      "pondcube_excluded_derived_sheets",
+      "pondcube_forward_compat_timeseries",
+      "pondcube_measurements_long_csv",
+      "pondcube_measurements_long_dict",
+      "pondcube_observations_wide_csv",
+      "pondcube_observations_wide_dict",
+      "pondcube_realtime_monitoring",
+      "pondcube_source_workbook",
+      "pondcube_tanks_reference_csv",
+      "pondcube_tanks_reference_dict",
+      "pondcube_tidy_long_format"
+    ],
+    "3": [
+      "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_airtable_diagnostic",
+      "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_idhf",
+      "peskas_peskas_automated_analytics_softwarex_2025_airtable_registry",
+      "peskas_peskas_automated_analytics_softwarex_2025_estimate_fishery_indicators",
+      "peskas_peskas_automated_analytics_softwarex_2025_harvard_dataverse",
+      "peskas_peskas_automated_analytics_softwarex_2025_kobotoolbox",
+      "peskas_peskas_automated_analytics_softwarex_2025_mad_outlier",
+      "peskas_peskas_automated_analytics_softwarex_2025_pds",
+      "peskas_peskas_automated_analytics_softwarex_2025_validate_pds_data",
+      "peskas_peskas_automated_analytics_softwarex_2025_workflow_modules",
+      "peskas_peskas_monitoring_system_slides_mongodb_storage"
+    ],
+    "4": [
+      "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_doc",
+      "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_fao_ontologies",
+      "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_scoping_assessment",
+      "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_thematic_domains",
+      "data_harmonization_wiomsa_harmonization_oct2025_cgiar_strategy",
+      "data_harmonization_wiomsa_harmonization_oct2025_minimum_common_denominator",
+      "data_harmonization_wiomsa_harmonization_oct2025_terms_standardisation",
+      "peskas_peskas_automated_analytics_softwarex_2025_aquatic_foods_ontology",
+      "peskas_peskas_automated_analytics_softwarex_2025_calculate_nutrients",
+      "peskas_peskas_monitoring_system_slides_fao_3alpha"
+    ],
+    "5": [
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fishbase_gfcd",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_shap",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_timor_catch_data",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_xgboost_model",
+      "peskas_peskas_automated_analytics_softwarex_2025_docker_github_gcloud",
+      "peskas_peskas_automated_analytics_softwarex_2025_open_source_rationale",
+      "peskas_peskas_automated_analytics_softwarex_2025_peskas_platform",
+      "peskas_peskas_automated_analytics_softwarex_2025_shiny_dashboard",
+      "peskas_peskas_automated_analytics_softwarex_2025_timor_pipeline",
+      "peskas_peskas_automated_analytics_softwarex_2025_timor_portal"
+    ],
+    "6": [
+      "data_harmonization_wiomsa_harmonization_oct2025_data_heterogeneity",
+      "data_harmonization_wiomsa_harmonization_oct2025_deck",
+      "data_harmonization_wiomsa_harmonization_oct2025_harmonization_benefits",
+      "data_harmonization_wiomsa_harmonization_oct2025_regional_platforms",
+      "peskas_peskas_automated_analytics_softwarex_2025_paper",
+      "peskas_peskas_monitoring_system_slides_data_flow",
+      "peskas_peskas_monitoring_system_slides_deck",
+      "peskas_peskas_monitoring_system_slides_ssf_challenges"
+    ],
+    "7": [
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_complementary_pathways",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_eaf",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fnp",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_kmeans_clustering",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_nsfm",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_paper",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_permanova",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_wra"
+    ],
+    "8": [
+      "fasa_fasa_git_readme_iis_reporting",
+      "fasa_fasa_git_readme_linear_programming_engine",
+      "fasa_fasa_git_readme_premix_constraint_masking"
+    ],
+    "9": [
+      "pondcube_blank_is_missing",
+      "pondcube_data_quality_csv",
+      "pondcube_data_quality_dict"
+    ],
+    "10": [
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fads",
+      "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_small_pelagics"
+    ],
+    "11": [
+      "pondcube_tank_local_identity"
+    ]
+  },
+  "cohesion": {
+    "0": 0.12648221343873517,
+    "1": 0.19047619047619047,
+    "2": 0.1978021978021978,
+    "3": 0.18181818181818182,
+    "4": 0.2222222222222222,
+    "5": 0.2,
+    "6": 0.25,
+    "7": 0.25,
+    "8": 0.6666666666666666,
+    "9": 0.6666666666666666,
+    "10": 1.0,
+    "11": 1.0
+  },
+  "gods": [
+    {
+      "id": "fasa_fasa_git_readme_fasa_feed_formulation_engine",
+      "label": "FASA Feed Formulation Engine (MVP)",
+      "degree": 10
+    },
+    {
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_paper",
+      "label": "A supply and demand intervention increased fish consumption among rural women (PLoS One 2026)",
+      "degree": 8
+    },
+    {
+      "id": "pondcube_data_dictionary",
+      "label": "PondCube Data Dictionary (Full)",
+      "degree": 7
+    },
+    {
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_peskas_platform",
+      "label": "Peskas Platform",
+      "degree": 7
+    },
+    {
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_workflow_modules",
+      "label": "Six-Module Peskas Workflow (Collection, Preprocessing, Validation, Analytics, Export, Visualisation)",
+      "degree": 7
+    },
+    {
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_feed_formulations",
+      "label": "PAFF Feed Formulations table",
+      "degree": 7
+    },
+    {
+      "id": "fasa_asns_nutrition_specification_database_dict_asns_database",
+      "label": "ASNS Nutrition Specification database",
+      "degree": 7
+    },
+    {
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_paper",
+      "label": "How much is too much information? Testing digital feedback on fisher behavior (Frontiers 2025)",
+      "degree": 7
+    },
+    {
+      "id": "pondcube_measurements_long_csv",
+      "label": "pondcube_measurements_long.csv",
+      "degree": 6
+    },
+    {
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_doc",
+      "label": "Technical Guidelines for SSF Data Harmonization in the WIO (v1.0, April 2026)",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Phase I Airtable Participatory Diagnostic Survey",
+      "target": "Airtable Metadata Registry",
+      "source_files": [
+        "data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md",
+        "peskas/peskas_automated_analytics_softwarex_2025.pdf"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (paper ↔ doc); connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "FAO Ontologies and Classifications (ASFIS, GAUL)",
+      "target": "FAO 3-Alpha Code Taxonomic Harmonisation",
+      "source_files": [
+        "data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md",
+        "peskas/peskas_monitoring_system_slides.pdf"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (paper ↔ doc); connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Technical Guidelines for SSF Data Harmonization in the WIO (v1.0, April 2026)",
+      "target": "Peskas Platform",
+      "source_files": [
+        "data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md",
+        "peskas/peskas_automated_analytics_softwarex_2025.pdf"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (paper ↔ doc); connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Terms/Variables Standardisation Across Organisations",
+      "target": "Aquatic Foods Ontology",
+      "source_files": [
+        "data_harmonization/WIOMSA_harmonization_OCT2025.pdf",
+        "peskas/peskas_automated_analytics_softwarex_2025.pdf"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Data Collection Heterogeneity (Five Dimensions)",
+      "target": "Challenges in SSF Data Collection",
+      "source_files": [
+        "data_harmonization/WIOMSA_harmonization_OCT2025.pdf",
+        "peskas/peskas_monitoring_system_slides.pdf"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Peskas Platform` connect `Community 5` to `Community 4`, `Community 6`?",
+      "why": "High betweenness centrality (0.110) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Technical Guidelines for SSF Data Harmonization in the WIO (v1.0, April 2026)` connect `Community 4` to `Community 3`, `Community 5`, `Community 6`?",
+      "why": "High betweenness centrality (0.086) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Six-Module Peskas Workflow (Collection, Preprocessing, Validation, Analytics, Export, Visualisation)` connect `Community 3` to `Community 5`, `Community 6`?",
+      "why": "High betweenness centrality (0.058) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `pondcube_data_quality.csv`, `PondCube Source Workbook 2025.7.31.xlsx`, `Data Dictionary: pondcube_measurements_long.csv` to the rest of the system?",
+      "why": "40 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.12648221343873517 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

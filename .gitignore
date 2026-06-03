@@ -1,8 +1,15 @@
-# Graphify local-only files (README Section 7)
-# These are machine-specific and break when shared, so don't commit them.
-graphify-out/manifest.json   # mtime-based, invalid after clone
-graphify-out/cost.json       # local token tracking
-# graphify-out/cache/        # optional: commit for speed, omit to keep repo small
+# Graphify local-only files (README Section 7) — machine-specific, break when shared.
+# Keep comments on their own lines: an inline "# ..." becomes part of the pattern.
+# manifest.json + cache/stat-index.json are mtime/path-based (invalid after clone);
+# cost.json is local token tracking; .graphify_root/.graphify_python are absolute local paths.
+graphify-out/manifest.json
+graphify-out/cost.json
+graphify-out/cache/stat-index.json
+graphify-out/.graphify_root
+graphify-out/.graphify_python
+# The content-hashed cache (cache/ast, cache/semantic) IS committed so teammates skip
+# re-extraction. To keep the repo small instead, ignore the whole cache: uncomment below.
+# graphify-out/cache/
 
 # OS / editor cruft
 .DS_Store
