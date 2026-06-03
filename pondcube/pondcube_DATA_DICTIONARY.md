@@ -61,10 +61,10 @@ Units were not stated in the source and are applied as the aquaculture-standard 
 
 ## Conventions & rules applied
 
-- **Blank = missing.** A blank source cell becomes an absent row (long) or empty cell (wide). It is **never** recorded as 0.
-- **Real zeros preserved.** The source contains exactly 5 genuine `0` values, all `nitrate`. These are chemically plausible (undetectable nitrate) and were kept; they are also listed in the QA log so you can confirm none were placeholders.
+- **Blank = missing.** A blank source cell becomes an absent row in `pondcube_measurements_long.csv` (long) or an empty cell in `pondcube_observations_wide.csv` (wide). It is **never** recorded as 0. Any ambiguous cases are logged in `pondcube_data_quality.csv`.
+- **Real zeros preserved.** The source contains exactly 5 genuine `0` values, all `nitrate`. These are chemically plausible (undetectable nitrate) and were kept; they are also listed in `pondcube_data_quality.csv` so you can confirm none were placeholders.
 - **Remarks:** the Remarks columns exist in the template but are **empty throughout** July, so no remark rows were produced.
-- **Tank identity:** `tank_id` is local to a location. To reference a tank globally, use the pair `(location, tank_id)`.
+- **Tank identity.** `tank_id` is local to a location; the global key is the pair `(location, tank_id)`. Every location/zone/tank is enumerated in `pondcube_tanks_reference.csv`, which the `location` and `tank_id` columns of `pondcube_measurements_long.csv` and `pondcube_observations_wide.csv` join against.
 
 ## Coverage (July 2025)
 

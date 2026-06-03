@@ -2,11 +2,13 @@
 
 A shared Graphify knowledge graph for the WorldFish Digital Brain (WDB) project. This README is the working standard for the repo: it explains how to set up Graphify and how to organize files so every team member works from the same map of our code, datasets, and documents.
 
-### 🧠 Open the knowledge graph
+### 🧠 The knowledge graph
 
-**[▶ Explore the interactive graph →](graphify-out/graph.html)**
+[![WDB knowledge graph — communities colour-coded](graphify-out/graph.svg)](graphify-out/graph.html)
 
-Clone the repo and open that file in any browser to explore the full WDB map — nodes, communities, and search. It's regenerated on every `/graphify .` or `/graphify . --update` run, so the committed copy always reflects the latest graph. (On github.com the link shows the file's source; download or clone the repo to open it live — GitHub can't render interactive HTML inline.)
+A snapshot of the current graph (each colour is a community). **[▶ Open the interactive version →](graphify-out/graph.html)** — clone the repo and open that file in any browser to search, zoom, and click through nodes. GitHub can't render interactive HTML inline, so the image above is the in-page preview and the link opens the live graph locally.
+
+> **Keeping it current:** `graph.html` refreshes on every `/graphify .` or `/graphify . --update` run. The `graph.svg` preview is regenerated with `graphify export svg` (or build with `/graphify . --svg`). Commit `graphify-out/` and both stay in sync for the team.
 
 > **Not a coder?** To add a file, dataset, or idea without touching the command line, follow **[USER_GUIDE.md](USER_GUIDE.md)** instead — a click-by-click walkthrough with no graph-tool setup.
 
