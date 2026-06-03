@@ -4,168 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": "pondcube_DATA_DICTIONARY.md",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L1",
-      "id": "pondcube_pondcube_data_dictionary_md",
-      "community": 8,
-      "norm_label": "pondcube_data_dictionary.md"
-    },
-    {
-      "label": "PondCube \u2014 Water Quality Dataset (July 2025)",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L1",
-      "id": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "community": 8,
-      "norm_label": "pondcube \u2014 water quality dataset (july 2025)"
-    },
-    {
-      "label": "Files",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L5",
-      "id": "pondcube_pondcube_data_dictionary_files",
-      "community": 8,
-      "norm_label": "files"
-    },
-    {
-      "label": "Source interpretation",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L15",
-      "id": "pondcube_pondcube_data_dictionary_source_interpretation",
-      "community": 8,
-      "norm_label": "source interpretation"
-    },
-    {
-      "label": "Schema \u2014 `pondcube_measurements_long.csv`",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L27",
-      "id": "pondcube_pondcube_data_dictionary_schema_pondcube_measurements_long_csv",
-      "community": 8,
-      "norm_label": "schema \u2014 `pondcube_measurements_long.csv`"
-    },
-    {
-      "label": "Schema \u2014 `pondcube_observations_wide.csv`",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L43",
-      "id": "pondcube_pondcube_data_dictionary_schema_pondcube_observations_wide_csv",
-      "community": 8,
-      "norm_label": "schema \u2014 `pondcube_observations_wide.csv`"
-    },
-    {
-      "label": "Units (standard aquaculture)",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L49",
-      "id": "pondcube_pondcube_data_dictionary_units_standard_aquaculture",
-      "community": 8,
-      "norm_label": "units (standard aquaculture)"
-    },
-    {
-      "label": "Conventions & rules applied",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L62",
-      "id": "pondcube_pondcube_data_dictionary_conventions_rules_applied",
-      "community": 8,
-      "norm_label": "conventions & rules applied"
-    },
-    {
-      "label": "Coverage (July 2025)",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L69",
-      "id": "pondcube_pondcube_data_dictionary_coverage_july_2025",
-      "community": 8,
-      "norm_label": "coverage (july 2025)"
-    },
-    {
-      "label": "Data-quality issues flagged",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L76",
-      "id": "pondcube_pondcube_data_dictionary_data_quality_issues_flagged",
-      "community": 8,
-      "norm_label": "data-quality issues flagged"
-    },
-    {
-      "label": "Forward-compatibility (probes / APIs / cloud)",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L80",
-      "id": "pondcube_pondcube_data_dictionary_forward_compatibility_probes_apis_cloud",
-      "community": 8,
-      "norm_label": "forward-compatibility (probes / apis / cloud)"
-    },
-    {
-      "label": "pondcube_about.md",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L1",
-      "id": "pondcube_pondcube_about_md",
-      "community": 9,
-      "norm_label": "pondcube_about.md"
-    },
-    {
-      "label": "PondCube",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L1",
-      "id": "pondcube_pondcube_about_pondcube",
-      "community": 9,
-      "norm_label": "pondcube"
-    },
-    {
-      "label": "Aim",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L3",
-      "id": "pondcube_pondcube_about_aim",
-      "community": 9,
-      "norm_label": "aim"
-    },
-    {
-      "label": "How it works",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L7",
-      "id": "pondcube_pondcube_about_how_it_works",
-      "community": 9,
-      "norm_label": "how it works"
-    },
-    {
-      "label": "Why it matters",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L15",
-      "id": "pondcube_pondcube_about_why_it_matters",
-      "community": 9,
-      "norm_label": "why it matters"
-    },
-    {
-      "label": "Datasets",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L19",
-      "id": "pondcube_pondcube_about_datasets",
-      "community": 9,
-      "norm_label": "datasets"
-    },
-    {
-      "label": "In short",
-      "file_type": "document",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L30",
-      "id": "pondcube_pondcube_about_in_short",
-      "community": 9,
-      "norm_label": "in short"
-    },
-    {
       "label": "pondcube_measurements_long.csv",
       "file_type": "concept",
       "source_file": "pondcube/pondcube_measurements_long_dict.md",
@@ -213,9 +51,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 2,
       "norm_label": "pondcube_data_quality.csv",
       "id": "pondcube_data_quality_csv"
+    },
+    {
+      "label": "PondCube Source Workbook 2025.7.31.xlsx",
+      "file_type": "concept",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "pondcube source workbook 2025.7.31.xlsx",
+      "id": "pondcube_source_workbook"
     },
     {
       "label": "Data Dictionary: pondcube_observations_wide.csv",
@@ -265,9 +116,126 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 2,
       "norm_label": "data dictionary: pondcube_data_quality.csv",
       "id": "pondcube_data_quality_dict"
+    },
+    {
+      "label": "PondCube Data Dictionary (Full)",
+      "file_type": "document",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "pondcube data dictionary (full)",
+      "id": "pondcube_data_dictionary"
+    },
+    {
+      "label": "PondCube System Overview",
+      "file_type": "document",
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "pondcube system overview",
+      "id": "pondcube_about"
+    },
+    {
+      "label": "Tidy Long Format Convention",
+      "file_type": "concept",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "tidy long format convention",
+      "id": "pondcube_tidy_long_format"
+    },
+    {
+      "label": "Blank-Equals-Missing Rule",
+      "file_type": "rationale",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "blank-equals-missing rule",
+      "id": "pondcube_blank_is_missing"
+    },
+    {
+      "label": "Exclusion of Derived/Reference Sheets",
+      "file_type": "rationale",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "exclusion of derived/reference sheets",
+      "id": "pondcube_excluded_derived_sheets"
+    },
+    {
+      "label": "Location-Local Tank Identity",
+      "file_type": "rationale",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "location-local tank identity",
+      "id": "pondcube_tank_local_identity"
+    },
+    {
+      "label": "Ammonia NH3 Toxicity Lookup Table",
+      "file_type": "concept",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "ammonia nh3 toxicity lookup table",
+      "id": "pondcube_ammonia_lookup"
+    },
+    {
+      "label": "Real-Time Water-Quality Monitoring System",
+      "file_type": "concept",
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "real-time water-quality monitoring system",
+      "id": "pondcube_realtime_monitoring"
+    },
+    {
+      "label": "Forward-Compatible Time-Series/Observation Model",
+      "file_type": "rationale",
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 2,
+      "norm_label": "forward-compatible time-series/observation model",
+      "id": "pondcube_forward_compat_timeseries"
     },
     {
       "label": "Fishery Nutrient Profiles for NSFM in Timor-Leste (Nature Food 2026)",
@@ -1442,164 +1410,34 @@
   ],
   "links": [
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_md",
-      "target": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L62",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_conventions_rules_applied",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L69",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_coverage_july_2025",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L76",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_data_quality_issues_flagged",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_files",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L80",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_forward_compatibility_probes_apis_cloud",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L27",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_schema_pondcube_measurements_long_csv",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L43",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_schema_pondcube_observations_wide_csv",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_source_interpretation",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
-      "source_location": "L49",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_data_dictionary_pondcube_water_quality_dataset_july_2025",
-      "target": "pondcube_pondcube_data_dictionary_units_standard_aquaculture",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L1",
+      "source_location": null,
       "weight": 1.0,
-      "source": "pondcube_pondcube_about_md",
-      "target": "pondcube_pondcube_about_pondcube",
-      "confidence_score": 1.0
+      "source": "pondcube_about",
+      "target": "pondcube_measurements_long_csv"
     },
     {
-      "relation": "contains",
+      "relation": "rationale_for",
       "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L3",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
       "weight": 1.0,
-      "source": "pondcube_pondcube_about_pondcube",
-      "target": "pondcube_pondcube_about_aim",
-      "confidence_score": 1.0
+      "source": "pondcube_blank_is_missing",
+      "target": "pondcube_measurements_long_csv"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L19",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
       "weight": 1.0,
-      "source": "pondcube_pondcube_about_pondcube",
-      "target": "pondcube_pondcube_about_datasets",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_about_pondcube",
-      "target": "pondcube_pondcube_about_how_it_works",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L30",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_about_pondcube",
-      "target": "pondcube_pondcube_about_in_short",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "pondcube/pondcube_about.md",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "pondcube_pondcube_about_pondcube",
-      "target": "pondcube_pondcube_about_why_it_matters",
-      "confidence_score": 1.0
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_measurements_long_csv"
     },
     {
       "relation": "shares_data_with",
@@ -1642,6 +1480,56 @@
       "target": "pondcube_measurements_long_csv"
     },
     {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_tank_local_identity",
+      "target": "pondcube_measurements_long_csv"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_tidy_long_format",
+      "target": "pondcube_measurements_long_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_about",
+      "target": "pondcube_observations_wide_csv"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_blank_is_missing",
+      "target": "pondcube_observations_wide_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_observations_wide_csv"
+    },
+    {
       "relation": "shares_data_with",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1662,6 +1550,46 @@
       "target": "pondcube_observations_wide_csv"
     },
     {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_tank_local_identity",
+      "target": "pondcube_observations_wide_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_about",
+      "target": "pondcube_tanks_reference_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_tanks_reference_csv"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_tank_local_identity",
+      "target": "pondcube_tanks_reference_csv"
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -1675,11 +1603,151 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_about",
+      "target": "pondcube_data_quality_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_blank_is_missing",
+      "target": "pondcube_data_quality_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_data_quality_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "pondcube/pondcube_data_quality_dict.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_quality_dict",
       "target": "pondcube_data_quality_csv"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_about",
+      "target": "pondcube_source_workbook"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_source_workbook"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_observations_wide_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_observations_wide_dict",
+      "target": "pondcube_ammonia_lookup"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "pondcube/pondcube_data_quality_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_quality_dict",
+      "target": "pondcube_blank_is_missing"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_about",
+      "target": "pondcube_data_dictionary"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_ammonia_lookup"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_excluded_derived_sheets"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_forward_compat_timeseries"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_data_dictionary",
+      "target": "pondcube_tidy_long_format"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "pondcube/pondcube_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_about",
+      "target": "pondcube_realtime_monitoring"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "pondcube_forward_compat_timeseries",
+      "target": "pondcube_realtime_monitoring"
     },
     {
       "relation": "references",
@@ -2753,5 +2821,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9ddfec133a37f7a0a7944040787a29e2d2929c76"
+  "built_at_commit": "d4da3ca509e18ac074486eb5d1ec3cd82b38055b"
 }

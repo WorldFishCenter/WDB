@@ -1,18 +1,12 @@
-# Graph Report - WDB  (2026-06-03)
+# Graph Report - .  (2026-06-03)
 
 ## Corpus Check
-- 18 files · ~5,881 words
-- Verdict: corpus is large enough that graph structure adds value.
+- Corpus is ~5,881 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 116 nodes · 131 edges · 11 communities (9 shown, 2 thin omitted)
-- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.83)
+- 108 nodes · 141 edges · 8 communities (7 shown, 1 thin omitted)
+- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `9ddfec13`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Feed Formulation Engine (FASA)|Feed Formulation Engine (FASA)]]
@@ -23,21 +17,18 @@
 - [[_COMMUNITY_WIO Harmonization Standards|WIO Harmonization Standards]]
 - [[_COMMUNITY_LP Solver Internals|LP Solver Internals]]
 - [[_COMMUNITY_FADs & Small Pelagics|FADs & Small Pelagics]]
-- [[_COMMUNITY_Community 8|Community 8]]
-- [[_COMMUNITY_Community 9|Community 9]]
-- [[_COMMUNITY_Community 10|Community 10]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `PondCube — Water Quality Dataset (July 2025)` - 10 edges
+1. `PondCube Data Dictionary (Full)` - 10 edges
 2. `FASA Feed Formulation Engine (MVP)` - 10 edges
-3. `A supply and demand intervention increased fish consumption among rural women (PLoS One 2026)` - 8 edges
-4. `Peskas Platform` - 7 edges
-5. `Six-Module Peskas Workflow (Collection, Preprocessing, Validation, Analytics, Export, Visualisation)` - 7 edges
-6. `PAFF Feed Formulations table` - 7 edges
-7. `ASNS Nutrition Specification database` - 7 edges
-8. `How much is too much information? Testing digital feedback on fisher behavior (Frontiers 2025)` - 7 edges
-9. `PondCube` - 6 edges
-10. `Technical Guidelines for SSF Data Harmonization in the WIO (v1.0, April 2026)` - 6 edges
+3. `pondcube_measurements_long.csv` - 9 edges
+4. `A supply and demand intervention increased fish consumption among rural women (PLoS One 2026)` - 8 edges
+5. `pondcube_observations_wide.csv` - 7 edges
+6. `PondCube System Overview` - 7 edges
+7. `Peskas Platform` - 7 edges
+8. `Six-Module Peskas Workflow (Collection, Preprocessing, Validation, Analytics, Export, Visualisation)` - 7 edges
+9. `PAFF Feed Formulations table` - 7 edges
+10. `ASNS Nutrition Specification database` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Phase I Airtable Participatory Diagnostic Survey` --semantically_similar_to--> `Airtable Metadata Registry`  [INFERRED] [semantically similar]
@@ -54,7 +45,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (11 total, 2 thin omitted)
+## Communities (8 total, 1 thin omitted)
 
 ### Community 0 - "Feed Formulation Engine (FASA)"
 Cohesion: 0.13
@@ -65,8 +56,8 @@ Cohesion: 0.11
 Nodes (19): Complementary Management Pathways, Ecosystem Approach to Fisheries (EAF), NutrientFishbase and Global Food Composition Databases, Fishery Nutrient Profile (FNP), K-means Clustering of Fishing Trips by Nutrient Density, Nutrition-Sensitive Fisheries Management (NSFM), Fishery Nutrient Profiles for NSFM in Timor-Leste (Nature Food 2026), PERMANOVA Validation of Nutrient Profiles (+11 more)
 
 ### Community 2 - "PondCube Monitoring"
-Cohesion: 0.47
-Nodes (6): pondcube_measurements_long.csv, Data Dictionary: pondcube_measurements_long.csv, pondcube_observations_wide.csv, Data Dictionary: pondcube_observations_wide.csv, pondcube_tanks_reference.csv, Data Dictionary: pondcube_tanks_reference.csv
+Cohesion: 0.22
+Nodes (18): PondCube System Overview, Ammonia NH3 Toxicity Lookup Table, Blank-Equals-Missing Rule, PondCube Data Dictionary (Full), pondcube_data_quality.csv, Data Dictionary: pondcube_data_quality.csv, Exclusion of Derived/Reference Sheets, Forward-Compatible Time-Series/Observation Model (+10 more)
 
 ### Community 3 - "Peskas Pipeline & Harmonization"
 Cohesion: 0.13
@@ -84,30 +75,22 @@ Nodes (13): Phase I Airtable Participatory Diagnostic Survey, Technical Guidelin
 Cohesion: 0.67
 Nodes (3): Hard-fail with IIS reporting (deletion filter), Linear programming engine (PuLP + HiGHS), Premix-aware constraint masking
 
-### Community 8 - "Community 8"
-Cohesion: 0.18
-Nodes (10): Conventions & rules applied, Coverage (July 2025), Data-quality issues flagged, Files, Forward-compatibility (probes / APIs / cloud), PondCube — Water Quality Dataset (July 2025), Schema — `pondcube_measurements_long.csv`, Schema — `pondcube_observations_wide.csv` (+2 more)
-
-### Community 9 - "Community 9"
-Cohesion: 0.29
-Nodes (6): Aim, Datasets, How it works, In short, PondCube, Why it matters
-
 ## Knowledge Gaps
-- **46 isolated node(s):** `Files`, `Source interpretation`, `Schema — `pondcube_measurements_long.csv``, `Schema — `pondcube_observations_wide.csv``, `Units (standard aquaculture)` (+41 more)
+- **30 isolated node(s):** `Data Dictionary: pondcube_measurements_long.csv`, `Data Dictionary: pondcube_tanks_reference.csv`, `Ecosystem Approach to Fisheries (EAF)`, `PERMANOVA Validation of Nutrient Profiles`, `SHAP Feature Importance Analysis` (+25 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Peskas Platform` connect `Nutrient Profiling & Peskas Platform` to `WIO Harmonization Standards`?**
-  _High betweenness centrality (0.095) - this node is a cross-community bridge._
+  _High betweenness centrality (0.110) - this node is a cross-community bridge._
 - **Why does `Technical Guidelines for SSF Data Harmonization in the WIO (v1.0, April 2026)` connect `WIO Harmonization Standards` to `Nutrient Profiling & Peskas Platform`, `Peskas Pipeline & Harmonization`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **Why does `Six-Module Peskas Workflow (Collection, Preprocessing, Validation, Analytics, Export, Visualisation)` connect `Peskas Pipeline & Harmonization` to `Nutrient Profiling & Peskas Platform`, `WIO Harmonization Standards`?**
-  _High betweenness centrality (0.050) - this node is a cross-community bridge._
-- **What connects `Files`, `Source interpretation`, `Schema — `pondcube_measurements_long.csv`` to the rest of the system?**
-  _50 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.058) - this node is a cross-community bridge._
+- **What connects `Data Dictionary: pondcube_measurements_long.csv`, `Data Dictionary: pondcube_tanks_reference.csv`, `Exclusion of Derived/Reference Sheets` to the rest of the system?**
+  _35 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Feed Formulation Engine (FASA)` be split into smaller, more focused modules?**
   _Cohesion score 0.12648221343873517 - nodes in this community are weakly interconnected._
 - **Should `Nutrient Profiling & Peskas Platform` be split into smaller, more focused modules?**

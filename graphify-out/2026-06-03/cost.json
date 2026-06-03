@@ -1,0 +1,25 @@
+{
+  "runs": [
+    {
+      "date": "2026-06-02T22:06:14.794810+00:00",
+      "input_tokens": 182844,
+      "output_tokens": 0,
+      "files": 25
+    },
+    {
+      "date": "2026-06-03T13:02:21.034188+00:00",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "files": 0
+    },
+    {
+      "date": "2026-06-03T13:41:58.528881+00:00",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "files": 2,
+      "note": "pondcube doc reconnection"
+    }
+  ],
+  "total_input_tokens": 182844,
+  "total_output_tokens": 0
+}
