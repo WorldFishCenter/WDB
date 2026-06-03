@@ -8,6 +8,9 @@ graphify-out/manifest.json
 graphify-out/cost.json
 graphify-out/cache/stat-index.json
 graphify-out/.graphify_*
+# Dated snapshot folders graphify auto-creates when it backs up a curated graph
+# before overwriting it (e.g. graphify-out/2026-06-03/) — local backups, not shared.
+graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 # The content-hashed cache (cache/ast, cache/semantic) IS committed so teammates skip
 # re-extraction. To keep the repo small instead, ignore the whole cache: uncomment below.
 # graphify-out/cache/
