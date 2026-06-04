@@ -14,7 +14,7 @@ for joins, app dropdowns, and validation. 296 distinct tanks across the logged a
 - pondcube_measurements_long.csv and pondcube_observations_wide.csv (the measurements that key on these tanks)
 - pondcube_data_quality.csv (QA issues, incl. tank-labeling anomalies)
 - convert_pondcube.py (reproducible script that generated this file)
-- pondcube_DATA_DICTIONARY.md (full source interpretation and coverage stats)
+- pondcube_data_about.md (full source interpretation and coverage stats)
 
 ## Notes / caveats
 - The pair `(location, tank_id)` is the global key — `tank_id` alone is not unique across locations (except within the `Fish Tanks` zone, which is continuously numbered).

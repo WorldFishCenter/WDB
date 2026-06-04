@@ -12,9 +12,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube_measurements_long.csv",
-      "id": "pondcube_measurements_long_csv"
+      "id": "pondcube_measurements_long_csv",
+      "community": 1
     },
     {
       "label": "pondcube_observations_wide.csv",
@@ -25,9 +25,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube_observations_wide.csv",
-      "id": "pondcube_observations_wide_csv"
+      "id": "pondcube_observations_wide_csv",
+      "community": 1
     },
     {
       "label": "pondcube_tanks_reference.csv",
@@ -38,9 +38,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube_tanks_reference.csv",
-      "id": "pondcube_tanks_reference_csv"
+      "id": "pondcube_tanks_reference_csv",
+      "community": 1
     },
     {
       "label": "pondcube_data_quality.csv",
@@ -51,22 +51,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube_data_quality.csv",
-      "id": "pondcube_data_quality_csv"
+      "id": "pondcube_data_quality_csv",
+      "community": 1
     },
     {
       "label": "PondCube Source Workbook 2025.7.31.xlsx",
       "file_type": "concept",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube source workbook 2025.7.31.xlsx",
-      "id": "pondcube_source_workbook"
+      "id": "pondcube_source_workbook",
+      "community": 1
     },
     {
       "label": "Data Dictionary: pondcube_observations_wide.csv",
@@ -77,9 +77,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "data dictionary: pondcube_observations_wide.csv",
-      "id": "pondcube_observations_wide_dict"
+      "id": "pondcube_observations_wide_dict",
+      "community": 1
     },
     {
       "label": "Data Dictionary: pondcube_measurements_long.csv",
@@ -90,9 +90,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "data dictionary: pondcube_measurements_long.csv",
-      "id": "pondcube_measurements_long_dict"
+      "id": "pondcube_measurements_long_dict",
+      "community": 1
     },
     {
       "label": "Data Dictionary: pondcube_tanks_reference.csv",
@@ -103,9 +103,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "data dictionary: pondcube_tanks_reference.csv",
-      "id": "pondcube_tanks_reference_dict"
+      "id": "pondcube_tanks_reference_dict",
+      "community": 1
     },
     {
       "label": "Data Dictionary: pondcube_data_quality.csv",
@@ -116,22 +116,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "data dictionary: pondcube_data_quality.csv",
-      "id": "pondcube_data_quality_dict"
+      "id": "pondcube_data_quality_dict",
+      "community": 1
     },
     {
       "label": "PondCube Data Dictionary (Full)",
       "file_type": "document",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube data dictionary (full)",
-      "id": "pondcube_data_dictionary"
+      "id": "pondcube_data_dictionary",
+      "community": 1
     },
     {
       "label": "PondCube System Overview",
@@ -142,74 +142,74 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "pondcube system overview",
-      "id": "pondcube_about"
+      "id": "pondcube_about",
+      "community": 1
     },
     {
       "label": "Tidy Long Format Convention",
       "file_type": "concept",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "tidy long format convention",
-      "id": "pondcube_tidy_long_format"
+      "id": "pondcube_tidy_long_format",
+      "community": 1
     },
     {
       "label": "Blank-Equals-Missing Rule",
       "file_type": "rationale",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "blank-equals-missing rule",
-      "id": "pondcube_blank_is_missing"
+      "id": "pondcube_blank_is_missing",
+      "community": 1
     },
     {
       "label": "Exclusion of Derived/Reference Sheets",
       "file_type": "rationale",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "exclusion of derived/reference sheets",
-      "id": "pondcube_excluded_derived_sheets"
+      "id": "pondcube_excluded_derived_sheets",
+      "community": 1
     },
     {
       "label": "Location-Local Tank Identity",
       "file_type": "rationale",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "location-local tank identity",
-      "id": "pondcube_tank_local_identity"
+      "id": "pondcube_tank_local_identity",
+      "community": 1
     },
     {
       "label": "Ammonia NH3 Toxicity Lookup Table",
       "file_type": "concept",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "ammonia nh3 toxicity lookup table",
-      "id": "pondcube_ammonia_lookup"
+      "id": "pondcube_ammonia_lookup",
+      "community": 1
     },
     {
       "label": "Real-Time Water-Quality Monitoring System",
@@ -220,22 +220,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "real-time water-quality monitoring system",
-      "id": "pondcube_realtime_monitoring"
+      "id": "pondcube_realtime_monitoring",
+      "community": 1
     },
     {
       "label": "Forward-Compatible Time-Series/Observation Model",
       "file_type": "rationale",
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
       "norm_label": "forward-compatible time-series/observation model",
-      "id": "pondcube_forward_compat_timeseries"
+      "id": "pondcube_forward_compat_timeseries",
+      "community": 1
     },
     {
       "label": "Fishery Nutrient Profiles for NSFM in Timor-Leste (Nature Food 2026)",
@@ -246,9 +246,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi, Gianna Bonis-Profumo, Hamza Altarturi, Jessica Bogard, Joctan Dos Reis Lopes, Jeppe Kolding, Villiam Sozinho, Alexander Tilley",
       "contributor": null,
-      "community": 2,
       "norm_label": "fishery nutrient profiles for nsfm in timor-leste (nature food 2026)",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_paper"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_paper",
+      "community": 2
     },
     {
       "label": "Nutrition-Sensitive Fisheries Management (NSFM)",
@@ -259,9 +259,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "nutrition-sensitive fisheries management (nsfm)",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_nsfm"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_nsfm",
+      "community": 2
     },
     {
       "label": "Fishery Nutrient Profile (FNP)",
@@ -272,9 +272,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "fishery nutrient profile (fnp)",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fnp"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fnp",
+      "community": 2
     },
     {
       "label": "Ecosystem Approach to Fisheries (EAF)",
@@ -285,9 +285,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "ecosystem approach to fisheries (eaf)",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_eaf"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_eaf",
+      "community": 2
     },
     {
       "label": "XGBoost Predictive Model of FNPs",
@@ -298,9 +298,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "xgboost predictive model of fnps",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_xgboost_model"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_xgboost_model",
+      "community": 5
     },
     {
       "label": "K-means Clustering of Fishing Trips by Nutrient Density",
@@ -311,9 +311,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "k-means clustering of fishing trips by nutrient density",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_kmeans_clustering"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_kmeans_clustering",
+      "community": 2
     },
     {
       "label": "PERMANOVA Validation of Nutrient Profiles",
@@ -324,9 +324,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "permanova validation of nutrient profiles",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_permanova"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_permanova",
+      "community": 2
     },
     {
       "label": "SHAP Feature Importance Analysis",
@@ -337,9 +337,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "shap feature importance analysis",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_shap"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_shap",
+      "community": 5
     },
     {
       "label": "Fish Aggregating Devices (FADs)",
@@ -350,9 +350,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
       "norm_label": "fish aggregating devices (fads)",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fads"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fads",
+      "community": 8
     },
     {
       "label": "Women of Reproductive Age (WRA) Nutrient Reference Group",
@@ -363,9 +363,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "women of reproductive age (wra) nutrient reference group",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_wra"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_wra",
+      "community": 2
     },
     {
       "label": "Small Pelagic Fishes as Nutrient-Dense Affordable Catch",
@@ -376,9 +376,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
       "norm_label": "small pelagic fishes as nutrient-dense affordable catch",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_small_pelagics"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_small_pelagics",
+      "community": 8
     },
     {
       "label": "Complementary Management Pathways",
@@ -389,9 +389,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
       "norm_label": "complementary management pathways",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_complementary_pathways"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_complementary_pathways",
+      "community": 2
     },
     {
       "label": "6-Year Timor-Leste Catch Dataset (77,438 fishing trips)",
@@ -402,9 +402,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "6-year timor-leste catch dataset (77,438 fishing trips)",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_timor_catch_data"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_timor_catch_data",
+      "community": 5
     },
     {
       "label": "NutrientFishbase and Global Food Composition Databases",
@@ -415,9 +415,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "nutrientfishbase and global food composition databases",
-      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fishbase_gfcd"
+      "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_fishbase_gfcd",
+      "community": 5
     },
     {
       "label": "Peskas: Automated Analytics for Small-Scale, Data-Deficient Fisheries (SoftwareX 2025)",
@@ -428,9 +428,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi, Villiam Sozinho, Hamza Altarturi, E. Fernando Cagua, Alexander Tilley",
       "contributor": null,
-      "community": 2,
       "norm_label": "peskas: automated analytics for small-scale, data-deficient fisheries (softwarex 2025)",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_paper"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_paper",
+      "community": 2
     },
     {
       "label": "Peskas Platform",
@@ -441,9 +441,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "peskas platform",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_peskas_platform"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_peskas_platform",
+      "community": 5
     },
     {
       "label": "peskas.timor.pipeline R Package",
@@ -454,9 +454,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "peskas.timor.pipeline r package",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_timor_pipeline"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_timor_pipeline",
+      "community": 5
     },
     {
       "label": "peskas.timor.portal R Package",
@@ -467,9 +467,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "peskas.timor.portal r package",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_timor_portal"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_timor_portal",
+      "community": 5
     },
     {
       "label": "Six-Module Peskas Workflow (Collection, Preprocessing, Validation, Analytics, Export, Visualisation)",
@@ -480,9 +480,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "six-module peskas workflow (collection, preprocessing, validation, analytics, export, visualisation)",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_workflow_modules"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_workflow_modules",
+      "community": 6
     },
     {
       "label": "KoboToolbox Field Data Collection",
@@ -493,9 +493,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "kobotoolbox field data collection",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_kobotoolbox"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_kobotoolbox",
+      "community": 6
     },
     {
       "label": "Pelagic Data Systems (PDS) Vessel Tracking",
@@ -506,9 +506,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "pelagic data systems (pds) vessel tracking",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_pds"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_pds",
+      "community": 6
     },
     {
       "label": "validate_pds_data Function",
@@ -519,9 +519,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "validate_pds_data function",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_validate_pds_data"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_validate_pds_data",
+      "community": 6
     },
     {
       "label": "get_weight and calculate_nutrients Functions",
@@ -532,9 +532,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "get_weight and calculate_nutrients functions",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_calculate_nutrients"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_calculate_nutrients",
+      "community": 4
     },
     {
       "label": "estimate_fishery_indicators Function",
@@ -545,9 +545,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "estimate_fishery_indicators function",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_estimate_fishery_indicators"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_estimate_fishery_indicators",
+      "community": 6
     },
     {
       "label": "MAD Univariate and Multivariate Outlier Detection",
@@ -558,9 +558,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "mad univariate and multivariate outlier detection",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_mad_outlier"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_mad_outlier",
+      "community": 6
     },
     {
       "label": "Docker, GitHub Actions and Google Cloud Infrastructure",
@@ -571,9 +571,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "docker, github actions and google cloud infrastructure",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_docker_github_gcloud"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_docker_github_gcloud",
+      "community": 5
     },
     {
       "label": "Harvard Dataverse Open Data Portal",
@@ -584,9 +584,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
       "norm_label": "harvard dataverse open data portal",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_harvard_dataverse"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_harvard_dataverse",
+      "community": 6
     },
     {
       "label": "Shiny Interactive Dashboard (kepler.gl, multilingual)",
@@ -597,9 +597,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "shiny interactive dashboard (kepler.gl, multilingual)",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_shiny_dashboard"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_shiny_dashboard",
+      "community": 5
     },
     {
       "label": "Aquatic Foods Ontology",
@@ -610,9 +610,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "aquatic foods ontology",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_aquatic_foods_ontology"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_aquatic_foods_ontology",
+      "community": 4
     },
     {
       "label": "Airtable Metadata Registry",
@@ -623,9 +623,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "airtable metadata registry",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_airtable_registry"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_airtable_registry",
+      "community": 4
     },
     {
       "label": "Low-Cost Open-Source Design Principle",
@@ -636,9 +636,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
       "norm_label": "low-cost open-source design principle",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_open_source_rationale"
+      "id": "peskas_peskas_automated_analytics_softwarex_2025_open_source_rationale",
+      "community": 5
     },
     {
       "label": "PESKAS Digital Monitoring System Slide Deck",
@@ -649,9 +649,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "peskas digital monitoring system slide deck",
-      "id": "peskas_peskas_monitoring_system_slides_deck"
+      "id": "peskas_peskas_monitoring_system_slides_deck",
+      "community": 2
     },
     {
       "label": "PESKAS Automated Analytics Framework Data Flow",
@@ -662,9 +662,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "peskas automated analytics framework data flow",
-      "id": "peskas_peskas_monitoring_system_slides_data_flow"
+      "id": "peskas_peskas_monitoring_system_slides_data_flow",
+      "community": 2
     },
     {
       "label": "Challenges in SSF Data Collection",
@@ -675,9 +675,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "challenges in ssf data collection",
-      "id": "peskas_peskas_monitoring_system_slides_ssf_challenges"
+      "id": "peskas_peskas_monitoring_system_slides_ssf_challenges",
+      "community": 2
     },
     {
       "label": "FAO 3-Alpha Code Taxonomic Harmonisation",
@@ -688,9 +688,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 4,
       "norm_label": "fao 3-alpha code taxonomic harmonisation",
-      "id": "peskas_peskas_monitoring_system_slides_fao_3alpha"
+      "id": "peskas_peskas_monitoring_system_slides_fao_3alpha",
+      "community": 4
     },
     {
       "label": "MongoDB and Google Cloud Data Storage",
@@ -701,9 +701,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 6,
       "norm_label": "mongodb and google cloud data storage",
-      "id": "peskas_peskas_monitoring_system_slides_mongodb_storage"
+      "id": "peskas_peskas_monitoring_system_slides_mongodb_storage",
+      "community": 6
     },
     {
       "label": "Data Harmonization: Unified Fisheries Data in East Africa (WIOMSA 2025 Slide Deck)",
@@ -714,9 +714,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "data harmonization: unified fisheries data in east africa (wiomsa 2025 slide deck)",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_deck"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_deck",
+      "community": 2
     },
     {
       "label": "Data Collection Heterogeneity (Five Dimensions)",
@@ -727,9 +727,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "data collection heterogeneity (five dimensions)",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_data_heterogeneity"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_data_heterogeneity",
+      "community": 2
     },
     {
       "label": "Minimum Common Denominator of Shared Variables",
@@ -740,9 +740,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 4,
       "norm_label": "minimum common denominator of shared variables",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_minimum_common_denominator"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_minimum_common_denominator",
+      "community": 4
     },
     {
       "label": "CGIAR Harmonization Strategy Variable Table",
@@ -753,9 +753,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 4,
       "norm_label": "cgiar harmonization strategy variable table",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_cgiar_strategy"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_cgiar_strategy",
+      "community": 4
     },
     {
       "label": "Terms/Variables Standardisation Across Organisations",
@@ -766,9 +766,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 4,
       "norm_label": "terms/variables standardisation across organisations",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_terms_standardisation"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_terms_standardisation",
+      "community": 4
     },
     {
       "label": "Tangible Benefits of Harmonization",
@@ -779,9 +779,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "tangible benefits of harmonization",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_harmonization_benefits"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_harmonization_benefits",
+      "community": 2
     },
     {
       "label": "Nairobi Convention and SWIOFC Regional Platforms",
@@ -792,9 +792,9 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi",
       "contributor": null,
-      "community": 2,
       "norm_label": "nairobi convention and swiofc regional platforms",
-      "id": "data_harmonization_wiomsa_harmonization_oct2025_regional_platforms"
+      "id": "data_harmonization_wiomsa_harmonization_oct2025_regional_platforms",
+      "community": 2
     },
     {
       "label": "Technical Guidelines for SSF Data Harmonization in the WIO (v1.0, April 2026)",
@@ -805,9 +805,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "technical guidelines for ssf data harmonization in the wio (v1.0, april 2026)",
-      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_doc"
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_doc",
+      "community": 4
     },
     {
       "label": "Integrated Data Harmonization Framework (IDHF)",
@@ -818,9 +818,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "integrated data harmonization framework (idhf)",
-      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_idhf"
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_idhf",
+      "community": 4
     },
     {
       "label": "Four Candidate Thematic Domains",
@@ -831,9 +831,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "four candidate thematic domains",
-      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_thematic_domains"
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_thematic_domains",
+      "community": 4
     },
     {
       "label": "Scoping Assessment of 26 Institutions Across 10 WIO Countries",
@@ -844,9 +844,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "scoping assessment of 26 institutions across 10 wio countries",
-      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_scoping_assessment"
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_scoping_assessment",
+      "community": 4
     },
     {
       "label": "FAO Ontologies and Classifications (ASFIS, GAUL)",
@@ -857,9 +857,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "fao ontologies and classifications (asfis, gaul)",
-      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_fao_ontologies"
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_fao_ontologies",
+      "community": 4
     },
     {
       "label": "Phase I Airtable Participatory Diagnostic Survey",
@@ -870,9 +870,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
       "norm_label": "phase i airtable participatory diagnostic survey",
-      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_airtable_diagnostic"
+      "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_airtable_diagnostic",
+      "community": 4
     },
     {
       "label": "PAFF Feed Formulations table",
@@ -883,9 +883,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "paff feed formulations table",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_feed_formulations"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_feed_formulations",
+      "community": 0
     },
     {
       "label": "IAFFD ingredient code",
@@ -896,9 +896,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "iaffd ingredient code",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_iaffd_code"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_iaffd_code",
+      "community": 0
     },
     {
       "label": "Ingredient inclusion percent",
@@ -909,9 +909,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "ingredient inclusion percent",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_inclusion_percent"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_inclusion_percent",
+      "community": 0
     },
     {
       "label": "PAFF benchmark gate",
@@ -922,9 +922,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "paff benchmark gate",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_benchmark_gate"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_feed_formulations_dict_benchmark_gate",
+      "community": 0
     },
     {
       "label": "FASA Feed Formulation Engine (MVP)",
@@ -935,9 +935,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "fasa feed formulation engine (mvp)",
-      "id": "fasa_fasa_git_readme_fasa_feed_formulation_engine"
+      "id": "fasa_fasa_git_readme_fasa_feed_formulation_engine",
+      "community": 0
     },
     {
       "label": "Linear programming engine (PuLP + HiGHS)",
@@ -948,9 +948,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "linear programming engine (pulp + highs)",
-      "id": "fasa_fasa_git_readme_linear_programming_engine"
+      "id": "fasa_fasa_git_readme_linear_programming_engine",
+      "community": 0
     },
     {
       "label": "ASNS-to-FICD crosswalk",
@@ -961,9 +961,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "asns-to-ficd crosswalk",
-      "id": "fasa_fasa_git_readme_crosswalk"
+      "id": "fasa_fasa_git_readme_crosswalk",
+      "community": 0
     },
     {
       "label": "Premix-aware constraint masking",
@@ -974,9 +974,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "premix-aware constraint masking",
-      "id": "fasa_fasa_git_readme_premix_constraint_masking"
+      "id": "fasa_fasa_git_readme_premix_constraint_masking",
+      "community": 0
     },
     {
       "label": "Hard toxin / anti-nutrient ceilings",
@@ -987,9 +987,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "hard toxin / anti-nutrient ceilings",
-      "id": "fasa_fasa_git_readme_toxin_hard_ceilings"
+      "id": "fasa_fasa_git_readme_toxin_hard_ceilings",
+      "community": 0
     },
     {
       "label": "Hard-fail with IIS reporting (deletion filter)",
@@ -1000,9 +1000,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "hard-fail with iis reporting (deletion filter)",
-      "id": "fasa_fasa_git_readme_iis_reporting"
+      "id": "fasa_fasa_git_readme_iis_reporting",
+      "community": 0
     },
     {
       "label": "FastAPI surface (/formulate, /supported, /validate-recipe, /health)",
@@ -1013,9 +1013,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "fastapi surface (/formulate, /supported, /validate-recipe, /health)",
-      "id": "fasa_fasa_git_readme_fastapi_surface"
+      "id": "fasa_fasa_git_readme_fastapi_surface",
+      "community": 0
     },
     {
       "label": "validator.py (composition recompute + PAFF gate)",
@@ -1026,9 +1026,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "validator.py (composition recompute + paff gate)",
-      "id": "fasa_fasa_git_readme_validator"
+      "id": "fasa_fasa_git_readme_validator",
+      "community": 0
     },
     {
       "label": "Africa ingredient pool",
@@ -1039,9 +1039,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "africa ingredient pool",
-      "id": "fasa_fasa_git_readme_ingredient_pool_africa"
+      "id": "fasa_fasa_git_readme_ingredient_pool_africa",
+      "community": 0
     },
     {
       "label": "Non-additive interaction layer (Hua & Bureau 2012)",
@@ -1052,9 +1052,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "non-additive interaction layer (hua & bureau 2012)",
-      "id": "fasa_fasa_git_readme_interaction_layer_hua_bureau_2012"
+      "id": "fasa_fasa_git_readme_interaction_layer_hua_bureau_2012",
+      "community": 0
     },
     {
       "label": "Chance-constrained variability handling",
@@ -1065,9 +1065,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "chance-constrained variability handling",
-      "id": "fasa_fasa_git_readme_chance_constrained_handling"
+      "id": "fasa_fasa_git_readme_chance_constrained_handling",
+      "community": 0
     },
     {
       "label": "ASNS Nutrition Specification database",
@@ -1078,9 +1078,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "asns nutrition specification database",
-      "id": "fasa_asns_nutrition_specification_database_dict_asns_database"
+      "id": "fasa_asns_nutrition_specification_database_dict_asns_database",
+      "community": 0
     },
     {
       "label": "ASNS spec code (PA/AA/ADAAF/ED/TX prefixes)",
@@ -1091,9 +1091,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "asns spec code (pa/aa/adaaf/ed/tx prefixes)",
-      "id": "fasa_asns_nutrition_specification_database_dict_spec_code"
+      "id": "fasa_asns_nutrition_specification_database_dict_spec_code",
+      "community": 0
     },
     {
       "label": "Restriction type (Minimum/Maximum/Ratio)",
@@ -1104,9 +1104,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "restriction type (minimum/maximum/ratio)",
-      "id": "fasa_asns_nutrition_specification_database_dict_restriction_type"
+      "id": "fasa_asns_nutrition_specification_database_dict_restriction_type",
+      "community": 0
     },
     {
       "label": "stage_weight label",
@@ -1117,9 +1117,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "stage_weight label",
-      "id": "fasa_asns_nutrition_specification_database_dict_stage_weight"
+      "id": "fasa_asns_nutrition_specification_database_dict_stage_weight",
+      "community": 0
     },
     {
       "label": "PAFF Calculated Composition table",
@@ -1130,9 +1130,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "paff calculated composition table",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_calculated_composition"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_calculated_composition",
+      "community": 0
     },
     {
       "label": "Nutrient composition metric",
@@ -1143,9 +1143,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "nutrient composition metric",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_nutrient"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_nutrient",
+      "community": 0
     },
     {
       "label": "Composition correctness target",
@@ -1156,9 +1156,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "composition correctness target",
-      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_correctness_target"
+      "id": "fasa_paff_practical_aquaculture_feed_formulation_database_calculated_composition_dict_correctness_target",
+      "community": 0
     },
     {
       "label": "FICD Feed Ingredient Composition database",
@@ -1169,9 +1169,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "ficd feed ingredient composition database",
-      "id": "fasa_ficd_feed_ingredient_composition_database_dict_ficd_database"
+      "id": "fasa_ficd_feed_ingredient_composition_database_dict_ficd_database",
+      "community": 0
     },
     {
       "label": "FICD ingredient code",
@@ -1182,9 +1182,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "ficd ingredient code",
-      "id": "fasa_ficd_feed_ingredient_composition_database_dict_ingredient_code"
+      "id": "fasa_ficd_feed_ingredient_composition_database_dict_ingredient_code",
+      "community": 0
     },
     {
       "label": "FICD composition parameter (long-format)",
@@ -1195,9 +1195,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "ficd composition parameter (long-format)",
-      "id": "fasa_ficd_feed_ingredient_composition_database_dict_composition_parameter"
+      "id": "fasa_ficd_feed_ingredient_composition_database_dict_composition_parameter",
+      "community": 0
     },
     {
       "label": "Digestible-energy parameter variants",
@@ -1208,9 +1208,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
       "norm_label": "digestible-energy parameter variants",
-      "id": "fasa_ficd_feed_ingredient_composition_database_dict_digestible_energy_variants"
+      "id": "fasa_ficd_feed_ingredient_composition_database_dict_digestible_energy_variants",
+      "community": 0
     },
     {
       "label": "Digital feedback on fisher behavior (Kenya 2025)",
@@ -1221,9 +1221,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
       "norm_label": "digital feedback on fisher behavior (kenya 2025)",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_context_digital_feedback_study"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_context_digital_feedback_study",
+      "community": 3
     },
     {
       "label": "Fish consumption RCT (Timor-Leste 2026)",
@@ -1234,9 +1234,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
       "norm_label": "fish consumption rct (timor-leste 2026)",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_context_fish_consumption_rct"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_context_fish_consumption_rct",
+      "community": 3
     },
     {
       "label": "How much is too much information? Testing digital feedback on fisher behavior (Frontiers 2025)",
@@ -1247,9 +1247,9 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 3,
       "norm_label": "how much is too much information? testing digital feedback on fisher behavior (frontiers 2025)",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_paper"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_paper",
+      "community": 3
     },
     {
       "label": "Knowledge-Attitude-Practice (KAP) framework",
@@ -1260,9 +1260,9 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 3,
       "norm_label": "knowledge-attitude-practice (kap) framework",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_kap_framework"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_kap_framework",
+      "community": 3
     },
     {
       "label": "Peskas open-source digital monitoring toolkit",
@@ -1273,9 +1273,9 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 3,
       "norm_label": "peskas open-source digital monitoring toolkit",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_peskas_toolkit"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_peskas_toolkit",
+      "community": 3
     },
     {
       "label": "Before-After-Control-Impact (BACI) design",
@@ -1286,9 +1286,9 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 3,
       "norm_label": "before-after-control-impact (baci) design",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_baci_design"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_baci_design",
+      "community": 3
     },
     {
       "label": "Three heuristic behavioral models (info deficit, self-interested, neighborhood-interested)",
@@ -1299,9 +1299,9 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 3,
       "norm_label": "three heuristic behavioral models (info deficit, self-interested, neighborhood-interested)",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_behavioral_models"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_behavioral_models",
+      "community": 3
     },
     {
       "label": "Beach Management Units (BMUs)",
@@ -1312,9 +1312,9 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 3,
       "norm_label": "beach management units (bmus)",
-      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_beach_management_units"
+      "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_beach_management_units",
+      "community": 3
     },
     {
       "label": "A supply and demand intervention increased fish consumption among rural women (PLoS One 2026)",
@@ -1325,9 +1325,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "a supply and demand intervention increased fish consumption among rural women (plos one 2026)",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_paper"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_paper",
+      "community": 3
     },
     {
       "label": "Nearshore fish-aggregating devices (FADs) supply intervention",
@@ -1338,9 +1338,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "nearshore fish-aggregating devices (fads) supply intervention",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_fad_intervention"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_fad_intervention",
+      "community": 3
     },
     {
       "label": "Social behaviour change (SBC) demand intervention",
@@ -1351,9 +1351,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "social behaviour change (sbc) demand intervention",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_sbc_intervention"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_sbc_intervention",
+      "community": 3
     },
     {
       "label": "Cluster-randomized 2x2 factorial controlled trial (NCT04729829)",
@@ -1364,9 +1364,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "cluster-randomized 2x2 factorial controlled trial (nct04729829)",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_cluster_rct_2x2_factorial"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_cluster_rct_2x2_factorial",
+      "community": 3
     },
     {
       "label": "Peskas catch monitoring system (Timor-Leste)",
@@ -1377,9 +1377,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "peskas catch monitoring system (timor-leste)",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_peskas_monitoring"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_peskas_monitoring",
+      "community": 3
     },
     {
       "label": "Child stunting and malnutrition in Timor-Leste",
@@ -1390,9 +1390,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "child stunting and malnutrition in timor-leste",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_child_stunting_malnutrition"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_child_stunting_malnutrition",
+      "community": 3
     },
     {
       "label": "Integrated supply-and-demand food system approach",
@@ -1403,9 +1403,9 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 3,
       "norm_label": "integrated supply-and-demand food system approach",
-      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_integrated_food_system"
+      "id": "ssf_research_fish_consumption_rct_timor_leste_2026_integrated_food_system",
+      "community": 3
     },
     {
       "label": "Digital Transformation Accelerator \u2014 Annual Technical Report 2025",
@@ -1416,9 +1416,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "digital transformation accelerator \u2014 annual technical report 2025",
       "id": "dta_report_2025",
-      "community": 7,
-      "norm_label": "digital transformation accelerator \u2014 annual technical report 2025"
+      "community": 7
     },
     {
       "label": "CGIAR Digital Transformation Accelerator",
@@ -1429,9 +1429,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "cgiar digital transformation accelerator",
       "id": "dta_accelerator",
-      "community": 7,
-      "norm_label": "cgiar digital transformation accelerator"
+      "community": 7
     },
     {
       "label": "Data Ecosystem AoW (FAIR / AI-ready data)",
@@ -1442,9 +1442,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "data ecosystem aow (fair / ai-ready data)",
       "id": "dta_data_ecosystem_aow",
-      "community": 7,
-      "norm_label": "data ecosystem aow (fair / ai-ready data)"
+      "community": 7
     },
     {
       "label": "Asia Digital Hub (WorldFish, Penang)",
@@ -1455,9 +1455,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "asia digital hub (worldfish, penang)",
       "id": "dta_asia_digital_hub",
-      "community": 7,
-      "norm_label": "asia digital hub (worldfish, penang)"
+      "community": 7
     },
     {
       "label": "Genetic Improvement Data Modernization",
@@ -1468,9 +1468,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "genetic improvement data modernization",
       "id": "pondcube_genetic_improvement",
-      "community": 7,
-      "norm_label": "genetic improvement data modernization"
+      "community": 7
     },
     {
       "label": "Cloud-Based Genetic Data Ecosystem",
@@ -1481,9 +1481,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "cloud-based genetic data ecosystem",
       "id": "pondcube_cloud_ecosystem",
-      "community": 7,
-      "norm_label": "cloud-based genetic data ecosystem"
+      "community": 7
     },
     {
       "label": "Multi-Country Hatchery Programs (Bangladesh, Egypt, Zambia)",
@@ -1494,9 +1494,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "norm_label": "multi-country hatchery programs (bangladesh, egypt, zambia)",
       "id": "pondcube_multicountry_hatcheries",
-      "community": 7,
-      "norm_label": "multi-country hatchery programs (bangladesh, egypt, zambia)"
+      "community": 7
     }
   ],
   "links": [
@@ -1514,7 +1514,7 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_blank_is_missing",
@@ -1534,7 +1534,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1544,7 +1544,7 @@
       "relation": "shares_data_with",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_measurements_long_csv",
@@ -1554,7 +1554,7 @@
       "relation": "shares_data_with",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_measurements_long_csv",
@@ -1584,7 +1584,7 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_tank_local_identity",
@@ -1594,7 +1594,7 @@
       "relation": "rationale_for",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_tidy_long_format",
@@ -1614,7 +1614,7 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_blank_is_missing",
@@ -1624,7 +1624,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1654,7 +1654,7 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_tank_local_identity",
@@ -1674,7 +1674,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1684,7 +1684,7 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_tank_local_identity",
@@ -1714,7 +1714,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_blank_is_missing",
@@ -1724,7 +1724,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1754,7 +1754,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1794,7 +1794,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1804,7 +1804,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1814,7 +1814,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1824,7 +1824,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_data_dictionary",
@@ -1864,7 +1864,7 @@
       "relation": "conceptually_related_to",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_DATA_DICTIONARY.md",
+      "source_file": "digital_transformation_accelerator/pondcube/pondcube_data_about.md",
       "source_location": null,
       "weight": 1.0,
       "source": "pondcube_forward_compat_timeseries",
@@ -3052,5 +3052,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "85666a6234d84064a73d17e2887ccb4e98e05eec"
+  "built_at_commit": "5886ee9a087e91f5ce501b026e33442ac4081c3e"
 }

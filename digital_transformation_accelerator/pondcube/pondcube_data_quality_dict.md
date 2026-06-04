@@ -15,7 +15,7 @@ workbook into the tidy/wide datasets. Used for QA and source cleanup; small by d
 - pondcube_measurements_long.csv and pondcube_observations_wide.csv (the converted data these issues refer to)
 - pondcube_tanks_reference.csv (tank identities, incl. the flagged anomalies)
 - convert_pondcube.py (the conversion that emits this log)
-- pondcube_DATA_DICTIONARY.md (full conventions and coverage context)
+- pondcube_data_about.md (full conventions and coverage context)
 
 ## Notes / caveats
 - Notable flagged items: a `90 for FT2` free-text label in a numeric tank field (parsed to `90`), and the 5 genuine `nitrate` zeros confirmed as real (not placeholders).

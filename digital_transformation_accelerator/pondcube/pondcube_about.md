@@ -29,14 +29,14 @@ Water conditions can turn dangerous quickly — dissolved oxygen in particular c
 
 ## Datasets
 
-The July 2025 water-quality readings are published as tidy, API-ready CSV files, fully documented in **[pondcube_DATA_DICTIONARY.md](pondcube_DATA_DICTIONARY.md)**:
+The July 2025 water-quality readings are published as tidy, API-ready CSV files, fully documented in **[pondcube_data_about.md](pondcube_data_about.md)**:
 
 - `pondcube_measurements_long.csv` — one row per individual measurement (time-series databases, APIs, ML).
 - `pondcube_observations_wide.csv` — one row per (location, tank, date, period), a column per parameter (apps, dashboards, human review).
 - `pondcube_tanks_reference.csv` — the reference list of every location, zone, and tank (joins, dropdowns, validation).
 - `pondcube_data_quality.csv` — the log of data-quality issues found during conversion.
 
-All four were converted from the source workbook `PondCube Source Workbook 2025.7.31.xlsx` by the conversion script. Read `pondcube_DATA_DICTIONARY.md` for the schema, units, and the conventions applied (blank = missing, location-local tank identity, exclusion of derived sheets).
+All four were converted from the source workbook `PondCube Source Workbook 2025.7.31.xlsx` by the conversion script. Read `pondcube_data_about.md` for the schema, units, and the conventions applied (blank = missing, location-local tank identity, exclusion of derived sheets).
 
 ## In short
 

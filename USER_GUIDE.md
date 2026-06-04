@@ -106,6 +106,7 @@ Put it in the right **initiative folder**, give it a **`lower_snake_case`** name
 | **Image / photo / diagram / screenshot** | Drag it in (e.g. a whiteboard photo or field map). | Required if it carries information — Template B (`…_context.md`). |
 | **Meeting recording / audio** (MP4, MP3) | Drag the media file in; the maintainer's tools transcribe it. | Required if it's hard to follow — Template B (`…_context.md`). |
 | **Web link / online paper** | **Don't** paste a URL into a file. Tell the maintainer the link — they add it properly with `/graphify add`. | The maintainer adds it. |
+| **A topic / initiative overview** (not about one file) | Right-click the folder → **New File** → name it `<topic>_about.md` (e.g. `pondcube_about.md`) and write a short overview. | The note *is* the content — write freely (no template) and add a `## Related files` section. |
 | **An idea, note, or observation** | Right-click the folder → **New File** → name it `idea_<short-topic>.md` and write it in plain English. | The note *is* the content — name any related files/initiatives inside it so the graph links them. |
 
 ---

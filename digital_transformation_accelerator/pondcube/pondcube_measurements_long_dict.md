@@ -22,7 +22,7 @@ time-series/ML-friendly shape (a wide pivot lives in pondcube_observations_wide.
 - pondcube_tanks_reference.csv (location/zone/tank lookup)
 - pondcube_data_quality.csv (QA issues found during conversion)
 - convert_pondcube.py (reproducible script that generated this file)
-- pondcube_DATA_DICTIONARY.md (full source interpretation, conventions, and coverage stats)
+- pondcube_data_about.md (full source interpretation, conventions, and coverage stats)
 
 ## Notes / caveats
 - Natural key: `(location, tank_id, date, period, parameter)`.

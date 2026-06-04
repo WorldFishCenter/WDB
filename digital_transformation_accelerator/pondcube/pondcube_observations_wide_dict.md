@@ -26,7 +26,7 @@ pondcube_measurements_long.csv). 4,334 observation rows, July 2025.
 - pondcube_tanks_reference.csv (location/zone/tank lookup)
 - pondcube_data_quality.csv (QA issues found during conversion)
 - convert_pondcube.py (reproducible script that generated this file)
-- pondcube_DATA_DICTIONARY.md (full source interpretation, conventions, and coverage stats)
+- pondcube_data_about.md (full source interpretation, conventions, and coverage stats)
 
 ## Notes / caveats
 - One row per (location, tank, date, period). An **empty parameter cell means no reading was taken — it is not a zero.**

@@ -1,4 +1,4 @@
-# Graph Report - .  (2026-06-03)
+# Graph Report - .  (2026-06-04)
 
 ## Corpus Check
 - Corpus is ~6,310 words - fits in a single context window. You may not need a graph.
