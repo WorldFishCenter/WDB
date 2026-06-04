@@ -18,7 +18,7 @@ reproduce the published numbers, validating the data-loading and crosswalk pipel
 - PAFF_practical_aquaculture_feed_formulation_database_Calculated_Composition.csv (the resulting nutrient composition of these recipes)
 - FICD_feed_ingredient_composition_database.csv (ingredient nutrient values used to recompute composition)
 - ASNS_nutrition_specification_database.csv (the targets these recipes are designed against)
-- FASA_git_README.md (engine; "PAFF benchmark gate")
+- fasa_repo_about.md (engine; "PAFF benchmark gate")
 
 ## Notes / caveats
 - The `species` field bundles species **and** life stage in one string (`<Species> - <Stage>`); some species (e.g. African Catfish, Channel Catfish, Snakehead) appear without a stage suffix.

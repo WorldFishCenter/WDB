@@ -17,7 +17,7 @@ gate). 1,296 rows across 36 species/stage tuples and 36 nutrients.
 - PAFF_practical_aquaculture_feed_formulation_database_Feed_Formulations.csv (the recipes these compositions are computed from)
 - FICD_feed_ingredient_composition_database.csv (ingredient nutrient source for recomputation)
 - ASNS_nutrition_specification_database.csv (the specs the recipes are compared against)
-- FASA_git_README.md (engine; validator.py recomputes and gates on these)
+- fasa_repo_about.md (engine; validator.py recomputes and gates on these)
 
 ## Notes / caveats
 - `species` joins 1:1 to the Feed_Formulations `species` field (same `<Species> - <Stage>` convention).

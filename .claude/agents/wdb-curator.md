@@ -46,9 +46,11 @@ those are the contributor's and maintainer's steps. Remind the user of them when
    - everything else → `<name>_context.md` (Template B)
    - code → no note (context goes in comments/docstrings).
    A document that describes a **topic or whole initiative** (not one file) is a standalone
-   **`<topic>_about.md`** doc (e.g. `pondcube_about.md`, `pondcube_data_about.md`) — write it
-   freely (no template) with a `## Related files` section, and never give it a `_dict`/`_context`
-   suffix (that suffix means "companion to the file of that name").
+   **`_about.md`** doc: name an aspect doc `<initiative>_<aspect>_about.md` (e.g.
+   `pondcube_data_about.md`, `fasa_repo_about.md`) and reserve the bare `<initiative>_about.md`
+   for the single whole-initiative overview (e.g. `pondcube_about.md`). Write it freely (no
+   template) with a `## Related files` section, and never give it a `_dict`/`_context` suffix
+   (that suffix means "companion to the file of that name").
    Use the templates and **worked examples in [README Section 9](README.md#9-context-notes-your-main-quality-lever)**,
    and match the house style of existing notes (`peskas/*_context.md`, `*/pondcube/*_dict.md`).
    Read the file first — header row + a few rows for data, the first pages for a PDF — so every

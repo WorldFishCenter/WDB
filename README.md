@@ -79,7 +79,7 @@ For the periodic full rebuild, prefer **`/graphify . --mode deep`** — it extra
 | Image / diagram / screenshot | initiative folder | Required if it carries information — Template B (`…_context.md`) |
 | Audio / video | initiative folder | Required if it's hard to follow — Template B (`…_context.md`) |
 | External link / online paper / video / repo | — | Don't save a URL — the maintainer runs `/graphify add <url>` (Section 5) |
-| A topic / initiative overview (not about one file) | initiative folder | Standalone `<topic>_about.md` (e.g. `pondcube_about.md`); no template — write freely + add `## Related files` |
+| A topic / initiative overview (not about one file) | initiative folder | Standalone `_about.md` (no template) + `## Related files`; aspect = `<initiative>_<aspect>_about.md`, whole-initiative overview = `<initiative>_about.md` |
 | An idea / observation | initiative folder | The note *is* the content: `idea_<topic>.md`; name related files inside it |
 
 ### Before you open the PR — checklist
@@ -260,7 +260,7 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 
 Companion notes are the highest-leverage thing you can add. Each `.md` is itself graphed, so a note turns a lone file into a well-connected node. Per [the protocol](#the-protocol-adding-to-the-brain), a note is **required for every dataset, PDF, and document** (recommended for images and audio/video) — the `wdb-curator` agent can draft it for you. The `## Related files` line is where you hand Graphify its edges: fill it with the real siblings the file relates to, and **cross-link across initiative folders**, not just within one (see [How to get the best graph](#how-to-get-the-best-graph-out-of-graphify)). Place each note beside the file it describes, named by **replacing the source file's extension** with `_dict.md` (tabular) or `_context.md` (everything else) — e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`, `report.pdf` → `report_context.md`.
 
-**Two kinds of note.** Most are **companion notes** that describe one specific file — `<file>_dict.md` (tabular) or `<file>_context.md` (anything else), named as above, using the templates below. A document that describes a **topic or a whole initiative** rather than a single file is a **standalone `_about.md` doc** — e.g. `pondcube_about.md` (initiative overview) or `pondcube_data_about.md` (a multi-file data overview). Name it `<topic>_about.md`, write it freely (no template), and still give it a `## Related files` section. Never give an overview a `_dict`/`_context` suffix — that suffix means "companion to the file of that name."
+**Two kinds of note.** Most are **companion notes** that describe one specific file — `<file>_dict.md` (tabular) or `<file>_context.md` (anything else), named as above, using the templates below. A document that describes a **topic or a whole initiative** rather than a single file is a **standalone `_about.md` doc**: name an aspect doc `<initiative>_<aspect>_about.md` (e.g. `pondcube_data_about.md`, `fasa_repo_about.md`), and **reserve the bare `<initiative>_about.md` for the single whole-initiative overview** (e.g. `pondcube_about.md`) — so a later overview never collides with an aspect doc. Write these freely (no template) but still give each a `## Related files` section. Never give an overview a `_dict`/`_context` suffix — that suffix means "companion to the file of that name."
 
 **Template A — tabular data** (`.csv`, `.xlsx`). Name it the file's name with its extension replaced by `_dict.md` (e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`):
 

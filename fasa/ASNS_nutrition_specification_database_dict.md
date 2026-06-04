@@ -23,7 +23,7 @@ least-cost linear program for a chosen (species, production_system, stage) tuple
 ## Related files
 - FICD_feed_ingredient_composition_database.csv (ingredient nutrient values the constraints act on)
 - PAFF_practical_aquaculture_feed_formulation_database_Feed_Formulations.csv and _Calculated_Composition.csv (reference recipes / benchmark)
-- FASA_git_README.md (engine that consumes this file; crosswalk maps ASNS code → FICD parameter)
+- fasa_repo_about.md (engine that consumes this file; crosswalk maps ASNS code → FICD parameter)
 
 ## Notes / caveats
 - `stage_weight` is a free-text label that the engine matches **exactly** (the API's `stage` must equal it). There are near-duplicate variants differing only in spacing/case (e.g. `< 5g (Starter)` vs `< 5 g (Starter)`; `5-50g (Pre-grower)` vs `5-50 g (Pre-grower)` vs `5-50g (Pre-Grower)`) — treat these as a data-quality wrinkle when joining or filtering.

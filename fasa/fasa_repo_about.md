@@ -1,5 +1,8 @@
 # FASA Feed Formulation Engine — MVP
 
+> Source: README of the FASA Feed Formulation Engine repository — https://github.com/WorldFishCenter/FasaEngine
+> (Only this README and the reference-data CSVs live in WDB; the codebase stays in its own repo.)
+
 Optimization core for the FASA digital application: low-cost, digestibility-aware feed formulation for Nile Tilapia and African Catfish using locally available African ingredients.
 
 ## Who this repo is for

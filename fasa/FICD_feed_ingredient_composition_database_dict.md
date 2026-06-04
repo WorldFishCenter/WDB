@@ -16,7 +16,7 @@ codes and 277 composition parameters.
 ## Related files
 - ASNS_nutrition_specification_database.csv (the constraints these compositions must satisfy)
 - PAFF_*_Feed_Formulations.csv (reference recipes built from these ingredients)
-- FASA_git_README.md (engine; crosswalk maps ASNS spec code → FICD parameter with unit factor)
+- fasa_repo_about.md (engine; crosswalk maps ASNS spec code → FICD parameter with unit factor)
 
 ## Notes / caveats
 - **Watch the column naming:** the column literally headed `ingredient` contains the *parameter* (e.g. `crude_protein_percent`); the actual ingredient lives in `description`/`code`. This trips up naive readers.
