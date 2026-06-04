@@ -12,4 +12,5 @@ dist/
 README.md
 USER_GUIDE.md
 .gitignore
+.claude/
 convert_pondcube.py
