@@ -64,7 +64,7 @@ Drag your file into that folder, then rename it (right-click → **Rename**) to 
 
 **Step 4 — Write its context note.** *(Required for datasets, PDFs, and documents.)*
 This small note is what lets the graph connect your file.
-- Right-click the folder → **New File**. Name it **exactly** `<your-filename>_dict.md` (for spreadsheets) or `<your-filename>_context.md` (for everything else).
+- Right-click the folder → **New File**. Name it your file's name with its **extension replaced** by `_dict.md` (spreadsheets) or `_context.md` (everything else) — e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`, `report.pdf` → `report_context.md`.
 - Copy the matching template from the **[README — Section 9](README.md#9-context-notes-your-main-quality-lever)** (it has worked examples), fill in **every** section in plain English, and save (**Ctrl+S** / **Cmd+S**).
 - The most important line is **`## Related files`**: list the real files yours relates to — and include files in **other initiative folders** too. Those cross-links are what make the brain valuable.
 
@@ -101,10 +101,10 @@ Put it in the right **initiative folder**, give it a **`lower_snake_case`** name
 
 | What you're adding | How to add it | Context note |
 |---|---|---|
-| **Dataset / spreadsheet** (CSV, Excel) | Drag into the folder. Don't change the column headers. | **Required** — `<file>_dict.md` (Template A). |
-| **Report / paper / document** (PDF, Word, text) | Drag it in. Keep a published paper's real title. | **Required** — `<file>_context.md` (Template B). |
-| **Image / photo / diagram / screenshot** | Drag it in (e.g. a whiteboard photo or field map). | Required if it carries information — `<file>_context.md` (Template B). |
-| **Meeting recording / audio** (MP4, MP3) | Drag the media file in; the maintainer's tools transcribe it. | Required if it's hard to follow — `<file>_context.md` (Template B). |
+| **Dataset / spreadsheet** (CSV, Excel) | Drag into the folder. Don't change the column headers. | **Required** — Template A (`…_dict.md`). |
+| **Report / paper / document** (PDF, Word, text) | Drag it in. Keep a published paper's real title. | **Required** — Template B (`…_context.md`). |
+| **Image / photo / diagram / screenshot** | Drag it in (e.g. a whiteboard photo or field map). | Required if it carries information — Template B (`…_context.md`). |
+| **Meeting recording / audio** (MP4, MP3) | Drag the media file in; the maintainer's tools transcribe it. | Required if it's hard to follow — Template B (`…_context.md`). |
 | **Web link / online paper** | **Don't** paste a URL into a file. Tell the maintainer the link — they add it properly with `/graphify add`. | The maintainer adds it. |
 | **An idea, note, or observation** | Right-click the folder → **New File** → name it `idea_<short-topic>.md` and write it in plain English. | The note *is* the content — name any related files/initiatives inside it so the graph links them. |
 

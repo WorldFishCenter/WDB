@@ -65,7 +65,7 @@ For the periodic full rebuild, prefer **`/graphify . --mode deep`** — it extra
 1. **Sync & branch.** Pull `main`, then create a branch named `yourname/short-topic`.
 2. **Pick the initiative folder.** Put your file in the matching `initiative/` folder. If none fits, create one at the repo root named in `lower_snake_case` (e.g. `genetic_improvement/`). If you're unsure which initiative it belongs to, **ask the maintainer — don't guess.**
 3. **Add the file, named by the rule.** Naming rule: **`lower_snake_case`, descriptive, with year and/or region when they apply.** ✅ `kenya_yield_2025.csv` ❌ `data.csv`, `Final Report.pdf`. Don't edit spreadsheet headers; keep a published paper's real title.
-4. **Write its context note.** **Required for every dataset, PDF, and document** (recommended for images and audio/video). Pick the template by type (table below), name it exactly `<file>_dict.md` or `<file>_context.md`, and **fill every section** — especially **Related files**, which is how the graph connects: list real siblings, and link *across* initiatives, not just within one. Templates + worked examples: [Section 9](#9-context-notes-your-main-quality-lever).
+4. **Write its context note.** **Required for every dataset, PDF, and document** (recommended for images and audio/video). Pick the template by type (table below), name it by **replacing the file's extension** with `_dict.md` (tabular) or `_context.md` (everything else) — e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`, `report.pdf` → `report_context.md` — and **fill every section** — especially **Related files**, which is how the graph connects: list real siblings, and link *across* initiatives, not just within one. Templates + worked examples: [Section 9](#9-context-notes-your-main-quality-lever).
 5. **Commit source files only.** Never commit anything under `graphify-out/`.
 6. **Open a pull request.** Push your branch and open a PR. The maintainer reviews and merges — that is the only way changes reach `main`.
 7. **Maintainer rebuilds.** After merge, the maintainer runs `/graphify . --update` and commits the regenerated `graphify-out/`. **Contributors never run the graph tool.**
@@ -74,10 +74,10 @@ For the periodic full rebuild, prefer **`/graphify . --mode deep`** — it extra
 
 | What you're adding | Where it goes | Context note |
 |---|---|---|
-| Dataset / spreadsheet (`.csv`, `.xlsx`) | initiative folder; don't edit headers | **Required** — `<file>_dict.md` (Template A) |
-| Report / paper / document (`.pdf`, `.docx`, `.md`, `.txt`) | initiative folder; keep a paper's real title | **Required** — `<file>_context.md` (Template B) |
-| Image / diagram / screenshot | initiative folder | Required if it carries information — `<file>_context.md` (Template B) |
-| Audio / video | initiative folder | Required if it's hard to follow — `<file>_context.md` (Template B) |
+| Dataset / spreadsheet (`.csv`, `.xlsx`) | initiative folder; don't edit headers | **Required** — Template A (`…_dict.md`) |
+| Report / paper / document (`.pdf`, `.docx`, `.md`, `.txt`) | initiative folder; keep a paper's real title | **Required** — Template B (`…_context.md`) |
+| Image / diagram / screenshot | initiative folder | Required if it carries information — Template B (`…_context.md`) |
+| Audio / video | initiative folder | Required if it's hard to follow — Template B (`…_context.md`) |
 | External link / online paper / video / repo | — | Don't save a URL — the maintainer runs `/graphify add <url>` (Section 5) |
 | An idea / observation | initiative folder | The note *is* the content: `idea_<topic>.md`; name related files inside it |
 
@@ -257,9 +257,9 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 
 ## 9. Context notes (your main quality lever)
 
-Companion notes are the highest-leverage thing you can add. Each `.md` is itself graphed, so a note turns a lone file into a well-connected node. Per [the protocol](#the-protocol-adding-to-the-brain), a note is **required for every dataset, PDF, and document** (recommended for images and audio/video) — the `wdb-curator` agent can draft it for you. The `## Related files` line is where you hand Graphify its edges: fill it with the real siblings the file relates to, and **cross-link across initiative folders**, not just within one (see [How to get the best graph](#how-to-get-the-best-graph-out-of-graphify)). Place each note beside the file it describes, named exactly `<exact_filename>_dict.md` (tabular) or `<exact_filename>_context.md` (everything else).
+Companion notes are the highest-leverage thing you can add. Each `.md` is itself graphed, so a note turns a lone file into a well-connected node. Per [the protocol](#the-protocol-adding-to-the-brain), a note is **required for every dataset, PDF, and document** (recommended for images and audio/video) — the `wdb-curator` agent can draft it for you. The `## Related files` line is where you hand Graphify its edges: fill it with the real siblings the file relates to, and **cross-link across initiative folders**, not just within one (see [How to get the best graph](#how-to-get-the-best-graph-out-of-graphify)). Place each note beside the file it describes, named by **replacing the source file's extension** with `_dict.md` (tabular) or `_context.md` (everything else) — e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`, `report.pdf` → `report_context.md`.
 
-**Template A — tabular data** (`.csv`, `.xlsx`). Name it `<exact_filename>_dict.md`:
+**Template A — tabular data** (`.csv`, `.xlsx`). Name it the file's name with its extension replaced by `_dict.md` (e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`):
 
 ```markdown
 # Data dictionary: kenya_yield_data_2025.csv
@@ -302,7 +302,7 @@ project_kenya_pilot initiative.
 Blank yield_kg means not-yet-harvested, not zero. Three plots were re-measured.
 ```
 
-**Template B — everything else** (PDFs, docs, images, audio/video). Name it `<exact_filename>_context.md`:
+**Template B — everything else** (PDFs, docs, images, audio/video). Name it the file's name with its extension replaced by `_context.md` (e.g. `grant_proposal_kenya.pdf` → `grant_proposal_kenya_context.md`):
 
 ```markdown
 # Context: grant_proposal_kenya.pdf

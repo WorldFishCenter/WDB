@@ -40,9 +40,10 @@ those are the contributor's and maintainer's steps. Remind the user of them when
 
 4. **Context note (protocol step 4 + Section 9).** A note is **required** for every dataset,
    PDF, and document; add one for an image/audio/video too if it carries information. Place it
-   beside its target file, named **exactly**:
-   - tabular (`.csv`, `.xlsx`) → `<exact_filename>_dict.md` (Template A)
-   - everything else → `<exact_filename>_context.md` (Template B)
+   beside its target file, named by **replacing the source file's extension** (e.g.
+   `foo.csv` → `foo_dict.md`, `report.pdf` → `report_context.md`):
+   - tabular (`.csv`, `.xlsx`) → `<name>_dict.md` (Template A)
+   - everything else → `<name>_context.md` (Template B)
    - code → no note (context goes in comments/docstrings). A general overview note with no
      template (e.g. `pondcube_about.md`) is fine.
    Use the templates and **worked examples in [README Section 9](README.md#9-context-notes-your-main-quality-lever)**,
