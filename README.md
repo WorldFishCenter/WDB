@@ -16,6 +16,8 @@ A shared Graphify knowledge graph for the WorldFish Digital Brain (WDB) project.
 
 ## Contents
 
+- [How to get the best graph](#how-to-get-the-best-graph-out-of-graphify)
+- [**The protocol: adding to the brain**](#the-protocol-adding-to-the-brain)
 - [1. One-time setup (each team member)](#1-one-time-setup-each-team-member)
 - [2. Workspace organization (Project-First rule)](#2-workspace-organization-project-first-rule)
 - [3. Building the graph](#3-building-the-graph)
@@ -24,7 +26,7 @@ A shared Graphify knowledge graph for the WorldFish Digital Brain (WDB) project.
 - [6. Updating the graph](#6-updating-the-graph-dont-rebuild-from-scratch)
 - [7. Team workflow (the shared standard)](#7-team-workflow-the-shared-standard)
 - [8. File-type reference](#8-file-type-reference)
-- [9. Optional: context notes](#9-optional-context-notes)
+- [9. Context notes (your main quality lever)](#9-context-notes-your-main-quality-lever)
 - [10. Reference project layout](#10-reference-project-layout)
 - [Quick command reference](#quick-command-reference)
 
@@ -41,6 +43,52 @@ Graphify is an open-source skill for AI coding assistants (Claude Code, Codex, C
 **How extraction works (so expectations are correct):** code is parsed locally with Tree-sitter (no API calls); docs, PDFs, and images are sent to your assistant's model for semantic extraction; relationships are clustered and each one is tagged `EXTRACTED`, `INFERRED`, or `AMBIGUOUS`. It is *not* keyword/filename matching.
 
 Graphify is open-source (MIT) — official project: **[graphifylabs.ai](https://graphifylabs.ai/)** · source & issues: **[github.com/safishamsi/graphify](https://github.com/safishamsi/graphify)** · PyPI package: `graphifyy`.
+
+---
+
+## How to get the best graph out of Graphify
+
+The graph's value is the **connections** Graphify finds — and it can only connect what your files make *explicit*. Good organization (Sections 2 & 9) gets you tight clusters; these three habits get you the rich cross-links that make the map worth having:
+
+1. **State relationships in words.** Graphify draws an edge when a document *says* two things are related — it does **not** infer links from filenames or folder layout. If a dataset is produced by a script, a paper builds on a method, or two efforts share an approach, write that sentence somewhere and **name both sides**. Unstated relationships stay invisible.
+2. **Treat "Related files" as the wiring — and cross-link across initiatives.** The `## Related files` line in a context note (Section 9) is the main way you hand Graphify an edge. List the real siblings each file relates to, and deliberately link *across* initiative folders, not only within one. Those cross-initiative links become the "surprising connections" the graph exists to surface.
+3. **Capture the "why," not just the "what."** Graphify stores rationale — design decisions, trade-offs, how a thing is used — as part of a node, and builds dedicated rationale links. A note that explains *why* a file exists and how it connects extracts far more than a bare summary.
+
+For the periodic full rebuild, prefer **`/graphify . --mode deep`** — it extracts more inferred and latent links (shared assumptions, indirect dependencies) than the default, which is what you want from a cross-disciplinary research corpus. Uncertain links are tagged `INFERRED`/`AMBIGUOUS`, so the audit trail stays honest.
+
+---
+
+## The protocol: adding to the brain
+
+**Follow these steps exactly, every time.** They are identical whether you work from the command line or from the click-by-click **[USER_GUIDE.md](USER_GUIDE.md)** — that guide is just this protocol with screenshots. Acting the same way is what keeps everyone's contributions consistent.
+
+1. **Sync & branch.** Pull `main`, then create a branch named `yourname/short-topic`.
+2. **Pick the initiative folder.** Put your file in the matching `initiative/` folder. If none fits, create one at the repo root named in `lower_snake_case` (e.g. `genetic_improvement/`). If you're unsure which initiative it belongs to, **ask the maintainer — don't guess.**
+3. **Add the file, named by the rule.** Naming rule: **`lower_snake_case`, descriptive, with year and/or region when they apply.** ✅ `kenya_yield_2025.csv` ❌ `data.csv`, `Final Report.pdf`. Don't edit spreadsheet headers; keep a published paper's real title.
+4. **Write its context note.** **Required for every dataset, PDF, and document** (recommended for images and audio/video). Pick the template by type (table below), name it exactly `<file>_dict.md` or `<file>_context.md`, and **fill every section** — especially **Related files**, which is how the graph connects: list real siblings, and link *across* initiatives, not just within one. Templates + worked examples: [Section 9](#9-context-notes-your-main-quality-lever).
+5. **Commit source files only.** Never commit anything under `graphify-out/`.
+6. **Open a pull request.** Push your branch and open a PR. The maintainer reviews and merges — that is the only way changes reach `main`.
+7. **Maintainer rebuilds.** After merge, the maintainer runs `/graphify . --update` and commits the regenerated `graphify-out/`. **Contributors never run the graph tool.**
+
+### What am I adding?
+
+| What you're adding | Where it goes | Context note |
+|---|---|---|
+| Dataset / spreadsheet (`.csv`, `.xlsx`) | initiative folder; don't edit headers | **Required** — `<file>_dict.md` (Template A) |
+| Report / paper / document (`.pdf`, `.docx`, `.md`, `.txt`) | initiative folder; keep a paper's real title | **Required** — `<file>_context.md` (Template B) |
+| Image / diagram / screenshot | initiative folder | Required if it carries information — `<file>_context.md` (Template B) |
+| Audio / video | initiative folder | Required if it's hard to follow — `<file>_context.md` (Template B) |
+| External link / online paper / video / repo | — | Don't save a URL — the maintainer runs `/graphify add <url>` (Section 5) |
+| An idea / observation | initiative folder | The note *is* the content: `idea_<topic>.md`; name related files inside it |
+
+### Before you open the PR — checklist
+
+- [ ] File is in the correct **initiative folder**
+- [ ] Name is **`lower_snake_case`**, descriptive (year/region if relevant)
+- [ ] **Context note** present where required, with **every section filled in**
+- [ ] **Related files** lists real siblings (+ a cross-initiative link where one exists)
+- [ ] Only **source files** staged — nothing under `graphify-out/`
+- [ ] On **my branch**, opening a **pull request** — not committing to `main`
 
 ---
 
@@ -155,32 +203,34 @@ If a rebuild reports *fewer* nodes than before (e.g. after deleting files) and y
 /graphify . --update --force
 ```
 
+For a periodic from-scratch rebuild that maximises connections, use **deep mode** — it pulls more inferred and latent links across the whole corpus:
+
+```bash
+/graphify . --mode deep
+```
+
 ---
 
 ## 7. Team workflow (the shared standard)
 
-This is what keeps everyone on the same map.
+The graph is generated *and committed*, so the team shares one map without everyone rebuilding. Two rules keep it consistent and conflict-free:
 
-1. **One person builds the graph** with `/graphify .` and commits the `graphify-out/` folder to git.
-2. **Everyone else pulls** — their assistant reads the committed graph immediately, no rebuild needed.
-3. **Install the git hook** so the graph auto-rebuilds on each commit (AST only, no API cost) and `graph.json` is union-merged to avoid conflicts:
+1. **Contributors follow [the protocol](#the-protocol-adding-to-the-brain): branch → add + document → pull request.** You commit **source files only** and never rebuild the graph yourself; the `wdb-curator` agent helps you place, name, and document each file. The maintainer reviews and merges every PR — that is the only path to `main`.
+2. **One maintainer owns the build.** After merging, the maintainer runs `/graphify . --update` (or `/graphify . --mode deep` for a full refresh) and commits the regenerated `graphify-out/`. Because only one person regenerates the large `graph.*` files, there are no merge conflicts. Everyone else just pulls.
 
-   ```bash
-   graphify hook install
-   ```
-
-4. **When docs or papers change**, run `/graphify . --update` to refresh those nodes.
+> ⚠️ **Don't run `graphify hook install` on this repo.** The commit hook rebuilds with a no-LLM structural pass that turns markdown docs into header-only "junk" nodes — it's built for code-heavy repos, and this corpus is almost entirely docs/PDFs. Always rebuild through the assistant (`/graphify . --update`), which does real semantic extraction.
 
 **Add to `.gitignore`** (these are local-only and break when shared). Keep each comment on its **own line** — an inline `# ...` after a pattern becomes part of the pattern, so the rule silently never matches:
 
 ```
 # manifest.json + cache/stat-index.json are mtime/path-based (invalid after clone);
-# cost.json is local token tracking; .graphify_root/.graphify_python are absolute paths.
+# cost.json is local token tracking; the .graphify_* dotfiles are transient pipeline
+# scratch plus machine-local absolute paths (_root/_python); dated folders are local backups.
 graphify-out/manifest.json
 graphify-out/cost.json
 graphify-out/cache/stat-index.json
-graphify-out/.graphify_root
-graphify-out/.graphify_python
+graphify-out/.graphify_*
+graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 
 # The content-hashed cache (cache/ast, cache/semantic) is committed so teammates skip
 # re-extraction. To keep the repo small instead, ignore the whole cache:
@@ -205,9 +255,9 @@ graphify-out/.graphify_python
 
 ---
 
-## 9. Optional: context notes
+## 9. Context notes (your main quality lever)
 
-Graphify does **not** require companion files — this is a team convention, not a tool feature. But because any `.md` you add is itself graphed, a short note next to a file can improve how it connects. Keep notes optional and lightweight, and place them in the same project folder as the file they describe. Two templates cover most cases.
+Companion notes are the highest-leverage thing you can add. Each `.md` is itself graphed, so a note turns a lone file into a well-connected node. Per [the protocol](#the-protocol-adding-to-the-brain), a note is **required for every dataset, PDF, and document** (recommended for images and audio/video) — the `wdb-curator` agent can draft it for you. The `## Related files` line is where you hand Graphify its edges: fill it with the real siblings the file relates to, and **cross-link across initiative folders**, not just within one (see [How to get the best graph](#how-to-get-the-best-graph-out-of-graphify)). Place each note beside the file it describes, named exactly `<exact_filename>_dict.md` (tabular) or `<exact_filename>_context.md` (everything else).
 
 **Template A — tabular data** (`.csv`, `.xlsx`). Name it `<exact_filename>_dict.md`:
 
@@ -228,6 +278,30 @@ One or two sentences: what this dataset tracks and which project it belongs to.
 Missing values, known skew, or logic the assistant should know when reading it.
 ```
 
+**Filled example** (note the cross-initiative link in *Related files*):
+
+```markdown
+# Data dictionary: kenya_yield_2025.csv
+
+## Summary
+Maize yields from the 2025 Kenya pilot — one row per plot per harvest. Part of the
+project_kenya_pilot initiative.
+
+## Columns
+- plot_id: unique plot identifier (joins to field_map.png)
+- harvest_date: harvest date (YYYY-MM-DD)
+- yield_kg: harvested maize, kilograms
+- variety: seed variety planted
+
+## Related files
+- field_map.png (plot locations for plot_id)
+- ingest_yields.py (the script that produced this file)
+- ../project_zanzibar/catch_data.xlsx (sister pilot — same survey design)
+
+## Notes / caveats
+Blank yield_kg means not-yet-harvested, not zero. Three plots were re-measured.
+```
+
 **Template B — everything else** (PDFs, docs, images, audio/video). Name it `<exact_filename>_context.md`:
 
 ```markdown
@@ -243,11 +317,29 @@ One or two sentences: what this file is and why it's in the workspace.
 - related_file_1, related_file_2
 ```
 
+**Filled example** (note the cross-initiative links):
+
+```markdown
+# Context: grant_proposal_kenya.pdf
+
+## Summary
+2025 funding proposal for the Kenya yield pilot — objectives, budget, and the
+nutrient-sensitive breeding rationale behind project_kenya_pilot.
+
+## Key concepts / entities
+- Nutrient-sensitive maize breeding; smallholder yield gaps; Kenya pilot sites
+- Builds on the FAIR data-collection methods in ../data_harmonization/
+
+## Related files
+- kenya_yield_2025.csv (the dataset this proposal funded)
+- ../digital_transformation_accelerator/ (shared FAIR / cloud-data approach)
+```
+
 ---
 
 ## 10. Reference project layout
 
-How an initiative folder looks with files and (optional) context notes in place:
+How an initiative folder looks with files and their context notes in place:
 
 ```
 WDB/
@@ -261,7 +353,7 @@ WDB/
 │   ├── grant_proposal_kenya.pdf
 │   ├── grant_proposal_kenya_context.md   # Template B
 │   ├── field_map.png
-│   ├── field_map_context.md              # Template B (optional)
+│   ├── field_map_context.md              # Template B (image — add if it carries info)
 │   └── kickoff_meeting.mp4
 │
 ├── project_zanzibar/
@@ -290,5 +382,5 @@ graphify install                 # register the skill
 graphify clone <github-url>      # add a remote repo
 /graphify query "what connects X to Y?"
 /graphify explain "SomeComponent"
-graphify hook install            # auto-rebuild on commit
+/graphify . --mode deep          # full rebuild, richer connections
 ```
