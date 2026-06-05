@@ -2,10 +2,10 @@
 
 ## Summary
 The FICD (Feed Ingredient Composition Database) holds the nutrient composition of
-feed ingredients in **long (tidy) format** — one row per (ingredient × parameter).
-It is the ingredient-side input to the FASA feed-formulation engine, which pivots it
-to wide at runtime to build the least-cost LP. ~222,150 rows covering 802 ingredient
-codes and 277 composition parameters.
+feed ingredients, one row per (ingredient × parameter). It is the ingredient-side
+input to the FASA feed-formulation engine, which reshapes it at runtime to build the
+least-cost LP. ~222,150 rows covering 802 ingredient codes and 277 composition
+parameters.
 
 ## Columns
 - code: ingredient code (802 distinct; the engine's `prices` map and crosswalk key on this)
@@ -21,4 +21,4 @@ codes and 277 composition parameters.
 ## Notes / caveats
 - **Watch the column naming:** the column literally headed `ingredient` contains the *parameter* (e.g. `crude_protein_percent`); the actual ingredient lives in `description`/`code`. This trips up naive readers.
 - Digestible-energy parameters come in multiple variants by species group and processing method (e.g. `de_fish_carni_*`, `de_fish_omni_*`, `de_carp_*`, `de_shrimp_*`, each in `_pelleted`/`_extruded` forms). The engine selects the correct one via the request's `processing_method` and the ASNS energy code.
-- The file is long-format by design and pivoted at runtime — don't alter headers; the loader expects exact names.
+- Don't alter headers; the loader expects exact column names.

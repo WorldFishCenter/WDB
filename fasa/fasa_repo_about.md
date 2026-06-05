@@ -85,7 +85,7 @@ fasa_engine/
 This engine needs four CSVs (committed under `data/` by default):
 
 - `data/ASNS_nutrition_specification_database.csv` (nutrition constraints by species/stage/system)
-- `data/FICD_feed_ingredient_composition_database.csv` (ingredient nutrient composition; long format, pivoted at runtime)
+- `data/FICD_feed_ingredient_composition_database.csv` (ingredient nutrient composition)
 - `data/PAFF_practical_aquaculture_feed_formulation_database_Feed_Formulations.csv` (reference formulations)
 - `data/PAFF_practical_aquaculture_feed_formulation_database_Calculated_Composition.csv` (reference calculated composition)
 

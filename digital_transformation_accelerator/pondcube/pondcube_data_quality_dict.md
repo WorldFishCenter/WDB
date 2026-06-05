@@ -2,7 +2,7 @@
 
 ## Summary
 Log of data-quality issues found while converting the July 2025 PondCube source
-workbook into the tidy/wide datasets. Used for QA and source cleanup; small by design
+workbook into the published datasets. Used for QA and source cleanup; small by design
 (one row per flagged issue).
 
 ## Columns

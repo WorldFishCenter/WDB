@@ -11,6 +11,8 @@ dist/
 *.generated.*
 README.md
 USER_GUIDE.md
+CLAUDE.md
 .gitignore
 .claude/
 convert_pondcube.py
+CHANGELOG.md

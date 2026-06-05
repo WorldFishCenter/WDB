@@ -29,7 +29,7 @@ Water conditions can turn dangerous quickly — dissolved oxygen in particular c
 
 ## Datasets
 
-The July 2025 water-quality readings are published as tidy, API-ready CSV files, fully documented in **[pondcube_data_about.md](pondcube_data_about.md)**:
+The July 2025 water-quality readings are published as clean, API-ready CSV files, fully documented in **[pondcube_data_about.md](pondcube_data_about.md)**:
 
 - `pondcube_measurements_long.csv` — one row per individual measurement (time-series databases, APIs, ML).
 - `pondcube_observations_wide.csv` — one row per (location, tank, date, period), a column per parameter (apps, dashboards, human review).

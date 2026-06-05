@@ -1,13 +1,13 @@
 # PondCube — Water Quality Dataset (July 2025)
 
-Machine-readable conversion of the paper/Excel log `2025.7.31.xlsx` into tidy, API- and AI-ready datasets.
+Machine-readable conversion of the paper/Excel log `2025.7.31.xlsx` into clean, API- and AI-ready datasets.
 
 ## Files
 
 | File | What it is | Best for |
 |------|------------|----------|
-| `pondcube_measurements_long.csv` | **Tidy long format** — one row per single measurement | Time-series databases, APIs, analytics, ML pipelines |
-| `pondcube_observations_wide.csv` | **Wide format** — one row per (location, tank, date, period) with a column per parameter | Apps, dashboards, human review, spreadsheets |
+| `pondcube_measurements_long.csv` | One row per single measurement | Time-series databases, APIs, analytics, ML pipelines |
+| `pondcube_observations_wide.csv` | One row per (location, tank, date, period), with a column per parameter | Apps, dashboards, human review, spreadsheets |
 | `pondcube_tanks_reference.csv` | Reference list of every location/zone/tank | Joins, app dropdowns, validation |
 | `pondcube_data_quality.csv` | Log of data-quality issues found during conversion | QA, source cleanup |
 | `convert_pondcube.py` | The reproducible conversion script | Re-running next month's file |
@@ -61,7 +61,7 @@ Units were not stated in the source and are applied as the aquaculture-standard 
 
 ## Conventions & rules applied
 
-- **Blank = missing.** A blank source cell becomes an absent row in `pondcube_measurements_long.csv` (long) or an empty cell in `pondcube_observations_wide.csv` (wide). It is **never** recorded as 0. Any ambiguous cases are logged in `pondcube_data_quality.csv`.
+- **Blank = missing.** A blank source cell becomes an absent row in `pondcube_measurements_long.csv` or an empty cell in `pondcube_observations_wide.csv`. It is **never** recorded as 0. Any ambiguous cases are logged in `pondcube_data_quality.csv`.
 - **Real zeros preserved.** The source contains exactly 5 genuine `0` values, all `nitrate`. These are chemically plausible (undetectable nitrate) and were kept; they are also listed in `pondcube_data_quality.csv` so you can confirm none were placeholders.
 - **Remarks:** the Remarks columns exist in the template but are **empty throughout** July, so no remark rows were produced.
 - **Tank identity.** `tank_id` is local to a location; the global key is the pair `(location, tank_id)`. Every location/zone/tank is enumerated in `pondcube_tanks_reference.csv`, which the `location` and `tank_id` columns of `pondcube_measurements_long.csv` and `pondcube_observations_wide.csv` join against.
@@ -79,7 +79,7 @@ See `pondcube_data_quality.csv`. Notable items: a tank labeled `90 for FT2` (fre
 
 ## Forward-compatibility (probes / APIs / cloud)
 
-The long format maps directly onto a time-series/observation model. When live probes come online, append rows with the same columns plus a `timestamp` (replacing or complementing `date`/`period`) and a `source` field (`manual` vs `probe`). Suggested relational shape:
+`pondcube_measurements_long.csv` maps directly onto a time-series/observation model. When live probes come online, append rows with the same columns plus a `timestamp` (replacing or complementing `date`/`period`) and a `source` field (`manual` vs `probe`). Suggested relational shape:
 
 - `locations(location_id, name, zone)`
 - `tanks(tank_id, location_id)` — surrogate PK; keep `(location, local_number)` as a natural key
