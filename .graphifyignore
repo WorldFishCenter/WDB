@@ -14,5 +14,6 @@ USER_GUIDE.md
 CLAUDE.md
 .gitignore
 .claude/
+.github/
 convert_pondcube.py
 CHANGELOG.md
