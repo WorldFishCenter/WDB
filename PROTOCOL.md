@@ -95,7 +95,7 @@ They are **sequential, not interchangeable**:
 | Image / diagram / screenshot | initiative folder | Required if it carries information — Template B |
 | Audio / video | initiative folder | Required if it's hard to follow — Template B |
 | External link / online paper / video / repo | — | Don't save a URL — the maintainer runs `/graphify add <url>` ([§9](#9-maintainer-and-build-reference)) |
-| A topic / initiative overview (not about one file) | initiative folder | Standalone `_about.md` (no template) + `## Related files`; the whole-initiative overview is the **living current-state node** ([§6](#6-context-notes)) |
+| A topic / initiative overview (not about one file) | initiative folder | Standalone `_about.md` — **Template C** + `## Related files`; the bare `<initiative>_about.md` overview is the **living current-state node** ([§6](#6-context-notes)) |
 | An idea / observation | initiative folder | The note *is* the content: `idea_<topic>.md` |
 
 ### Pre-PR checklist
@@ -179,8 +179,12 @@ edges — fill it with real siblings, and **cross-link across initiative folders
 or `<file>_context.md` (anything else). A document describing a **topic or whole initiative** rather
 than one file is a standalone **`_about.md`**: an aspect doc is `<initiative>_<aspect>_about.md`
 (e.g. `pondcube_data_about.md`, `fasa_repo_about.md`); the bare `<initiative>_about.md` is reserved for
-the single whole-initiative overview (e.g. `pondcube_about.md`). Write `_about.md` docs freely (no
-template) but give each a `## Related files`. Never give an overview a `_dict`/`_context` suffix — that
+the single whole-initiative overview (e.g. `pondcube_about.md`). Both follow **Template C** (below): a
+light scaffold whose required anchors are a proper-name `# H1`, a one-line identity, and a `## Related
+files`. The two suffix forms are a **parent⇄child hierarchy** — the bare `<initiative>_about.md` is the
+parent hub; each `<initiative>_<aspect>_about.md` is a child that names its parent ("part of") while the
+parent enumerates its children, stated on **both** sides so the edge is `EXTRACTED`. The hierarchy may
+nest. Never give an overview a `_dict`/`_context` suffix — that
 suffix means "companion to the file of that name."
 
 **Two tenses — this is how the brain stays current.**
@@ -304,6 +308,49 @@ nutrient-sensitive breeding rationale behind project_kenya_pilot.
 - kenya_yield_2025.csv (the dataset this proposal funded)
 - ../digital_transformation_accelerator/ (shared FAIR / cloud-data approach)
 ```
+
+### Template C — initiative overview (`_about.md`)
+
+Unlike the frozen A/B snapshots, an `_about.md` is the **living, present-tense node** for a topic or
+whole initiative — **updated in place** (git is its history) and the natural `superseded_by` target a
+stale snapshot points to ([§7](#7-recording-updates-and-supersession-over-time)). It is a **light
+scaffold, not a fill-in form**: write the body freely, but always include the three **required
+anchors** — a proper-name `# H1` (it becomes the node's label), a one-line identity, and a
+`## Related files` block (the wiring).
+
+`_about.md` docs form a **parent⇄child hierarchy** and the naming encodes the rank: the bare
+`<initiative>_about.md` is the **parent hub**; each `<initiative>_<aspect>_about.md` is a **child** (one
+component — a data bundle, an engine/repo). State the link on **both** sides so the edge is `EXTRACTED`:
+the child names its parent in `## Related files` ("part of `<initiative>_about.md`") and the parent
+**enumerates its children**. The hierarchy nests (an aspect hub can itself parent a finer one).
+
+**Keep the hub about *meaning and connections*, not mechanics** — habit 4 applies here too. Schemas,
+column/value lists, units, and coverage counts belong in the relevant `_dict.md` (filled by `/enrich`);
+engine/app internals, quickstart, API, deployment, CI, and file-trees belong in the child engine/repo
+doc — the hub *delegates* to them ("see `<child>_about.md`"). **One carve-out:** an aspect doc that is a
+verbatim **imported external README** (e.g. `fasa_repo_about.md`) may keep that tooling detail, but mark
+it with a top `> Source: …` provenance line; the parent hub stays clean.
+
+```markdown
+# <Initiative's real name>        <!-- becomes the graph node label — the proper name, not a filename -->
+
+<One sentence, present tense: what this initiative is and the problem it addresses.>
+
+## Aim
+<Why it exists — the goal and the rationale behind it. Graphify stores this as node rationale.>
+
+## Scope (current state)
+<What it covers today: workstreams, sites, methods, components. Name the concepts and entities
+ a reader — and the graph — should associate with this initiative.>
+
+## Related files
+- <child or sibling> — <how it relates: part of / produced by / documents / feeds / builds on>
+- ../<other_initiative>/<file> — <cross-initiative relationship>   <!-- list these first; most valuable -->
+```
+
+**Worked example:** `fasa/fasa_about.md` (the parent FASA hub) ⇄ `fasa/fasa_repo_about.md` (its engine
+child) — the hub carries the programme (aim, partners, funding, field research) and delegates the
+optimization-engine internals to the child.
 
 ---
 

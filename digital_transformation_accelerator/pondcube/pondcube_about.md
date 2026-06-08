@@ -41,3 +41,9 @@ All four were converted from the source workbook `PondCube Source Workbook 2025.
 ## In short
 
 PondCube moves WorldFish's genetic-improvement data out of scattered spreadsheets into one FAIR-aligned, cloud-based pipeline — ingesting manual and sensor inputs (starting with tank water quality), validating and analyzing them, and surfacing decisions through dashboards across hatcheries and country programs.
+
+## Related files
+
+- `../digital_transformation_accelerator_about.md` — the parent **Digital Transformation Accelerator** initiative PondCube is delivered under (part of).
+- `pondcube_data_about.md` — PondCube's **water-quality dataset** documentation (a child aspect of this overview).
+- `pondcube_measurements_long_dict.md`, `pondcube_observations_wide_dict.md`, `pondcube_tanks_reference_dict.md`, `pondcube_data_quality_dict.md` — the dataset dictionaries for the four published CSVs.

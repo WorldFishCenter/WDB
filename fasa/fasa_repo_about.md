@@ -5,6 +5,13 @@
 
 Optimization core for the FASA digital application: low-cost, digestibility-aware feed formulation for Nile Tilapia and African Catfish using locally available African ingredients.
 
+## Related files
+
+- `fasa_about.md` — the parent **FASA initiative** this engine is part of (its program, partners, funding, and field research).
+- `ASNS_nutrition_specification_database_dict.md` — the nutritional constraints (by species/stage/system) this engine enforces.
+- `FICD_feed_ingredient_composition_database_dict.md` — the ingredient nutrient composition this engine reads.
+- `PAFF_practical_aquaculture_feed_formulation_database_Feed_Formulations_dict.md`, `PAFF_practical_aquaculture_feed_formulation_database_Calculated_Composition_dict.md` — the reference formulations this engine reproduces as its PAFF correctness gate.
+
 ## Who this repo is for
 
 - **Feed formulators / mills**: explore least-cost formulations under explicit nutritional + toxin constraints.

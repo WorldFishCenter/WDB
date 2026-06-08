@@ -1,3 +1,49 @@
+# WDB 0.0.3
+
+Turns the `_about.md` overview from a free-form note into a structured, connected
+node: a light template, a parent⇄child hierarchy between initiative hubs and their
+component docs, and a clear division of labour between the hub and its companions.
+
+## Contributing Protocol
+
+* **CHANGED** `_about.md` overviews now follow **Template C** ([PROTOCOL §6](PROTOCOL.md#6-context-notes))
+  — a light scaffold, not a free-form note (revises 0.0.2's "no template"). Required
+  anchors: a proper-name `# H1` (it becomes the node label), a one-line identity, and a
+  `## Related files` block; `## Aim`/`## Scope` are recommended.
+* **NEW** Parent⇄child `_about.md` hierarchy. The bare `<initiative>_about.md` is the
+  parent hub; each `<initiative>_<aspect>_about.md` is a child component (a data bundle,
+  an engine/repo). The link is stated on **both** sides — the child names its parent
+  ("part of"), the parent enumerates its children — so the edge extracts as `EXTRACTED`,
+  and the hierarchy may nest.
+* **NEW** Hub-vs-companion division of labour (extends habit 4). The hub stays about
+  *meaning and connections*: schemas / value-lists / units stay in the `_dict.md` and
+  engine/app/tooling internals stay in the child engine doc — the hub *delegates*
+  ("see `<child>_about.md`"). One carve-out: a verbatim imported external README (e.g.
+  `fasa_repo_about.md`) may keep tooling detail if marked with a top `> Source:` line.
+
+## Documentation
+
+* **NEW** `PROTOCOL.md` §6 gains **Template C** (initiative overview), with a worked
+  `fasa_about.md` ⇄ `fasa_repo_about.md` parent/child example; the placement table and
+  naming section now point to it.
+* **CHANGED** `README.md` and `USER_GUIDE.md` now **name Template C** for the initiative
+  overview — in the "What am I adding?" table, the flow diagram, and (README) the
+  skeletons note — so it reads in parallel with Template A/B instead of "write freely".
+
+## Automated Tooling
+
+* **CHANGED** `wdb-curator` agent now drafts overviews against **Template C** and wires
+  the parent⇄child link on **both** sides, applying the hub-vs-companion division of
+  labour (and the imported-README `> Source:` carve-out).
+
+## Initiatives
+
+* **NEW** Whole-initiative hubs added: `digital_transformation_accelerator/digital_transformation_accelerator_about.md`
+  (DTA, parenting PondCube) and `fasa/fasa_about.md` (FASA, parenting the feed-formulation
+  engine doc) — the first parent hubs built under the new hierarchy.
+
+---
+
 # WDB 0.0.2
 
 Adds a standard, protocol-aligned way to record how knowledge changes over

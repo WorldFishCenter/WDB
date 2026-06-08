@@ -49,9 +49,17 @@ those are the contributor's and maintainer's steps. Remind the user of them when
    A document that describes a **topic or whole initiative** (not one file) is a standalone
    **`_about.md`** doc: name an aspect doc `<initiative>_<aspect>_about.md` (e.g.
    `pondcube_data_about.md`, `fasa_repo_about.md`) and reserve the bare `<initiative>_about.md`
-   for the single whole-initiative overview (e.g. `pondcube_about.md`). Write it freely (no
-   template) with a `## Related files` section, and never give it a `_dict`/`_context` suffix
-   (that suffix means "companion to the file of that name").
+   for the single whole-initiative overview (e.g. `pondcube_about.md`). Use **Template C**
+   ([PROTOCOL §6](PROTOCOL.md#6-context-notes)) — a light scaffold: a proper-name `# H1` (the node
+   label), a one-line identity, recommended `## Aim`/`## Scope`, and a required `## Related files`.
+   `_about.md` docs are a **parent⇄child hierarchy**: a child `<initiative>_<aspect>_about.md` names
+   its parent ("part of `<initiative>_about.md`") and the parent enumerates its children — state it on
+   **both** sides so the edge is EXTRACTED. Keep the hub about meaning and connections: schemas /
+   value-lists / units stay in the `_dict.md`, and engine/app/tooling internals in the child engine
+   doc — the hub delegates ("see `<child>_about.md`"). The one carve-out is a verbatim **imported
+   external README** (e.g. `fasa_repo_about.md`), which may keep tooling detail if marked with a top
+   `> Source:` line. Never give an overview a `_dict`/`_context` suffix (that suffix means "companion
+   to the file of that name").
    Use the templates and **worked examples in [PROTOCOL §6 — Context notes](PROTOCOL.md#6-context-notes)**,
    and match the house style of existing notes (`peskas/*_context.md`, `*/pondcube/*_dict.md`).
    Read the file first — header row + a few rows for data, the first pages for a PDF — so every

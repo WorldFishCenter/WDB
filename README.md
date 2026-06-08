@@ -44,19 +44,19 @@ Full detail for each step is in [PROTOCOL §2](PROTOCOL.md#2-the-contribution-pr
 6. **Commit source files only** (never `graphify-out/`), then open a **pull request**.
 7. **Maintainer rebuilds** — `/graphify . --update` after merge. *(Contributors never build.)*
 
-The map below covers every path: adding a file, writing a note, sharing a link, or updating/superseding something already in ([§7](PROTOCOL.md#7-recording-updates-and-supersession-over-time)).
+The map below covers every path: adding a file, writing a note, sharing a link, or updating/superseding something already in the brain ([§7](PROTOCOL.md#7-recording-updates-and-supersession-over-time)).
 
 ```mermaid
 flowchart TD
   S{"What are you doing?"}
   S -- "Adding a new file" --> A[Add file to its initiative folder]
-  S -- "Writing an idea /<br/>_about overview" --> N[Write the note in plain English]
+  S -- "Writing an idea /<br/>_about overview" --> N["Write the note in plain English<br/>(an _about overview uses Template C)"]
   S -- "Sharing a URL" --> L["Tell the maintainer — don't commit a URL"]
-  S -- "Updating / superseding<br/>something already in" --> U["Append ## Updates + a superseded_by<br/>link to its companion note (or /curate)"]
+  S -- "Updating / superseding<br/>something already in the brain" --> U["Append ## Updates + a superseded_by<br/>link to its companion note (or /curate)"]
 
   A --> B["/curate — place, name,<br/>draft the context note"]
   B --> C{"Tabular?<br/>(.csv / .xlsx)"}
-  C -- "no (PDF, doc, image…)" --> G[Commit source files only → open PR]
+  C -- "no (PDF, doc, image)" --> G[Commit source files only → open PR]
   C -- "yes" --> D["/enrich — 1) gate the shape<br/>2) fill value domains into the note"]
   D --> E{Tidy wide or long?}
   E -- "no" --> F[Reshape the table → re-run /enrich]
@@ -76,7 +76,7 @@ flowchart TD
 | Report / paper / document (`.pdf`, `.docx`, `.md`, `.txt`) | **Required** — Template B (`…_context.md`) |
 | Image / diagram / audio / video | Required if it carries information — Template B |
 | External link / online paper / repo | Don't save a URL — tell the maintainer (`/graphify add <url>`) |
-| A topic / whole-initiative overview | Standalone `_about.md` — the **living current-state node** ([§6](PROTOCOL.md#6-context-notes)) |
+| A topic / whole-initiative overview | Standalone `_about.md` — **Template C**, the **living current-state node** ([§6](PROTOCOL.md#6-context-notes)) |
 | An idea / observation | The note *is* the content: `idea_<topic>.md` |
 
 ### Context notes — the quality lever
@@ -92,6 +92,9 @@ worked examples** from [PROTOCOL §6](PROTOCOL.md#6-context-notes). Skeletons:
 ## Related files                     |   ## Related files
 ## Notes / caveats                   |   (## Updates — only when superseded; see §7)
 ```
+
+A whole-initiative overview instead uses **Template C** — a lighter *living-node* scaffold (proper-name
+title, one-line identity, `## Related files`), not these frozen-snapshot notes ([§6](PROTOCOL.md#6-context-notes)).
 
 Keep a table's **shape** (wide/long) and any **tooling/provenance** *out* of the note — that's habit 4,
 and it's why the graph stays clean ([§6](PROTOCOL.md#6-context-notes)).
