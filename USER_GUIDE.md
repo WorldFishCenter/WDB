@@ -1,10 +1,10 @@
 # Adding things to the WDB graph — a guide for non-coders
 
-![Version](https://img.shields.io/badge/version-0.0.1-blue) · [CHANGELOG](CHANGELOG.md)
+![Version](https://img.shields.io/badge/version-0.0.2-blue) · [CHANGELOG](CHANGELOG.md)
 
 This guide is for team members who have **never used a code editor** and don't write code. It walks you, click by click, through adding something new — a dataset, a PDF, a photo, even just an **idea** — to the WorldFish Digital Brain (WDB) so it becomes part of the shared knowledge graph.
 
-**This is the exact same procedure as the [README protocol](README.md#the-protocol-adding-to-the-brain) — just with screenshots.** Following the same steps as everyone else is what keeps the brain consistent. You never touch the main project directly: you make your changes on your **own copy**, and the maintainer reviews and approves them.
+**This is the exact same procedure as the [main protocol](PROTOCOL.md#2-the-contribution-protocol) — just with screenshots.** Following the same steps as everyone else is what keeps the brain consistent. You never touch the main project directly: you make your changes on your **own copy**, and the maintainer reviews and approves them. *(The complete rules live in [PROTOCOL.md](PROTOCOL.md); you don't need to read it — this guide covers everything you do.)*
 
 You **do not build the graph** — the maintainer does that after approving your change. You do run **two simple check commands** on your own file before you submit (`/curate` and `/enrich`); you type them into the assistant's chat box, which is not coding. Setup below gets you ready for that (do it once).
 
@@ -64,7 +64,31 @@ You'll now see the WDB folders in the **left sidebar** (the Explorer). That's th
 
 ## Part 2 — The protocol, step by step
 
-These are the **same steps as the [README protocol](README.md#the-protocol-adding-to-the-brain)** — you perform steps 1–6 below by clicking and typing two commands; step 7 (rebuilding the graph) is the maintainer's. Repeat them every time you add something.
+These are the **same steps as the [main protocol](PROTOCOL.md#2-the-contribution-protocol)** — you perform steps 1–6 below by clicking and typing two commands; step 7 (rebuilding the graph) is the maintainer's. Repeat them every time you add something.
+
+**The two commands run in order: `/curate` first, then `/enrich`.** `/curate` (Step 4) tidies your file and writes its note; `/enrich` (Step 5) runs **after** it and **only for spreadsheets**, to check the table's shape and fill in the note's value lists. So always do `/curate` first — and if your file isn't a spreadsheet, you only need `/curate`. The map below shows **every path you might take** — adding a file, writing a note, sharing a link, or **updating something that's already in** (that last one is [Part 4](#part-4--updating-something-thats-already-in-the-brain)):
+
+```mermaid
+flowchart TD
+  S{"What do you want to do?"}
+  S -- "Add a new file<br/>(dataset, PDF, image, audio…)" --> A[Put it in its initiative folder]
+  S -- "Write an idea or a<br/>project overview note" --> N["Create idea_….md or …_about.md<br/>and write it in plain English"]
+  S -- "Share a web link /<br/>online paper" --> L["Tell the maintainer the link<br/>(don't save a URL)"]
+  S -- "Update / replace something<br/>already in the brain" --> U["Open its companion note: add a dated<br/>## Updates line + a superseded_by link<br/>(or ask /curate) — see Part 4"]
+
+  A --> B["/curate — tidy placement &<br/>name, write the note"]
+  B --> C{"Spreadsheet?<br/>(.csv / .xlsx)"}
+  C -- "no (PDF, doc, photo…)" --> G[Commit your changes → open a pull request]
+  C -- "yes" --> D["/enrich — 1) check the shape<br/>2) fill the note's value lists"]
+  D --> E{One clean wide or long table?}
+  E -- "no" --> F[Tidy the table → run /enrich again]
+  F --> D
+  E -- "yes" --> G
+  N --> G
+  U --> G
+  L --> Z([Done — the maintainer adds it])
+  G --> H["The maintainer rebuilds<br/>the graph for everyone"]
+```
 
 **Step 1 — Sync & branch.**
 - Click the **Source Control** icon on the left (a branching-road shape) → the **"⋯"** menu at the top → **Pull**. Now you have the newest version.
@@ -83,9 +107,9 @@ This small note is what lets the graph connect your file. The easy way:
 - Open the **Claude Code panel** in your editor and type **`/curate`** in its chat box. It reads your new file and drafts the note for you — correct name, the right template, and the all-important **`## Related files`** links.
 - **Read what it wrote** and fix anything it got wrong (you know the file best). Save (**Ctrl+S** / **Cmd+S**).
 
-Prefer to write it by hand? Right-click the folder → **New File**, name it your file's name with its **extension replaced** by `_dict.md` (spreadsheets) or `_context.md` (everything else) — e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`. Copy the matching template from the **[README — Context notes](README.md#context-notes-your-main-quality-lever)** and fill **every** section. The most important line is **`## Related files`**: list the real files yours relates to — including files in **other initiative folders**. Those cross-links are what make the brain valuable.
+Prefer to write it by hand? Right-click the folder → **New File**, name it your file's name with its **extension replaced** by `_dict.md` (spreadsheets) or `_context.md` (everything else) — e.g. `kenya_yield_2025.csv` → `kenya_yield_2025_dict.md`. Copy the matching template from **[PROTOCOL.md — Context notes](PROTOCOL.md#6-context-notes)** and fill **every** section. The most important line is **`## Related files`**: list the real files yours relates to — including files in **other initiative folders**. Those cross-links are what make the brain valuable.
 
-**Step 5 — Check a spreadsheet with `/enrich`.** *(Skip if you didn't add a `.csv`/`.xlsx`.)*
+**Step 5 — Check a spreadsheet with `/enrich`.** *(Skip if you didn't add a `.csv`/`.xlsx`.)* Do this **after** Step 4 — `/enrich` fills the note that `/curate` just wrote.
 In the assistant chat, type **`/enrich`** followed by your file name (e.g. `/enrich kenya_yield_2025.csv`). It does two things:
 - **Checks the shape.** If the table isn't one clean wide/long table, it **stops and tells you exactly what to fix** — go back to Step 3, tidy it, and run `/enrich` again.
 - **Fills the value lists** in your `_dict.md` automatically (the maintainer reviews them later).
@@ -116,7 +140,7 @@ This is the same checklist the README uses. Tick every box:
 
 ## Part 3 — What you can add
 
-Put it in the right **initiative folder**, give it a **`lower_snake_case`** name, and add the context note the table requires (templates + worked examples are in the **[README — Context notes](README.md#context-notes-your-main-quality-lever)**). This table matches the README's "What am I adding?" exactly.
+Put it in the right **initiative folder**, give it a **`lower_snake_case`** name, and add the context note the table requires (templates + worked examples are in **[PROTOCOL.md — Context notes](PROTOCOL.md#6-context-notes)**). This table matches the "What am I adding?" list exactly.
 
 | What you're adding | How to add it | Context note |
 |---|---|---|
@@ -130,6 +154,40 @@ Put it in the right **initiative folder**, give it a **`lower_snake_case`** name
 
 ---
 
+## Part 4 — Updating something that's already in the brain
+
+Sometimes a file is already in the brain, but the world moves on: a 2025 report's method gets replaced, or a project quietly changes how it works. **You don't delete or rewrite the old thing** — it's still a true record of its moment, and other notes point to it. You just **add a short note on top** so the brain knows what changed.
+
+**The golden rule for updates: never change the original file, and don't rewrite its note. Only *add* to it.**
+
+**Where "what's true now" lives — the project overview.** Most projects keep one living summary file named like `peskas_about.md` (the project's name + `_about`). Unlike everything else, **that one file is *meant* to be kept up to date** — it describes the project *as it is today*. So when an older file goes out of date, the thing that "replaces" it is usually **the project's `_about.md`**, not a brand-new document. If the project doesn't have one yet, `/curate` will offer to make one.
+
+Here's how, in two small additions to the old file's **companion note** (the `..._context.md` or `..._dict.md` next to it):
+
+1. **Say what changed.** Open the companion note, scroll to the bottom, add an **`## Updates`** heading (if it isn't there) and one line — newest at the top:
+
+   ```
+   ## Updates
+   - **2026 (around then)** — The workflow changed; the part in section 3 is now
+     replaced (superseded_by) the current project summary `peskas_about.md`.
+     The 2025 numbers above are still correct for 2025.
+   ```
+
+   **A rough date is fine** — *"2026"*, *"around 2026"*, *"since the 2025 paper"*, even *"not sure exactly when"*. **Don't guess a precise date you don't know.** What matters is recording *that* it changed and *what* now replaces it.
+
+2. **Link it to what's current.** In that same note's **`## Related files`** list, add a line pointing at the current version (usually the project overview):
+
+   ```
+   ## Related files
+   - peskas_about.md — superseded_by
+   ```
+
+   That link is what lets the brain tell *current* from *out-of-date*. (If a specific newer file — not the overview — is what replaced it, point at that file instead, and add the mirror line `old_file.pdf — supersedes` in the newer file's note.)
+
+**The easy way:** type **`/curate`** in the assistant chat and tell it *"the workflow in the 2025 paper has been superseded by current Peskas"* — it writes both bits in the right place, and offers to create the project overview if there isn't one. Read what it wrote, save, and open a pull request as usual. *(Don't put any of this in the little `---` block at the very top of a note — the brain ignores update info there. It has to be in the body, as shown above.)*
+
+---
+
 ## Quick reference
 
 | You want to… | Do this |
@@ -139,6 +197,7 @@ Put it in the right **initiative folder**, give it a **`lower_snake_case`** name
 | Start your own branch | Click the branch name (**bottom-left**) → **Create new branch** |
 | Draft a context note | Type **`/curate`** in the assistant chat |
 | Check a spreadsheet | Type **`/enrich <file.csv>`** in the assistant chat |
+| Mark something as updated/superseded | Add a dated `## Updates` line + a `superseded_by` link to its note (or ask **`/curate`**) — [Part 4](#part-4--updating-something-thats-already-in-the-brain) |
 | Save your work | **Source Control →** type a message **→ Commit** |
 | Send it for review | **Publish Branch**, then open a **Pull request** on github.com |
 

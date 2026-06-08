@@ -1,4 +1,4 @@
-# .graphifyignore — what to exclude from the knowledge graph (README Section 4)
+# .graphifyignore — what to exclude from the knowledge graph (see PROTOCOL.md §9).
 # Same syntax as .gitignore, including ! negation.
 
 .git/
@@ -9,6 +9,7 @@ __pycache__/
 node_modules/
 dist/
 *.generated.*
+PROTOCOL.md
 README.md
 USER_GUIDE.md
 CLAUDE.md

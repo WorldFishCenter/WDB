@@ -1,12 +1,12 @@
 # WDB — operator instructions
 
-This is a **collaborative Graphify knowledge-graph repo**. The human-facing conventions
-live in [README.md](README.md) and [USER_GUIDE.md](USER_GUIDE.md) (both `.graphifyignore`d).
-This file carries the rules Claude must enforce when **operating** the graph — chiefly
-during `/graphify` extraction, which the README conventions cannot reach because the
-extractor never reads the README.
+This is a **collaborative Graphify knowledge-graph repo**. The conventions are specified in
+[PROTOCOL.md](PROTOCOL.md) (the normative spec) and surfaced practically in [README.md](README.md)
+and [USER_GUIDE.md](USER_GUIDE.md) (all `.graphifyignore`d). This file carries the rules Claude must
+enforce when **operating** the graph — chiefly during `/graphify` extraction, which those conventions
+cannot reach because the extractor never reads them.
 
-Per the protocol ([README §"adding to the brain"](README.md#the-protocol-adding-to-the-brain)),
+Per the protocol ([PROTOCOL §2](PROTOCOL.md#2-the-contribution-protocol)),
 only the **maintainer** runs `/graphify`. These rules apply to whoever is in that seat.
 
 ## Build model & provenance
@@ -46,8 +46,8 @@ whatever prompt drives extraction:
 > site / species / measurement subject. If the *only* thing two nodes share is
 > structural shape, emit **no** edge.
 
-**Why this is a separate enforcement point, not just a note-writing rule.** README
-[habit 4](README.md#how-to-get-the-best-graph-out-of-graphify) keeps shape language *out
+**Why this is a separate enforcement point, not just a note-writing rule.**
+[Habit 4 (PROTOCOL §6)](PROTOCOL.md#6-context-notes) keeps shape language *out
 of the notes*. But a `_dict.md` still reveals shape through its **column list, node
 label, and filename** (`..._observations_wide`, `..._measurements_long`) even when the
 prose is clean — so the extractor can re-derive shape and mint the noise anyway. Habit 4
@@ -60,7 +60,7 @@ new wide/long file would multiply that noise without this guard.
 ### Note on `--mode deep`
 
 The documented default for this repo is **standard** mode (`/graphify .` or `--update`);
-see README ["How to get the best graph"](README.md#how-to-get-the-best-graph-out-of-graphify).
+see [PROTOCOL §9 — Building & updating](PROTOCOL.md#9-maintainer-and-build-reference).
 `--mode deep` instructs subagents to be **aggressive with INFERRED edges**, which amplifies
 exactly the speculative similarity noise this guard suppresses — so it is **not** recommended
 for routine rebuilds. Reserve it for deliberate one-off exploration, and expect to review the
