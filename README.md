@@ -72,11 +72,11 @@ flowchart TD
 
 | What you're adding | Context note |
 |---|---|
-| Dataset / spreadsheet (`.csv`, `.xlsx`) | **Required** — Template A (`…_dict.md`); run **`/enrich`** |
-| Report / paper / document (`.pdf`, `.docx`, `.md`, `.txt`) | **Required** — Template B (`…_context.md`) |
+| Dataset / spreadsheet (`.csv`, `.xlsx`) | **Required** — [Template A](PROTOCOL.md#template-a--tabular-data-csv-xlsx) (`…_dict.md`); run **`/enrich`** |
+| Report / paper / document (`.pdf`, `.docx`, `.md`, `.txt`) | **Required** — [Template B](PROTOCOL.md#template-b--everything-else-pdfs-docs-images-audiovideo) (`…_context.md`) |
 | Image / diagram / audio / video | Required if it carries information — Template B |
 | External link / online paper / repo | Don't save a URL — tell the maintainer (`/graphify add <url>`) |
-| A topic / whole-initiative overview | Standalone `_about.md` — **Template C**, the **living current-state node** ([§6](PROTOCOL.md#6-context-notes)) |
+| A topic / whole-initiative overview | Standalone `_about.md` — **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)**, the **living current-state node** ([§6](PROTOCOL.md#6-context-notes)) |
 | An idea / observation | The note *is* the content: `idea_<topic>.md` |
 
 ### Context notes — the quality lever
@@ -93,7 +93,7 @@ worked examples** from [PROTOCOL §6](PROTOCOL.md#6-context-notes). Skeletons:
 ## Notes / caveats                   |   (## Updates — only when superseded; see §7)
 ```
 
-A whole-initiative overview instead uses **Template C** — a lighter *living-node* scaffold (proper-name
+A whole-initiative overview instead uses **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)** — a lighter *living-node* scaffold (proper-name
 title, one-line identity, `## Related files`), not these frozen-snapshot notes ([§6](PROTOCOL.md#6-context-notes)).
 
 Keep a table's **shape** (wide/long) and any **tooling/provenance** *out* of the note — that's habit 4,

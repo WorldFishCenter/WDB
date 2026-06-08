@@ -144,12 +144,12 @@ Put it in the right **initiative folder**, give it a **`lower_snake_case`** name
 
 | What you're adding | How to add it | Context note |
 |---|---|---|
-| **Dataset / spreadsheet** (CSV, Excel) | Drag into the folder. Don't change the column headers. Make it **one clean table** — single header row, **wide or long** (see Step 3). | **Required** — Template A (`…_dict.md`); run **`/enrich`** yourself to check the shape and fill its value lists (maintainer reviews). |
-| **Report / paper / document** (PDF, Word, text) | Drag it in. Keep a published paper's real title. | **Required** — Template B (`…_context.md`). |
+| **Dataset / spreadsheet** (CSV, Excel) | Drag into the folder. Don't change the column headers. Make it **one clean table** — single header row, **wide or long** (see Step 3). | **Required** — [Template A](PROTOCOL.md#template-a--tabular-data-csv-xlsx) (`…_dict.md`); run **`/enrich`** yourself to check the shape and fill its value lists (maintainer reviews). |
+| **Report / paper / document** (PDF, Word, text) | Drag it in. Keep a published paper's real title. | **Required** — [Template B](PROTOCOL.md#template-b--everything-else-pdfs-docs-images-audiovideo) (`…_context.md`). |
 | **Image / photo / diagram / screenshot** | Drag it in (e.g. a whiteboard photo or field map). | Required if it carries information — Template B (`…_context.md`). |
 | **Meeting recording / audio** (MP4, MP3) | Drag the media file in; the maintainer's tools transcribe it. | Required if it's hard to follow — Template B (`…_context.md`). |
 | **Web link / online paper** | **Don't** paste a URL into a file. Tell the maintainer the link — they add it properly with `/graphify add`. | The maintainer adds it. |
-| **A topic / initiative overview** (not about one file) | Right-click the folder → **New File** → name it `<topic>_about.md` (e.g. `pondcube_about.md`) and write a short overview. | Follow the light **`_about.md` template (Template C)** — a title, one line on what it is, and a `## Related files` list. If it's part of a bigger initiative, point up to that initiative's `_about.md` so the two link. **`/curate` sets this up for you.** |
+| **A topic / initiative overview** (not about one file) | Right-click the folder → **New File** → name it `<topic>_about.md` (e.g. `pondcube_about.md`) and write a short overview. | Follow the light **`_about.md` template** ([Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)) — a title, one line on what it is, and a `## Related files` list. If it's part of a bigger initiative, point up to that initiative's `_about.md` so the two link. **`/curate` sets this up for you.** |
 | **An idea, note, or observation** | Right-click the folder → **New File** → name it `idea_<short-topic>.md` and write it in plain English. | The note *is* the content — name any related files/initiatives inside it so the graph links them. |
 
 ---

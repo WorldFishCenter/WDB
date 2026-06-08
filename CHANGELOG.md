@@ -6,7 +6,7 @@ component docs, and a clear division of labour between the hub and its companion
 
 ## Contributing Protocol
 
-* **CHANGED** `_about.md` overviews now follow **Template C** ([PROTOCOL §6](PROTOCOL.md#6-context-notes))
+* **CHANGED** `_about.md` overviews now follow **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)**
   — a light scaffold, not a free-form note (revises 0.0.2's "no template"). Required
   anchors: a proper-name `# H1` (it becomes the node label), a one-line identity, and a
   `## Related files` block; `## Aim`/`## Scope` are recommended.
