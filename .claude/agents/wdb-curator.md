@@ -60,6 +60,20 @@ those are the contributor's and maintainer's steps. Remind the user of them when
    external README** (e.g. `fasa_repo_about.md`), which may keep tooling detail if marked with a top
    `> Source:` line. Never give an overview a `_dict`/`_context` suffix (that suffix means "companion
    to the file of that name").
+   An initiative may have **several** such children — a timeline, roadmap, design or decision notes —
+   each an aspect `_about.md`. Apply the **satellite rules**
+   ([PROTOCOL §6](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name)): (a) **one
+   canonical name** — refer to the initiative/system by the exact proper name in the hub's `# H1`,
+   never a synonym (write "Peskas", not "Peskas platform"/"Peskas Monitoring System"), so the extractor
+   mints one node, not duplicates; (b) **anchor to the hub** on both sides; (c) **keep cross-initiative
+   links in the hub** — a satellite links mainly to its hub + same-initiative siblings. If a satellite
+   you draft or edit links heavily to *other* initiatives, **warn the user** and move those
+   cross-initiative links up to the hub, since outward links can pull the initiative into another
+   community. (d) **Provenance on the doc it describes** — put `source_url`/`captured_at` frontmatter on
+   the satellite it was imported from, **never on the hub**; the hub is a living synthesis (give it the
+   project's canonical site, or no `source_url`). Phrase the parent link so it doesn't just repeat the
+   filename (``<hub>.md — parent hub; this <doc> is part of the <Initiative> overview, which delegates X
+   here``).
    Use the templates and **worked examples in [PROTOCOL §6 — Context notes](PROTOCOL.md#6-context-notes)**,
    and match the house style of existing notes (`peskas/*_context.md`, `*/pondcube/*_dict.md`).
    Read the file first — header row + a few rows for data, the first pages for a PDF — so every

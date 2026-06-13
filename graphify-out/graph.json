@@ -1,54 +1,7 @@
 {
   "directed": false,
   "multigraph": false,
-  "graph": {
-    "hyperedges": [
-      {
-        "id": "pondcube_published_csvs",
-        "label": "PondCube July 2025 published water-quality CSVs",
-        "nodes": [
-          "pondcube_pondcube_about_pondcube_measurements_long_csv",
-          "pondcube_pondcube_about_pondcube_observations_wide_csv",
-          "pondcube_pondcube_about_pondcube_tanks_reference_csv",
-          "pondcube_pondcube_about_pondcube_data_quality_csv",
-          "pondcube_pondcube_data_about_source_workbook"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "digital_transformation_accelerator/pondcube/pondcube_about.md"
-      },
-      {
-        "id": "fasa_engine_reference_databases",
-        "label": "FASA engine reference databases (ASNS/FICD/PAFF)",
-        "nodes": [
-          "fasa_fasa_repo_about_lp_engine",
-          "fasa_fasa_repo_about_asns_database",
-          "fasa_fasa_repo_about_ficd_database",
-          "fasa_fasa_repo_about_paff_database"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "fasa/fasa_repo_about.md"
-      },
-      {
-        "id": "fasa_lp_modeling_flow",
-        "label": "FASA LP formulation flow (engine, crosswalk, constraints, IIS)",
-        "nodes": [
-          "fasa_fasa_repo_about_lp_engine",
-          "fasa_fasa_repo_about_crosswalk",
-          "fasa_fasa_repo_about_premix_masking",
-          "fasa_fasa_repo_about_toxin_ceilings",
-          "fasa_fasa_repo_about_iis_reporting"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "fasa/fasa_repo_about.md"
-      }
-    ]
-  },
+  "graph": {},
   "nodes": [
     {
       "label": "Context note: Fishery Nutrient Profiles Timor-Leste (Nature Food 2026)",
@@ -59,7 +12,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "context note: fishery nutrient profiles timor-leste (nature food 2026)",
       "id": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026_context"
     },
@@ -72,7 +25,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "nutrition-sensitive fisheries management (nsfm)",
       "id": "peskas_nutrition_sensitive_fisheries_management"
     },
@@ -85,7 +38,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "ecosystem approach to fisheries (eaf)",
       "id": "peskas_ecosystem_approach_to_fisheries"
     },
@@ -98,7 +51,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "nutrient density score (nds) / fishery nutrient profiles (fnp)",
       "id": "peskas_nutrient_density_score"
     },
@@ -111,7 +64,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "complementary management pathways",
       "id": "peskas_complementary_management_pathways"
     },
@@ -124,7 +77,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "blue foods / nutrient-dense aquatic foods",
       "id": "peskas_blue_foods"
     },
@@ -137,7 +90,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "women of reproductive age (wra) reference group",
       "id": "peskas_women_of_reproductive_age"
     },
@@ -150,7 +103,7 @@
       "captured_at": null,
       "author": "Lorenzo Longobardi, Villiam Sozinho, Hamza Altarturi, E. Fernando Cagua, Alexander Tilley",
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "peskas: automated analytics for small-scale, data-deficient fisheries (softwarex 2025)",
       "id": "peskas_peskas_automated_analytics_softwarex_2025"
     },
@@ -163,7 +116,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "context note: peskas automated analytics (softwarex 2025)",
       "id": "peskas_peskas_automated_analytics_softwarex_2025_context"
     },
@@ -176,7 +129,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "peskas digital monitoring system",
       "id": "peskas_peskas_platform"
     },
@@ -189,7 +142,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "peskas end-to-end workflow (ingestion to dashboard)",
       "id": "peskas_end_to_end_workflow"
     },
@@ -202,7 +155,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "kobotoolbox (field data collection)",
       "id": "peskas_kobotoolbox"
     },
@@ -215,7 +168,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "pelagic data systems (pds) vessel tracking",
       "id": "peskas_pelagic_data_systems"
     },
@@ -228,7 +181,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "harvard dataverse (open data archive)",
       "id": "peskas_harvard_dataverse"
     },
@@ -241,7 +194,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "iuu fishing monitoring",
       "id": "peskas_iuu_fishing_monitoring"
     },
@@ -254,7 +207,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "low-cost open-source adaptable template",
       "id": "peskas_open_source_template_design"
     },
@@ -267,7 +220,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "aquatic foods ontology / asfis-isscaap classification",
       "id": "peskas_aquatic_foods_ontology"
     },
@@ -280,7 +233,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "context note: peskas monitoring system slides",
       "id": "peskas_peskas_monitoring_system_slides_context"
     },
@@ -358,7 +311,7 @@
       "captured_at": null,
       "author": "Tim McClanahan, Jesse Kosgei, Lorenzo Longobardi, Alexander Tilley",
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "digital feedback on fisher behavior & governance, kenya (frontiers 2025)",
       "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025"
     },
@@ -371,7 +324,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "context note: digital feedback fisher behavior kenya (2025)",
       "id": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_context"
     },
@@ -384,7 +337,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "digital feedback / information provision to fishers",
       "id": "ssf_research_digital_feedback_information_provision"
     },
@@ -397,7 +350,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "knowledge-attitude-practice framework / baci design",
       "id": "ssf_research_knowledge_attitude_practice_framework"
     },
@@ -410,7 +363,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "beach management units (bmus), kenya",
       "id": "ssf_research_beach_management_units"
     },
@@ -423,7 +376,7 @@
       "captured_at": null,
       "author": "Alexander Tilley, Kendra A. Byrd, Hamza Altarturi, Gianna Bonis-Profumo, Joctan Dos Reis Lopes, Mario Gomes, Katherine Klumpyan, Lorenzo Longobardi, Kelvin Mashisia Shikuku",
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "supply & demand intervention increasing fish consumption rct, timor-leste (plos one 2026)",
       "id": "ssf_research_fish_consumption_rct_timor_leste_2026"
     },
@@ -436,7 +389,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "context note: fish consumption rct timor-leste (2026)",
       "id": "ssf_research_fish_consumption_rct_timor_leste_2026_context"
     },
@@ -449,7 +402,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "nearshore fish-aggregating devices (fads)",
       "id": "ssf_research_fish_aggregating_devices"
     },
@@ -462,7 +415,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "social behaviour change (sbc) intervention",
       "id": "ssf_research_social_behaviour_change"
     },
@@ -475,7 +428,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "cluster-randomized 2x2 factorial trial (nct04729829)",
       "id": "ssf_research_cluster_randomized_factorial_trial"
     },
@@ -488,7 +441,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "integrated supply-and-demand food-system approach",
       "id": "ssf_research_integrated_food_system_approach"
     },
@@ -501,7 +454,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 2,
       "norm_label": "timor-leste malnutrition & child stunting",
       "id": "ssf_research_timor_leste_malnutrition_stunting"
     },
@@ -514,7 +467,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "paff feed formulations table",
       "id": "fasa_paff_feed_formulations"
     },
@@ -527,7 +480,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "paff calculated composition table",
       "id": "fasa_paff_calculated_composition"
     },
@@ -540,7 +493,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "paff (practical aquaculture feed formulation database)",
       "id": "fasa_paff_database"
     },
@@ -553,7 +506,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "asns (aquaculture species nutrition specification database)",
       "id": "fasa_asns_database"
     },
@@ -566,7 +519,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "ficd (feed ingredient composition database)",
       "id": "fasa_ficd_database"
     },
@@ -579,7 +532,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "fasa feed formulation engine",
       "id": "fasa_repo_engine"
     },
@@ -592,7 +545,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "asns-to-ficd crosswalk",
       "id": "fasa_repo_crosswalk"
     },
@@ -605,7 +558,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "paff benchmark gate",
       "id": "fasa_repo_paff_benchmark_gate"
     },
@@ -618,7 +571,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "digestibility-aware least-cost lp (pulp + highs)",
       "id": "fasa_repo_least_cost_lp"
     },
@@ -631,7 +584,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "hua & bureau (2012) plant-protein interaction model",
       "id": "fasa_repo_hua_bureau_2012"
     },
@@ -644,7 +597,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "bureau (2014) aquaculture feed formulation optimization",
       "id": "fasa_repo_bureau_2014"
     },
@@ -657,7 +610,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 0,
+      "community": 3,
       "norm_label": "avadi et al. (2022) smallholder aquaculture in zambia",
       "id": "fasa_repo_avadi_2022"
     },
@@ -670,7 +623,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "cgiar digital transformation accelerator \u2014 annual technical report 2025",
       "id": "digital_transformation_accelerator_2025_tr"
     },
@@ -683,7 +636,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "digital transformation accelerator (cgiar)",
       "id": "digital_transformation_accelerator_program"
     },
@@ -696,7 +649,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "asia digital hub (worldfish, penang)",
       "id": "digital_transformation_accelerator_asia_digital_hub"
     },
@@ -709,7 +662,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pondcube (worldfish genetic-improvement data package)",
       "id": "pondcube_package"
     },
@@ -722,7 +675,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pondcube water-quality dataset (july 2025)",
       "id": "pondcube_water_quality_dataset"
     },
@@ -735,7 +688,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pondcube_observations_wide table",
       "id": "pondcube_observations_wide"
     },
@@ -748,7 +701,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pondcube_measurements_long table",
       "id": "pondcube_measurements_long"
     },
@@ -761,7 +714,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pondcube_tanks_reference table",
       "id": "pondcube_tanks_reference"
     },
@@ -774,7 +727,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "pondcube_data_quality log",
       "id": "pondcube_data_quality"
     },
@@ -787,7 +740,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 5,
       "norm_label": "convert_pondcube.py conversion script",
       "id": "pondcube_convert_script"
     },
@@ -813,7 +766,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "wio ssf data-harmonization guidelines",
       "id": "peskas_kenya_validated_trips_dict_wio_ssf_harmonization_guidelines"
     },
@@ -826,7 +779,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "mozambique validated trips dataset",
       "id": "peskas_mozambique_validated_trips_dict_dataset"
     },
@@ -839,7 +792,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "peskas monitoring system",
       "id": "peskas_mozambique_validated_trips_dict_peskas_monitoring_system"
     },
@@ -852,7 +805,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "fao gaul administrative layers",
       "id": "peskas_mozambique_validated_trips_dict_gaul_admin_layers"
     },
@@ -865,7 +818,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "wio ssf data-harmonization guidelines",
       "id": "peskas_mozambique_validated_trips_dict_wio_ssf_harmonization"
     },
@@ -878,7 +831,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "harmonized catch/effort data (western indian ocean)",
       "id": "peskas_mozambique_validated_trips_dict_catch_effort_data"
     },
@@ -891,7 +844,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "catch_price entirely empty (mozambique extract)",
       "id": "peskas_mozambique_validated_trips_dict_catch_price_empty"
     },
@@ -904,7 +857,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "catch_habitat stray value \"3\" data-entry error",
       "id": "peskas_mozambique_validated_trips_dict_catch_habitat_stray_value"
     },
@@ -917,7 +870,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "mozambique/kenya catch_habitat category divergence",
       "id": "peskas_mozambique_validated_trips_dict_habitat_divergence"
     },
@@ -930,22 +883,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "kenya validated trips dataset",
       "id": "peskas_kenya_validated_trips_dict_dataset"
-    },
-    {
-      "label": "Peskas Automated Analytics (SoftwareX 2025)",
-      "file_type": "paper",
-      "source_file": "peskas/mozambique_validated_trips_dict.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "norm_label": "peskas automated analytics (softwarex 2025)",
-      "id": "peskas_peskas_automated_analytics_softwarex_2025_paper"
     },
     {
       "label": "Peskas Monitoring System Slides",
@@ -956,7 +896,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "peskas monitoring system slides",
       "id": "peskas_peskas_monitoring_system_slides_doc"
     },
@@ -969,22 +909,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "wio ssf data harmonization technical guidelines",
       "id": "data_harmonization_technical_guidelines_ssf_data_harmonization_wio_doc"
-    },
-    {
-      "label": "Zanzibar Validated Trips Dataset",
-      "file_type": "document",
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "norm_label": "zanzibar validated trips dataset",
-      "id": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips"
     },
     {
       "label": "Peskas Monitoring System",
@@ -995,7 +922,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "peskas monitoring system",
       "id": "concept_peskas_monitoring_system"
     },
@@ -1008,7 +935,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 1,
       "norm_label": "kenya (coast)",
       "id": "concept_kenya"
     },
@@ -1021,7 +948,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 1,
       "norm_label": "mozambique (coast)",
       "id": "concept_mozambique"
     },
@@ -1034,7 +961,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 1,
       "norm_label": "zanzibar (unguja & pemba, tanzania)",
       "id": "concept_zanzibar"
     },
@@ -1047,7 +974,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 1,
       "norm_label": "small-scale fisheries (ssf)",
       "id": "concept_small_scale_fisheries"
     },
@@ -1060,7 +987,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "fao gaul administrative coding",
       "id": "concept_gaul_admin_coding"
     },
@@ -1073,7 +1000,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "scientific-name catch taxonomy",
       "id": "concept_scientific_name_taxonomy"
     },
@@ -1086,7 +1013,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "validated-trip provenance",
       "id": "concept_validated_trip_provenance"
     },
@@ -1099,7 +1026,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "catch habitat classification",
       "id": "concept_catch_habitat"
     },
@@ -1112,7 +1039,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "harmonized catch/effort data",
       "id": "concept_harmonized_catch_effort_data"
     },
@@ -1125,7 +1052,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "wio ssf data-harmonization technical guidelines",
       "id": "concept_wio_ssf_data_harmonization_standard"
     },
@@ -1138,7 +1065,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "peskas automated analytics (softwarex 2025)",
       "id": "concept_peskas_softwarex_paper"
     },
@@ -1151,7 +1078,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 6,
       "norm_label": "peskas monitoring system slides",
       "id": "concept_peskas_monitoring_system_slides"
     },
@@ -1164,22 +1091,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 2,
       "norm_label": "fishery nutrient profiles timor-leste (nature food 2026)",
       "id": "concept_fishery_nutrient_profiles_naturefood_paper"
-    },
-    {
-      "label": "Digital Feedback & Fisher Behavior Kenya (2025)",
-      "file_type": "document",
-      "source_file": "peskas/kenya_validated_trips_dict.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 2,
-      "norm_label": "digital feedback & fisher behavior kenya (2025)",
-      "id": "concept_digital_feedback_fisher_behavior_kenya"
     },
     {
       "label": "Technical Guidelines for SSF Data Harmonization in the WIO Region",
@@ -1203,7 +1117,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 1,
       "norm_label": "western indian ocean (wio) region",
       "id": "concept_wio_region"
     },
@@ -1299,7 +1213,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "domain 1: spatial and temporal reference",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_domain_spatial_temporal"
     },
@@ -1312,7 +1226,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "domain 2: fishing effort",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_domain_fishing_effort"
     },
@@ -1325,7 +1239,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "domain 3: catch composition",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_domain_catch_composition"
     },
@@ -1351,7 +1265,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "catch and effort data",
       "id": "concept_catch_effort_data"
     },
@@ -1365,7 +1279,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Census-type data on the number of active fishers and boats per landing site provide the denominators needed to raise sample-based catch/effort data to population-level totals; standardized landing-site metadata (unique location codes, coordinates aligned with FAO GAUL) enable spatial aggregation and accurate mapping across the WIO.",
-      "community": 3,
+      "community": 4,
       "norm_label": "fishery-level contextual information for scaling up",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_fishery_contextual_scaling"
     },
@@ -1379,7 +1293,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Standardizing variables alone is insufficient if underlying sampling designs are incompatible; comparable sampling requires aligned sampling-frame definition, stratification, temporal/spatial coverage documentation, raising procedures, and QA/QC so data from different institutions can be meaningfully compared and aggregated.",
-      "community": 3,
+      "community": 4,
       "norm_label": "standardized sampling methodologies",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_standardized_sampling"
     },
@@ -1392,7 +1306,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "raising procedures (sample to total estimates)",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_raising_procedures"
     },
@@ -1405,7 +1319,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "quality assurance and quality control (qa/qc) procedures",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_qa_qc"
     },
@@ -1418,7 +1332,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 1,
       "norm_label": "regional standard operating procedure (sop) manual",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_sop_manual"
     },
@@ -1432,7 +1346,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Paper-based collection is error-prone, slow, locally confined, and offers no real-time validation; digital collection enables immediate sync, built-in validation at point of entry, and automatic export to analysis pipelines. Requirements are defined tool-agnostically (not mandating one platform) since 88% of institutions already use digital platforms, indicating readiness for a coordinated transition.",
-      "community": 3,
+      "community": 4,
       "norm_label": "functional requirements for electronic data collection tools",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_electronic_data_collection_requirements"
     },
@@ -1446,7 +1360,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Tool-agnostic pipelines accept data from multiple collection platforms and apply standardized transformation, validation, and formatting before ingesting records into a central/regional repository, accommodating the diversity of tools in use while ensuring all data converge to a common standard at aggregation.",
-      "community": 3,
+      "community": 4,
       "norm_label": "centralized data pipelines",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_centralized_data_pipelines"
     },
@@ -1460,7 +1374,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Ontologies provide the semantic infrastructure ensuring each variable name carries a single clear definition across institutions; by mapping data elements to internationally recognized identifiers and hierarchies they resolve terminological ambiguities and enable machine-readable interoperability between datasets using different local labels for the same concept.",
-      "community": 3,
+      "community": 4,
       "norm_label": "ontologies and classification systems",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_ontologies_classification"
     },
@@ -1473,7 +1387,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "food and agriculture organization of the united nations (fao)",
       "id": "concept_fao"
     },
@@ -1487,7 +1401,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Hierarchical gear coding (first-tier categories e.g. 'Gillnets and Entangling Nets' code 07; second-tier e.g. 'Set gillnets (anchored)' GNS 07.1). Adoption resolves ambiguity where the same equipment is recorded under different local names (e.g. 'Monofilament Nets' vs 'Gillnets') across organizations. Documented in FAO Fisheries and Aquaculture Technical Paper No. 672.",
-      "community": 3,
+      "community": 4,
       "norm_label": "fao international standard statistical classification of fishing gear (isscfg)",
       "id": "concept_fao_isscfg"
     },
@@ -1500,7 +1414,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "fao fisheries and aquaculture technical paper no. 672",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_fao_tech_paper_672"
     },
@@ -1514,7 +1428,7 @@
       "author": null,
       "contributor": null,
       "rationale": "FAO Aquatic Sciences and Fisheries Information System assigns each species a unique three-letter code (e.g. PIL for Sardina pilchardus), providing unambiguous identifiers that bridge linguistic and taxonomic discrepancies. Organizations should adopt a shared reference pairing local and scientific names to FAO 3-alpha codes.",
-      "community": 3,
+      "community": 4,
       "norm_label": "fao asfis list and 3-alpha codes",
       "id": "concept_fao_asfis"
     },
@@ -1528,7 +1442,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Landing sites and administrative units referenced to FAO GAUL (FAO, 2024) ensure consistent spatial coding across countries and enable spatial aggregation at sub-national, national, and regional scales.",
-      "community": 3,
+      "community": 4,
       "norm_label": "fao global administrative unit layers (gaul)",
       "id": "concept_fao_gaul"
     },
@@ -1541,7 +1455,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "fao (2024) gaul dataset citation",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_fao_2024"
     },
@@ -1555,7 +1469,7 @@
       "author": null,
       "contributor": null,
       "rationale": "All date fields recorded in YYYY-MM-DD format to ensure unambiguous temporal referencing and full interoperability across datasets and software systems.",
-      "community": 3,
+      "community": 4,
       "norm_label": "iso 8601 date/time standard",
       "id": "concept_iso_8601"
     },
@@ -1569,7 +1483,7 @@
       "author": null,
       "contributor": null,
       "rationale": "A formally structured vocabulary providing semantic definitions and hierarchical relationships for fisheries concepts (gear, fishing net, line, trap, fuel). Each concept has a unique URI (e.g. http://w3id.org/aqfo/aqfo_00002220 for 'gear'). Linking each data-dictionary variable to its AQFO URI gives every variable a machine-readable, unambiguous definition; adoption recommended as a medium-term goal.",
-      "community": 3,
+      "community": 1,
       "norm_label": "aquatic food ontology (aqfo)",
       "id": "concept_aquatic_food_ontology"
     },
@@ -1583,7 +1497,7 @@
       "author": null,
       "contributor": null,
       "rationale": "A shared reference framework co-created with SWIOFC and the WGDS defining core variables, metadata structures, classification systems, and standardized terminologies so all participating countries/institutions work from an aligned vocabulary. Maintained as a living document, updated periodically to reflect evolving needs and new international standards.",
-      "community": 3,
+      "community": 1,
       "norm_label": "regional data dictionary",
       "id": "concept_regional_data_dictionary"
     },
@@ -1596,7 +1510,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 1,
       "norm_label": "data governance and institutional arrangements",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_data_governance"
     },
@@ -1610,7 +1524,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Legally binding agreements between primary data custodians defining access levels, privacy rules, data ownership, custodianship roles, and shared repository arrangements. 81.8% of scoping respondents support open access with appropriate safeguards, indicating readiness for formalized data-sharing.",
-      "community": 3,
+      "community": 1,
       "norm_label": "data-sharing agreements",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_data_sharing_agreements"
     },
@@ -1624,7 +1538,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Recommended potentially under SWIOFC auspices to finalize rules on data ownership, access rights, licensing, and long-term hosting, clarifying responsibilities of collectors, validators, custodians, and users (custodianship is currently centralized in fisheries departments in 80% of cases).",
-      "community": 3,
+      "community": 1,
       "norm_label": "regional data governance board",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_regional_governance_board"
     },
@@ -1637,7 +1551,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 1,
       "norm_label": "south west indian ocean fisheries commission (swiofc)",
       "id": "concept_swiofc"
     },
@@ -1650,7 +1564,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 1,
       "norm_label": "working group on data and statistics (wgds)",
       "id": "concept_wgds"
     },
@@ -1716,7 +1630,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "variable: date of collection (yyyy-mm-dd, iso 8601)",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_date_collection"
     },
@@ -1729,7 +1643,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "variable: landing site",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_landing_site"
     },
@@ -1742,7 +1656,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "variable: vessel / boat type",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_vessel_type"
     },
@@ -1755,7 +1669,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "variable: number of fishing trips",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_number_fishing_trips"
     },
@@ -1768,7 +1682,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "variable: gear type",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_gear_type"
     },
@@ -1781,7 +1695,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "variable: number of fishers per trip",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_fishers_per_trip"
     },
@@ -1794,7 +1708,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "variable: duration of fishing trip (hours)",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_trip_duration"
     },
@@ -1807,7 +1721,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 4,
       "norm_label": "variable: fish group / species",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_fish_species"
     },
@@ -1820,7 +1734,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "variable: fish length (cm)",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_fish_length"
     },
@@ -1833,7 +1747,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 1,
+      "community": 4,
       "norm_label": "variable: catch weight (kg)",
       "id": "converted_technical_guidelines_ssf_data_harmonization_wio_8f7e1b7e_var_catch_weight"
     },
@@ -1872,9 +1786,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_fair_ai_ready",
-      "community": 4,
-      "norm_label": "fair-by-design and ai-ready data"
+      "community": 5,
+      "norm_label": "fair-by-design and ai-ready data",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_fair_ai_ready"
     },
     {
       "label": "Data Ecosystem (Area of Work)",
@@ -1885,9 +1799,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_data_ecosystem",
-      "community": 4,
-      "norm_label": "data ecosystem (area of work)"
+      "community": 5,
+      "norm_label": "data ecosystem (area of work)",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_data_ecosystem"
     },
     {
       "label": "Carob harmonization framework",
@@ -1898,9 +1812,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_carob",
-      "community": 4,
-      "norm_label": "carob harmonization framework"
+      "community": 5,
+      "norm_label": "carob harmonization framework",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_carob"
     },
     {
       "label": "GARDIAN platform",
@@ -1911,9 +1825,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_gardian",
-      "community": 4,
-      "norm_label": "gardian platform"
+      "community": 5,
+      "norm_label": "gardian platform",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_gardian"
     },
     {
       "label": "AgriLLM (open-source agricultural LLM)",
@@ -1924,9 +1838,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_agrillm",
-      "community": 4,
-      "norm_label": "agrillm (open-source agricultural llm)"
+      "community": 5,
+      "norm_label": "agrillm (open-source agricultural llm)",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_agrillm"
     },
     {
       "label": "CGIAR AI Hub",
@@ -1937,9 +1851,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_cgiar_ai_hub",
-      "community": 4,
-      "norm_label": "cgiar ai hub"
+      "community": 5,
+      "norm_label": "cgiar ai hub",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_cgiar_ai_hub"
     },
     {
       "label": "Asia Digital Hub at WorldFish (Penang)",
@@ -1950,9 +1864,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_asia_digital_hub",
-      "community": 4,
-      "norm_label": "asia digital hub at worldfish (penang)"
+      "community": 5,
+      "norm_label": "asia digital hub at worldfish (penang)",
+      "id": "digital_transformation_accelerator_digital_transformation_accelerator_about_asia_digital_hub"
     },
     {
       "label": "PondCube",
@@ -1963,9 +1877,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_about_pondcube",
-      "community": 4,
-      "norm_label": "pondcube"
+      "community": 5,
+      "norm_label": "pondcube",
+      "id": "pondcube_pondcube_about_pondcube"
     },
     {
       "label": "Genetic-improvement data modernization",
@@ -1976,9 +1890,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_about_genetic_improvement_modernization",
-      "community": 4,
-      "norm_label": "genetic-improvement data modernization"
+      "community": 5,
+      "norm_label": "genetic-improvement data modernization",
+      "id": "pondcube_pondcube_about_genetic_improvement_modernization"
     },
     {
       "label": "Real-time water-quality monitoring",
@@ -1989,9 +1903,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_about_water_quality_monitoring",
-      "community": 4,
-      "norm_label": "real-time water-quality monitoring"
+      "community": 5,
+      "norm_label": "real-time water-quality monitoring",
+      "id": "pondcube_pondcube_about_water_quality_monitoring"
     },
     {
       "label": "Sense-Send-Serve-Monitor-Alert pipeline",
@@ -2002,9 +1916,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_about_sense_send_serve_pipeline",
-      "community": 4,
-      "norm_label": "sense-send-serve-monitor-alert pipeline"
+      "community": 5,
+      "norm_label": "sense-send-serve-monitor-alert pipeline",
+      "id": "pondcube_pondcube_about_sense_send_serve_pipeline"
     },
     {
       "label": "PondCube Source Workbook 2025.7.31.xlsx",
@@ -2015,9 +1929,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_data_about_source_workbook",
-      "community": 4,
-      "norm_label": "pondcube source workbook 2025.7.31.xlsx"
+      "community": 5,
+      "norm_label": "pondcube source workbook 2025.7.31.xlsx",
+      "id": "pondcube_pondcube_data_about_source_workbook"
     },
     {
       "label": "Blanks preserved as missing (never 0)",
@@ -2028,9 +1942,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_data_about_blanks_as_missing",
-      "community": 4,
-      "norm_label": "blanks preserved as missing (never 0)"
+      "community": 5,
+      "norm_label": "blanks preserved as missing (never 0)",
+      "id": "pondcube_pondcube_data_about_blanks_as_missing"
     },
     {
       "label": "pondcube_observations_wide.csv",
@@ -2041,9 +1955,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "pondcube_pondcube_about_pondcube_observations_wide_csv",
-      "community": 4,
-      "norm_label": "pondcube_observations_wide.csv"
+      "community": 5,
+      "norm_label": "pondcube_observations_wide.csv",
+      "id": "pondcube_pondcube_about_pondcube_observations_wide_csv"
     },
     {
       "label": "FASA Initiative",
@@ -2054,9 +1968,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_about_fasa_initiative",
-      "community": 0,
-      "norm_label": "fasa initiative"
+      "community": 3,
+      "norm_label": "fasa initiative",
+      "id": "fasa_fasa_about_fasa_initiative"
     },
     {
       "label": "FASA Feed-Formulation App (the engine)",
@@ -2067,9 +1981,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_about_feed_formulation_app",
-      "community": 0,
-      "norm_label": "fasa feed-formulation app (the engine)"
+      "community": 3,
+      "norm_label": "fasa feed-formulation app (the engine)",
+      "id": "fasa_fasa_about_feed_formulation_app"
     },
     {
       "label": "Circular economy (waste-to-feed)",
@@ -2080,9 +1994,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_about_circular_economy",
-      "community": 0,
-      "norm_label": "circular economy (waste-to-feed)"
+      "community": 3,
+      "norm_label": "circular economy (waste-to-feed)",
+      "id": "fasa_fasa_about_circular_economy"
     },
     {
       "label": "Nile Tilapia",
@@ -2093,9 +2007,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_about_nile_tilapia",
-      "community": 0,
-      "norm_label": "nile tilapia"
+      "community": 3,
+      "norm_label": "nile tilapia",
+      "id": "fasa_fasa_about_nile_tilapia"
     },
     {
       "label": "African Catfish",
@@ -2106,9 +2020,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_about_african_catfish",
-      "community": 0,
-      "norm_label": "african catfish"
+      "community": 3,
+      "norm_label": "african catfish",
+      "id": "fasa_fasa_about_african_catfish"
     },
     {
       "label": "Linear programming engine (PuLP + HiGHS)",
@@ -2119,9 +2033,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_lp_engine",
-      "community": 0,
-      "norm_label": "linear programming engine (pulp + highs)"
+      "community": 3,
+      "norm_label": "linear programming engine (pulp + highs)",
+      "id": "fasa_fasa_repo_about_lp_engine"
     },
     {
       "label": "Premix-aware constraint masking",
@@ -2132,9 +2046,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_premix_masking",
-      "community": 0,
-      "norm_label": "premix-aware constraint masking"
+      "community": 3,
+      "norm_label": "premix-aware constraint masking",
+      "id": "fasa_fasa_repo_about_premix_masking"
     },
     {
       "label": "Hard toxin / anti-nutrient ceilings",
@@ -2145,9 +2059,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_toxin_ceilings",
-      "community": 0,
-      "norm_label": "hard toxin / anti-nutrient ceilings"
+      "community": 3,
+      "norm_label": "hard toxin / anti-nutrient ceilings",
+      "id": "fasa_fasa_repo_about_toxin_ceilings"
     },
     {
       "label": "Deletion-filter IIS infeasibility reporting",
@@ -2158,9 +2072,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_iis_reporting",
-      "community": 0,
-      "norm_label": "deletion-filter iis infeasibility reporting"
+      "community": 3,
+      "norm_label": "deletion-filter iis infeasibility reporting",
+      "id": "fasa_fasa_repo_about_iis_reporting"
     },
     {
       "label": "PAFF benchmark / correctness gate",
@@ -2171,9 +2085,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_paff_benchmark_gate",
-      "community": 0,
-      "norm_label": "paff benchmark / correctness gate"
+      "community": 3,
+      "norm_label": "paff benchmark / correctness gate",
+      "id": "fasa_fasa_repo_about_paff_benchmark_gate"
     },
     {
       "label": "fasa_api (FastAPI surface)",
@@ -2184,9 +2098,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_fasa_api",
-      "community": 0,
-      "norm_label": "fasa_api (fastapi surface)"
+      "community": 3,
+      "norm_label": "fasa_api (fastapi surface)",
+      "id": "fasa_fasa_repo_about_fasa_api"
     },
     {
       "label": "fasa_core (formulation & validation logic)",
@@ -2197,9 +2111,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_fasa_core",
-      "community": 0,
-      "norm_label": "fasa_core (formulation & validation logic)"
+      "community": 3,
+      "norm_label": "fasa_core (formulation & validation logic)",
+      "id": "fasa_fasa_repo_about_fasa_core"
     },
     {
       "label": "Non-additive interaction layer hook (post-MVP)",
@@ -2210,9 +2124,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_interaction_layer_hook",
-      "community": 0,
-      "norm_label": "non-additive interaction layer hook (post-mvp)"
+      "community": 3,
+      "norm_label": "non-additive interaction layer hook (post-mvp)",
+      "id": "fasa_fasa_repo_about_interaction_layer_hook"
     },
     {
       "label": "ASNS nutrition specification database",
@@ -2223,9 +2137,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_asns_database",
-      "community": 0,
-      "norm_label": "asns nutrition specification database"
+      "community": 3,
+      "norm_label": "asns nutrition specification database",
+      "id": "fasa_fasa_repo_about_asns_database"
     },
     {
       "label": "FICD feed ingredient composition database",
@@ -2236,9 +2150,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_ficd_database",
-      "community": 0,
-      "norm_label": "ficd feed ingredient composition database"
+      "community": 3,
+      "norm_label": "ficd feed ingredient composition database",
+      "id": "fasa_fasa_repo_about_ficd_database"
     },
     {
       "label": "PAFF practical aquaculture feed formulation database",
@@ -2249,9 +2163,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fasa_fasa_repo_about_paff_database",
-      "community": 0,
-      "norm_label": "paff practical aquaculture feed formulation database"
+      "community": 3,
+      "norm_label": "paff practical aquaculture feed formulation database",
+      "id": "fasa_fasa_repo_about_paff_database"
     },
     {
       "label": "Bureau (2014) \u2014 Optimization of the Formulation of Aquaculture Feeds",
@@ -2262,9 +2176,9 @@
       "captured_at": null,
       "author": "Bureau, D.P.",
       "contributor": null,
-      "id": "fasa_fasa_repo_about_bureau_2014",
-      "community": 0,
-      "norm_label": "bureau (2014) \u2014 optimization of the formulation of aquaculture feeds"
+      "community": 3,
+      "norm_label": "bureau (2014) \u2014 optimization of the formulation of aquaculture feeds",
+      "id": "fasa_fasa_repo_about_bureau_2014"
     },
     {
       "label": "Hua & Bureau (2012) \u2014 Plant protein ingredients in fish feeds",
@@ -2275,9 +2189,9 @@
       "captured_at": null,
       "author": "Hua, K. & Bureau, D.P.",
       "contributor": null,
-      "id": "fasa_fasa_repo_about_hua_bureau_2012",
-      "community": 0,
-      "norm_label": "hua & bureau (2012) \u2014 plant protein ingredients in fish feeds"
+      "community": 3,
+      "norm_label": "hua & bureau (2012) \u2014 plant protein ingredients in fish feeds",
+      "id": "fasa_fasa_repo_about_hua_bureau_2012"
     },
     {
       "label": "Avad\u00ed et al. (2022) \u2014 Smallholder aquaculture sustainability in Zambia",
@@ -2288,9 +2202,542 @@
       "captured_at": null,
       "author": "Avad\u00ed, A. et al.",
       "contributor": null,
-      "id": "fasa_fasa_repo_about_avadi_2022",
+      "community": 3,
+      "norm_label": "avadi et al. (2022) \u2014 smallholder aquaculture sustainability in zambia",
+      "id": "fasa_fasa_repo_about_avadi_2022"
+    },
+    {
+      "label": "Peskas",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
       "community": 0,
-      "norm_label": "avadi et al. (2022) \u2014 smallholder aquaculture sustainability in zambia"
+      "norm_label": "peskas",
+      "id": "peskas_peskas_about_peskas"
+    },
+    {
+      "label": "Data Collection Methods",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "data collection methods",
+      "id": "peskas_peskas_about_data_collection_methods"
+    },
+    {
+      "label": "KoBoToolbox",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "kobotoolbox",
+      "id": "peskas_peskas_about_kobotoolbox"
+    },
+    {
+      "label": "Pelagic Data Systems (GPS Vessel Tracking)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "pelagic data systems (gps vessel tracking)",
+      "id": "peskas_peskas_about_pelagic_data_systems"
+    },
+    {
+      "label": "Harmonization & Validation",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "harmonization & validation",
+      "id": "peskas_peskas_about_harmonization_validation"
+    },
+    {
+      "label": "FAO ASFIS 3-Alpha Codes",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "fao asfis 3-alpha codes",
+      "id": "peskas_peskas_about_fao_asfis_codes"
+    },
+    {
+      "label": "Automated Validation Engine",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 1,
+      "norm_label": "automated validation engine",
+      "id": "peskas_peskas_about_validation_engine"
+    },
+    {
+      "label": "Nutrition-Sensitive Analytics",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "nutrition-sensitive analytics",
+      "id": "peskas_peskas_about_nutrition_sensitive_analytics"
+    },
+    {
+      "label": "XGBoost",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "xgboost",
+      "id": "peskas_peskas_about_xgboost"
+    },
+    {
+      "label": "FishBase",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "fishbase",
+      "id": "peskas_peskas_about_fishbase"
+    },
+    {
+      "label": "Dissemination Components",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "dissemination components",
+      "id": "peskas_peskas_about_dissemination_components"
+    },
+    {
+      "label": "Harvard Dataverse",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "harvard dataverse",
+      "id": "peskas_peskas_about_harvard_dataverse"
+    },
+    {
+      "label": "Kenya Validated Trips",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "kenya validated trips",
+      "id": "peskas_peskas_about_kenya_validated_trips"
+    },
+    {
+      "label": "Mozambique Validated Trips",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "mozambique validated trips",
+      "id": "peskas_peskas_about_mozambique_validated_trips"
+    },
+    {
+      "label": "Peskas (present-state overview hub)",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "peskas (present-state overview hub)",
+      "id": "peskas_peskas_about_peskas_hub"
+    },
+    {
+      "label": "Peskas platform",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "peskas platform",
+      "id": "peskas_platform"
+    },
+    {
+      "label": "PeskAAS (Peskas Automated Analytics System)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "peskaas (peskas automated analytics system)",
+      "id": "peskaas_automated_analytics_system"
+    },
+    {
+      "label": "WorldFish (ICLARM)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "worldfish (iclarm)",
+      "id": "worldfish"
+    },
+    {
+      "label": "Alex Tilley",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "alex tilley",
+      "id": "alex_tilley"
+    },
+    {
+      "label": "Timor-Leste",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "timor-leste",
+      "id": "timor_leste"
+    },
+    {
+      "label": "Small-scale fisheries (SSF)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "small-scale fisheries (ssf)",
+      "id": "small_scale_fisheries_ssf"
+    },
+    {
+      "label": "Near-real-time monitoring",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "near-real-time monitoring",
+      "id": "near_real_time_monitoring"
+    },
+    {
+      "label": "Fishery Nutrient Profiles (FNPs)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "fishery nutrient profiles (fnps)",
+      "id": "fishery_nutrient_profiles_fnp"
+    },
+    {
+      "label": "Co-management",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "co-management",
+      "id": "co_management"
+    },
+    {
+      "label": "Ecosystem approach to fisheries (EAF)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "ecosystem approach to fisheries (eaf)",
+      "id": "ecosystem_approach_to_fisheries_eaf"
+    },
+    {
+      "label": "Peskas Tracks app",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "peskas tracks app",
+      "id": "peskas_tracks_app"
+    },
+    {
+      "label": "Asia\u2013Africa BlueTech Superhighway (AABS)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "asia\u2013africa bluetech superhighway (aabs)",
+      "id": "aabs_bluetech_superhighway"
+    },
+    {
+      "label": "ProFishBlue (Malawi)",
+      "file_type": "concept",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "profishblue (malawi)",
+      "id": "profishblue_malawi"
+    },
+    {
+      "label": "Technical Guidelines: SSF Data Harmonization (WIO)",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "technical guidelines: ssf data harmonization (wio)",
+      "id": "wio_ssf_data_harmonization_guidelines"
+    },
+    {
+      "label": "WIOMSA Harmonization Deck (Oct 2025)",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "wiomsa harmonization deck (oct 2025)",
+      "id": "wiomsa_harmonization_oct2025_deck"
+    },
+    {
+      "label": "Digital feedback & fisher behavior in Kenya (2025)",
+      "file_type": "paper",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "digital feedback & fisher behavior in kenya (2025)",
+      "id": "digital_feedback_fisher_behavior_kenya_2025"
+    },
+    {
+      "label": "Fish consumption RCT, Timor-Leste (2026)",
+      "file_type": "paper",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "fish consumption rct, timor-leste (2026)",
+      "id": "fish_consumption_rct_timor_leste_2026"
+    },
+    {
+      "label": "Peskas Automated Analytics (SoftwareX, 2025)",
+      "file_type": "paper",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "peskas automated analytics (softwarex, 2025)",
+      "id": "peskas_automated_analytics_softwarex_2025"
+    },
+    {
+      "label": "Peskas Monitoring System Slides",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "peskas monitoring system slides",
+      "id": "peskas_monitoring_system_slides"
+    },
+    {
+      "label": "Fishery Nutrient Profiles, Timor-Leste (Nature Food, 2026)",
+      "file_type": "paper",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "fishery nutrient profiles, timor-leste (nature food, 2026)",
+      "id": "fishery_nutrient_profiles_timor_leste_naturefood_2026"
+    },
+    {
+      "label": "Kenya validated trips dataset",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "kenya validated trips dataset",
+      "id": "kenya_validated_trips"
+    },
+    {
+      "label": "Zanzibar validated trips dataset",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 6,
+      "norm_label": "zanzibar validated trips dataset",
+      "id": "zanzibar_validated_trips"
+    },
+    {
+      "label": "Mozambique validated trips dataset",
+      "file_type": "document",
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "source_url": "https://app.tana.inc/shared/the-history-co-development-evolution-and-global-scaling-timeline-of-peskas-2013present/cVFBQ3ZoVld0bS9SWkh0V2tCcDFaMTU=",
+      "captured_at": "2026-06-11",
+      "author": null,
+      "contributor": null,
+      "community": 0,
+      "norm_label": "mozambique validated trips dataset",
+      "id": "mozambique_validated_trips"
+    },
+    {
+      "label": "Peskas \u2014 History & Global Scaling Timeline",
+      "file_type": "document",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": "https://peskas.org/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "peskas_peskas_timeline_about_doc",
+      "community": 0,
+      "norm_label": "peskas \u2014 history & global scaling timeline"
+    },
+    {
+      "label": "Kenya Validated Trips",
+      "file_type": "document",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "kenya_validated_trips_dict",
+      "community": 0,
+      "norm_label": "kenya validated trips"
+    },
+    {
+      "label": "Mozambique Validated Trips",
+      "file_type": "document",
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "mozambique_validated_trips_dict",
+      "community": 0,
+      "norm_label": "mozambique validated trips"
     }
   ],
   "links": [
@@ -3479,7 +3926,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "peskas/mozambique_validated_trips_dict.md",
-      "source_location": null,
+      "source_location": "Related files",
       "weight": 1.0,
       "source": "peskas_mozambique_validated_trips_dict_dataset",
       "target": "concept_peskas_softwarex_paper"
@@ -3562,16 +4009,6 @@
       "source_location": "Related files",
       "weight": 1.0,
       "source": "peskas_mozambique_validated_trips_dict_dataset",
-      "target": "peskas_peskas_automated_analytics_softwarex_2025_paper"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/mozambique_validated_trips_dict.md",
-      "source_location": "Related files",
-      "weight": 1.0,
-      "source": "peskas_mozambique_validated_trips_dict_dataset",
       "target": "peskas_peskas_monitoring_system_slides_doc"
     },
     {
@@ -3582,7 +4019,7 @@
       "source_location": null,
       "weight": 1.0,
       "source": "peskas_mozambique_validated_trips_dict_dataset",
-      "target": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips"
+      "target": "zanzibar_validated_trips"
     },
     {
       "relation": "rationale_for",
@@ -3601,7 +4038,7 @@
       "source_file": "peskas/mozambique_validated_trips_dict.md",
       "source_location": "Related files",
       "weight": 1.0,
-      "source": "peskas_peskas_automated_analytics_softwarex_2025_paper",
+      "source": "concept_peskas_softwarex_paper",
       "target": "peskas_mozambique_validated_trips_dict_peskas_monitoring_system"
     },
     {
@@ -3653,16 +4090,6 @@
       "weight": 1.0,
       "source": "peskas_kenya_validated_trips_dict_dataset",
       "target": "concept_catch_habitat"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/kenya_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_kenya_validated_trips_dict_dataset",
-      "target": "concept_digital_feedback_fisher_behavior_kenya"
     },
     {
       "relation": "references",
@@ -3785,6 +4212,16 @@
       "target": "concept_wio_ssf_harmonization_guidelines"
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/kenya_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_kenya_validated_trips_dict_dataset",
+      "target": "digital_feedback_fisher_behavior_kenya_2025"
+    },
+    {
       "relation": "shares_data_with",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -3792,107 +4229,7 @@
       "source_location": null,
       "weight": 1.0,
       "source": "peskas_kenya_validated_trips_dict_dataset",
-      "target": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_catch_habitat"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_fishery_nutrient_profiles_naturefood_paper"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_gaul_admin_coding"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_harmonized_catch_effort_data"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_peskas_monitoring_system"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_peskas_monitoring_system_slides"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_peskas_softwarex_paper"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_scientific_name_taxonomy"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_wio_ssf_data_harmonization_standard"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "peskas/zanzibar_validated_trips_dict.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "peskas_zanzibar_validated_trips_dict_zanzibar_validated_trips",
-      "target": "concept_zanzibar"
+      "target": "zanzibar_validated_trips"
     },
     {
       "relation": "conceptually_related_to",
@@ -3925,14 +4262,14 @@
       "target": "concept_peskas_monitoring_system"
     },
     {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "peskas/kenya_validated_trips_dict.md",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "concept_digital_feedback_fisher_behavior_kenya",
-      "target": "concept_kenya"
+      "source": "zanzibar_validated_trips",
+      "target": "concept_peskas_monitoring_system"
     },
     {
       "relation": "conceptually_related_to",
@@ -3943,6 +4280,16 @@
       "weight": 1.0,
       "source": "concept_kenya",
       "target": "concept_wio_region"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "peskas/kenya_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "digital_feedback_fisher_behavior_kenya_2025",
+      "target": "concept_kenya"
     },
     {
       "relation": "conceptually_related_to",
@@ -3988,6 +4335,16 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_zanzibar"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "graphify-out/converted/Technical_Guidelines_SSF_Data_Harmonization_WIO_8f7e1b7e.md",
       "source_location": "\u00a71",
       "weight": 1.0,
@@ -4005,6 +4362,36 @@
       "target": "concept_wio_ssf_data_harmonization_standard"
     },
     {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_gaul_admin_coding"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_scientific_name_taxonomy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_catch_habitat"
+    },
+    {
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -4013,6 +4400,76 @@
       "weight": 1.0,
       "source": "concept_harmonized_catch_effort_data",
       "target": "concept_wio_ssf_data_harmonization_standard"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_harmonized_catch_effort_data"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_wio_ssf_data_harmonization_standard"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Related files",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "concept_peskas_softwarex_paper"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_peskas_softwarex_paper"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_peskas_monitoring_system_slides"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Related files",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "concept_fishery_nutrient_profiles_naturefood_paper"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/zanzibar_validated_trips_dict.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "concept_fishery_nutrient_profiles_naturefood_paper"
     },
     {
       "relation": "references",
@@ -4588,6 +5045,16 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_harmonization_validation",
+      "target": "concept_aquatic_food_ontology"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "graphify-out/converted/Technical_Guidelines_SSF_Data_Harmonization_WIO_8f7e1b7e.md",
       "source_location": "\u00a78.1",
       "weight": 1.0,
@@ -4933,53 +5400,768 @@
       "weight": 1.0,
       "source": "fasa_fasa_repo_about_interaction_layer_hook",
       "target": "fasa_fasa_repo_about_hua_bureau_2012"
-    }
-  ],
-  "hyperedges": [
-    {
-      "id": "pondcube_published_csvs",
-      "label": "PondCube July 2025 published water-quality CSVs",
-      "nodes": [
-        "pondcube_pondcube_about_pondcube_measurements_long_csv",
-        "pondcube_pondcube_about_pondcube_observations_wide_csv",
-        "pondcube_pondcube_about_pondcube_tanks_reference_csv",
-        "pondcube_pondcube_about_pondcube_data_quality_csv",
-        "pondcube_pondcube_data_about_source_workbook"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "digital_transformation_accelerator/pondcube/pondcube_about.md"
     },
     {
-      "id": "fasa_engine_reference_databases",
-      "label": "FASA engine reference databases (ASNS/FICD/PAFF)",
-      "nodes": [
-        "fasa_fasa_repo_about_lp_engine",
-        "fasa_fasa_repo_about_asns_database",
-        "fasa_fasa_repo_about_ficd_database",
-        "fasa_fasa_repo_about_paff_database"
-      ],
-      "relation": "participate_in",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "fasa/fasa_repo_about.md"
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "fishery_nutrient_profiles_timor_leste_naturefood_2026",
+      "target": "peskas_peskas_about_peskas"
     },
     {
-      "id": "fasa_lp_modeling_flow",
-      "label": "FASA LP formulation flow (engine, crosswalk, constraints, IIS)",
-      "nodes": [
-        "fasa_fasa_repo_about_lp_engine",
-        "fasa_fasa_repo_about_crosswalk",
-        "fasa_fasa_repo_about_premix_masking",
-        "fasa_fasa_repo_about_toxin_ceilings",
-        "fasa_fasa_repo_about_iis_reporting"
-      ],
-      "relation": "form",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_kenya_validated_trips",
+      "target": "peskas_peskas_about_peskas"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_mozambique_validated_trips",
+      "target": "peskas_peskas_about_peskas"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "co_management"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "ecosystem_approach_to_fisheries_eaf"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "fish_consumption_rct_timor_leste_2026"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "fishery_nutrient_profiles_fnp"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "near_real_time_monitoring"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "### 2019 | Formal national adoption and transition to scaling",
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskaas_automated_analytics_system"
+    },
+    {
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskas_automated_analytics_softwarex_2025"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskas_monitoring_system_slides"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskas_peskas_about_data_collection_methods"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskas_peskas_about_dissemination_components"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskas_peskas_about_harmonization_validation"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "peskas_peskas_about_nutrition_sensitive_analytics"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "small_scale_fisheries_ssf"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "timor_leste"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "wio_ssf_data_harmonization_guidelines"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas",
+      "target": "wiomsa_harmonization_oct2025_deck"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Scope",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "peskas_peskas_about_peskas"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "peskas_peskas_about_peskas"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_data_collection_methods",
+      "target": "peskas_peskas_about_kobotoolbox"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_data_collection_methods",
+      "target": "peskas_peskas_about_pelagic_data_systems"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_harmonization_validation",
+      "target": "peskas_peskas_about_fao_asfis_codes"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_harmonization_validation",
+      "target": "peskas_peskas_about_validation_engine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_nutrition_sensitive_analytics",
+      "target": "fishery_nutrient_profiles_fnp"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_nutrition_sensitive_analytics",
+      "target": "peskas_peskas_about_fishbase"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_nutrition_sensitive_analytics",
+      "target": "peskas_peskas_about_xgboost"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_dissemination_components",
+      "target": "peskas_peskas_about_harvard_dataverse"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_dissemination_components",
+      "target": "peskas_tracks_app"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "digital_feedback_fisher_behavior_kenya_2025"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "fish_consumption_rct_timor_leste_2026"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "fishery_nutrient_profiles_timor_leste_naturefood_2026"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "kenya_validated_trips"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "mozambique_validated_trips"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "peskas_automated_analytics_softwarex_2025"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "peskas_monitoring_system_slides"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "wio_ssf_data_harmonization_guidelines"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "wiomsa_harmonization_oct2025_deck"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_about_peskas_hub",
+      "target": "zanzibar_validated_trips"
+    },
+    {
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Related files",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "peskas_peskas_about_peskas_hub"
+    },
+    {
+      "relation": "produced_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "kenya_validated_trips",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "produced_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "mozambique_validated_trips",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "part_of",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskaas_automated_analytics_system",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_automated_analytics_softwarex_2025",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "aabs_bluetech_superhighway"
+    },
+    {
+      "relation": "produced_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "alex_tilley"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "co_management"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "ecosystem_approach_to_fisheries_eaf"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "fishery_nutrient_profiles_fnp"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "near_real_time_monitoring"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "profishblue_malawi"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "small_scale_fisheries_ssf"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "timor_leste"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "wio_ssf_data_harmonization_guidelines"
+    },
+    {
+      "relation": "produced_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_platform",
+      "target": "worldfish"
+    },
+    {
+      "relation": "part_of",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_tracks_app",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "produced_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "zanzibar_validated_trips",
+      "target": "peskas_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "### 2017 | Conceptualisation of PeskAAS",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "peskaas_automated_analytics_system"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "fish_consumption_rct_timor_leste_2026",
+      "target": "timor_leste"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "fishery_nutrient_profiles_timor_leste_naturefood_2026",
+      "target": "timor_leste"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "fishery_nutrient_profiles_timor_leste_naturefood_2026",
+      "target": "fishery_nutrient_profiles_fnp"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "digital_feedback_fisher_behavior_kenya_2025",
+      "target": "peskas_tracks_app"
+    },
+    {
+      "relation": "conceptually_related_to",
       "confidence": "INFERRED",
       "confidence_score": 0.85,
-      "source_file": "fasa/fasa_repo_about.md"
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "wiomsa_harmonization_oct2025_deck",
+      "target": "wio_ssf_data_harmonization_guidelines"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "peskas/peskas_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "digital_feedback_fisher_behavior_kenya_2025",
+      "target": "fish_consumption_rct_timor_leste_2026"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "digital_feedback_fisher_behavior_kenya_2025"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "fish_consumption_rct_timor_leste_2026"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "peskas_automated_analytics_softwarex_2025"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "fishery_nutrient_profiles_timor_leste_naturefood_2026"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "kenya_validated_trips"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Related files",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "zanzibar_validated_trips"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "mozambique_validated_trips"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Related files",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "kenya_validated_trips_dict"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "peskas/peskas_timeline_about.md",
+      "source_location": "## Related files",
+      "weight": 1.0,
+      "source": "peskas_peskas_timeline_about_doc",
+      "target": "mozambique_validated_trips_dict"
     }
   ],
-  "built_at_commit": "de758f55ec3b76cbe5a7545979a4d73d0ec8eeaa"
+  "hyperedges": [],
+  "built_at_commit": "a8641ff02db0cf120ddf8d8ff3495ca74673bf5e"
 }

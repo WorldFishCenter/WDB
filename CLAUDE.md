@@ -6,6 +6,12 @@ and [USER_GUIDE.md](USER_GUIDE.md) (all `.graphifyignore`d). This file carries t
 enforce when **operating** the graph — chiefly during `/graphify` extraction, which those conventions
 cannot reach because the extractor never reads them.
 
+**The aim.** WDB is WorldFish's shared knowledge brain — one queryable graph over every initiative's
+data, documents, and notes, whose value is the **cross-initiative connections** it surfaces, not any
+single file. Operate it to keep that graph **connected, honest, and de-duplicated**: edges only on
+real domain meaning, **one node per real-world entity**, and provenance you can trust. The guards
+below exist to protect exactly those three properties at build time.
+
 Per the protocol ([PROTOCOL §2](PROTOCOL.md#2-the-contribution-protocol)),
 only the **maintainer** runs `/graphify`. These rules apply to whoever is in that seat.
 
@@ -65,3 +71,40 @@ see [PROTOCOL §9 — Building & updating](PROTOCOL.md#9-maintainer-and-build-re
 exactly the speculative similarity noise this guard suppresses — so it is **not** recommended
 for routine rebuilds. Reserve it for deliberate one-off exploration, and expect to review the
 extra edges. The guard above still applies in deep mode.
+
+## Graphify extraction: canonical-entity guard
+
+Protects the **one node per real-world entity** property. Like the similarity guard, it governs the
+**extractor**, which cannot read the protocol's canonical-name rule
+([PROTOCOL §6 — satellites](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name)).
+It has two parts — an injection (input side) and a maintainer build step (output side). **Both are
+required**: the injection alone does not fix it, because graphify's dedup refuses to merge short labels.
+
+**1. Inject into every extraction subagent prompt** (verbatim in intent, all backends — Claude or
+Gemini):
+
+> Refer to each initiative/system by its **one canonical name** — the proper name in that initiative's
+> hub `# H1` (e.g. **"Peskas"**, never "Peskas platform" / "Peskas Monitoring System"). For a shared
+> real-world entity that already exists in the graph (the platform, a cited paper, a dataset, a place),
+> **reference the existing node — do not re-mint the initiative concept under a variant label or a new
+> id.** A satellite (`_about` child) anchors to its hub with a `part_of` edge; it must **not** create
+> its own copy of the initiative concept.
+
+**2. Reconcile entity ids at merge (maintainer build step).** graphify's dedup (`dedup.py`) **will not
+merge labels under 12 characters** (e.g. "Peskas") or coincidental cross-file matches — so a fresh
+extraction of a short-named entity mints a **new duplicate node** rather than merging onto the
+existing one. So after extraction, **before `build_merge`, remap the new fragment onto existing
+canonical node ids**: for any node the extractor minted under a variant id/label that denotes an
+entity already in `graph.json`, rewrite that node's edges' `source`/`target` to the existing id and
+**drop the new node entry** (so it cannot clobber the canonical node's attrs). This is what held the
+Peskas-timeline re-extraction at **zero** new duplicates; skipping it added `peskas` + "Peskas
+Overview" + `PeskAAS` duplicate nodes.
+
+**Why a separate enforcement point.** [PROTOCOL §6](PROTOCOL.md#6-context-notes) makes contributors
+*write* the canonical name and `/curate` drafts notes that way — but the extractor re-invents labels
+and per-file ids on every run, and short proper names never auto-merge, so the input rule alone still
+leaves duplicate entity nodes. The injection keeps new extractions consistent; the remap collapses
+them onto one node. **Both are required**, same as Habit 4 + the similarity guard. Residual variants
+from **frozen** `_dict`/`_context` snapshots are accepted (we never rewrite a frozen note); a heavier
+consolidation is graphify's LLM dedup pass (`build_merge(dedup_llm_backend=…)`), **off by default**
+(cost, determinism — it conflicts with the pinned-model reproducibility above).

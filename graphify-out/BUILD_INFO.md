@@ -6,48 +6,44 @@ in a pull request means the graph was rebuilt with a different model or tool ver
 
 | Field | Value |
 |---|---|
-| Built (UTC date) | 2026-06-08 |
+| Built (UTC date) | 2026-06-12 |
 | Model (build + agents) | `claude-opus-4-8` (Opus 4.8) |
 | graphify | 0.8.35 |
 | Mode | incremental (`/graphify . --update`) |
-| Graph | 171 nodes · 264 edges · 7 communities |
+| Graph | 209 nodes · 342 edges · 7 communities |
 
 > Even with a pinned model, LLM extraction is not bit-for-bit reproducible — the model version
 > is the largest controllable factor. Pinning the exact model plus this record is how WDB keeps
 > the graph's provenance honest: you control *when* the model changes, and this file says *which*
 > model built what is committed.
 >
-> This incremental build re-extracted **5 changed documents**, all Markdown context/about notes:
-> two new whole-initiative `_about.md` files —
-> `digital_transformation_accelerator/digital_transformation_accelerator_about.md` and
-> `fasa/fasa_about.md` — plus three modified notes:
-> `digital_transformation_accelerator/pondcube/pondcube_about.md`,
-> `digital_transformation_accelerator/pondcube/pondcube_data_about.md`, and
-> `fasa/fasa_repo_about.md`. No code, papers, or images changed, so AST extraction was skipped and
-> only the semantic subagent ran; the unchanged PDFs and `_dict.md` files were served from cache.
+> This incremental build re-extracted **1 changed document**: `peskas/peskas_timeline_about.md`,
+> after it was edited under the new **satellite convention** ([PROTOCOL §6](../PROTOCOL.md)) — the
+> bare "Peskas" canonical name was used in place of "Peskas platform", and the two cross-initiative
+> `## Related files` links (the Kenya digital-feedback study, the Timor-Leste RCT) were removed from
+> the satellite and left to the `peskas_about.md` hub, so the timeline links mainly to its hub and
+> same-initiative siblings. No code/papers/images changed; AST was skipped and the rest served from
+> cache.
 >
-> This build adds the two missing initiative hubs and wires their packages, datasets, concepts, and
-> cited literature into the graph: the **Digital Transformation Accelerator (DTA)** hub (Data
-> Ecosystem area of work, FAIR-by-design / AI-ready data, Carob, GARDIAN, AgriLLM, CGIAR AI Hub,
-> Asia Digital Hub) with **PondCube** and its sense-send-serve-monitor-alert pipeline and
-> water-quality dataset hanging off it; and the **FASA Initiative** hub (feed-formulation app,
-> circular-economy waste-to-feed framing, Nile Tilapia / African Catfish) over the FASA engine
-> (PuLP + HiGHS LP, premix-aware masking, toxin ceilings, IIS reporting, PAFF benchmark gate,
-> `fasa_api` / `fasa_core`, the ASNS→FICD crosswalk) and its ASNS / FICD / PAFF reference databases
-> and aquaculture-feed literature (Bureau 2014, Hua & Bureau 2012, Avadí et al. 2022).
+> **Entity-resolution note (deliberate maintainer step).** Re-extracting the satellite with the
+> short canonical label "Peskas" first produced *new* duplicate nodes (`peskas`, "Peskas Overview",
+> `PeskAAS`), because graphify's dedup (`dedup.py`) refuses to merge labels under 12 characters — two
+> "Peskas" nodes from different files never auto-collapse. The build therefore **remapped the
+> satellite's references onto the existing canonical node ids** (`peskas_peskas_about_peskas`,
+> `peskas_peskas_about_peskas_hub`, `peskaas_automated_analytics_system`) before merge, so the
+> timeline points at the *existing* Peskas / hub / PeskAAS nodes and adds **zero** new duplicates.
+> Canonical *names* are necessary but, for short proper names, not sufficient — canonical *ids*
+> (a satellite referencing the hub's node, not re-minting the concept) are what actually consolidate.
 >
-> Net effect: **33 new nodes and 51 new edges against 1 edge removed, with 7 nodes deduplicated on
-> merge (2 exact, 5 fuzzy)**. The dedup consolidated the new about-file nodes onto the dataset and
-> database nodes the existing `_dict.md` extractions already carried (the PondCube CSVs, the
-> ASNS/FICD/PAFF databases) rather than duplicating them. The graph moved 138 → 171 nodes and
-> 214 → 264 edges; clustering resolved into 7 communities (down from 8, as the DTA and PondCube
-> content fused into one "Digital Transformation Accelerator & PondCube" community).
+> Net effect vs. the prior graph: **3 new nodes / 18 new edges against 3 nodes / 13 edges removed**
+> (the prior timeline subgraph was replaced; node count held at 209). Edges moved 337 → 342 and
+> clustering tightened from 8 → **7 communities** as the consolidated, hub-anchored timeline pulled
+> the Peskas content together. The timeline node sits inside the "Peskas Platform & Global Scaling"
+> community (degree 15) and is **not** a high-betweenness cross-community bridge — the intended
+> cohesion outcome. The pre-existing legacy variants (`Peskas platform`, the `Peskas Monitoring
+> System` concept nodes from frozen `_dict.md` notes) remain — accepted residual under the
+> canonical-naming-only decision (no LLM dedup pass).
 >
 > The format-blind similarity guard was injected verbatim into the extraction subagent. **Zero
-> `semantically_similar_to` edges were emitted this build.** In particular the subagent deliberately
-> minted **no** link between the PondCube datasets and the FASA ASNS/FICD/PAFF databases: they share
-> only structural shape (tidy CSV/table form) and no domain meaning — different initiatives, species,
-> and studies — so per the guard no cross-initiative edge was created. Within-initiative
-> `shares_data_with` edges were used only where there is a genuine domain join (the four PondCube CSVs
-> derive from one source workbook; the FASA engine reads its three reference databases; the
-> ASNS↔FICD crosswalk).
+> `semantically_similar_to` edges were emitted**; every satellite edge rests on domain meaning
+> (`part_of` the hub, `references`/`cites` siblings, `produced_by`), never on table shape or format.

@@ -50,7 +50,7 @@ The map below covers every path: adding a file, writing a note, sharing a link, 
 flowchart TD
   S{"What are you doing?"}
   S -- "Adding a new file" --> A[Add file to its initiative folder]
-  S -- "Writing an idea /<br/>_about overview" --> N["Write the note in plain English<br/>(an _about overview uses Template C)"]
+  S -- "Writing an idea, overview,<br/>or timeline / note" --> N["Write the note in plain English<br/>(overviews & satellites use Template C)"]
   S -- "Sharing a URL" --> L["Tell the maintainer — don't commit a URL"]
   S -- "Updating / superseding<br/>something already in the brain" --> U["Append ## Updates + a superseded_by<br/>link to its companion note (or /curate)"]
 
@@ -77,6 +77,7 @@ flowchart TD
 | Image / diagram / audio / video | Required if it carries information — Template B |
 | External link / online paper / repo | Don't save a URL — tell the maintainer (`/graphify add <url>`) |
 | A topic / whole-initiative overview | Standalone `_about.md` — **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)**, the **living current-state node** ([§6](PROTOCOL.md#6-context-notes)) |
+| A timeline / history / roadmap / design note | An aspect `_about.md` **child** of the hub ([satellite rules](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name)) — use the project's one **canonical name** and link up to the hub |
 | An idea / observation | The note *is* the content: `idea_<topic>.md` |
 
 ### Context notes — the quality lever
@@ -95,6 +96,9 @@ worked examples** from [PROTOCOL §6](PROTOCOL.md#6-context-notes). Skeletons:
 
 A whole-initiative overview instead uses **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)** — a lighter *living-node* scaffold (proper-name
 title, one-line identity, `## Related files`), not these frozen-snapshot notes ([§6](PROTOCOL.md#6-context-notes)).
+Extra perspective docs on a project (timeline, history, roadmap, design notes) are **aspect `_about.md`
+children** of that hub — [satellite rules](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name):
+refer to the project by its **one canonical name**, anchor to the hub, and leave cross-initiative links to the hub.
 
 Keep a table's **shape** (wide/long) and any **tooling/provenance** *out* of the note — that's habit 4,
 and it's why the graph stays clean ([§6](PROTOCOL.md#6-context-notes)).

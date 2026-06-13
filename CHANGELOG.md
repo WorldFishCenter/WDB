@@ -2,7 +2,9 @@
 
 Turns the `_about.md` overview from a free-form note into a structured, connected
 node: a light template, a parent⇄child hierarchy between initiative hubs and their
-component docs, and a clear division of labour between the hub and its companions.
+component docs, a clear division of labour between the hub and its companions, and a
+**satellite** convention — with one canonical name per initiative — for the extra
+perspective docs a project accrues (timelines, notes, roadmaps).
 
 ## Contributing Protocol
 
@@ -20,6 +22,14 @@ component docs, and a clear division of labour between the hub and its companion
   engine/app/tooling internals stay in the child engine doc — the hub *delegates*
   ("see `<child>_about.md`"). One carve-out: a verbatim imported external README (e.g.
   `fasa_repo_about.md`) may keep tooling detail if marked with a top `> Source:` line.
+* **NEW** Initiative **satellite docs** & the **canonical-name** rule. Beyond the hub, an
+  initiative's perspective artifacts (timeline, history, roadmap, design / decision notes)
+  are **aspect `_about.md` children**, hub-anchored. Each initiative has **one canonical
+  proper name** (the hub's `# H1`) used verbatim in every note — synonyms mint duplicate
+  graph nodes, since Graphify's dedup won't merge short/variant labels. Cross-initiative
+  links are **concentrated in the hub**, not scattered across satellites (clustering is
+  edge-density driven with no pinning, so an outward-linking satellite can be pulled into
+  another community). Refines habit 2 for satellites only.
 
 ## Documentation
 
@@ -29,18 +39,34 @@ component docs, and a clear division of labour between the hub and its companion
 * **CHANGED** `README.md` and `USER_GUIDE.md` now **name Template C** for the initiative
   overview — in the "What am I adding?" table, the flow diagram, and (README) the
   skeletons note — so it reads in parallel with Template A/B instead of "write freely".
+* **NEW** `PROTOCOL.md` §6 gains an *"Initiative perspective docs (satellites) & the
+  canonical name"* subsection (canonical-name, hub-anchoring, and cross-initiative-link
+  concentration rules + an artifact→convention table); `README.md` and `USER_GUIDE.md`
+  each gain a row for project timelines/history/notes that deep-links into it.
 
 ## Automated Tooling
 
 * **CHANGED** `wdb-curator` agent now drafts overviews against **Template C** and wires
   the parent⇄child link on **both** sides, applying the hub-vs-companion division of
-  labour (and the imported-README `> Source:` carve-out).
+  labour (and the imported-README `> Source:` carve-out). It now also applies the
+  **satellite rules** — uses the hub's canonical name verbatim, anchors satellites to the
+  hub, warns when a satellite over-links to other initiatives, and puts provenance
+  (`source_url`/`captured_at`) on the doc it describes, never on the hub.
+* **NEW** `CLAUDE.md` gains a **canonical-entity guard** (operator/build layer, alongside the
+  format-blind similarity guard): an extraction-prompt injection (use the canonical name;
+  reference the hub's existing node, don't re-mint the initiative concept) plus a maintainer
+  **canonical-id remap** build step that reconciles short-named entities onto existing node ids
+  before merge — graphify's dedup won't auto-merge labels under 12 chars. Also states the
+  brain's aim (connected, honest, de-duplicated) the guards protect.
 
 ## Initiatives
 
 * **NEW** Whole-initiative hubs added: `digital_transformation_accelerator/digital_transformation_accelerator_about.md`
   (DTA, parenting PondCube) and `fasa/fasa_about.md` (FASA, parenting the feed-formulation
   engine doc) — the first parent hubs built under the new hierarchy.
+* **NEW** `peskas/peskas_timeline_about.md` — the Peskas 2013→present history & global-scaling
+  timeline, standardized into the first **satellite** aspect-`_about.md` child (anchored to the
+  `peskas_about.md` hub).
 
 ---
 

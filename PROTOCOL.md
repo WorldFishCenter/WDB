@@ -352,6 +352,61 @@ it with a top `> Source: …` provenance line; the parent hub stays clean.
 child) — the hub carries the programme (aim, partners, funding, field research) and delegates the
 optimization-engine internals to the child.
 
+### Initiative perspective docs (satellites) & the canonical name
+
+An initiative usually grows **more than one** child doc: besides the hub it accumulates *perspective*
+artifacts — a history/timeline, a roadmap, design rationale, a decision log. **Each is an aspect
+`<initiative>_<aspect>_about.md` child** (Template C, hub-anchored), e.g. `peskas_timeline_about.md`. A
+single standalone idea stays `idea_<topic>.md`, but it too must name its initiative and use the
+canonical name below. Don't invent new suffixes — reuse the aspect-child pattern.
+
+Three rules keep these from making a mess or splitting the initiative across communities:
+
+1. **One canonical entity name.** The hub's `# H1` is the initiative's single canonical proper name.
+   Every note in the initiative refers to the initiative/system by *that exact name* — never a synonym
+   (**"Peskas"**, not "Peskas platform" / "Peskas Monitoring System"). *Why:* Graphify identifies a node
+   by its label; it auto-merges identical long labels but its dedup deliberately **won't** merge short
+   or variant labels — so synonyms mint duplicate nodes for the same real thing. The hub is the one
+   canonical concept node; satellites *reference* it, never reintroduce a variant.
+2. **Anchor every satellite to the hub.** State `part of <initiative>_about.md` in the satellite and
+   **enumerate the satellite in the hub** (both sides → `EXTRACTED`). *Why:* clustering is edge-density
+   driven with no manual pinning — a node joins whichever community it links most strongly into, so a
+   strong hub link keeps the satellite with its initiative.
+3. **Keep cross-initiative links in the hub.** Put "this initiative relates to initiative X" edges in
+   the **hub**, not scattered across satellites. A satellite that links heavily *outward* gets pulled
+   into another community or inflates a cross-cluster, so satellites stay mostly inward-facing (hub +
+   same-initiative siblings) and the hub is the initiative's single outward-facing connector. *(This
+   refines habit 2 for satellites only — companion `_dict`/`_context` notes keep their file-specific
+   cross-links.)*
+4. **Provenance lives on the doc it describes.** If a satellite is *imported from a specific source*
+   (a shared doc, a Tana/Notion export, a report), put `source_url`/`captured_at` in **that satellite's**
+   YAML frontmatter — **never on the hub**. The hub is a living *synthesis*: give it the project's
+   canonical site (or no `source_url` — git is its provenance). Putting one doc's source on another
+   misattributes it (a timeline's source URL must not sit on the hub).
+
+| Artifact | Convention |
+|---|---|
+| Whole-initiative overview (current state) | the bare `<initiative>_about.md` **hub** |
+| Timeline / history / roadmap / design rationale / decision log | aspect `<initiative>_<aspect>_about.md` child, hub-anchored |
+| A single idea / observation | `idea_<topic>.md` (names its initiative, uses the canonical name) |
+
+**To add a satellite** (or just run `/curate`, which does all of this):
+1. Create `<initiative>/<initiative>_<aspect>_about.md` in the initiative folder; shape it as Template C.
+2. Use the hub's canonical name (its `# H1`) **verbatim** wherever you name the initiative/system.
+3. In the satellite's `## Related files`, link **up to the hub**, phrased so it doesn't just repeat the
+   filename — e.g. ``peskas_about.md — parent hub; this timeline is **part of** the Peskas overview,
+   which delegates its full history here.``
+4. In the **hub's** `## Related files`, add a line enumerating the new child (so the edge is `EXTRACTED`
+   on both sides).
+5. Link only **same-initiative siblings** in the satellite; leave cross-initiative links to the hub.
+6. If the satellite came from a specific source, put its `source_url`/`captured_at` in **its own**
+   frontmatter — not the hub's.
+
+**Worked example:** `peskas/peskas_timeline_about.md` (the history & scaling chronology) is a child of
+`peskas/peskas_about.md`; it calls the system **"Peskas"** throughout, links up to the hub, leaves the
+Peskas↔other-initiative links to the hub, and carries its own Tana `source_url` — so the whole initiative
+clusters as one and the timeline's provenance stays on the timeline.
+
 ---
 
 ## 7. Recording updates and supersession over time

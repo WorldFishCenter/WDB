@@ -72,7 +72,7 @@ These are the **same steps as the [main protocol](PROTOCOL.md#2-the-contribution
 flowchart TD
   S{"What do you want to do?"}
   S -- "Add a new file<br/>(dataset, PDF, image, audio…)" --> A[Put it in its initiative folder]
-  S -- "Write an idea or a<br/>project overview note" --> N["Create idea_….md or …_about.md<br/>in plain English (an _about uses Template C)"]
+  S -- "Write an idea, overview,<br/>or timeline / note" --> N["Create idea_….md or …_about.md<br/>in plain English (_about uses Template C)"]
   S -- "Share a web link /<br/>online paper" --> L["Tell the maintainer the link<br/>(don't save a URL)"]
   S -- "Update / replace something<br/>already in the brain" --> U["Open its companion note: add a dated<br/>## Updates line + a superseded_by link<br/>(or ask /curate) — see Part 4"]
 
@@ -150,6 +150,7 @@ Put it in the right **initiative folder**, give it a **`lower_snake_case`** name
 | **Meeting recording / audio** (MP4, MP3) | Drag the media file in; the maintainer's tools transcribe it. | Required if it's hard to follow — Template B (`…_context.md`). |
 | **Web link / online paper** | **Don't** paste a URL into a file. Tell the maintainer the link — they add it properly with `/graphify add`. | The maintainer adds it. |
 | **A topic / initiative overview** (not about one file) | Right-click the folder → **New File** → name it `<topic>_about.md` (e.g. `pondcube_about.md`) and write a short overview. | Follow the light **`_about.md` template** ([Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)) — a title, one line on what it is, and a `## Related files` list. If it's part of a bigger initiative, point up to that initiative's `_about.md` so the two link. **`/curate` sets this up for you.** |
+| **A project's timeline, history, or notes** | Right-click the folder → **New File** → name it `<project>_<topic>_about.md` (e.g. `peskas_timeline_about.md`) and write it. | A **child** of the project's `_about.md` ([satellite rules](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name)): always call the project by **the same name** its `_about.md` uses, and point up to that `_about.md`. **`/curate` sets this up for you.** |
 | **An idea, note, or observation** | Right-click the folder → **New File** → name it `idea_<short-topic>.md` and write it in plain English. | The note *is* the content — name any related files/initiatives inside it so the graph links them. |
 
 ---
