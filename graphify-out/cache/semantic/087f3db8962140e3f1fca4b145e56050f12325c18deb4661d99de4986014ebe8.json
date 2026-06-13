@@ -1,0 +1,1 @@
+{"nodes": [], "edges": [{"source": "dta_2025_tr", "target": "dta_hub", "relation": "part_of", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "digital_transformation_accelerator/Digital_Transformation_Accelerator_2025_TR_context.md", "source_location": "Annual Technical Report 2025 of the Accelerator", "weight": 1.0}], "hyperedges": []}

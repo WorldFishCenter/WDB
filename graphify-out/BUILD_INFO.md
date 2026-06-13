@@ -9,41 +9,55 @@ in a pull request means the graph was rebuilt with a different model or tool ver
 | Built (UTC date) | 2026-06-12 |
 | Model (build + agents) | `claude-opus-4-8` (Opus 4.8) |
 | graphify | 0.8.35 |
-| Mode | incremental (`/graphify . --update`) |
-| Graph | 209 nodes · 342 edges · 7 communities |
+| Mode | **full rebuild from scratch** (`/graphify .`) |
+| Graph | 173 nodes · 320 edges · 7 communities (single connected component) |
 
 > Even with a pinned model, LLM extraction is not bit-for-bit reproducible — the model version
 > is the largest controllable factor. Pinning the exact model plus this record is how WDB keeps
 > the graph's provenance honest: you control *when* the model changes, and this file says *which*
 > model built what is committed.
 >
-> This incremental build re-extracted **1 changed document**: `peskas/peskas_timeline_about.md`,
-> after it was edited under the new **satellite convention** ([PROTOCOL §6](../PROTOCOL.md)) — the
-> bare "Peskas" canonical name was used in place of "Peskas platform", and the two cross-initiative
-> `## Related files` links (the Kenya digital-feedback study, the Timor-Leste RCT) were removed from
-> the satellite and left to the `peskas_about.md` hub, so the timeline links mainly to its hub and
-> same-initiative siblings. No code/papers/images changed; AST was skipped and the rest served from
-> cache.
+> **This was a from-scratch full rebuild, not an `--update`.** It deliberately replaced the prior
+> incremental graph (209 nodes / 342 edges, accumulated over many `--update` sessions). The prior
+> graph carried **51 nodes extracted from converted-PDF sidecars** (`graphify-out/converted/`) that
+> duplicated their source papers, plus concept nodes whose ids had drifted across many incremental
+> passes. The rebuild re-extracts the **34 current corpus files** (27 docs + 7 PDFs) once, cleanly,
+> from a freshly cleared semantic cache. Net change vs. the prior committed graph: **209 → 173
+> nodes**, **342 → 320 edges** — fewer nodes, but no sidecar duplicates and a single internally
+> consistent id scheme.
 >
-> **Entity-resolution note (deliberate maintainer step).** Re-extracting the satellite with the
-> short canonical label "Peskas" first produced *new* duplicate nodes (`peskas`, "Peskas Overview",
-> `PeskAAS`), because graphify's dedup (`dedup.py`) refuses to merge labels under 12 characters — two
-> "Peskas" nodes from different files never auto-collapse. The build therefore **remapped the
-> satellite's references onto the existing canonical node ids** (`peskas_peskas_about_peskas`,
-> `peskas_peskas_about_peskas_hub`, `peskaas_automated_analytics_system`) before merge, so the
-> timeline points at the *existing* Peskas / hub / PeskAAS nodes and adds **zero** new duplicates.
-> Canonical *names* are necessary but, for short proper names, not sufficient — canonical *ids*
-> (a satellite referencing the hub's node, not re-minting the concept) are what actually consolidate.
+> **Extraction strategy — 7 per-initiative chunks.** One subagent per initiative
+> (data_harmonization, DTA, PondCube, FASA, Peskas-platform, Peskas-data/nutrient-profiles,
+> ssf_research), each instructed to **read its PDFs directly** (not just the `_context.md`
+> companions) for paper-level concepts — the main source of the concept richness. Total extraction:
+> ~380k input tokens across the 7 agents.
 >
-> Net effect vs. the prior graph: **3 new nodes / 18 new edges against 3 nodes / 13 edges removed**
-> (the prior timeline subgraph was replaced; node count held at 209). Edges moved 337 → 342 and
-> clustering tightened from 8 → **7 communities** as the consolidated, hub-anchored timeline pulled
-> the Peskas content together. The timeline node sits inside the "Peskas Platform & Global Scaling"
-> community (degree 15) and is **not** a high-betweenness cross-community bridge — the intended
-> cohesion outcome. The pre-existing legacy variants (`Peskas platform`, the `Peskas Monitoring
-> System` concept nodes from frozen `_dict.md` notes) remain — accepted residual under the
-> canonical-naming-only decision (no LLM dedup pass).
+> **Cross-initiative connectivity by canonical shared nodes (not cross-chunk edges).** Because each
+> subagent only sees its own chunk, no edge can span two chunks. Connectivity was instead achieved by
+> giving **every** chunk one fixed shared-entity vocabulary — stable ids for the real-world entities
+> that span initiatives (`shared_worldfish`, `shared_kenya`, `shared_timor_leste`, `shared_zanzibar`,
+> `shared_mozambique`, `shared_small_scale_fisheries`, `shared_fao_asfis/gaul/isscfg`,
+> `shared_aabs`, …) plus five fixed initiative-hub ids (`peskas_hub`, `fasa_hub`, `pondcube_hub`,
+> `dta_hub`, `data_harmonization_hub`), each emitted only by its owning chunk and referenced by id
+> elsewhere. 204 raw nodes collapsed to **173 unique** as the shared/hub ids deduped across chunks —
+> and the graph came out as a **single connected component** with `Peskas` (betweenness 0.373) and
+> `WorldFish` (bridges all five of its communities) as the cross-initiative bridges. This is the
+> canonical-entity guard ([`CLAUDE.md`](../CLAUDE.md)) applied at build time: one node per real-world
+> entity is exactly what links the initiatives.
 >
-> The format-blind similarity guard was injected verbatim into the extraction subagent. **Zero
-> `semantically_similar_to` edges were emitted**; every satellite edge rests on domain meaning
-> (`part_of` the hub, `references`/`cites` siblings, `produced_by`), never on table shape or format.
+> **Similarity guard held: zero `semantically_similar_to` edges emitted.** The format-blind guard was
+> injected verbatim into all 7 subagents. The two structurally identical pairs the corpus is known to
+> bait on — PondCube `observations_wide` ↔ `measurements_long`, and the three sister validated-trips
+> long tables (Kenya / Mozambique / Zanzibar) — produced **no shape-based links**: the PondCube pair
+> is joined only on its shared tank-sensor `(location, tank_id)` subject (`shares_data_with`), and the
+> three validated-trips datasets are joined only to their countries, the FAO standards, and Peskas,
+> co-participating through a single hyperedge rather than pairwise sister-table edges. All
+> cross-cutting links rest on domain meaning.
+>
+> **Entity-resolution note.** `PeskAAS` (the historical predecessor system named in the Peskas
+> timeline) was modeled as its **own distinct concept node**, not merged into `peskas_hub` — a real
+> prior system, not a label variant. The Peskas timeline anchors to the hub via `part_of` and does
+> not re-mint the platform concept.
+>
+> A safety backup of the replaced 209-node graph was kept at `/tmp/wdb_graph_209_backup.json` during
+> the build (outside the repo, not committed).

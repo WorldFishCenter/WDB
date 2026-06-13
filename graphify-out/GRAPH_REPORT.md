@@ -1,98 +1,117 @@
 # Graph Report - .  (2026-06-12)
 
 ## Corpus Check
-- 1 files · ~15,047 words
-- Verdict: corpus is large enough that graph structure adds value.
+- Corpus is ~15,052 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 209 nodes · 342 edges · 7 communities
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 33 edges (avg confidence: 0.85)
-- Token cost: 20,745 input · 0 output
+- 173 nodes · 320 edges · 7 communities
+- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 36 edges (avg confidence: 0.81)
+- Token cost: 380,610 input · 0 output
 
 ## Community Hubs (Navigation)
-- [[_COMMUNITY_Peskas Platform & Global Scaling|Peskas Platform & Global Scaling]]
-- [[_COMMUNITY_WIO SSF Data Harmonization|WIO SSF Data Harmonization]]
-- [[_COMMUNITY_Blue-Food Nutrition & Peskas Workflow|Blue-Food Nutrition & Peskas Workflow]]
-- [[_COMMUNITY_FASA Feed Formulation Engine|FASA Feed Formulation Engine]]
-- [[_COMMUNITY_FAO Standards & Catch-Effort Variables|FAO Standards & Catch-Effort Variables]]
-- [[_COMMUNITY_Digital Transformation Accelerator & PondCube|Digital Transformation Accelerator & PondCube]]
-- [[_COMMUNITY_Peskas Validated-Trip Data (WIO)|Peskas Validated-Trip Data (WIO)]]
+- [[_COMMUNITY_Peskas Platform & SSF Monitoring|Peskas Platform & SSF Monitoring]]
+- [[_COMMUNITY_DTA & CGIAR AI Ecosystem|DTA & CGIAR AI Ecosystem]]
+- [[_COMMUNITY_Fisheries Data Harmonization & Standards|Fisheries Data Harmonization & Standards]]
+- [[_COMMUNITY_WIO Harmonization Framework (IDHF)|WIO Harmonization Framework (IDHF)]]
+- [[_COMMUNITY_Fishery Nutrient Profiling & Nutrition|Fishery Nutrient Profiling & Nutrition]]
+- [[_COMMUNITY_PondCube & FAIR Data Ecosystem|PondCube & FAIR Data Ecosystem]]
+- [[_COMMUNITY_FASA Aquaculture Feed Formulation|FASA Aquaculture Feed Formulation]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Kenya Validated Trips Dataset` - 22 edges
-2. `Mozambique Validated Trips Dataset` - 21 edges
-3. `Peskas` - 21 edges
-4. `Peskas platform` - 19 edges
-5. `FASA Feed Formulation Engine` - 17 edges
-6. `Zanzibar validated trips dataset` - 16 edges
-7. `Peskas — History & Global Scaling Timeline` - 15 edges
-8. `Fishery Nutrient Profiles Timor-Leste (Nature Food 2026)` - 14 edges
-9. `Peskas Digital Monitoring System` - 13 edges
-10. `Peskas (present-state overview hub)` - 12 edges
+1. `Peskas` - 40 edges
+2. `Fishery Nutrient Profiles for Nutrition-Sensitive SSF Management in Timor-Leste (Nature Food 2026)` - 22 edges
+3. `Digital Transformation Accelerator` - 18 edges
+4. `WIO SSF Data Harmonization Initiative` - 16 edges
+5. `WorldFish` - 14 edges
+6. `How Much Is Too Much Information? Digital Feedback on Fisher Behavior (Kenya)` - 14 edges
+7. `Supply and Demand Intervention Increased Fish Consumption Among Rural Women (Timor-Leste RCT)` - 13 edges
+8. `FASA Feed Formulation Engine` - 12 edges
+9. `FASA` - 11 edges
+10. `CGIAR` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `FAO Ontologies (ASFIS, GAUL administrative layers)` --semantically_similar_to--> `Aquatic Foods Ontology / ASFIS-ISSCAAP classification`  [INFERRED] [semantically similar]
-  data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md → peskas/peskas_automated_analytics_softwarex_2025.pdf
-- `Technical Guidelines for SSF Data Harmonization in the WIO Region` --conceptually_related_to--> `Peskas Digital Monitoring System`  [INFERRED]
-  graphify-out/converted/Technical_Guidelines_SSF_Data_Harmonization_WIO_8f7e1b7e.md → peskas/peskas_automated_analytics_softwarex_2025.pdf
-- `Kenya Validated Trips Dataset` --shares_data_with--> `Digital Feedback on Fisher Behavior & Governance, Kenya (Frontiers 2025)`  [EXTRACTED]
-  peskas/kenya_validated_trips_dict.md → ssf_research/digital_feedback_fisher_behavior_kenya_2025.pdf
-- `Data Harmonization: Unified Fisheries Data in East Africa (WIOMSA Slides Oct 2025)` --references--> `Technical Guidelines for SSF Data Harmonization in the WIO Region`  [EXTRACTED]
+- `CGIAR Data Harmonization Workshop & Guidelines` --conceptually_related_to--> `WIO SSF Data Harmonization Initiative`  [INFERRED]
+  digital_transformation_accelerator/Digital_Transformation_Accelerator_2025_TR.pdf → data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md
+- `COASTS (Small Scale Fisheries Analysis Platform)` --conceptually_related_to--> `Peskas`  [INFERRED]
+  data_harmonization/WIOMSA_harmonization_OCT2025.pdf → peskas/peskas_about.md
+- `International Potato Center (CIP)` --part_of--> `CGIAR`  [INFERRED]
+  digital_transformation_accelerator/Digital_Transformation_Accelerator_2025_TR.pdf → data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md
+- `International Rice Research Institute (IRRI)` --part_of--> `CGIAR`  [INFERRED]
+  digital_transformation_accelerator/Digital_Transformation_Accelerator_2025_TR.pdf → data_harmonization/Technical_Guidelines_SSF_Data_Harmonization_WIO_context.md
+- `KoboToolbox` --references--> `Functional Requirements for Electronic Data Collection Tools`  [EXTRACTED]
   data_harmonization/WIOMSA_harmonization_OCT2025.pdf → graphify-out/converted/Technical_Guidelines_SSF_Data_Harmonization_WIO_8f7e1b7e.md
-- `Supply & Demand Intervention Increasing Fish Consumption RCT, Timor-Leste (PLoS One 2026)` --conceptually_related_to--> `Fishery Nutrient Profiles Timor-Leste (Nature Food 2026)`  [EXTRACTED]
-  ssf_research/fish_consumption_rct_timor_leste_2026.pdf → peskas/kenya_validated_trips_dict.md
 
 ## Import Cycles
 - None detected.
 
+## Hyperedges (group relationships)
+- **Integrated Data Harmonization Framework Phases** — data_harmonization_idhf_diagnostic_assessment, data_harmonization_idhf_design_standardization, data_harmonization_idhf_implementation_sustainability [EXTRACTED 0.95]
+- **FAO Standards Adopted for SSF Data Harmonization** — shared_fao_asfis, shared_fao_gaul, shared_fao_isscfg, shared_aquatic_food_ontology [EXTRACTED 0.95]
+- **Four Thematic Domains of the Minimum Variable Set** — data_harmonization_thematic_domain_spatial_temporal, data_harmonization_thematic_domain_fishing_effort, data_harmonization_thematic_domain_catch_composition, data_harmonization_thematic_domain_socioeconomic_environmental [EXTRACTED 0.95]
+- **DTA Four Areas of Work** — dta_aow_data_ecosystem, dta_aow_action_lab, dta_aow_digital_futures, dta_aow_enabling_environment [EXTRACTED 1.00]
+- **CGIAR AI Hub Product Suite** — shared_agrillm, dta_genebank_ai, dta_hydrology_ai, shared_cgiar_ai_hub [EXTRACTED 0.85]
+- **FAIR Data Ecosystem Stack** — shared_carob_framework, shared_gardian_platform, shared_terminag_vocabulary, shared_fair_ai_ready_data [INFERRED 0.85]
+- **PondCube July 2025 Water-Quality Dataset Artifacts** — pondcube_measurements_long, pondcube_observations_wide, pondcube_tanks_reference, pondcube_data_quality [EXTRACTED 0.95]
+- **FASA Reference Database Family (ASNS / FICD / PAFF)** — fasa_asns_database, fasa_ficd_database, fasa_paff_feed_formulations, fasa_paff_calculated_composition [EXTRACTED 0.95]
+- **FASA Feed-Formulation Pipeline (engine consumes ASNS specs + FICD composition)** — fasa_repo, fasa_asns_database, fasa_ficd_database, fasa_crosswalk [EXTRACTED 0.95]
+- **PAFF Correctness Gate (engine recomputes PAFF recipes from FICD)** — fasa_paff_benchmark_gate, fasa_paff_feed_formulations, fasa_paff_calculated_composition, fasa_ficd_database [EXTRACTED 0.95]
+- **Peskas end-to-end six-module workflow (ingestion to dashboard)** — peskas_ingestion_pipeline, peskas_validation_engine, peskas_dashboard, peskas_harvard_dataverse [EXTRACTED 0.85]
+- **Peskas multi-source data integration** — peskas_ingestion_pipeline, peskas_kobotoolbox, peskas_pelagic_data_systems, peskas_fishbase [EXTRACTED 0.85]
+- **Peskas AABS East-Africa scaling** — peskas_hub, shared_aabs, shared_kenya, shared_zanzibar, shared_mozambique [EXTRACTED 0.85]
+- **Peskas East-Africa validated-trips datasets (Kenya, Mozambique, Zanzibar)** — peskas_kenya_validated_trips_kenya_validated_trips, peskas_mozambique_validated_trips_mozambique_validated_trips, peskas_zanzibar_validated_trips_zanzibar_validated_trips, peskas_hub [EXTRACTED 0.95]
+- **FNP modelling method stack (k-means clustering, PERMANOVA, XGBoost, SHAP)** — shared_kmeans_clustering, shared_permanova, shared_xgboost, shared_shap_values [EXTRACTED 0.85]
+- **Nutrition-sensitive SSF management framework (FNP, NDS, NSFM, blue foods)** — shared_fishery_nutrient_profile, shared_nutrient_density_score, shared_nutrition_sensitive_fisheries_management, shared_blue_foods [EXTRACTED 0.85]
+- **Integrated Supply-and-Demand Food-System Intervention (FAD + SBC, Timor-Leste RCT)** — ssf_research_fish_consumption_rct_timor_leste_2026_paper, ssf_research_timor_leste_rct_fad, ssf_research_timor_leste_rct_sbc, ssf_research_timor_leste_rct_2x2_factorial [EXTRACTED 0.95]
+- **Peskas-Driven Digital-Feedback Experiment Across Kenyan BMUs (KAP + BACI)** — ssf_research_digital_feedback_fisher_behavior_kenya_2025_paper, peskas_hub, ssf_research_digital_feedback_kenya_bmu, ssf_research_digital_feedback_kenya_kap_framework, ssf_research_digital_feedback_kenya_baci_design [EXTRACTED 0.95]
+
 ## Communities (7 total, 0 thin omitted)
 
-### Community 0 - "Peskas Platform & Global Scaling"
-Cohesion: 0.10
-Nodes (37): Asia–Africa BlueTech Superhighway (AABS), Alex Tilley, Co-management, Digital feedback & fisher behavior in Kenya (2025), Ecosystem approach to fisheries (EAF), Fish consumption RCT, Timor-Leste (2026), Fishery Nutrient Profiles (FNPs), Fishery Nutrient Profiles, Timor-Leste (Nature Food, 2026) (+29 more)
-
-### Community 1 - "WIO SSF Data Harmonization"
+### Community 0 - "Peskas Platform & SSF Monitoring"
 Cohesion: 0.07
-Nodes (36): Aquatic Food Ontology (AQFO), Integrated Data Harmonization Framework (IDHF), Kenya (coast), Minimum Common Denominator (Minimum Variable Set), Mozambique (coast), Nairobi Convention, Regional Data Dictionary, Small-Scale Fisheries (SSF) (+28 more)
+Nodes (42): Centralized Tool-Agnostic Data Pipeline, COASTS (Small Scale Fisheries Analysis Platform), Dataverse Project, Functional Requirements for Electronic Data Collection Tools, FishBase, Phased Implementation Roadmap (2026-2030), KoboToolbox, Paper vs. Digital Data Collection (+34 more)
 
-### Community 2 - "Blue-Food Nutrition & Peskas Workflow"
-Cohesion: 0.07
-Nodes (31): Fishery Nutrient Profiles Timor-Leste (Nature Food 2026), Aquatic Foods Ontology / ASFIS-ISSCAAP classification, Blue Foods / Nutrient-Dense Aquatic Foods, Complementary Management Pathways, Ecosystem Approach to Fisheries (EAF), Peskas End-to-End Workflow (ingestion to dashboard), Context note: Fishery Nutrient Profiles Timor-Leste (Nature Food 2026), Harvard Dataverse (open data archive) (+23 more)
+### Community 1 - "DTA & CGIAR AI Ecosystem"
+Cohesion: 0.09
+Nodes (35): Digital Transformation Accelerator — Annual Technical Report 2025, Digital Transformation Accelerator — Overview (about), CGIAR AI Co-Scientist, Action Lab (AoW2), Digital Futures (AoW3), Enabling Environment (AoW4), Asia Digital Hub at WorldFish (Penang), Genebank AI (+27 more)
 
-### Community 3 - "FASA Feed Formulation Engine"
-Cohesion: 0.10
-Nodes (31): ASNS (Aquaculture Species Nutrition Specification database), African Catfish, Circular economy (waste-to-feed), FASA Initiative, FASA Feed-Formulation App (the engine), Nile Tilapia, ASNS nutrition specification database, Avadí et al. (2022) — Smallholder aquaculture sustainability in Zambia (+23 more)
+### Community 2 - "Fisheries Data Harmonization & Standards"
+Cohesion: 0.16
+Nodes (25): Data Collection Heterogeneity (five dimensions), Data Governance & Institutional Arrangements, Data-Information-Knowledge-Insight Integration, WIO SSF Data Harmonization Initiative, Regional Data Dictionary, Species List & Taxonomic Resolution Heterogeneity, Technical Guidelines for SSF Data Harmonization in the WIO Region, Terms/Variable Standardization (+17 more)
 
-### Community 4 - "FAO Standards & Catch-Effort Variables"
-Cohesion: 0.08
-Nodes (28): Catch and Effort Data, Food and Agriculture Organization of the United Nations (FAO), FAO ASFIS List and 3-alpha Codes, FAO Global Administrative Unit Layers (GAUL), FAO International Standard Statistical Classification of Fishing Gear (ISSCFG), ISO 8601 Date/Time Standard, Centralized Data Pipelines, Domain 3: Catch Composition (+20 more)
+### Community 3 - "WIO Harmonization Framework (IDHF)"
+Cohesion: 0.12
+Nodes (19): Airtable Diagnostic Survey Form, Participatory Diagnostic Survey of Data Collection Practices, Design and Standardization Phase, Diagnostic Assessment Phase, Implementation and Sustainability Phase, Integrated Data Harmonization Framework (IDHF), ISO 8601 Date/Time Standard, Minimum Common Denominator (+11 more)
 
-### Community 5 - "Digital Transformation Accelerator & PondCube"
+### Community 4 - "Fishery Nutrient Profiling & Nutrition"
 Cohesion: 0.14
-Nodes (24): CGIAR Digital Transformation Accelerator — Annual Technical Report 2025, Asia Digital Hub (WorldFish, Penang), AgriLLM (open-source agricultural LLM), Asia Digital Hub at WorldFish (Penang), Carob harmonization framework, CGIAR AI Hub, Data Ecosystem (Area of Work), FAIR-by-design and AI-ready data (+16 more)
+Nodes (18): Fishery Nutrient Profiles for Nutrition-Sensitive SSF Management in Timor-Leste (Nature Food 2026), Blue Foods / Aquatic Foods for Nutrition, Ecosystem Approach to Fisheries (EAF), FAO/INFOODS Global Food Composition Database for Fish and Shellfish, Fish Aggregating Devices (FADs), Fishery Nutrient Profile (FNP), k-means Clustering, Micronutrient Deficiency in LMICs (+10 more)
 
-### Community 6 - "Peskas Validated-Trip Data (WIO)"
-Cohesion: 0.20
-Nodes (22): Catch Habitat Classification, FAO GAUL Administrative Coding, Harmonized Catch/Effort Data, Peskas Monitoring System, Peskas Monitoring System Slides, Peskas Automated Analytics (SoftwareX 2025), Scientific-Name Catch Taxonomy, Validated-Trip Provenance (+14 more)
+### Community 5 - "PondCube & FAIR Data Ecosystem"
+Cohesion: 0.24
+Nodes (17): Data Ecosystem (AoW1), CGIAR Data Harmonization Workshop & Guidelines, convert_pondcube.py, pondcube_data_quality.csv, WorldFish Genetic Improvement Programs, PondCube, pondcube_measurements_long.csv, pondcube_observations_wide.csv (+9 more)
+
+### Community 6 - "FASA Aquaculture Feed Formulation"
+Cohesion: 0.24
+Nodes (17): ASNS Nutrition Specification Database, ASNS to FICD Crosswalk, FICD Feed Ingredient Composition Database, FASA, Least-Cost Linear Programming Formulation Model, PAFF Benchmark Gate, PAFF Calculated Composition Database, PAFF Feed Formulations Database (+9 more)
 
 ## Knowledge Gaps
-- **71 isolated node(s):** `Context note: Fishery Nutrient Profiles Timor-Leste (Nature Food 2026)`, `Nutrient Density Score (NDS) / Fishery Nutrient Profiles (FNP)`, `Blue Foods / Nutrient-Dense Aquatic Foods`, `Women of Reproductive Age (WRA) Reference Group`, `Context note: Peskas Automated Analytics (SoftwareX 2025)` (+66 more)
+- **53 isolated node(s):** `Tungpantong et al. (2021)`, `Minimum Common Denominator`, `Domain 4: Socio-economic and Environmental Context`, `Airtable Diagnostic Survey Form`, `Regional Scoping Assessment (26 institutions, 10 WIO countries)` (+48 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Technical Guidelines for SSF Data Harmonization in the WIO Region` connect `WIO SSF Data Harmonization` to `Blue-Food Nutrition & Peskas Workflow`, `Peskas Validated-Trip Data (WIO)`?**
-  _High betweenness centrality (0.194) - this node is a cross-community bridge._
-- **Why does `Kenya Validated Trips Dataset` connect `Peskas Validated-Trip Data (WIO)` to `Peskas Platform & Global Scaling`, `WIO SSF Data Harmonization`, `Blue-Food Nutrition & Peskas Workflow`?**
-  _High betweenness centrality (0.179) - this node is a cross-community bridge._
-- **Why does `Peskas` connect `Peskas Platform & Global Scaling` to `WIO SSF Data Harmonization`, `Peskas Validated-Trip Data (WIO)`?**
-  _High betweenness centrality (0.141) - this node is a cross-community bridge._
-- **Are the 5 inferred relationships involving `Peskas platform` (e.g. with `PeskAAS (Peskas Automated Analytics System)` and `Peskas Automated Analytics (SoftwareX, 2025)`) actually correct?**
-  _`Peskas platform` has 5 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Context note: Fishery Nutrient Profiles Timor-Leste (Nature Food 2026)`, `Nutrient Density Score (NDS) / Fishery Nutrient Profiles (FNP)`, `Complementary Management Pathways` to the rest of the system?**
-  _80 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Peskas Platform & Global Scaling` be split into smaller, more focused modules?**
-  _Cohesion score 0.1036036036036036 - nodes in this community are weakly interconnected._
-- **Should `WIO SSF Data Harmonization` be split into smaller, more focused modules?**
-  _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
+- **Why does `Peskas` connect `Peskas Platform & SSF Monitoring` to `DTA & CGIAR AI Ecosystem`, `Fisheries Data Harmonization & Standards`, `Fishery Nutrient Profiling & Nutrition`, `FASA Aquaculture Feed Formulation`?**
+  _High betweenness centrality (0.373) - this node is a cross-community bridge._
+- **Why does `WorldFish` connect `DTA & CGIAR AI Ecosystem` to `Peskas Platform & SSF Monitoring`, `Fisheries Data Harmonization & Standards`, `Fishery Nutrient Profiling & Nutrition`, `PondCube & FAIR Data Ecosystem`, `FASA Aquaculture Feed Formulation`?**
+  _High betweenness centrality (0.279) - this node is a cross-community bridge._
+- **Why does `Fishery Nutrient Profiles for Nutrition-Sensitive SSF Management in Timor-Leste (Nature Food 2026)` connect `Fishery Nutrient Profiling & Nutrition` to `Peskas Platform & SSF Monitoring`, `DTA & CGIAR AI Ecosystem`, `Fisheries Data Harmonization & Standards`, `FASA Aquaculture Feed Formulation`?**
+  _High betweenness centrality (0.196) - this node is a cross-community bridge._
+- **Are the 3 inferred relationships involving `Peskas` (e.g. with `COASTS (Small Scale Fisheries Analysis Platform)` and `Peskas COASTS (regional analysis platform)`) actually correct?**
+  _`Peskas` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `Digital Transformation Accelerator` (e.g. with `WIO SSF Data Harmonization Initiative` and `Aquaculture`) actually correct?**
+  _`Digital Transformation Accelerator` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 3 inferred relationships involving `WIO SSF Data Harmonization Initiative` (e.g. with `Digital Transformation Accelerator` and `FAIR / AI-ready Data`) actually correct?**
+  _`WIO SSF Data Harmonization Initiative` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `Tungpantong et al. (2021)`, `Minimum Common Denominator`, `Domain 4: Socio-economic and Environmental Context` to the rest of the system?**
+  _54 weakly-connected nodes found - possible documentation gaps or missing edges._
