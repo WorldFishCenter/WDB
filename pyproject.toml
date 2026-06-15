@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wdb-mode-c"
+version = "0.1.0"
+description = "WDB Mode C — structured query over the tidy CSVs (quantitative/computed answers)"
+requires-python = ">=3.10"
+# DuckDB is a real, declared dependency (the proof installed it ad-hoc; a real
+# integration must add it — three-mode-architecture.md §9, FINDINGS.md).
+dependencies = [
+    "duckdb>=1.0",
+]
+
+[project.optional-dependencies]
+# The live resolver calls the pinned Opus 4.8 model via the Anthropic SDK.
+# The offline ReplayResolver + the regression suite need none of this.
+live = [
+    "anthropic>=0.40",
+]
+dev = [
+    "pytest>=7",
+]
+
+[project.scripts]
+mode-c = "mode_c.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mode_c*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

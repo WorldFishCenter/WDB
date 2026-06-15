@@ -18,3 +18,10 @@ CLAUDE.md
 .github/
 convert_pondcube.py
 CHANGELOG.md
+civ-kb/
+docs/
+proof/
+proof_c/
+mode_c/
+tests/
+pyproject.toml
