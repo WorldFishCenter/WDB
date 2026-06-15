@@ -204,6 +204,9 @@ The graph's value is the **connections** Graphify finds, and it can only connect
 *explicit* (it does **not** infer links from filenames or folder layout):
 
 1. **State relationships in words**, naming *both* sides (produced by X, builds on Y, shares approach Z).
+   **Write each sentence to stand on its own** — name its subject by the initiative's **canonical name**
+   (the hub `# H1`: "Peskas", not "the platform" or a pronoun), not by context from elsewhere, so a
+   quoted `## Summary`/`## Key concepts` line reads and resolves correctly out of context.
 2. **Treat `## Related files` as the wiring — and cross-link across initiatives.** Cross-initiative
    links are the most valuable connections in the graph.
 3. **Capture the "why,"** not just the "what" (design decisions, trade-offs, how a thing is used).

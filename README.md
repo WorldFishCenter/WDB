@@ -83,7 +83,10 @@ flowchart TD
 ### Context notes — the quality lever
 
 Each note turns a lone file into a connected node; **`## Related files`** is where you hand the graph
-its edges (list real siblings and **cross-link across initiatives**). Copy the **canonical templates +
+its edges (list real siblings and **cross-link across initiatives**). Write `## Summary` and
+`## Key concepts` so each sentence stands on its own, naming its subject by the project's **one
+canonical name** ("Peskas", not "the platform" or a pronoun) — a line that reads well out of context
+also retrieves and resolves well. Copy the **canonical templates +
 worked examples** from [PROTOCOL §6](PROTOCOL.md#6-context-notes). Skeletons:
 
 ```markdown
