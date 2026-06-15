@@ -22,6 +22,7 @@ civ-kb/
 docs/
 proof/
 proof_c/
+mode_b/
 mode_c/
 tests/
 pyproject.toml

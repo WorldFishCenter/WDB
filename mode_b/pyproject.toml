@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wdb-mode-b"
+version = "0.1.0"
+description = "WDB Mode B — passage retrieval + cited synthesis over WDB prose & companion notes"
+requires-python = ">=3.10"
+# The retrieval core (vendored from civ-kb): chunk/embed/index/rerank + extractors.
+# No DuckDB (that's Mode C); no civ-kb runtime dependency (the core is vendored).
+dependencies = [
+    "chromadb>=0.5",
+    "sentence-transformers>=3.0",
+    "pymupdf>=1.24",        # per-page PDF extraction
+    "python-docx>=1.0",     # .docx extraction
+    "python-pptx>=1.0",     # .pptx extraction
+]
+
+[project.optional-dependencies]
+# The synthesis LLM (pinned Sonnet 4.6, see MODEL.md) via the Anthropic SDK.
+# The offline ReplayRetriever/ReplaySynthesizer + the regression suite need none.
+live = [
+    "anthropic>=0.40",
+]
+dev = [
+    "pytest>=7",
+]
+
+[project.scripts]
+mode-b = "mode_b.cli:main"
+
+# mode_b/ IS the package directory (flat layout); tests/ is excluded from the dist.
+[tool.setuptools]
+packages = ["mode_b", "mode_b.fixtures"]
+
+[tool.setuptools.package-dir]
+"mode_b" = "."
+"mode_b.fixtures" = "fixtures"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
