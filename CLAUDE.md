@@ -52,6 +52,17 @@ whatever prompt drives extraction:
 > site / species / measurement subject. If the *only* thing two nodes share is
 > structural shape, emit **no** edge.
 
+**Carve-out — grain (the row's domain subject) is *not* shape.** The ban on `row-per-X` targets X as
+the **structural unit** shared by every table of the form — a "record", a "measurement", an
+"(entity × parameter)" cell. It does **not** target a `## Grain` line that names X as a **domain
+subject**: *one row = one catch item of a trip*, *one nutrient value for one ingredient*. That is the
+row's subject — the same "measurement subject" the rule above already allows — so it **may** support a
+**same-subject** edge. Two grain lines that share only the template "one row per …" but whose subjects
+differ (catch item vs. ingredient) are **not** similar: never mint a structural edge from the shared
+word "row", and never *suppress* a real same-subject link just because a grain line contains it. (Grain
+is recorded per [PROTOCOL §6, Template A](PROTOCOL.md#6-context-notes); habit 4's carve-out keeps it
+domain-only on the input side.)
+
 **Why this is a separate enforcement point, not just a note-writing rule.**
 [Habit 4 (PROTOCOL §6)](PROTOCOL.md#6-context-notes) keeps shape language *out
 of the notes*. But a `_dict.md` still reveals shape through its **column list, node

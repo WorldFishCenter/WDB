@@ -9,6 +9,14 @@ locations are coded with FAO GAUL administrative layers and catches with scienti
 same variable conventions promoted by the WIO SSF data-harmonization guidelines — making this a
 second-country example of harmonized catch/effort data for the Western Indian Ocean region.
 
+## Grain
+One row = one catch item of a fishing trip. The row is finer than `trip_id` (≈1.53 rows per trip):
+trip-level fields constant within a `trip_id` and repeating across its catch rows are landing_date,
+gaul_1_code, gaul_1_name, gaul_2_code, gaul_2_name, n_fishers, trip_duration_hrs, gear, vessel_type,
+catch_habitat, catch_outcome, tot_catch_kg, tot_catch_price — aggregate these over distinct `trip_id`,
+not raw rows. Per-catch detail (n_catch, catch_taxon, scientific_name, length_cm, catch_kg) varies row
+to row.
+
 ## Columns
 - survey_id: identifier of the survey/data source the record came from — 1 distinct ∈ {apobg7g9x9c5ZqHbcn69T3}
 - trip_id: unique fishing-trip identifier — high-cardinality, 991 distinct (e.g. TRIP_715693918, TRIP_715693927, TRIP_716414848, TRIP_716797347, TRIP_717069214)

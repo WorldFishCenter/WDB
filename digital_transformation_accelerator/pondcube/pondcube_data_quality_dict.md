@@ -5,6 +5,11 @@ Log of data-quality issues found while converting the July 2025 PondCube source
 workbook into the published datasets. Used for QA and source cleanup; small by design
 (one row per flagged issue).
 
+## Grain
+One row = one flagged data-quality issue, located by `row` (the source row index where the anomaly
+was detected, unique per issue here). No higher-grain attribute repeats — each row is a distinct
+finding.
+
 ## Columns
 - location: physical area / source sheet where the issue was found (e.g. `Fish Tank 2`)
 - period: `morning` or `afternoon` block the issue occurred in

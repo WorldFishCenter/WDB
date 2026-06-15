@@ -87,11 +87,12 @@ its edges (list real siblings and **cross-link across initiatives**). Copy the *
 worked examples** from [PROTOCOL §6](PROTOCOL.md#6-context-notes). Skeletons:
 
 ```markdown
-# Data dictionary: <file>.csv        |   # Context: <file>.pdf
-## Summary                           |   ## Summary
-## Columns   (value domains: /enrich)|   ## Key concepts / entities
-## Related files                     |   ## Related files
-## Notes / caveats                   |   (## Updates — only when superseded; see §7)
+# Data dictionary: <file>.csv           |   # Context: <file>.pdf
+## Summary                              |   ## Summary
+## Grain      (what one row is: /enrich)|   ## Key concepts / entities
+## Columns    (value domains:  /enrich) |   ## Related files
+## Related files                        |   (## Updates — only when superseded; see §7)
+## Notes / caveats                      |
 ```
 
 A whole-initiative overview instead uses **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)** — a lighter *living-node* scaffold (proper-name

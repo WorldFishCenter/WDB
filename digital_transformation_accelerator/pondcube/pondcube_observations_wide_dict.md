@@ -5,6 +5,13 @@ PondCube water-quality readings, built for apps, dashboards, spreadsheets, and h
 review (a companion file, pondcube_measurements_long.csv, holds the same readings).
 4,334 observation rows, July 2025.
 
+## Grain
+One row = one observation — the set of water-quality readings for one tank on one date and reading
+slot, keyed by (`location`, `tank_id`, `date`, `period`), with the six parameters as columns.
+`tank_id` is local to a location (`tank_id_raw` preserves its original label), so use (`location`,
+`tank_id`) to identify a tank globally. No higher-grain measurement repeats across rows — each row is
+a distinct observation.
+
 ## Columns
 - location: physical area / source sheet — 7 distinct ∈ {Aqua, Block L, Fish Tank 1, Fish Tank 2, Fish Tank 3, Hatchery, Pond}
 - zone: grouping label (`Fish Tanks` for the three fish-tank locations; otherwise the area's own zone) — 5 distinct ∈ {Aqua, Block L, Fish Tanks, Hatchery, Pond}

@@ -8,6 +8,13 @@ the **benchmark gate**: the engine independently recomputes their composition an
 reproduce the published numbers, validating the data-loading and crosswalk pipeline.
 619 rows across 36 species/stage tuples and 61 ingredient codes.
 
+## Grain
+One row = one ingredient line of a reference recipe — the inclusion (`inclusion_percent`) of one
+ingredient (`iaffd_code`) in one species/stage formulation (`species`). The row is finer than
+`iaffd_code` (≈10.15 rows per code): `ingredient` is fixed by `iaffd_code` and repeats across the
+recipes that use that code — aggregate ingredient-level facts over distinct `iaffd_code`, not raw
+rows. `species` and `inclusion_percent` vary row to row.
+
 ## Columns
 - species: species + life-stage label, e.g. `Nile Tilapia - Starter`, `Whiteleg Shrimp - Grower`, `African Catfish` (36 distinct)
 - iaffd_code: IAFFD ingredient code for the recipe line (61 distinct; resolved to FICD ingredients via the crosswalk)
