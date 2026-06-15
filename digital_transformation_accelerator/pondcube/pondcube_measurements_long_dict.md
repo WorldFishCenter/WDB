@@ -5,6 +5,11 @@ Water-quality measurements for the PondCube aquaculture monitoring system, cover
 July 2025 (a companion file, pondcube_observations_wide.csv, holds the same readings).
 9,759 measurements across 296 tanks in 7 logged areas.
 
+## Grain
+One row = one water-quality measurement — a single `parameter` value (`value`) for one (`location`,
+`tank_id`, `date`, `period`), with `unit` following the parameter. `value` is at this finest grain;
+the dimension columns repeat across the parameters measured in the same slot.
+
 ## Columns
 - location: physical area / source sheet — 7 distinct ∈ {Aqua, Block L, Fish Tank 1, Fish Tank 2, Fish Tank 3, Hatchery, Pond}
 - zone: grouping label — `Fish Tank 1/2/3` share zone `Fish Tanks` (continuous numbering 1–210); other areas are their own zone — 5 distinct ∈ {Aqua, Block L, Fish Tanks, Hatchery, Pond}

@@ -216,18 +216,35 @@ The graph's value is the **connections** Graphify finds, and it can only connect
    similarity guard** in [CLAUDE.md](CLAUDE.md) governs the *extractor* (a `_dict.md` still reveals
    shape through its column list, node label, and filename). **Both are required.**
 
+   **One carve-out — grain, not shape.** A table's `_dict.md` *does* state its **grain** in a
+   `## Grain` section (Template A): *what one row is*, in domain terms — "one row = one catch item of
+   a trip" — and which higher-grain columns repeat across a coarser key. Grain names the row's
+   **real-world subject** and *this table's own columns*, so it can only link **same-subject** tables
+   (two per-catch-item trip tables), never every table of a shape — that is domain meaning, the edge
+   you *want*. The ban stays on **form**: wide/long/EAV, encoding, file type, "one row per
+   (entity × parameter)" — phrasing true of every table of that shape. The test: *would this sentence
+   read identically for every table of this shape?* **Yes → form (out); specific to this table's
+   subject → grain (in).** `/enrich` fills `## Grain` deterministically from the data; the maintainer
+   reviews it.
+
 ### Template A — tabular data (`.csv`, `.xlsx`)
 
 Name it the file's name with its extension replaced by `_dict.md`. Describe what each column **means**
-and record its **value domain** in `## Columns`. **You don't hand-type the domains** — run **`/enrich`**
-and it fills them deterministically (the maintainer reviews). Per habit 4, keep the table's **shape**
-and any **tooling/provenance** *out* of the note.
+and record its **value domain** in `## Columns`, and state the table's **grain** in `## Grain`. **You
+don't hand-type the domains or the grain** — run **`/enrich`** and it fills both deterministically (the
+maintainer reviews). Per habit 4, record the **grain** (what one row *is*) but keep the table's **shape**
+(wide/long) and any **tooling/provenance** *out* of the note.
 
 ```markdown
 # Data dictionary: kenya_yield_data_2025.csv
 
 ## Summary
 One or two sentences: what this dataset tracks and which project it belongs to.
+
+## Grain
+One sentence: what one row IS, in domain terms (its real-world subject) — and, if the row is finer
+than an entity, which higher-grain columns repeat across that key. Filled by `/enrich`; never the
+wide/long form.
 
 ## Columns
 - column_name: plain-English meaning — value domain (distinct set, or count +
@@ -253,6 +270,10 @@ Missing values, known skew, units, or logic the assistant should know when readi
 
 ## Summary
 Maize yields from the 2025 Kenya pilot. Part of the project_kenya_pilot initiative.
+
+## Grain
+One row = one plot's 2025 harvest, keyed by `plot_id` (312 distinct, one row each). No column is
+higher-grain than the row, so nothing repeats — aggregate plot stats directly over rows.
 
 ## Columns
 - plot_id: unique plot identifier (joins to field_map.png) — identifier, 312 distinct
@@ -487,7 +508,9 @@ So expectations are correct:
   a similarity edge — that mints quadratic, uninformative cross-links. This is enforced at two points:
   habit 4 ([§6](#6-context-notes)) keeps shape language out of *notes*; the **format-blind similarity
   guard** in [CLAUDE.md](CLAUDE.md) keeps the *extractor* from re-deriving shape from a note's column
-  list / label / filename. **Both are required.**
+  list / label / filename. **Both are required.** **Grain is not shape:** a `## Grain` line states the
+  row's *domain subject* (a catch item, a trip), which is legitimate same-subject meaning and may
+  support an edge — it is never read as the table's form.
 
 ---
 

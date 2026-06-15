@@ -8,6 +8,13 @@ the FASA feed-formulation engine: each active row becomes a constraint in the
 least-cost linear program for a chosen (species, production_system, stage) tuple.
 ~50,700 rows covering 42 species.
 
+## Grain
+One row = one specification threshold (`value`) for one (species × production_system × stage_weight)
+under one spec `code`. The spec's descriptors — specification, short_name, unit, restriction_type —
+are constant within a `code` and repeat across the species/stages it applies to; aggregate those
+spec-level facts over distinct `code`, not raw rows. The per-context fields (species_code, species,
+production_system, stage_weight, value) vary row to row.
+
 ## Columns
 - species_code: numeric code identifying the species (e.g. 101 = Nile Tilapia)
 - species: common name (42 distinct: Nile Tilapia, African Catfish, Atlantic Salmon, Whiteleg Shrimp, Groupers, IMCs, …)

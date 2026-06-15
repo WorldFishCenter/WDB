@@ -7,6 +7,11 @@ input to the FASA feed-formulation engine, which reshapes it at runtime to build
 least-cost LP. ~222,150 rows covering 802 ingredient codes and 277 composition
 parameters.
 
+## Grain
+One row = one composition value (`quantity`) of one nutrient/composition parameter (`ingredient`) for
+one feed ingredient (`code`/`description`). `quantity` is at this finest grain; the ingredient
+descriptors `code` and `description` repeat across the parameters measured for the same ingredient.
+
 ## Columns
 - code: ingredient code (802 distinct; the engine's `prices` map and crosswalk key on this)
 - description: full ingredient name, e.g. `Fish meal, mixed fish, South Asia, 74% CP`, `Sunflower meal, solvent extract, 23% CP`, `L-Valine` (801 distinct)

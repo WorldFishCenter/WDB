@@ -15,6 +15,10 @@ Given one CSV/XLSX, this script:
   3. Extracts value domains in a SHAPE-AWARE way -- distinct values for categoricals
      (listed when low-cardinality, else count + examples), ranges for numerics, and for
      long data a range + unit PER parameter (never one mixed domain).
+  4. Derives the table's GRAIN as deterministic facts -- what one row IS and which
+     higher-grain columns repeat (a wide row finer than a repeating id; a long
+     measurement). These name the row's domain subject and this table's own columns,
+     NOT the wide/long form -- so they feed a `## Grain` line, never a shape-based edge.
 
 It prints a human-readable report plus a `## Columns`-ready block of domain FACTS for a
 maintainer (or the dict-enricher agent) to merge into the matching `_dict.md`. It never
@@ -56,6 +60,10 @@ SUFFIX_UNITS = {
     "kcal_kg": "kcal/kg", "mj_kg": "MJ/kg", "kg": "kg", "g": "g", "mg": "mg",
     "mg_l": "mg/L", "mgl": "mg/L", "degc": "degC", "celsius": "degC",
 }
+
+# Names that mark a column as an entity identifier (used only to find a *coarser*
+# grouping key when testing whether a wide table's row is finer than that entity).
+ID_LIKE = re.compile(r"(?:^|_)(id|code|key|uuid)$", re.IGNORECASE)
 
 
 class InvalidShape(Exception):
@@ -412,6 +420,66 @@ def extract_long(df, shape, max_list, n_ex) -> dict:
 
 
 # --------------------------------------------------------------------------- #
+# Grain (what one row IS, structurally) -- deterministic facts only
+# --------------------------------------------------------------------------- #
+def _is_id_like(name) -> bool:
+    return bool(ID_LIKE.search(str(name).strip()))
+
+
+def compute_grain(df, shape) -> dict:
+    """Derive the table's GRAIN as deterministic facts -- never the wide/long *form*.
+
+    These are *facts about this table's row subject*, the input the `## Grain` line
+    is written from: they name domain columns (not a format class), so they support a
+    same-subject link, never a shape-based one.
+
+    - long: one row is one value of `var_col` for one combination of the dimension
+      columns -- the value is already at the finest grain.
+    - wide: test whether the row is FINER than an entity id. If an id/code column is
+      non-unique, the row is a sub-record of that entity; the columns that stay constant
+      within each of its groups are higher-grain attributes that REPEAT across the row's
+      siblings (the silent-grain trap: averaging them over raw rows over-weights). If a
+      column is unique per row, the row is that entity and nothing repeats.
+    """
+    n_rows = int(len(df))
+    if shape["shape"] == "long":
+        var_col, value_col = shape["var_col"], shape.get("value_col")
+        unit_col = shape.get("unit_col")
+        dims = [str(c) for c in df.columns if c not in {value_col, unit_col, var_col}]
+        return {"kind": "long_measurement", "n_rows": n_rows,
+                "var_col": str(var_col), "value_col": str(value_col), "dims": dims}
+
+    # wide
+    cols = list(df.columns)
+    nuniq = {c: int(df[c].nunique(dropna=True)) for c in cols}
+    n_nonnull = {c: int(df[c].notna().sum()) for c in cols}
+    unique_keys = [str(c) for c in cols if nuniq[c] == n_rows and n_nonnull[c] == n_rows]
+    idlike_nonunique = [c for c in cols if _is_id_like(c) and 1 < nuniq[c] < n_rows]
+
+    if idlike_nonunique:
+        # finest coarser entity = the id/code column with the most distinct values
+        key = max(idlike_nonunique, key=lambda c: nuniq[c])
+        per_group = df.groupby(key, dropna=True).nunique(dropna=True)
+        constant_within, varying_within = [], []
+        for c in cols:
+            # skip the key itself, all-null columns, and globally-constant columns (no grain signal)
+            if str(c) == str(key) or n_nonnull[c] == 0 or nuniq[c] <= 1:
+                continue
+            if int(per_group[c].max()) <= 1:
+                constant_within.append(str(c))  # constant within every group -> repeats across the row's siblings
+            else:
+                varying_within.append(str(c))   # varies within a group -> per-row detail
+        return {"kind": "wide_finer_than_key", "n_rows": n_rows,
+                "coarser_key": str(key), "n_keys": nuniq[key],
+                "rows_per_key": round(n_rows / nuniq[key], 2),
+                "constant_within_key": constant_within,
+                "varying_within_key": varying_within}
+    if unique_keys:
+        return {"kind": "wide_unique_row", "n_rows": n_rows, "unique_keys": unique_keys}
+    return {"kind": "wide_unkeyed", "n_rows": n_rows}
+
+
+# --------------------------------------------------------------------------- #
 # Rendering
 # --------------------------------------------------------------------------- #
 def _domain_str(d: dict) -> str:
@@ -440,6 +508,40 @@ def _domain_str(d: dict) -> str:
     label = {"id": "identifier", "free_text": "free text", "high_cardinality": "high-cardinality"}[kind]
     ex = ", ".join(d.get("examples", []))
     return f"{label}, {d['n_distinct']} distinct (e.g. {ex})"
+
+
+def _grain_lines(g: dict) -> list[str]:
+    """Render the grain FACTS the `## Grain` line is written from. These name the row's
+    subject and this table's own columns -- never the wide/long form."""
+    L = ["## Grain  (what one row IS -- name the row's subject from the Summary; do NOT write the wide/long form)"]
+    kind = g["kind"]
+    if kind == "long_measurement":
+        dims = ", ".join(f"`{c}`" for c in g["dims"]) or "(no dimension columns)"
+        L.append(f"- one row records one value of `{g['var_col']}` for one combination of {dims}.")
+        L.append(f"- `{g['value_col']}` is already at this finest grain; the dimension columns repeat "
+                 f"across the `{g['var_col']}` values of the same subject.")
+    elif kind == "wide_finer_than_key":
+        k = g["coarser_key"]
+        if g["constant_within_key"]:
+            L.append(f"- the row is FINER than `{k}`: {g['n_keys']} distinct `{k}` over {g['n_rows']:,} rows "
+                     f"(≈{g['rows_per_key']} rows per `{k}`), so several rows share one `{k}`.")
+            rep = ", ".join(g["constant_within_key"])
+            det = ", ".join(g["varying_within_key"]) or "(none)"
+            L.append(f"- constant within a `{k}` — higher-grain attributes that REPEAT across its rows: {rep}")
+            L.append(f"- vary within a `{k}` — the per-row detail: {det}")
+            L.append(f"- ⇒ aggregate the repeating (`{k}`-level) columns over DISTINCT `{k}`, never over raw rows.")
+        else:
+            L.append(f"- `{k}` is non-unique ({g['n_keys']} distinct over {g['n_rows']:,} rows) but NO column stays "
+                     f"constant within it — `{k}` is not a coarser entity with repeating attributes (the real key "
+                     f"is likely a column combination). No higher-grain repetition; the silent-grain trap does not apply on `{k}`.")
+    elif kind == "wide_unique_row":
+        keys = ", ".join(f"`{c}`" for c in g["unique_keys"])
+        L.append(f"- one row per entity: uniquely identified by {keys}; no coarser key, "
+                 f"no higher-grain repetition detected.")
+    else:  # wide_unkeyed
+        L.append(f"- {g['n_rows']:,} rows; no id/code column to test for a coarser grain. "
+                 f"Name the row's subject from the data; no single-column higher-grain repetition detected.")
+    return L
 
 
 def render_text(report: dict) -> str:
@@ -471,6 +573,9 @@ def render_text(report: dict) -> str:
             L.append(f"    - {p['parameter']}: {rng}{unit_s}  (n={p['n']})")
         if e["value_non_numeric"]:
             L.append(f"  ⚠ {e['value_non_numeric']} non-numeric value(s) in `{e['value_col']}`.")
+    if report.get("grain"):
+        L.append("")
+        L.extend(_grain_lines(report["grain"]))
     return "\n".join(L)
 
 
@@ -524,6 +629,7 @@ def main(argv=None) -> int:
         report["columns"] = extract_wide(df, args.max_list, args.examples)
     else:
         report["long"] = extract_long(df, shape, args.max_list, args.examples)
+    report["grain"] = compute_grain(df, shape)
 
     print(json.dumps(report, indent=2) if args.json else render_text(report))
     return 0
