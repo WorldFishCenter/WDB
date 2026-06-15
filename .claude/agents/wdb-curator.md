@@ -126,6 +126,34 @@ folder layout. So in every note:
 - **Capture the "why"** (purpose, how it's used, key decisions), not just the "what" — Graphify
   stores rationale as part of the node.
 
+## Write prose that also reads well out of context
+
+A note's `## Summary` and `## Key concepts` are not only graph nodes — they are also quoted back as
+**stand-alone passages**, so draft them to be understood on their own:
+- **Make each sentence self-contained.** Name its subject explicitly instead of leaning on a pronoun,
+  an abbreviation, or context from another section ("it", "this dataset", "the platform", "as above").
+  A reader who sees only that one sentence — with none of the surrounding note — should still know what
+  it is about and which initiative it belongs to. This is *richer, more explicit* prose, **not** a
+  description of the file's container: never reach for self-containedness by adding the table's
+  wide/long shape, encoding, file type, or which script/command produced it — that is exactly what
+  [habit 4](PROTOCOL.md#6-context-notes) keeps out, and a table's grain stays in its own `## Grain`
+  line (filled by `dict-enricher`/`/enrich`), never the Summary. Naming the real-world subject
+  explicitly pushes prose toward the *specific-to-this-file* side of habit 4's test, never the
+  *generic-to-the-shape* side.
+- **Spell the canonical name in the prose, not just in the label.** Wherever the Summary or Key
+  concepts name an initiative or system, write its **one canonical name** — the proper name in that
+  initiative's hub `# H1` ("Peskas") — rather than "the platform", "the system", "the project", or a
+  pronoun. This applies the canonical-name rule (the satellite rule in step 4, and
+  [PROTOCOL §6](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name)) to the
+  sentence text of **every** note, companion notes included: a passage that says "Peskas" both
+  retrieves (a query for Peskas matches it) and resolves to the right node, where "the system" does
+  neither. Use the *exact same* name everywhere — never a synonym or an expanded variant — so the
+  extractor still mints one node, not duplicates.
+
+This shapes the notes you **draft** and the sections you **add** going forward — it is not licence to
+rewrite a frozen `## Summary`/`## Key concepts`; existing snapshots stay as they are
+([§7](PROTOCOL.md#7-recording-updates-and-supersession-over-time)).
+
 ## Before you hand back — run the protocol checklist
 
 For each file you touched, confirm:
