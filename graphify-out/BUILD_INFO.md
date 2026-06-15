@@ -6,58 +6,60 @@ in a pull request means the graph was rebuilt with a different model or tool ver
 
 | Field | Value |
 |---|---|
-| Built (UTC date) | 2026-06-12 |
+| Built (UTC date) | 2026-06-15 |
 | Model (build + agents) | `claude-opus-4-8` (Opus 4.8) |
 | graphify | 0.8.35 |
-| Mode | **full rebuild from scratch** (`/graphify .`) |
-| Graph | 173 nodes · 320 edges · 7 communities (single connected component) |
+| Mode | **incremental `--update`** (`/graphify . --update`) |
+| Graph | 172 nodes · 324 edges · 9 communities (single connected component) |
 
 > Even with a pinned model, LLM extraction is not bit-for-bit reproducible — the model version
 > is the largest controllable factor. Pinning the exact model plus this record is how WDB keeps
 > the graph's provenance honest: you control *when* the model changes, and this file says *which*
 > model built what is committed.
 >
-> **This was a from-scratch full rebuild, not an `--update`.** It deliberately replaced the prior
-> incremental graph (209 nodes / 342 edges, accumulated over many `--update` sessions). The prior
-> graph carried **51 nodes extracted from converted-PDF sidecars** (`graphify-out/converted/`) that
-> duplicated their source papers, plus concept nodes whose ids had drifted across many incremental
-> passes. The rebuild re-extracts the **34 current corpus files** (27 docs + 7 PDFs) once, cleanly,
-> from a freshly cleared semantic cache. Net change vs. the prior committed graph: **209 → 173
-> nodes**, **342 → 320 edges** — fewer nodes, but no sidecar duplicates and a single internally
-> consistent id scheme.
+> **This was an incremental `--update` over the 2026-06-12 full rebuild**, not a from-scratch
+> rebuild. It re-extracted **only the 11 `_dict.md` files that changed** since the last build — the
+> tabular data dictionaries that gained an explicit `## Grain` line in the Phase-0 work (PondCube ×4,
+> FASA ×4, Peskas validated-trips ×3). The four new scratch/proof directories added to the working
+> tree (`civ-kb/`, `docs/`, `proof/`, `proof_c/` — RAG-integration POC work) were **deliberately
+> excluded**: they were added to `.graphifyignore` in the same change, so incremental detection never
+> picked them up. Net change vs. the prior committed graph: **173 → 172 nodes**, **320 → 324 edges**.
 >
-> **Extraction strategy — 7 per-initiative chunks.** One subagent per initiative
-> (data_harmonization, DTA, PondCube, FASA, Peskas-platform, Peskas-data/nutrient-profiles,
-> ssf_research), each instructed to **read its PDFs directly** (not just the `_context.md`
-> companions) for paper-level concepts — the main source of the concept richness. Total extraction:
-> ~380k input tokens across the 7 agents.
+> **Extraction strategy — 3 per-initiative chunks.** One subagent per initiative (PondCube, FASA,
+> Peskas-validated-trips), each given (a) both WDB guards verbatim, and (b) the **exact existing
+> canonical node ids** for its datasets and the shared/hub entities they reference, so it updated the
+> dataset nodes *in place* rather than minting `_dict` duplicates. Total extraction: ~80k input tokens
+> across the 3 agents. All 11 emitted node ids matched existing canonical ids — **zero new duplicate
+> nodes**, so the canonical-entity guard's merge-time remap was a verified no-op.
 >
-> **Cross-initiative connectivity by canonical shared nodes (not cross-chunk edges).** Because each
-> subagent only sees its own chunk, no edge can span two chunks. Connectivity was instead achieved by
-> giving **every** chunk one fixed shared-entity vocabulary — stable ids for the real-world entities
-> that span initiatives (`shared_worldfish`, `shared_kenya`, `shared_timor_leste`, `shared_zanzibar`,
-> `shared_mozambique`, `shared_small_scale_fisheries`, `shared_fao_asfis/gaul/isscfg`,
-> `shared_aabs`, …) plus five fixed initiative-hub ids (`peskas_hub`, `fasa_hub`, `pondcube_hub`,
-> `dta_hub`, `data_harmonization_hub`), each emitted only by its owning chunk and referenced by id
-> elsewhere. 204 raw nodes collapsed to **173 unique** as the shared/hub ids deduped across chunks —
-> and the graph came out as a **single connected component** with `Peskas` (betweenness 0.373) and
-> `WorldFish` (bridges all five of its communities) as the cross-initiative bridges. This is the
-> canonical-entity guard ([`CLAUDE.md`](../CLAUDE.md)) applied at build time: one node per real-world
-> entity is exactly what links the initiatives.
+> **Why grain was re-extracted at all.** The carve-out in [`CLAUDE.md`](../CLAUDE.md) treats a
+> `## Grain` line's *domain subject* (e.g. "one row = one catch item of a fishing trip") as a valid
+> basis for **same-subject** domain edges, while still banning structural shape edges. The update's
+> value is exactly those grain-clarified domain edges: the FASA **benchmark-gate** structure (`PAFF
+> Feed_Formulations` and `PAFF Calculated_Composition` → `PAFF Benchmark Gate` via `part_of`; ASNS →
+> Calculated_Composition `references`) and the Peskas **production lineage** (`Peskas Automated
+> Validation Engine` → each of the Kenya / Mozambique / Zanzibar validated-trips datasets via
+> `part_of`). The grain-clarified PondCube tables also drew tight enough on their shared
+> `(location, tank_id)` tank-sensor subject to form their own community (PondCube Water-Quality Data).
 >
 > **Similarity guard held: zero `semantically_similar_to` edges emitted.** The format-blind guard was
-> injected verbatim into all 7 subagents. The two structurally identical pairs the corpus is known to
-> bait on — PondCube `observations_wide` ↔ `measurements_long`, and the three sister validated-trips
-> long tables (Kenya / Mozambique / Zanzibar) — produced **no shape-based links**: the PondCube pair
-> is joined only on its shared tank-sensor `(location, tank_id)` subject (`shares_data_with`), and the
-> three validated-trips datasets are joined only to their countries, the FAO standards, and Peskas,
-> co-participating through a single hyperedge rather than pairwise sister-table edges. All
-> cross-cutting links rest on domain meaning.
+> injected verbatim into all 3 subagents. The two structurally identical pairs the corpus baits on —
+> PondCube `observations_wide` ↔ `measurements_long`, and the three sister validated-trips long tables
+> (Kenya / Mozambique / Zanzibar) — produced **no shape-based links**: the PondCube pair is joined only
+> on its shared tank-sensor `(location, tank_id)` subject (`shares_data_with`), and the three
+> validated-trips datasets are joined only to their countries, the FAO standards, the shared
+> validated-trip-record concept, and Peskas, co-participating through a single hyperedge rather than
+> pairwise sister-table edges. All cross-cutting links rest on domain meaning.
 >
-> **Entity-resolution note.** `PeskAAS` (the historical predecessor system named in the Peskas
-> timeline) was modeled as its **own distinct concept node**, not merged into `peskas_hub` — a real
-> prior system, not a label variant. The Peskas timeline anchors to the hub via `part_of` and does
-> not re-mint the platform concept.
+> **Entity-resolution note — one beneficial dedup (173 → 172).** graphify's build-time dedup pass
+> collapsed two pre-existing nodes that denote the same concept: `peskas_fishery_nutrient_profiles`
+> ("Fishery Nutrient Profiles (FNPs)") merged into the surviving `shared_fishery_nutrient_profile`
+> ("Fishery Nutrient Profile (FNP)"). These were a single real-world entity split across two chunks at
+> full-rebuild time (long labels >12 chars, so the dedup length gate allowed the merge). All four edges
+> from the merged node were rerouted to the survivor with no dangling references — this is the
+> "one node per real-world entity" property the canonical-entity guard protects, applied to a residual
+> duplicate. `PeskAAS` remains its own distinct concept node (a real predecessor system, not a label
+> variant), unchanged.
 >
-> A safety backup of the replaced 209-node graph was kept at `/tmp/wdb_graph_209_backup.json` during
-> the build (outside the repo, not committed).
+> A safety backup of the pre-update 173-node graph was kept at `graphify-out/.graphify_old.json`
+> during the build and removed at cleanup (not committed).

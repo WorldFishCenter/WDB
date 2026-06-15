@@ -27,3 +27,7 @@ __pycache__/
 # Mode B passage index — a regenerable artifact (rebuild with `python -m mode_b --ingest`),
 # never committed (keeps the PR diff code + tests; same stance as a re-derived graph).
 mode_b/.index/
+
+/docs
+/proof
+/proof_c
