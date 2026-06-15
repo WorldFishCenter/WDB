@@ -24,5 +24,6 @@ proof/
 proof_c/
 mode_b/
 mode_c/
+router/
 tests/
 pyproject.toml
