@@ -32,3 +32,6 @@ mode_b/.index/
 /proof
 /proof_c
 /proof_a
+
+.env
+/civ-kb
