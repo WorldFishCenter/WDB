@@ -30,40 +30,38 @@ finished. It does honour Mode A's honesty rule: prefer `EXTRACTED`, flag
 ## Run it
 
 The harness needs **one interpreter with all three modes' deps** —
-chromadb + sentence-transformers + torch (Mode B) **and** duckdb (Mode C). The repo's
-`civ-kb/.venv` already carries the ML stack; add duckdb to it (a wheel only — do
-**not** touch civ-kb's manifest):
+chromadb + sentence-transformers + torch (Mode B) **and** duckdb (Mode C). That is
+WDB's own consolidated environment now (it used to borrow `civ-kb/.venv`); build it once
+from the manifest — see [../RUNNING.md](../RUNNING.md):
 
 ```bash
-civ-kb/.venv/bin/python -m pip install 'duckdb>=1.0'
+uv sync --extra dev        # creates .venv/ with all three modes' deps, per uv.lock
 ```
 
 ```bash
-VP=civ-kb/.venv/bin/python
-
 # single-mode (deterministic Replay backends — no model, no network)
-$VP -m router "What projects operate in Kenya?"                 # → Mode A
-$VP -m router "Average total catch per trip in Kwale?"          # → Mode C
-$VP -m router "How does the platform validate catch survey data?"  # → Mode B
+uv run python -m router "What projects operate in Kenya?"                 # → Mode A
+uv run python -m router "Average total catch per trip in Kwale?"          # → Mode C
+uv run python -m router "How does the platform validate catch survey data?"  # → Mode B
 
 # blended — composes A + B + C into one answer
-$VP -m router "Which datasets feed Peskas, how does Peskas validate catch \
+uv run python -m router "Which datasets feed Peskas, how does Peskas validate catch \
 survey data, and what is the average total catch per trip in Kwale?"
 
 # just show the routing decision
-$VP -m router --classify-only "Average catch by county"
+uv run python -m router --classify-only "Average catch by county"
 
 # LIVE: real Chroma + cross-encoder reranker (Mode B), Opus 4.8 resolver (Mode C).
 # The off-topic refusal arm needs the reranker but NOT an API key (the gate
 # refuses before synthesis):
-$VP -m router --live "What is the impact of salmon cage farming on fjord water quality in Norway?"
+uv run python -m router --live "What is the impact of salmon cage farming on fjord water quality in Norway?"
 #  → UNANSWERED: top passage rerank score < floor → "not available", not a synthesis
 ```
 
 ## Tests
 
 ```bash
-civ-kb/.venv/bin/python -m pytest router/tests -v
+uv run pytest router/tests -v
 ```
 
 Deterministic (Replay) by default; the one `@pytest.mark.live` test (real reranker

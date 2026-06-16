@@ -46,8 +46,8 @@ gate: a floor judged on mismatch-degraded scores would be meaningless (§7).
 The regression suite runs the **offline `ReplayRetriever` + `ReplaySynthesizer`**
 (recorded retrieval + synthesis), so the gate → join → contract pipeline is
 verified deterministically with no model and no network. The **`LiveSynthesizer`**
-is the production path (pinned Sonnet 4.6); it requires
-`pip install 'wdb-mode-b[live]'` and `ANTHROPIC_API_KEY`. The local embedding /
+is the production path (pinned Sonnet 4.6); the anthropic SDK ships in the
+consolidated `wdb` env (`uv sync`), so it needs only `ANTHROPIC_API_KEY`. The local embedding /
 rerank models are exercised only by the bonus `test_index_live.py`, which skips
 when they (or chromadb) are unavailable.
 

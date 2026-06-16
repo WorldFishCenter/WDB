@@ -22,8 +22,8 @@ so a routing change is a deliberate, visible diff — the same philosophy as
 which replays the resolutions the proof's Opus 4.8 produced for the 9 questions —
 so the gate + executor + answer-contract pipeline is verified deterministically,
 with real DuckDB computation, no network. The **`LiveResolver`** is the
-production path: pinned Opus 4.8 + the two-guard prompt + structured output. It
-requires `pip install 'wdb-mode-c[live]'` and `ANTHROPIC_API_KEY`.
+production path: pinned Opus 4.8 + the two-guard prompt + structured output. The
+anthropic SDK ships in the consolidated `wdb` env (`uv sync`), so it needs only `ANTHROPIC_API_KEY`.
 
 **To upgrade the resolver model:** change `RESOLVER_MODEL` in
 [`mode_c/model.py`](model.py) and update this file in the same commit.
