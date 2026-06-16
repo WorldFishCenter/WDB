@@ -23,6 +23,9 @@ __pycache__/
 *.pyc
 .venv/
 *.egg-info/
+# Build artifacts (uv build / setuptools — the container-prep step in RUNNING.md)
+build/
+dist/
 
 # Mode B passage index — a regenerable artifact (rebuild with `python -m mode_b --ingest`),
 # never committed (keeps the PR diff code + tests; same stance as a re-derived graph).

@@ -42,14 +42,13 @@ question ─▶ resolver ─▶ vetted-band gate ─▶ DuckDB executor ─▶ a
 ## Usage
 
 ```bash
-pip install -e '.[dev]'            # duckdb + pytest
+uv sync --extra dev                # the one WDB env (see ../RUNNING.md)
 python -m mode_c --list            # the replayable proof questions
 python -m mode_c "Average total catch per trip in Kwale?"
 python -m mode_c "Average CPUE in Kwale district?"
 python -m mode_c "Average catch in Kisumu county?"     # -> NOT AVAILABLE
 
-# live resolver (pinned Opus 4.8): needs the SDK + key
-pip install -e '.[live]'
+# live resolver (pinned Opus 4.8): the anthropic SDK ships in the env; just add a key
 ANTHROPIC_API_KEY=... python -m mode_c --live "Average crude protein of fish meal?"
 ```
 

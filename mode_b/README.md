@@ -59,13 +59,12 @@ question ─▶ retrieve ─▶ rerank ─▶ refuse-when-thin ─▶ synthesize
 ## Usage
 
 ```bash
-pip install -e 'mode_b[dev]'                 # or [live] for synthesis
+uv sync --extra dev                          # the one WDB env (see ../RUNNING.md)
 python -m mode_b --ingest                    # build the passage index (prose + .md, no CSVs)
 python -m mode_b --list-corpus               # what's indexed (and that 0 CSVs are)
 python -m mode_b "How does Peskas validate small-scale fishery catch survey data?"
 
-# live synthesis (pinned Sonnet 4.6): needs the SDK + key
-pip install -e 'mode_b[live]'
+# live synthesis (pinned Sonnet 4.6): the anthropic SDK ships in the env; just add a key
 ANTHROPIC_API_KEY=... python -m mode_b "Research gaps for cage culture in Zambia?"
 ```
 
