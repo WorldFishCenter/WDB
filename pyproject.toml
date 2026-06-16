@@ -48,7 +48,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-# The regression suites (mode_a 21, mode_b 33, mode_c 40, router 22). pytest is the
+# The regression suites (mode_a 21, mode_b 33, mode_c 40, wdb_router 29). pytest is the
 # only test-time addition; everything the tests exercise is already a core dep.
 dev = [
     "pytest>=7",
@@ -59,10 +59,9 @@ dev = [
 mode-a = "mode_a.cli:main"
 mode-b = "mode_b.cli:main"
 mode-c = "mode_c.cli:main"
-# The system entry point: the router composes all three modes into one answer.
-# (This is the throwaway harness router; the production router replaces this entry
-# in a later phase — see router/README.md.)
-wdb-router = "router.cli:main"
+# The system entry point: the production router dispatches a question across all three
+# modes and composes one §6 answer — see wdb_router/README.md.
+wdb-router = "wdb_router.cli:main"
 
 # Flat layout: each top-level dir is a package of the single `wdb` distribution.
 # The `fixtures` subpackages are RUNTIME (mode_a/mode_c CLIs import their Replay
@@ -72,7 +71,7 @@ packages = [
     "mode_a", "mode_a.fixtures",
     "mode_b", "mode_b.fixtures",
     "mode_c", "mode_c.fixtures",
-    "router",
+    "wdb_router",
 ]
 
 [tool.setuptools.package-data]
@@ -83,7 +82,7 @@ packages = [
 # All four suites under one run. `--import-mode=importlib` is required: tests/ and
 # mode_b/tests/ both define test_gate.py, and mode_a/tests/ and mode_b/tests/ both
 # define test_pipeline.py — duplicate basenames the legacy prepend importer rejects.
-testpaths = ["tests", "mode_a/tests", "mode_b/tests", "router/tests"]
+testpaths = ["tests", "mode_a/tests", "mode_b/tests", "wdb_router/tests"]
 addopts = "--import-mode=importlib"
 markers = [
     "live: exercises real models / network (Chroma + cross-encoder, or the Anthropic API); self-skips when unavailable",

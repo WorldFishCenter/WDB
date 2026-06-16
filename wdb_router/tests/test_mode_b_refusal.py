@@ -1,24 +1,24 @@
-"""Mode B's off-topic refusal — the arm Phase 2 left unproven.
+"""Mode B's off-topic refusal — the router respects it, never coaxes a synthesis.
 
-Two forms, per the phase brief:
+Two forms:
 
-* **Deterministic** — a recorded passage whose cross-encoder logit is below the
-  floor exercises the *score* arm (distinct from the empty arm) with no model.
-* **Live** — the real Chroma index + cross-encoder reranker actually refuse the
-  off-topic question end-to-end. Self-skips when the models aren't available, so
-  offline CI still passes on the deterministic form.
+* **Deterministic** — a recorded passage whose cross-encoder logit is below the floor
+  exercises the *score* arm (distinct from the empty arm) with no model.
+* **Live** — the real Chroma index + cross-encoder reranker actually refuse the off-topic
+  question end-to-end. Self-skips when the models aren't available, so offline CI still
+  passes on the deterministic form.
 
-The point both make: an off-topic question (Norway salmon farming) must return
-"not available", never a synthesis from irrelevant passages. The reranker logit
-floor (``RERANK_FLOOR = 0``) is the principled threshold — a negative logit means
-"not relevant" — where Phase 2's bi-encoder cosine (~59%) did NOT refuse.
+The point both make: an off-topic question (Norway salmon farming) must return "not
+available", never a synthesis from irrelevant passages. The reranker logit floor
+(``RERANK_FLOOR = 0``) is the principled threshold — a negative logit means "not relevant" —
+where a bi-encoder cosine (~59%) would not refuse.
 """
 
 import pytest
 
-from router import answer
-from router.fixtures import OFFTOPIC_BELOW_FLOOR, Q_OFFTOPIC
-from router.router import live_backends, replay_backends
+from wdb_router import answer
+from wdb_router.backends import live_backends, replay_backends
+from wdb_router.fixtures import OFFTOPIC_BELOW_FLOOR, Q_OFFTOPIC
 
 
 def test_offtopic_refuses_on_the_rerank_logit_floor_deterministic():

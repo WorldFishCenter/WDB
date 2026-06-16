@@ -1,15 +1,16 @@
-"""CLI for the throwaway router:  python -m router "…one question…"
+"""CLI for the WDB router:  python -m wdb_router "…one question…"
 
-    python -m router "What projects operate in Kenya?"          # → Mode A
-    python -m router "Average total catch per trip in Kwale?"   # → Mode C
-    python -m router "How does Peskas validate catch data?"     # → Mode B
-    python -m router --live "…off-topic question…"              # real Chroma + reranker
+    python -m wdb_router "What projects operate in Kenya?"          # → Mode A
+    python -m wdb_router "Average total catch per trip in Kwale?"   # → Mode C
+    python -m wdb_router "How does Peskas validate catch data?"     # → Mode B
+    python -m wdb_router --live "…off-topic question…"              # real Chroma + reranker
 
-Default is the deterministic Replay backends (no model, no network) — it answers
-the modes' proof questions and the harness's blended demo. ``--live`` swaps in the
-real Chroma index + cross-encoder reranker (Mode B) and the Opus 4.8 resolver
-(Mode C); Mode B synthesis additionally needs ``ANTHROPIC_API_KEY`` (the off-topic
-*refusal* arm does not — the gate refuses before synthesis).
+Default is the deterministic Replay backends (no model, no network) — it answers the modes'
+proof questions and the blended demo. ``--live`` swaps in Mode A's Opus 4.8 reasoner, Mode
+B's real Chroma index + cross-encoder reranker, and Mode C's Opus 4.8 resolver; the
+LLM-dependent arms additionally need ``ANTHROPIC_API_KEY`` (the off-topic *refusal* arm does
+not — the gate refuses before any model call). ``--classify-only`` prints the routing
+decision without dispatching.
 """
 
 from __future__ import annotations
@@ -18,9 +19,10 @@ import argparse
 import json
 import sys
 
+from .backends import live_backends, replay_backends
 from .contract import RouterAnswer
-from .intent import classify
-from .router import answer, live_backends, replay_backends
+from .dispatch import answer
+from .routing import route
 
 
 def _render_citation(mode: str, cit) -> list[str]:
@@ -75,11 +77,11 @@ def render(ans: RouterAnswer) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    p = argparse.ArgumentParser(prog="router",
-                                description="Throwaway router over Modes A + B + C")
+    p = argparse.ArgumentParser(prog="wdb-router",
+                                description="WDB router — dispatch a question across Modes A + B + C")
     p.add_argument("question", nargs="?", help="the question to route and answer")
     p.add_argument("--live", action="store_true",
-                   help="use real Chroma + reranker (Mode B) and the Opus 4.8 resolver (Mode C)")
+                   help="use the real backends (Mode A Opus 4.8, Mode B Chroma + reranker, Mode C Opus 4.8)")
     p.add_argument("--no-rerank", action="store_true",
                    help="with --live, skip the cross-encoder reranker (fallback to cosine)")
     p.add_argument("--classify-only", action="store_true",
@@ -90,7 +92,7 @@ def main(argv: list[str] | None = None) -> int:
         p.error("a question is required")
 
     if args.classify_only:
-        for r in classify(args.question):
+        for r in route(args.question).routes:
             print(f"{r.mode}: {r.reason}")
         return 0
 
