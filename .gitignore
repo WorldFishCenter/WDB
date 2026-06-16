@@ -31,7 +31,10 @@ dist/
 # never committed (keeps the PR diff code + tests; same stance as a re-derived graph).
 mode_b/.index/
 
-/docs
+# docs/ holds local-only POC design docs (untracked). Exclude its contents but keep
+# the dir traversable so the negation below can re-include the one tracked deliverable.
+/docs/*
+!/docs/production-stack-design.md
 /proof
 /proof_c
 /proof_a
