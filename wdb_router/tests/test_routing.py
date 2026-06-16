@@ -1,11 +1,15 @@
-"""Layer-1 intent classification (§5): signals route to the right mode(s)."""
+"""Layer-1 intent routing (§5): signals route to the right mode(s).
 
-from router import classify
-from router.fixtures import BLENDED, GROUPED, Q_OFFTOPIC
+These exercise routing in complete isolation — :func:`route` takes only the question, so
+none of this touches a backend or a mode (see ``test_seam.py`` for the explicit seam check).
+"""
+
+from wdb_router import route
+from wdb_router.fixtures import BLENDED, GROUPED, Q_OFFTOPIC
 
 
 def modes(q: str) -> set[str]:
-    return {r.mode for r in classify(q)}
+    return set(route(q).modes)
 
 
 def test_enumeration_routes_to_A():
@@ -46,5 +50,5 @@ def test_offtopic_synthesis_routes_to_B():
 
 
 def test_every_route_carries_a_reason():
-    for r in classify("Average catch by county"):
+    for r in route("Average catch by county").routes:
         assert r.reason

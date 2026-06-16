@@ -38,16 +38,17 @@ uv run python -m mode_a "What projects operate in Kenya?"                # enume
 uv run python -m mode_c "Average total catch per trip in Kwale?"         # quantitative
 uv run python -m mode_b --list-corpus                                    # indexable files
 
-# The system entry point — the router composes all three modes into one answer.
-# (This is the throwaway harness router; a production router replaces this entry later.)
-uv run python -m router "Which datasets feed Peskas, and what is the average catch in Kwale?"
-uv run python -m router --classify-only "Average catch by county"        # just the routing decision
+# The system entry point — the production router dispatches a question across all three
+# modes and composes one §6 answer (calls the real Mode A/B/C; see wdb_router/README.md).
+uv run python -m wdb_router "Which datasets feed Peskas, and what is the average catch in Kwale?"
+uv run python -m wdb_router --classify-only "Average catch by county"    # just the routing decision
 
-# LIVE — real Chroma + cross-encoder reranker (Mode B), Opus 4.8 resolver (Mode C).
-# Mode B's off-topic refusal needs the reranker but NOT an API key (the gate refuses
-# before synthesis); live *synthesis* and the Mode C live resolver need ANTHROPIC_API_KEY.
+# LIVE — Mode A Opus 4.8 reasoner, real Chroma + cross-encoder reranker (Mode B), Opus 4.8
+# resolver (Mode C). Mode B's off-topic refusal needs the reranker but NOT an API key (the
+# gate refuses before synthesis); live *synthesis*, the Mode C resolver and the Mode A
+# reasoner need ANTHROPIC_API_KEY.
 uv run python -m mode_b --ingest                                         # build the passage index first
-uv run python -m router --live "What is the impact of salmon cage farming on Norwegian fjords?"
+uv run python -m wdb_router --live "What is the impact of salmon cage farming on Norwegian fjords?"
 #   → UNANSWERED: top passage rerank score < floor → "not available", not a synthesis
 ```
 
@@ -60,7 +61,7 @@ Console-script aliases are also declared (`mode-a`, `mode-b`, `mode-c`, `wdb-rou
 uv run pytest          # all four suites in one run (uses testpaths + --import-mode=importlib)
 ```
 
-Per-suite counts (the green baseline): **mode_c 40, mode_a 21, router 22, mode_b 33** — 116
+Per-suite counts (the green baseline): **mode_c 40, mode_a 21, wdb_router 29, mode_b 33** — 123
 passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
 `--import-mode=importlib` because two suites share test-file basenames (`test_gate.py`,
 `test_pipeline.py`). The `@pytest.mark.live` reranker-refusal test runs end-to-end when the models

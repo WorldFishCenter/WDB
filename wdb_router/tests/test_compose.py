@@ -1,7 +1,11 @@
-"""A blended question composes >1 mode into one §6 answer, every claim traceable."""
+"""A blended question composes >1 mode into one §6 answer, every claim traceable.
 
-from router import answer
-from router.fixtures import BLENDED
+Mode A here is the **real** Mode A: the blended question fans out to A's enumeration path
+(no model) alongside B's recorded synthesis and C's recorded resolution.
+"""
+
+from wdb_router import answer
+from wdb_router.fixtures import BLENDED
 
 
 def test_blended_routes_to_more_than_one_mode(backends):
@@ -11,8 +15,8 @@ def test_blended_routes_to_more_than_one_mode(backends):
 
 
 def test_every_claim_carries_a_mode_and_at_least_one_citation(backends):
-    # §6 rule 1: no claim without a citation; each claim names the mode that
-    # grounded it and a WDB-relative source — i.e. every claim is traceable.
+    # §6 rule 1: no claim without a citation; each claim names the mode that grounded it
+    # and a WDB-relative source — i.e. every claim is traceable.
     ans = answer(BLENDED, backends=backends)
     assert ans.claims
     for c in ans.claims:

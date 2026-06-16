@@ -1,10 +1,14 @@
-"""Each mode answers its own proven case, end-to-end through the router."""
+"""Each mode answers its own proven case, end-to-end through the router.
+
+Mode A is the **real** Mode A (graph enumeration over the committed graph — no model, no
+fixture); B and C run on their recorded Replay fixtures.
+"""
 
 from mode_b.fixtures.recorded import Q_COVERED
 from mode_c.fixtures.resolutions import Q4
 
-from router import answer
-from router.fixtures import GROUPED
+from wdb_router import answer
+from wdb_router.fixtures import GROUPED
 
 
 def test_enumeration_grounds_in_mode_A(backends):
@@ -14,6 +18,9 @@ def test_enumeration_grounds_in_mode_A(backends):
     texts = " | ".join(c.text for c in ans.claims)
     assert "Peskas" in texts and "FASA" in texts      # real Kenya-touching projects
     assert ans.associations                            # the typed-edge payload (§6)
+    # Mode A's native citation artifact: a graph edge triple with its confidence tag
+    cit = ans.claims[0].citations[0]
+    assert cit.locator and cit.confidence in {"EXTRACTED", "INFERRED"}
 
 
 def test_quantitative_grounds_in_mode_C(backends):
