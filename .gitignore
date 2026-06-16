@@ -35,6 +35,7 @@ mode_b/.index/
 # the dir traversable so the negation below can re-include the one tracked deliverable.
 /docs/*
 !/docs/production-stack-design.md
+!/docs/ingestion-pipeline-design.md
 /proof
 /proof_c
 /proof_a
