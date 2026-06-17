@@ -45,13 +45,20 @@ dependencies = [
     # via the Anthropic SDK. The offline Replay backends + the regression suites
     # need none of this, but the one declared env carries it so `--live` runs too.
     "anthropic>=0.40",
+    # The read API (wdb_api) — a thin HTTP wrapper over wdb_router.answer() for the
+    # read UI. FastAPI is the app; uvicorn serves it locally (`uvicorn wdb_api.app:app`).
+    # Persistent host (Cloud Run, per RUNNING.md): Mode B's models load once on startup.
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
 ]
 
 [project.optional-dependencies]
-# The regression suites (mode_a 21, mode_b 33, mode_c 40, wdb_router 29). pytest is the
-# only test-time addition; everything the tests exercise is already a core dep.
+# The regression suites (mode_a 21, mode_b 33, mode_c 40, wdb_router 29, wdb_api 21).
+# pytest runs them; httpx backs the FastAPI TestClient the wdb_api suite uses — both are the
+# only test-time additions; everything else the tests exercise is already a core dep.
 dev = [
     "pytest>=7",
+    "httpx>=0.27",                   # Starlette/FastAPI TestClient (wdb_api suite; offline)
 ]
 
 [project.scripts]
@@ -72,6 +79,7 @@ packages = [
     "mode_b", "mode_b.fixtures",
     "mode_c", "mode_c.fixtures",
     "wdb_router",
+    "wdb_api",
 ]
 
 [tool.setuptools.package-data]
@@ -82,7 +90,7 @@ packages = [
 # All four suites under one run. `--import-mode=importlib` is required: tests/ and
 # mode_b/tests/ both define test_gate.py, and mode_a/tests/ and mode_b/tests/ both
 # define test_pipeline.py — duplicate basenames the legacy prepend importer rejects.
-testpaths = ["tests", "mode_a/tests", "mode_b/tests", "wdb_router/tests"]
+testpaths = ["tests", "mode_a/tests", "mode_b/tests", "wdb_router/tests", "wdb_api/tests"]
 addopts = "--import-mode=importlib"
 markers = [
     "live: exercises real models / network (Chroma + cross-encoder, or the Anthropic API); self-skips when unavailable",

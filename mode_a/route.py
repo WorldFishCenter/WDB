@@ -1,6 +1,6 @@
 """Shape routing WITHIN Mode A — direct enumeration vs LLM-reasoning-over-subgraph.
 
-This is NOT the cross-mode router (``router/intent.py`` decides A vs B vs C). Once a
+This is NOT the cross-mode router (``wdb_router/routing.py`` decides A vs B vs C). Once a
 question is Mode A, this picks the *path* by question shape, per the proof's recommendation
 (``proof_a/FINDINGS.md`` "the constrained middle"):
 

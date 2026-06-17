@@ -61,8 +61,8 @@ Console-script aliases are also declared (`mode-a`, `mode-b`, `mode-c`, `wdb-rou
 uv run pytest          # all four suites in one run (uses testpaths + --import-mode=importlib)
 ```
 
-Per-suite counts (the green baseline): **mode_c 40, mode_a 21, wdb_router 29, mode_b 33** — 123
-passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
+Per-suite counts (the green baseline): **mode_c 40, mode_a 21, wdb_router 29, mode_b 33,
+wdb_api 21** — 144 passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
 `--import-mode=importlib` because two suites share test-file basenames (`test_gate.py`,
 `test_pipeline.py`). The `@pytest.mark.live` reranker-refusal test runs end-to-end when the models
 are available and self-skips otherwise, so offline CI still passes.

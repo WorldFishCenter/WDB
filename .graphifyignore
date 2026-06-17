@@ -25,7 +25,8 @@ proof_c/
 mode_a/
 mode_b/
 mode_c/
-router/
+wdb_router/
+wdb_api/
 tests/
 pyproject.toml
 proof_a/
