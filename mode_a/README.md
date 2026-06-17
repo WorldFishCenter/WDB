@@ -16,7 +16,7 @@ recommended ([../proof_a/FINDINGS.md](../proof_a/FINDINGS.md)).
 | "Which initiatives share … with X, and how?" | **reasoning** | `bridges` (2-hop shared connectors) | yes (gated) |
 
 `route.py` is Mode A's *internal* shape router — distinct from the cross-mode
-`router/intent.py` (which decides A vs B vs C).
+`wdb_router/routing.py` (which decides A vs B vs C).
 
 ## The honesty wrapper (why the LLM is safe here)
 
