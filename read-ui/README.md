@@ -1,0 +1,71 @@
+# `read-ui` — WDB read query UI (dual-pane)
+
+A local **Next.js + SCSS** read interface over the Phase-A1 API ([`wdb_api`](../wdb_api)). You ask
+a question; it shows a **grounded answer with its sources** next to the **graph associations** around
+it — the "passage + associations" dual view. It is **read-only** (it queries, it never adds or edits
+knowledge) and **local** (it talks to the local API; nothing is deployed).
+
+Its whole job is to make the system's **honesty legible** — exactly what the API returns, nothing
+added:
+
+- **Every claim shows its source TYPE** at a glance — `A` graph fact, `B` grounded passage,
+  `C` computed figure — each with its native citation (the edge triple, the verbatim quote, or the
+  SQL + result rows).
+- **EXTRACTED vs INFERRED** is marked distinctly — an inferred graph edge never reads as a hard fact.
+- **`unanswered` is shown as first-class** — what the system could not ground is displayed as such,
+  never hidden.
+- A **full refusal** renders as an honest "the knowledge base doesn't cover this", never a blank
+  screen or a fabricated-looking answer.
+
+It matches the [worldfish.digital](https://github.com/WorldFishCenter/worldfish.digital) visual
+identity — the same palette, Noto Sans / Chivo type, dark hero, and component feel — using the real
+extracted tokens in [`styles/tokens.scss`](styles/tokens.scss).
+
+## Run it (local)
+
+```bash
+# 1. Start the Phase-A1 API from the repo root (Replay = key-free, deterministic):
+uv run uvicorn wdb_api.app:app          # serves http://127.0.0.1:8000
+
+# 2. In another shell, start the UI:
+cd read-ui
+npm install
+npm run dev                             # http://localhost:3000
+```
+
+Open http://localhost:3000 and ask a question, or click an example. The UI shows an honest status
+of which backend the API loaded (Replay vs Live).
+
+Point at a different API with `WDB_API_URL` (see [`.env.local.example`](.env.local.example)).
+
+## How it connects to the API
+
+The browser never calls the API cross-origin (the API is left untouched — no CORS middleware added).
+Instead, same-origin Next route handlers proxy to it:
+
+| Route | Proxies to | Purpose |
+| --- | --- | --- |
+| `POST /api/answer` | `POST {WDB_API_URL}/answer` | the question → the full §6 answer, verbatim |
+| `GET /api/health` | `GET {WDB_API_URL}/health` | backend (Replay/Live) + reachability |
+| `GET /api/source?path=` | reads the repo (read-only) | opens a citation's source note/doc |
+
+## Built against the REAL contract
+
+The renderer targets the **actual** JSON captured from the running API in STEP 0, saved in
+[`fixtures/`](fixtures) — one file per state the UI must handle:
+
+| Fixture | Exercises |
+| --- | --- |
+| `single_mode_a.json` | Mode A only — graph-fact claims + associations |
+| `quantitative_c.json` | Mode C — a scalar claim **and a figure** (bar chart + SQL + rows) |
+| `blended_abc.json` | all three citation shapes at once + EXTRACTED/INFERRED edges |
+| `partial_blend.json` | some grounded, some `unanswered` in one answer (`answered: true`) |
+| `refusal.json` | a full honest refusal (`answered: false`) |
+
+The TypeScript types in [`lib/contract.ts`](lib/contract.ts) mirror these shapes.
+
+## Scope (deliberately narrow)
+
+One clean dual-pane query page. **No** contribution/upload/edit UI (that's the parked ingestion
+phase), **no** deployment/Vercel config, **no** auth. Those come later, gated on production-stack
+sign-off.

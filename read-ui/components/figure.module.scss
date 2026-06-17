@@ -1,0 +1,114 @@
+.figure {
+  margin: 0;
+  background: var(--wf-bg-elevated);
+  border: 1px solid var(--wf-border);
+  border-top: 2px solid var(--wf-mode-c);
+  border-radius: var(--wf-radius-md);
+  padding: 16px;
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.cap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.capKind {
+  font-size: var(--wf-font-3xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--wf-mode-c);
+  background: var(--wf-mode-c-bg);
+  padding: 2px 10px;
+  border-radius: var(--wf-radius-pill);
+}
+
+.capAxes {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-font-sm);
+  font-weight: 600;
+  color: var(--wf-color-gray-800);
+}
+
+.toggle {
+  margin-left: auto;
+  font-size: var(--wf-font-xxs);
+  font-weight: 600;
+  color: var(--wf-mode-c);
+  background: transparent;
+  border: 1px solid rgba(226, 149, 120, 0.5);
+  border-radius: var(--wf-radius-pill);
+  padding: 3px 12px;
+
+  &:hover {
+    background: var(--wf-mode-c-bg);
+  }
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 130px 1fr 64px;
+  align-items: center;
+  gap: 10px;
+}
+
+.barLabel {
+  font-size: var(--wf-font-xxs);
+  color: var(--wf-color-gray-700);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  background: var(--wf-color-gray-100);
+  border-radius: var(--wf-radius-pill);
+  height: 18px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  min-width: 2px;
+  border-radius: var(--wf-radius-pill);
+  background: linear-gradient(90deg, var(--wf-color-orange-900), var(--wf-color-orange-500));
+  transition: width 0.4s ease;
+}
+
+.barValue {
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-font-xxs);
+  font-weight: 700;
+  color: var(--wf-color-gray-800);
+  text-align: right;
+}
+
+.detail {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--wf-border);
+}
+
+.sql {
+  margin: 0 0 10px;
+  padding: 12px;
+  background: var(--wf-surface-panel);
+  color: var(--wf-text-slate-200);
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-font-xxs);
+  line-height: 1.55;
+  border-radius: var(--wf-radius-sm);
+  overflow-x: auto;
+  white-space: pre;
+}

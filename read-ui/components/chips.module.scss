@@ -1,0 +1,80 @@
+.modeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px 2px 2px;
+  border-radius: var(--wf-radius-pill);
+  font-size: var(--wf-font-xxs);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.modeLetter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: var(--wf-color-white);
+  font-size: var(--wf-font-xxs);
+  font-weight: 700;
+}
+
+.modeText {
+  font-family: var(--wf-font-heading);
+  letter-spacing: 0.2px;
+}
+
+.modeA {
+  background: var(--wf-mode-a-bg);
+  color: var(--wf-mode-a);
+  border-color: var(--wf-border-accent-soft);
+  .modeLetter {
+    background: var(--wf-mode-a);
+  }
+}
+
+.modeB {
+  background: var(--wf-mode-b-bg);
+  color: var(--wf-mode-b);
+  border-color: rgba(80, 143, 218, 0.2);
+  .modeLetter {
+    background: var(--wf-mode-b);
+  }
+}
+
+.modeC {
+  background: var(--wf-mode-c-bg);
+  color: #a4502f;
+  border-color: rgba(226, 149, 120, 0.35);
+  .modeLetter {
+    background: var(--wf-mode-c);
+  }
+}
+
+.confTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--wf-radius-pill);
+  font-size: var(--wf-font-3xs);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.extracted {
+  background: var(--wf-extracted-bg);
+  color: var(--wf-extracted);
+}
+
+.inferred {
+  background: var(--wf-inferred-bg);
+  color: var(--wf-inferred);
+  box-shadow: inset 0 0 0 1px var(--wf-inferred-line);
+}

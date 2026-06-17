@@ -1,0 +1,31 @@
+.card {
+  background: var(--wf-bg-elevated);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-md);
+  padding: 16px;
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.text {
+  margin: 0;
+  font-size: var(--wf-font-md);
+  line-height: 1.55;
+  color: var(--wf-color-gray-900);
+}
+
+.modeA {
+  border-top: 2px solid var(--wf-mode-a);
+}
+.modeB {
+  border-top: 2px solid var(--wf-mode-b);
+}
+.modeC {
+  border-top: 2px solid var(--wf-mode-c);
+}
