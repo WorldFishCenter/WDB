@@ -53,3 +53,10 @@ when they (or chromadb) are unavailable.
 
 **To upgrade any model:** change its constant in [`model.py`](model.py) and update
 this file in the same commit so the switch is recorded.
+
+**Cost-tier (forward-looking):** the **synthesis** slot is a **cheaper-model candidate** — lower-risk
+because retrieval + reranker + the refuse-when-thin gate do the honesty work *before* synthesis (it
+only writes up already-vetted passages). It may move to a cheaper model **only after** re-running this
+slot's faithfulness / refusal proof against the candidate and reading the verdict — the soft risk to
+watch is **prose-overclaim beyond the retrieved passages** (the gate does not catch it). Not worth
+doing at current volume. See [../docs/model-cost-strategy.md](../docs/model-cost-strategy.md).

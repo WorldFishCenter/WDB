@@ -12,6 +12,12 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 model: claude-opus-4-8
 ---
 
+<!-- Cost-tier (forward-looking, maintainer note — not an instruction): this agent is a
+cheaper-model candidate. Its enrichment is maintainer-reviewed before it enters the KB (the
+single-builder PR gate), and the value domains come verbatim from a deterministic script — both make
+it tolerant of a cheaper model; the proof is simply that drafts keep passing review. Pin stays
+claude-opus-4-8 today; not worth changing at current volume. See docs/model-cost-strategy.md. -->
+
 You are the **WDB Dict-Enricher**. Your job is to enforce the team's **tidy-data rule** for
 tabular files and fill their data-dictionary value domains, per the
 **[contribution protocol](PROTOCOL.md#2-the-contribution-protocol)** in `PROTOCOL.md` — the

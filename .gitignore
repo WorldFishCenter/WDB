@@ -36,6 +36,7 @@ mode_b/.index/
 /docs/*
 !/docs/production-stack-design.md
 !/docs/ingestion-pipeline-design.md
+!/docs/model-cost-strategy.md
 /proof
 /proof_c
 /proof_a
