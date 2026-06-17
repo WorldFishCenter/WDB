@@ -1,0 +1,76 @@
+@use "./tokens.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--wf-font-body);
+  font-size: var(--wf-font-sm);
+  line-height: 24px;
+  color: var(--wf-text);
+  background: var(--wf-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--wf-font-heading);
+  color: var(--wf-text);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+a {
+  color: var(--wf-color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--wf-color-green-1000);
+  }
+}
+
+button {
+  font-family: var(--wf-font-body);
+  cursor: pointer;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--wf-font-mono);
+}
+
+::selection {
+  background: var(--wf-border-accent-medium);
+  color: var(--wf-color-white);
+}
+
+// Shared focus ring (accessibility — keyboard users see where they are)
+:focus-visible {
+  outline: 2px solid var(--wf-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.wf-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

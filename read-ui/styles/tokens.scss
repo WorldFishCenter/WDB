@@ -1,0 +1,112 @@
+// WorldFish design tokens — extracted verbatim from WorldFishCenter/worldfish.digital
+// (public/assets/scss/abstracts/_variables.scss + _tokens-root.scss, base/_typography.scss).
+// This file is the read UI's single token source so it reads as part of the same family.
+// Font vars --chivo / --noto are injected on <html> by next/font in app/layout.tsx, exactly
+// as the WF site does in app/layout.js.
+
+:root {
+  // ---- Typography: families (next/font) + the WF px scale --------------------
+  --wf-font-heading: var(--noto), "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+  --wf-font-body: var(--chivo), "Chivo", ui-sans-serif, system-ui, sans-serif;
+  --wf-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --wf-font-3xs: 10px;
+  --wf-font-xxs: 12px;
+  --wf-font-xs: 13px;
+  --wf-font-sm: 14px;
+  --wf-font-md-2: 15px;
+  --wf-font-md: 16px;
+  --wf-font-lg: 18px;
+  --wf-font-xl: 20px;
+  --wf-font-2xl: 22px;
+  --wf-font-3xl: 58px;
+
+  // ---- Brand / neutral palette (light base) ---------------------------------
+  --wf-color-primary: #508fda;
+  --wf-color-secondary: #8d99ae;
+  --wf-color-success: #06d6a0;
+  --wf-color-danger: #ef476f;
+  --wf-color-warning: #ffd166;
+  --wf-color-info: #38a0c2;
+  --wf-color-white: #ffffff;
+
+  --wf-color-gray-50: #f9fafb;
+  --wf-color-gray-100: #f2f4f7;
+  --wf-color-gray-200: #e4e7ec;
+  --wf-color-gray-300: #d0d5dd;
+  --wf-color-gray-400: #98a2b3;
+  --wf-color-gray-500: #667085;
+  --wf-color-gray-600: #475467;
+  --wf-color-gray-700: #344054;
+  --wf-color-gray-800: #1d2939;
+  --wf-color-gray-900: #101828;
+
+  --wf-color-green-900: #57b3d1;
+  --wf-color-green-500: #8fd1e4;
+  --wf-color-green-100: #d4eef6;
+  --wf-color-green-1000: #2c8fae;
+
+  --wf-color-orange-900: #e29578;
+  --wf-color-orange-500: #ffddd2;
+  --wf-color-orange-100: #faede3;
+
+  // ---- Signature dark hero (the live-site look) -----------------------------
+  --wf-accent: #57b3d1;
+  --wf-surface-deep: #00050a;
+  --wf-surface-panel: #020813;
+  --wf-gradient-hero: linear-gradient(180deg, #020813 0%, #00050a 100%);
+  --wf-surface-header: rgba(6, 10, 16, 0.65);
+  --wf-surface-header-scrolled: rgba(10, 14, 22, 0.88);
+  --wf-surface-header-blur: blur(20px) saturate(160%);
+  --wf-text-slate-50: #f8fafc;
+  --wf-text-slate-200: #e2e8f0;
+  --wf-text-slate-300: #cbd5e1;
+  --wf-text-slate-400: #94a3b8;
+  --wf-border-header: rgba(255, 255, 255, 0.07);
+  --wf-border-subtle: rgba(255, 255, 255, 0.05);
+  --wf-border-card: rgba(255, 255, 255, 0.08);
+  --wf-border-medium: rgba(255, 255, 255, 0.12);
+  --wf-border-accent-soft: rgba(87, 179, 209, 0.15);
+  --wf-border-accent-medium: rgba(87, 179, 209, 0.4);
+  --wf-glow-accent: rgba(87, 179, 209, 0.15);
+
+  // ---- Shape & elevation (WF radii + a card shadow) -------------------------
+  --wf-radius-sm: 8px;
+  --wf-radius-md: 12px;
+  --wf-radius-lg: 16px;
+  --wf-radius-pill: 999px;
+  --wf-shadow-card: 4px 4px 40px rgba(16, 24, 40, 0.1);
+  --wf-shadow-3: 0px 47px 65px rgba(21, 28, 38, 0.1);
+  --wf-shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.1);
+
+  // ---- Honesty surface: semantic mode + provenance aliases ------------------
+  // The whole point of the UI is to make the source TYPE legible at a glance. Each mode
+  // gets a stable WF colour; provenance confidence (EXTRACTED vs INFERRED) gets its own.
+  --wf-mode-a: var(--wf-color-green-1000);   // graph fact  (relationship)
+  --wf-mode-a-bg: var(--wf-color-green-100);
+  --wf-mode-a-line: var(--wf-color-green-900);
+
+  --wf-mode-b: var(--wf-color-primary);      // grounded passage (verbatim quote)
+  --wf-mode-b-bg: #e7f0fb;
+  --wf-mode-b-line: var(--wf-color-primary);
+
+  --wf-mode-c: var(--wf-color-orange-900);   // computed figure (number + SQL)
+  --wf-mode-c-bg: var(--wf-color-orange-100);
+  --wf-mode-c-line: var(--wf-color-orange-900);
+
+  --wf-extracted: var(--wf-color-green-1000); // stated in the corpus → hard fact
+  --wf-extracted-bg: var(--wf-color-green-100);
+  --wf-inferred: #b54708;                     // readable amber text on light
+  --wf-inferred-bg: #fff3d6;                  // derived from --wf-warning
+  --wf-inferred-line: var(--wf-color-warning);
+
+  --wf-unanswered: var(--wf-color-danger);    // not grounded — stated, never hidden
+  --wf-unanswered-bg: #fdecf0;
+
+  // ---- App background -------------------------------------------------------
+  --wf-bg: var(--wf-color-gray-50);
+  --wf-bg-elevated: var(--wf-color-white);
+  --wf-text: var(--wf-color-gray-900);
+  --wf-text-muted: var(--wf-color-gray-500);
+  --wf-border: var(--wf-color-gray-200);
+}
