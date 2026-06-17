@@ -1,15 +1,26 @@
 import type { RouterAnswer } from "@/lib/contract";
-import { AnswerPane } from "./AnswerPane";
+import { ClaimsSection } from "./AnswerPane";
 import { AssociationsPane } from "./AssociationsPane";
+import { RoutePosture } from "./RoutePosture";
+import { FigureView } from "./FigureView";
+import { Unanswered } from "./Unanswered";
 import { Refusal } from "./Refusal";
 import styles from "./answerview.module.scss";
 
 /**
- * The dual-pane "passage + associations" view. A full refusal (nothing grounded) renders as an
- * honest refusal panel instead. Otherwise: the answer (claims + figures + unanswered) on the
- * left, the graph associations on the right.
+ * Vertical-flow answer layout: question echo → route posture → full-width interactive graph →
+ * summary stats bar → accordion-grouped claims → figures → unanswered.
+ *
+ * Replaces the old cramped two-pane grid with a single-column flow where every section gets
+ * the full viewport width. The graph is the visual hero; claims are compact accordions.
  */
-export function AnswerView({ answer }: { answer: RouterAnswer }) {
+export function AnswerView({
+  answer,
+  globalNodeMap,
+}: {
+  answer: RouterAnswer;
+  globalNodeMap?: Map<string, { label: string; community: number; file_type?: string; source_file?: string }>;
+}) {
   const isFullRefusal = !answer.answered && answer.claims.length === 0 && answer.figures.length === 0;
 
   if (isFullRefusal) {
@@ -23,18 +34,47 @@ export function AnswerView({ answer }: { answer: RouterAnswer }) {
 
   return (
     <div className={styles.wrap}>
+      {/* ── Question Echo ── */}
       <QuestionEcho question={answer.question} />
-      <div className={styles.grid}>
-        <div className={styles.left}>
-          <AnswerPane answer={answer} />
-        </div>
-        <div className={styles.right}>
-          <AssociationsPane associations={answer.associations} />
-        </div>
-      </div>
+
+      {/* ── Route Posture (compact, full-width) ── */}
+      <RoutePosture routes={answer.routes} grounded={answer.modes_grounded} />
+
+      {/* ── Interactive Graph (full-width hero) ── */}
+      {answer.associations.length > 0 && (
+        <section className={styles.section} aria-label="Graph associations">
+          <AssociationsPane associations={answer.associations} globalNodeMap={globalNodeMap} />
+        </section>
+      )}
+
+      {/* ── Claims Summary + Accordions ── */}
+      {(answer.claims.length > 0 || answer.unanswered.length > 0) && (
+        <section className={styles.section} aria-label="Claims">
+          <ClaimsSection claims={answer.claims} />
+        </section>
+      )}
+
+      {/* ── Figures ── */}
+      {answer.figures.length > 0 && (
+        <section className={styles.section} aria-label="Figures">
+          <div className={styles.sectionHead}>
+            <span className={styles.sectionTitle}>Figures</span>
+            <span className={styles.sectionCount}>{answer.figures.length}</span>
+          </div>
+          <div className={styles.stack}>
+            {answer.figures.map((f, i) => (
+              <FigureView key={i} figure={f} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Unanswered ── */}
+      <Unanswered items={answer.unanswered} />
     </div>
   );
 }
+
 
 function QuestionEcho({ question }: { question: string }) {
   return (
