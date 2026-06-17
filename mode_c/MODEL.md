@@ -27,3 +27,10 @@ anthropic SDK ships in the consolidated `wdb` env (`uv sync`), so it needs only 
 
 **To upgrade the resolver model:** change `RESOLVER_MODEL` in
 [`mode_c/model.py`](model.py) and update this file in the same commit.
+
+**Cost-tier (forward-looking):** this slot is **non-negotiable pinned-Anthropic** — autonomous and
+honesty-critical (the grain + derived-metric guards were validated on Opus; a weaker model risks the
+silent grain trap — a confident-wrong number — with no human in the loop), so it is **not** a
+cheaper-model candidate. The proof path exists but the door stays shut: it could only ever move by
+re-running `proof_c/` (the 9 resolver questions + naive-control traps) against a candidate and having
+it pass. See [../docs/model-cost-strategy.md](../docs/model-cost-strategy.md).
