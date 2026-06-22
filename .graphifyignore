@@ -31,3 +31,4 @@ read-ui/
 tests/
 pyproject.toml
 proof_a/
+model_eval/
