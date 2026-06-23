@@ -12,6 +12,14 @@ eval rides on; it changes no mode, pin, MODEL.md, or real Live path.
   translated by ``schema_gemini`` and ``usageMetadata`` read back for cost —
   output billed = answer tokens + thinking tokens (Gemini bundles thinking into
   output pricing).
+* OpenRouter (the gateway for every non-Anthropic candidate — Gemini routed here
+  AND the ultra-cheap open model DeepSeek): the official OpenAI-compatible
+  ``/chat/completions`` endpoint, Bearer auth, ``response_format`` json_object to
+  enforce parseable JSON (the structured-output mitigation the task calls for).
+  Reuses stdlib ``urllib`` — same as the Gemini backend — so the harness adds NO
+  new dependency (it is a trivial OpenAI-shaped POST). ``usage.prompt_tokens`` /
+  ``completion_tokens`` are read back for cost; the ~5.5% OpenRouter credit fee is
+  folded into the rate in ``costs.py``, not here.
 """
 from __future__ import annotations
 
@@ -212,6 +220,116 @@ class GeminiBackend:
 
 
 # --------------------------------------------------------------------------- #
+# OpenRouter — the gateway for every non-Anthropic candidate (Gemini + DeepSeek)
+# --------------------------------------------------------------------------- #
+_OR_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+
+class OpenRouterBackend:
+    provider = "openrouter"
+
+    def __init__(self, name: str, model_id: str):
+        self.name = name
+        self.model_id = model_id          # the provider/model OpenRouter slug
+        self.key = _env.openrouter_key()
+
+    def _post(self, payload: dict, max_retries: int = 4) -> dict:
+        body = json.dumps(payload).encode()
+        headers = {
+            "Authorization": f"Bearer {self.key}",
+            "Content-Type": "application/json",
+            # OpenRouter's documented attribution headers (optional but polite).
+            "HTTP-Referer": "https://worldfish.digital",
+            "X-Title": "WDB model-eval",
+        }
+        last = None
+        for attempt in range(max_retries):
+            req = urllib.request.Request(_OR_URL, data=body, headers=headers)
+            try:
+                with urllib.request.urlopen(req, timeout=180) as resp:
+                    data = json.loads(resp.read())
+            except urllib.error.HTTPError as e:
+                code = e.code
+                last = f"HTTP {code}: {e.read()[:200]!r}"
+                if code in (429, 500, 502, 503, 529) and attempt < max_retries - 1:
+                    time.sleep(2 ** attempt + 1)
+                    continue
+                raise RuntimeError(f"{self.name}: {last}") from e
+            except urllib.error.URLError as e:
+                last = str(e)
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt + 1)
+                    continue
+                raise RuntimeError(f"{self.name}: {last}") from e
+            # A 200 can still carry a provider-side error (OpenRouter passes it through).
+            if data.get("error"):
+                last = f"provider error: {str(data['error'])[:200]}"
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt + 1)
+                    continue
+                raise RuntimeError(f"{self.name}: {last}")
+            return data
+        raise RuntimeError(f"{self.name}: exhausted retries ({last})")
+
+    def _usage(self, data: dict) -> Usage:
+        u = data.get("usage", {}) or {}
+        # Reasoning tokens (when a model emits them) are billed inside completion_tokens
+        # by OpenRouter; surface them informationally without double-counting.
+        details = u.get("completion_tokens_details") or {}
+        think = details.get("reasoning_tokens", 0) or 0
+        return Usage(in_tok=u.get("prompt_tokens", 0) or 0,
+                     out_tok=u.get("completion_tokens", 0) or 0,
+                     thinking_tok=think, raw=u)
+
+    def _text_of(self, data: dict) -> str:
+        ch = (data.get("choices") or [{}])[0]
+        msg = ch.get("message") or {}
+        return msg.get("content") or "", ch.get("finish_reason")
+
+    def json_call(self, system: str, user: str, schema: dict, max_tokens: int = 8192,
+                  contract: str | None = None):
+        # json_object mode guarantees valid JSON but not a schema, so — exactly like
+        # the Anthropic path — the key contract is described in-prompt and tolerantly
+        # parsed. Both OR candidates are thus tested on the same OpenAI-compatible
+        # structured-output channel (NOT Gemini's native responseSchema). The budget
+        # is generous (matches the Gemini backend) so a reasoning model — DeepSeek
+        # v4-flash thinks by default — never truncates its JSON; only tokens actually
+        # emitted are billed, so headroom is free.
+        sys = system + "\n\n" + (contract or render_contract(schema))
+        payload = {
+            "model": self.model_id,
+            "messages": [{"role": "system", "content": sys},
+                         {"role": "user", "content": user}],
+            "temperature": 0,
+            "max_tokens": max_tokens,
+            "response_format": {"type": "json_object"},
+        }
+        data = self._post(payload)
+        usage = self._usage(data)
+        text, finish = self._text_of(data)
+        try:
+            return extract_json(text), usage
+        except json.JSONDecodeError as e:
+            err = JSONParseError(f"{self.name}: {e}; finish={finish}; text={text[:300]!r}")
+            err.usage = usage
+            raise err from e
+
+    def text_call(self, system: str, user: str, max_tokens: int = 4096):
+        # Generous default (matches the Gemini backend) so a reasoning model's
+        # thinking budget does not crowd out the Mode-B answer.
+        payload = {
+            "model": self.model_id,
+            "messages": [{"role": "system", "content": system},
+                         {"role": "user", "content": user}],
+            "temperature": 0,
+            "max_tokens": max_tokens,
+        }
+        data = self._post(payload)
+        text, _ = self._text_of(data)
+        return text, self._usage(data)
+
+
+# --------------------------------------------------------------------------- #
 # Registry
 # --------------------------------------------------------------------------- #
 def opus() -> AnthropicBackend:
@@ -228,3 +346,14 @@ def haiku() -> AnthropicBackend:
 
 def gemini_flash() -> GeminiBackend:
     return GeminiBackend("gemini-2.5-flash", "gemini-2.5-flash")
+
+
+# OpenRouter candidates — slugs confirmed live via the models API on 2026-06-23
+# (GET https://openrouter.ai/api/v1/models). Names carry an "-or" suffix so cost
+# rows and result files never collide with the native gemini-2.5-flash row from #16.
+def gemini_or() -> OpenRouterBackend:
+    return OpenRouterBackend("gemini-2.5-flash-or", "google/gemini-2.5-flash")
+
+
+def deepseek_or() -> OpenRouterBackend:
+    return OpenRouterBackend("deepseek-v4-flash-or", "deepseek/deepseek-v4-flash")

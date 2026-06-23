@@ -1,0 +1,102 @@
+{
+  "models": [
+    {
+      "model": "gemini-2.5-flash-or",
+      "docs": {
+        "zanzibar_trips (Template A)": {
+          "proxies": {
+            "has_h1": true,
+            "sections_present": [
+              "## Summary",
+              "## Columns",
+              "## Grain",
+              "## Related files"
+            ],
+            "sections_missing": [],
+            "canonical_named": true,
+            "shape_word_leak": [
+              ".csv"
+            ],
+            "chars": 2449
+          },
+          "note": "# Peskas Zanzibar Validated Trips\n## Summary\nThe Peskas Zanzibar Validated Trips dataset contains detailed records of fishing trips and their catch in Zanzibar, collected through the Peskas monitoring system. It provides information on trip characteristics, fishing effort, and catch composition, including species, quantity, and value. This dataset is produced by the Peskas system and represents validated data from fishing activities in Zanzibar.\n\n## Columns\n- `survey_id`: An identifier for the survey instance that collected the trip data.\n- `trip_id`: A unique identifier for a specific fishing trip.\n- `landing_date`: The date when the fishing trip's catch was landed.\n- `gaul_1_code`: The GAUL (Global Administrative Unit Layers) code for the first-level administrative division where the landing occurred.\n- `gaul_1_name`: The name of the first-level administrative division where the landing occurred.\n- `gaul_2_code`: The GAUL code for the second-level administrative division where the landing occurred.\n- `gaul_2_name`: The name of the second-level administrative division where the landing occurred.\n- `n_fishers`: The number of fishers participating in the trip.\n- `trip_duration_hrs`: The duration of the fishing trip in hours.\n- `gear`: The type of fishing gear used during the trip.\n- `vessel_type`: The type of vessel used for the fishing trip.\n- `catch_habitat`: The habitat where the catch was made.\n- `catch_outcome`: An indicator of the catch outcome (e.g., 1 for successful catch).\n- `n_catch`: The number of individual catch items recorded for a specific species on the trip.\n- `catch_taxon`: A three-letter FAO code representing the taxon of the caught species.\n- `scientific_name`: The scientific name of the caught species.\n- `length_cm`: The length of the caught species in centimeters.\n- `catch_kg`: The weight of the specific catch item in kilograms.\n- `catch_price`: The price obtained for the specific catch item.\n- `tot_catch_kg`: The total weight of all catch items for the trip in kilograms.\n- `tot_catch_price`: The total price obtained for all catch items for the trip.\n\n## Grain\nOne row represents one specific catch item of a fishing trip. Columns such as `n_fishers`, `trip_duration_hrs`, `gear`, `vessel_type`, `tot_catch_kg`, and `tot_catch_price` repeat for all catch items within the same `trip_id` and should be aggregated over the distinct `trip_id`.\n\n## Related files\n- `peskas/zanzibar_raw_trips.csv`"
+        },
+        "peskas_softwarex (Template B)": {
+          "proxies": {
+            "has_h1": true,
+            "sections_present": [
+              "## Summary",
+              "## Key concepts",
+              "## Related files"
+            ],
+            "sections_missing": [],
+            "canonical_named": true,
+            "shape_word_leak": [],
+            "chars": 844
+          },
+          "note": "# Peskas: Automated analytics for small-scale, data-deficient fisheries\n## Summary\nThis document is a publication in SoftwareX that introduces Peskas, a low-cost solution for automated analytics in small-scale, data-deficient fisheries. It establishes Peskas as a template workflow for data ingestion and analysis, culminating in a decision dashboard.\n## Key concepts\nPeskas provides automated analytics for small-scale, data-deficient fisheries. Peskas addresses challenges in gathering and interpreting data in small-scale fisheries. Peskas offers a template workflow for data ingestion and analysis. Peskas produces a decision dashboard. The Peskas code is available in two versions: `peskas.timor.portal v1.0.0` and `peskas.timor.data.pipeline v3.1.0`. The Peskas code is licensed under the Apache License.\n## Related files\n## Related files"
+        }
+      },
+      "cost": {
+        "model": "gemini-2.5-flash-or",
+        "ops": 2,
+        "in_tok_total": 2460,
+        "out_tok_total": 802,
+        "thinking_tok_total": 0,
+        "avg_in_tok": 1230.0,
+        "avg_out_tok": 401.0,
+        "usd_total": 0.002894,
+        "usd_per_op": 0.001447
+      }
+    },
+    {
+      "model": "deepseek-v4-flash-or",
+      "docs": {
+        "zanzibar_trips (Template A)": {
+          "proxies": {
+            "has_h1": true,
+            "sections_present": [
+              "## Summary",
+              "## Columns",
+              "## Grain",
+              "## Related files"
+            ],
+            "sections_missing": [],
+            "canonical_named": true,
+            "shape_word_leak": [
+              ".csv"
+            ],
+            "chars": 2609
+          },
+          "note": "# Zanzibar Validated Trips\n\n## Summary\nThis dataset contains validated fishing trip records from Zanzibar, produced by the Peskas initiative. Each record represents a single catch item from a surveyed fishing trip, with information about the trip, vessel, gear, catch, and location. The data is used to monitor and analyze small-scale fisheries in Zanzibar, providing validated estimates of catch weight, price, and species composition.\n\n## Columns\n- `survey_id`: Unique identifier for the survey event that collected the trip data.\n- `trip_id`: Unique identifier for the fishing trip.\n- `landing_date`: Date and time when the trip ended and catch was landed.\n- `gaul_1_code`: GAUL administrative level 1 code for the region (Zanzibar's first-level administrative division).\n- `gaul_1_name`: Name of the GAUL level 1 administrative region.\n- `gaul_2_code`: GAUL administrative level 2 code for the district.\n- `gaul_2_name`: Name of the GAUL level 2 administrative district.\n- `n_fishers`: Number of fishers on the trip.\n- `trip_duration_hrs`: Duration of the fishing trip in hours.\n- `gear`: Type of fishing gear used (e.g., Hand Line, Gill Net, Ring Net, Trap, Tangle Net).\n- `vessel_type`: Type of vessel used (e.g., Dhow, Motorized Boat, Wooden Boat).\n- `catch_habitat`: Habitat where the catch was taken (e.g., Reef, Open Sea).\n- `catch_outcome`: Outcome of the catch event (1 = kept, 2 = discarded).\n- `n_catch`: Sequential number of the catch item within the trip.\n- `catch_taxon`: FAO species code for the caught taxon.\n- `scientific_name`: Scientific name of the caught species.\n- `length_cm`: Length of the caught individual in centimeters.\n- `catch_kg`: Weight of this individual catch item in kilograms.\n- `catch_price`: Price of this individual catch item in Tanzanian Shillings.\n- `tot_catch_kg`: Total weight of all catch items from the trip in kilograms.\n- `tot_catch_price`: Total price of all catch items from the trip in Tanzanian Shillings.\n\n## Grain\nOne row represents one catch item (individual fish or aggregated catch of a single species) from a validated fishing trip. Multiple rows with the same `trip_id` represent multiple catch items from the same trip. To aggregate to trip level, sum `catch_kg` and `catch_price` across rows with the same `trip_id`, and use the first row's `tot_catch_kg` and `tot_catch_price` for trip totals.\n\n## Related files\n- `peskas/zanzibar_trips.csv`: Raw (unvalidated) trip data from which this validated dataset is derived.\n- `peskas/zanzibar_validated_trips_metadata.csv`: Metadata describing the validation process and quality flags for these trips."
+        },
+        "peskas_softwarex (Template B)": {
+          "proxies": {
+            "has_h1": true,
+            "sections_present": [
+              "## Summary",
+              "## Key concepts",
+              "## Related files"
+            ],
+            "sections_missing": [],
+            "canonical_named": true,
+            "shape_word_leak": [],
+            "chars": 2241
+          },
+          "note": "# Peskas\n\n## Summary\n\nThis peer-reviewed publication in SoftwareX (Volume 29, 2025) describes Peskas, an open-source software system developed by WorldFish and the University of East Anglia for automated analytics and decision support in small-scale, data-deficient fisheries. The article establishes Peskas as a low-cost, template-based workflow that ingests, processes, and visualises fishery data in near-real-time, addressing logistical, financial, and capacity constraints that hinder data collection and interpretation in small-scale fisheries. It includes metadata linking to the system\u2019s code repositories and a reproducible capsule.\n\n## Key concepts\n\n- **Peskas**: An open-source system produced by researchers at WorldFish and the University of East Anglia (authors: Lorenzo Longobardi, Villiam Sozinho, Hamza Altarturi, E. Fernando Cagua, Alexander Tilley) that provides a template workflow for automated ingestion, analysis, and visualisation of small-scale fisheries data via a decision dashboard.\n- **Near-real-time analytics**: Peskas enables near-real-time processing of fishery data to support stock assessment and detection of illegal, unreported, and unregulated (IUU) fishing.\n- **Decision dashboard**: The system includes a dashboard component (peskas.timor.portal) that presents analysis results, built on top of the data pipeline (peskas.timor.data.pipeline).\n- **Template workflow**: Peskas provides an adaptable ingestion and analysis workflow that can be customised to different contexts and needs, with the Timor-Leste case serving as an example.\n- **Code repositories and reproducibility**: The article links to two GitHub repositories \u2014 `peskas.timor.portal` and `peskas.timor.data.pipeline` \u2014 and their corresponding Zenodo capsules (DOI 10.5281/zenodo.10906764 and 10.5281/zenodo.10906697 respectively), ensuring reproducibility of the software.\n\n## Related files\n\n- `peskas.timor.portal` \u2014 the dashboard component of Peskas, referenced in the document.\n- `peskas.timor.data.pipeline` \u2014 the data pipeline component of Peskas, referenced in the document.\n- No other files are explicitly referenced within the publication; other materials in the `peskas` repository may form part of the broader Peskas ecosystem."
+        }
+      },
+      "cost": {
+        "model": "deepseek-v4-flash-or",
+        "ops": 2,
+        "in_tok_total": 2114,
+        "out_tok_total": 2165,
+        "thinking_tok_total": 1035,
+        "avg_in_tok": 1057.0,
+        "avg_out_tok": 1082.5,
+        "usd_total": 0.000612,
+        "usd_per_op": 0.000306
+      }
+    }
+  ]
+}

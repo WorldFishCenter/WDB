@@ -16,6 +16,17 @@ per-operation cost, attributes every failure, and gives a per-slot verdict + a b
 — the current pins. Both baselines reproduced their recorded results through this harness (Mode C
 **9/9**, Mode A **0 fabrications/10**), which is what validates the harness before any candidate is judged.
 
+> **Extended 2026-06-23 — §11 (OpenRouter-gateway arm).** §§1–10 below are the original run: Haiku
+> direct + Gemini 2.5 Flash via its **native** AI-Studio key. The plan was then revised to route **all**
+> non-Anthropic candidates through **one gateway (OpenRouter)** and add an **ultra-cheap open model**.
+> [§11](#11-openrouter-gateway-arm--gemini-routed-through-openrouter--the-open-model-deepseek) runs the
+> same four proofs against **Gemini 2.5 Flash via OpenRouter** and **DeepSeek v4-flash** (the open
+> standout), on fair prompts, json-mode structured output, with the ~5.5% OpenRouter fee folded into
+> cost. It **reuses** the §§1–10 Opus/Sonnet/Haiku rows as reference (it re-ran only the two new
+> candidates) and writes to `results/*_openrouter.json` so nothing here is overwritten. **OpenRouter is
+> used as an evaluation gateway only — not a recommendation to route production through a gateway** (that
+> would conflict with the version-pinning reproducibility the build discipline depends on; see §11.5).
+
 ---
 
 ## 1. Method — identical bar, per-model expression, each provider's own structured output
@@ -267,8 +278,191 @@ don't build the split until query volume makes the absolute saving worth the mig
 
 ---
 
+## 11. OpenRouter-gateway arm — Gemini routed through OpenRouter + the open model DeepSeek
+
+**Date:** 2026-06-23. The plan above (§§1–10) tested Gemini through its **native** AI-Studio key. The
+revised plan routes **every non-Anthropic candidate through one gateway — OpenRouter** (the official
+OpenAI-compatible way: base `https://openrouter.ai/api/v1`, `/chat/completions`, `Authorization:
+Bearer`) — and adds an **ultra-cheap OPEN model**. This arm runs the **same four proofs, same identical
+bar**, against two candidates, **reusing** the §§1–10 Opus/Sonnet/Haiku rows as reference:
+
+| Candidate | Slug (confirmed live via the OpenRouter models API, 2026-06-23) | List price ($/1M in,out) |
+|---|---|---|
+| **Gemini 2.5 Flash (via OpenRouter)** | `google/gemini-2.5-flash` | $0.30 / $2.50 |
+| **DeepSeek v4-flash** (the open standout) | `deepseek/deepseek-v4-flash` | **$0.09 / $0.18** |
+
+MiniMax was the optional "one more"; it failed a clean reachability probe (non-standard response shape)
+and — DeepSeek being the named standout that passed — was dropped to keep the set to one open model.
+
+### 11.1 Method delta — one gateway, one structured-output channel, the fee folded into cost
+
+- **Fair prompt = the same model-neutral non-Claude prompts** the §§1–10 Gemini arm used
+  (`prompts.mode_c_gemini`, `MODE_A_GEMINI`, `MODE_B_GEMINI`, `INGESTION_BRIEF`) — they encode the
+  identical bar in numbered-imperative / "return JSON only" style, so both OpenRouter candidates run on
+  the same fair expression. The runners route any non-Claude `provider` (native `gemini` **or**
+  `openrouter`) to these.
+- **Structured output = OpenRouter `response_format: {"type":"json_object"}` + the in-prompt key
+  contract**, tolerantly parsed — the same prompt-for-JSON shape the Anthropic path uses. This is the
+  task's recommended structured-output mitigation, and it is **uniform** for both OR candidates. Note
+  this is **deliberately a different channel** from the §§1–10 native-Gemini row, which used Gemini's
+  `responseSchema`; the comparison below isolates that channel effect.
+- **Cost honesty:** OpenRouter passes provider pricing through at cost but adds a **~5.5%
+  credit-purchase fee**, so every OR `$/op` here uses the list price **×1.055** ([`costs.py`](costs.py)).
+  OpenRouter's response also returns the real upstream `usage.cost`, which corroborated the token×rate
+  figures. Anthropic (Haiku/Opus) is billed direct, **no fee**.
+- **DeepSeek reasons by default** (it is a thinking model): on a trivial prompt it spends ~60 reasoning
+  tokens, and those are billed inside `completion_tokens`. The fair choice is to test it **as it ships
+  (reasoning on)** — that is its best configuration for the honesty/grain tasks — and let measured cost
+  carry the reasoning tokens. Budgets were set generously (8k json / 4k text) so thinking never
+  truncates; only emitted tokens are billed, so headroom is free. (Reasoning-off is ~6× cheaper but was
+  not used — disabling a capability on reasoning-critical slots would be the unfair move.)
+- The STOP-gate reachability probe ([`reach_probe.py`](reach_probe.py)) was extended to the gateway and
+  passed for both slugs (plain **and** json-mode) before any paid run.
+
+### 11.2 Per-slot × per-model verdict + measured cost (OpenRouter fee included)
+
+| Slot | Type | Gemini 2.5 Flash **via OpenRouter** | DeepSeek v4-flash | Reference (§§1–10) |
+|---|---|---|---|---|
+| **C resolver** (9 Q) | mechanical | **7/9** · $0.00280/op | **7/9** · $0.00077/op | Opus 9/9 · Haiku 7/9 · Gemini-native 8/9 |
+| **C — grain trap** (decisive) | mechanical | ✅ **31.88** | ✅ **31.88** | ✅ all |
+| **A reasoner** (cold, 10 Q) | mechanical | **0 fab** / 2 struct · $0.00192/op | **0 fab / 0 struct** · $0.00028/op | Opus 0 fab · Haiku 1 fab · Gemini-native 0 fab/1 trunc |
+| **A — negative control** | mechanical | guard has teeth (model-independent): injected fabrication caught ✅ |||
+| **B synthesis** (2 probes) | mech + judg | covered ✅ / overclaim ✅ · $0.00016/op | ✅ / ✅ · $0.00003/op | Sonnet ✅✅ · Haiku ✅✅ |
+| **Ingestion** (2 notes) | judgment | honest grain, *under-wires* (+1 invented sibling) · $0.00145/op | strong B note, *over-asserts* (2 invented siblings + invented domains) · $0.00031/op | Opus publish-grade · Haiku over-asserts · Gemini-native under-wires |
+
+### 11.3 Slot-by-slot — what passed, what failed, why
+
+**Mode C (mechanical) — both 7/9; the decisive grain trap is safe on both.** Both deduped Q4 to
+`trip_id` and computed **31.88** (never the raw-row 28.99), passed the Gill-Net disambiguation, both
+honest refusals (Kisumu, wind), and Inhambane/Zanzibar. Both miss the **same two**:
+- **Q6 (EAV mislabel)** — both route on the non-distinctive token "Fish meal" (2 tables) instead of the
+  distinctive `crude_protein_percent`; the gate refuses. **Reasoning** miss, but **fail-safe** (a
+  refusal, not a wrong number) — identical to native Gemini, the one case Opus uniquely nails.
+- **Q2 (CPUE)** — **not a reasoning miss.** Both **derived CPUE correctly** (`tot_catch_kg /
+  trip_duration_hrs`, inputs + assumptions + alternatives stated — DeepSeek even named `n_fishers`/
+  `n_catch` as alternative effort denominators), but both left `metric_label` **null** instead of
+  `"cpue"`, so the gate (which admits only registered derived labels) refused. Native Gemini got Q2 via
+  its **`responseSchema`**; the OR `json_object` channel did **not** elicit the label field. So the 1-point
+  drop vs native Gemini (8/9 → 7/9) is a **structured-output / convention** effect of the gateway's JSON
+  channel, **not** a reasoning regression — and it is the kind of thing a schema-enforced channel or a
+  one-line convention nudge fixes.
+
+**Mode A (mechanical) — the standout result.** Negative control caught the injected fabrication
+(model-independent). Then:
+- **DeepSeek v4-flash: 0 fabrications / 10, 0 structured-output failures — a clean sheet**, matching
+  Opus's record, with reasoning on (~240 reasoning tok/op) and **valid JSON every time**, at
+  **$0.00028/op (~130× cheaper than Opus's $0.0373)**. On this set it is the **best cheap candidate Mode
+  A has seen** — better than Haiku (which fabricated 1/10) and cleaner than native Gemini (which
+  truncated one).
+- **Gemini via OpenRouter: 0 fabrications / 10**, but **2 structured-output failures** (Q3, Q5 — the two
+  largest subgraphs): the JSON came back unterminated/empty and failed to parse. Zero fabrication is the
+  honesty bar it cared about; the misses are **structured-output**, the same fragility the native row
+  showed on its largest output — fixable with budget/schema, attributed as such.
+- **n = 10 is small** — the same caveat §10 raised for the §§1–10 "0/10" results applies verbatim to
+  DeepSeek's clean sheet. It is *encouraging*, not *earned*.
+
+**Mode B (mechanical + judgment) — both pass, cleanly.** The refuse-when-thin gate declines the empty
+retrieval (model-independent). On the covered passage both cite `[1]` and stay faithful; on the
+overclaim probe both decline to invent an algorithm or precision and explicitly hedge ("do not specify
+…"). No prose-overclaim. DeepSeek at **$0.00003/op** is effectively free here.
+
+**Ingestion (judgment) — both review-gated usable, opposite failure modes (the §6 pattern, repeated).**
+- **DeepSeek**: its **Template B (Peskas SoftwareX) draft is near publish-grade** — canonical "Peskas"
+  H1, rich relationship prose, and authors/DOIs/repos that are **faithfully extracted from the supplied
+  page (verified present in the sample), not fabricated**, ending on an honest hedge about unreferenced
+  files. But its **Template A over-asserts**: it invented **two** sibling files (`zanzibar_trips.csv`,
+  `zanzibar_validated_trips_metadata.csv` — neither exists in `peskas/`) and invented column domains the
+  CSV head cannot support (catch priced "in Tanzanian Shillings"; `catch_outcome` "1 = kept, 2 =
+  discarded"). The grain line is correct and trip-aware. This is the **Haiku-style over-assertion** the
+  curator review gate is built to catch.
+- **Gemini via OpenRouter**: **honest on substance** (excellent grain, accurate columns) but **invented
+  one** sibling (`zanzibar_raw_trips.csv`) and its Template-B note is **under-wired** — it emitted a
+  **duplicated, empty `## Related files` header** (a structural glitch) and named the platform loosely
+  ("Peskas monitoring system" / "Peskas system" rather than the canonical "Peskas"). The §6
+  **under-wires** pattern, plus a header bug.
+
+Net: DeepSeek leans **over-assert** (reviewer deletes invented links/domains — cheap), Gemini-OR leans
+**under-wire** (reviewer adds links — more effort) — neither publish-ready unreviewed, exactly why
+ingestion sits behind the human gate.
+
+### 11.4 Cost — measured per-op (fee included), and where the gateway changed the number
+
+| Slot | Opus/Sonnet (ref) | Haiku (ref) | Gemini-native (ref) | **Gemini-OR** | **DeepSeek-OR** |
+|---|---|---|---|---|---|
+| C resolver | $0.0627 | $0.0097 | $0.0040 | **$0.00280** | **$0.00077** |
+| A reasoner | $0.0373 | $0.0052 | $0.0034 | **$0.00192** | **$0.00028** |
+| B synthesis | $0.0027 | $0.0006 | $0.0008 | **$0.00016** | **$0.00003** |
+| Ingestion | $0.0365 | $0.0047 | $0.0065 | **$0.00145** | **$0.00031** |
+
+Two honest cost notes:
+- **Gemini-via-OpenRouter measured *cheaper* than native Gemini on three of four slots** *despite* the
+  5.5% fee — because the OR-served model emitted far fewer billed output tokens (e.g. Mode C avg out
+  **100 tok** vs the native row's heavy default-thinking output). OpenRouter did not report Gemini
+  reasoning tokens separately (`thinking_tot = 0` across slots), so this is a measured-billing fact, not
+  a claim about how much it "really" thought. The same thinner output coincides with its CPUE-label miss
+  and the two Mode-A truncations — **less (visible) thinking → cheaper but slightly more
+  structured-output fragility.** Cost and reliability moved together; do not read the lower price as a
+  free lunch.
+- **DeepSeek v4-flash is the cheapest on every slot** even with reasoning-on billed (its reasoning
+  tokens *are* in these figures). At the §7 volume assumption (2 ingestions/day + an even A/B/C query
+  split), swapping the two **movable** slots (B + ingestion) to DeepSeek instead of Haiku changes the
+  monthly total by **cents** — because, exactly as §7 found, the spend is dominated by the **Mode A/C**
+  slots that **stay pinned on honesty grounds**, so a cheaper movable slot barely moves the total. The
+  open model's headline 35–130× cheapness is real but lands on the slots that already cost ~nothing.
+
+### 11.5 What §11 established, what it did not, and the gateway caveat
+
+- **Firm (mechanical):** the **grain trap is safe** on both OR candidates (31.88); **DeepSeek fabricated
+  nothing on Mode A (0/10) with zero structured-output failures**; both refuse-when-thin and avoid
+  prose-overclaim on Mode B. The negative control still has teeth.
+- **A real structured-output finding, isolated:** the **same model (Gemini 2.5 Flash) scored 8/9 native
+  (`responseSchema`) but 7/9 via OpenRouter (`json_object`)** — the gateway's JSON channel did not elicit
+  the registered-derived-label field, and truncated the two largest Mode-A outputs. When a cheap model
+  "fails," distinguish the **channel** from the **model**: here the model reasoned correctly and the
+  *channel* lost the point. For DeepSeek, `json_object` was **reliable** (0 parse failures across C+A).
+- **Judgment, not firm:** the ingestion verdicts and Mode-B prose are a human read of the committed
+  drafts (`ingestion_drafts/*__{gemini-2.5-flash-or,deepseek-v4-flash-or}.md`), not a mechanical pass.
+  Sample sizes are small (C 9 Q, A 10 Q, B 2 probes, ingestion 2 docs).
+- **Gateway caveat (explicit):** OpenRouter was the **evaluation** transport only. It is **not** a
+  recommendation to run production through a gateway — a gateway can silently change the serving build,
+  the structured-output channel, and the thinking configuration of "the same" model (this run is the
+  proof: native vs OR Gemini differed on both score and cost). That directly conflicts with WDB's
+  **version-pinning reproducibility** discipline (`CLAUDE.md` pins the exact build, stamps
+  `BUILD_INFO.md`). If any of these candidates were ever adopted, it would be pinned to a **specific,
+  reproducible provider build on its own key**, re-validated on the **real** Live path — not left behind
+  a gateway that can move under it.
+
+### 11.6 Bottom line — does the open-model arm change the §9 assignment? No (but it names the open candidate).
+
+- **Mode A / C stay pinned (Opus).** §11 does **not** overturn §9: both OR candidates still miss C's EAV
+  case (7/9), and although **DeepSeek's 0-fab/0-struct Mode-A clean sheet is the strongest cheap result
+  to date**, it rests on n=10 + an autonomous, no-human-review slot — **inconclusive-promising, not
+  earned.** DeepSeek (open) now joins Gemini as a candidate worth a **larger cold-rate run** before any
+  autonomous-slot move; the door §9 kept open now has **two** names on it, and the cheaper one is open.
+- **Mode B / ingestion remain the movable slots.** Both OR candidates pass Mode B; both draft
+  review-gated ingestion notes. **DeepSeek is cheaper than Haiku on both** — but the §11.4/§7 arithmetic
+  says the **absolute** saving over the already-recommended Haiku move is **negligible at near-term
+  volume**, so there is **no reason to prefer the open model over Haiku** for these slots today: Haiku
+  keeps everything on **one pinned Anthropic provider** (simpler, no gateway, no extra key, reproducible)
+  for a few cents' difference. The open model earns its place only if (a) a future larger run lets it
+  take an A/C slot, or (b) movable-slot volume grows enough that its 4–6× edge over Haiku becomes real
+  money.
+
+**§11 conclusion:** routing through OpenRouter and adding an open model **confirmed §9 rather than
+changing it** — the honesty-critical slots still cannot move, the movable slots still can, and the open
+model's dramatic per-token cheapness lands mostly on slots that already cost almost nothing. The single
+genuinely new, actionable signal is **DeepSeek v4-flash's clean Mode-A sheet**, which makes it (not
+Haiku) the cheapest candidate to put through a **larger autonomous-slot trial** before the next cost
+review — with the gateway caveat (§11.5) front and centre if it is ever adopted.
+
+---
+
 *Reproduce: `model_eval/.venv` is not needed — run with the repo `.venv` from the repo root:
-`python -m model_eval.reach_probe` (STOP-gate reachability), then `run_mode_c`, `run_mode_a`,
-`run_mode_b`, `run_ingestion`. Verdict + cost JSON in `results/`; verbatim model output in `raw/`
-(git-ignored); drafted notes in `ingestion_drafts/`. Adapted prompts in `prompts.py`. No WDB data,
-mode, pin, `MODEL.md`, router, API, or `graphify-out/` was modified.*
+`python -m model_eval.reach_probe` (STOP-gate reachability — now also probes the OpenRouter slugs),
+then the §§1–10 baseline arm `run_mode_c` / `run_mode_a` / `run_mode_b` / `run_ingestion`, and the §11
+gateway arm `python -m model_eval.run_openrouter` (Gemini-OR + DeepSeek across all four slots →
+`results/*_openrouter.json`). Verdict + cost JSON in `results/`; verbatim model output in `raw/`
+(git-ignored); drafted notes in `ingestion_drafts/`. Adapted prompts in `prompts.py`; the OpenRouter
+seam in `backends.py` (`OpenRouterBackend`) + `costs.py` (the ×1.055 fee). No WDB data, mode, pin,
+`MODEL.md`, router, API, or `graphify-out/` was modified — and no production path was routed through a
+gateway; OpenRouter was the evaluation transport only.*

@@ -72,7 +72,10 @@ def ground_truth(catalog) -> dict:
 
 
 def _system(backend, catalog) -> str:
-    if backend.provider == "gemini":
+    # Non-Claude candidates (native Gemini AND every OpenRouter slug) get the same
+    # requirements re-expressed in model-neutral numbered-imperative style; Claude
+    # models (Opus baseline, Haiku) get the existing pinned prompt verbatim (fair).
+    if backend.provider in ("gemini", "openrouter"):
         return mode_c_gemini(catalog.render_corpus())
     return build_resolver_prompt(catalog)            # the existing Claude prompt (fair for Haiku)
 
@@ -188,7 +191,10 @@ def run_naive_diagnostic(backend, catalog) -> dict:
     return out
 
 
-def main() -> int:
+def main(models=None, suffix="") -> int:
+    """Default (no args) reproduces #16 byte-for-byte: the same three models written
+    to results/mode_c.json. The OpenRouter arm passes its own model list + suffix
+    (run_openrouter.py) so it never clobbers the committed baseline rows."""
     RAW.mkdir(exist_ok=True)
     RESULTS.mkdir(exist_ok=True)
     catalog = load_catalog()
@@ -197,13 +203,14 @@ def main() -> int:
     for q, v in truth.items():
         print(f"   {q[:50]:50} -> {v}")
 
-    models = [backends.opus(), backends.haiku(), backends.gemini_flash()]
+    if models is None:
+        models = [backends.opus(), backends.haiku(), backends.gemini_flash()]
     report = {"ground_truth": {k: v for k, v in truth.items()}, "models": [], "naive_diagnostic": {}}
     for b in models:
         report["models"].append(run_model(b, catalog, truth))
         report["naive_diagnostic"][b.name] = run_naive_diagnostic(b, catalog)
 
-    (RESULTS / "mode_c.json").write_text(json.dumps(report, indent=2, default=str))
+    (RESULTS / f"mode_c{suffix}.json").write_text(json.dumps(report, indent=2, default=str))
     print(f"\n{'='*84}\nSUMMARY\n{'='*84}")
     for m in report["models"]:
         c = m["cost"]
@@ -213,7 +220,7 @@ def main() -> int:
     print("\nNAIVE DIAGNOSTIC (no guard — does the model get grain/CPUE right on its own?):")
     for name, d in report["naive_diagnostic"].items():
         print(f"  {name:18} {d}")
-    print(f"\nwrote {RESULTS / 'mode_c.json'}")
+    print(f"\nwrote {RESULTS / f'mode_c{suffix}.json'}")
     return 0
 
 
