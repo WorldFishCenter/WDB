@@ -30,7 +30,9 @@ RAW, RESULTS = HERE / "raw", HERE / "results"
 
 
 def _system(backend) -> str:
-    return MODE_A_GEMINI if backend.provider == "gemini" else SYSTEM_PROMPT
+    # Non-Claude (native Gemini + every OpenRouter slug) -> the model-neutral
+    # re-expression of the same six honesty rules; Claude models -> pinned prompt.
+    return MODE_A_GEMINI if backend.provider in ("gemini", "openrouter") else SYSTEM_PROMPT
 
 
 def _sanitize(ans: dict) -> dict:
@@ -104,14 +106,18 @@ def negative_control(g) -> dict:
             "fabrication_caught": caught}
 
 
-def main() -> int:
+def main(models=None, suffix="") -> int:
+    """Default (no args) reproduces #16: same models -> results/mode_a.json. The
+    OpenRouter arm passes its own list + suffix so it never clobbers #16's rows."""
     RAW.mkdir(exist_ok=True)
     RESULTS.mkdir(exist_ok=True)
     g = extract.get_graph()
     report = {"negative_control": negative_control(g), "models": []}
-    for b in [backends.opus(), backends.haiku(), backends.gemini_flash()]:
+    if models is None:
+        models = [backends.opus(), backends.haiku(), backends.gemini_flash()]
+    for b in models:
         report["models"].append(run_model(b, g))
-    (RESULTS / "mode_a.json").write_text(json.dumps(report, indent=2, default=str))
+    (RESULTS / f"mode_a{suffix}.json").write_text(json.dumps(report, indent=2, default=str))
 
     print(f"\n{'='*92}\nSUMMARY (cold-fabrication-rate; baseline Opus target = 0/10)\n{'='*92}")
     for m in report["models"]:
@@ -119,7 +125,7 @@ def main() -> int:
         print(f"  {m['model']:18} fabrications {m['fabrications']}/{m['n']}  "
               f"cite-check rejections {m['rejections']}/{m['n']}  "
               f"${c['usd_per_op']:.5f}/op (in {c['avg_in_tok']:.0f} / out {c['avg_out_tok']:.0f} tok)")
-    print(f"\nwrote {RESULTS / 'mode_a.json'}")
+    print(f"\nwrote {RESULTS / f'mode_a{suffix}.json'}")
     return 0
 
 
