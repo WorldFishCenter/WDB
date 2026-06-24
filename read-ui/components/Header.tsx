@@ -8,7 +8,13 @@ export interface Health {
 }
 
 /** Slim app bar — brand + an honest status of the local API it's wired to. */
-export function Header({ health }: { health: Health | null }) {
+export function Header({
+  health,
+  onExploreGraph,
+}: {
+  health: Health | null;
+  onExploreGraph?: () => void;
+}) {
   return (
     <header className={styles.bar}>
       <div className={`wf-container ${styles.inner}`}>
@@ -17,6 +23,15 @@ export function Header({ health }: { health: Health | null }) {
           <span className={styles.brandText}>WorldFish Digital Brain</span>
         </div>
         <div className={styles.status} title={health ? `API: ${health.target}` : "checking API…"}>
+          {onExploreGraph && (
+            <button
+              className={styles.exploreBtn}
+              onClick={onExploreGraph}
+              title="Explore full interactive knowledge graph"
+            >
+              🌐 Explore Graph
+            </button>
+          )}
           <span className={styles.metaLabel}>local · read-only</span>
           {health === null ? (
             <span className={styles.pill}>
@@ -37,3 +52,4 @@ export function Header({ health }: { health: Health | null }) {
     </header>
   );
 }
+

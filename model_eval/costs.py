@@ -1,20 +1,35 @@
 """Per-operation cost from REAL token usage + verified published rates.
 
-Rates ($/1M tokens), verified at eval time (2026-06-18):
-  Anthropic (claude-api skill / platform.claude.com):
+Rates ($/1M tokens), verified at eval time:
+  Anthropic (claude-api skill / platform.claude.com), 2026-06-18 — billed direct,
+  NO gateway fee:
     Opus 4.8     $5.00 in / $25.00 out
     Sonnet 4.6   $3.00 in / $15.00 out
     Haiku 4.5    $1.00 in / $5.00 out
-  Gemini (ai.google.dev/gemini-api/docs/pricing, paid tier; thinking billed as output):
+  Gemini native (ai.google.dev/gemini-api/docs/pricing, paid tier; thinking billed
+  as output) — the #16 row:
     gemini-2.5-flash  $0.30 in / $2.50 out
+
+  OpenRouter arm (GET https://openrouter.ai/api/v1/models, 2026-06-23). OpenRouter
+  passes provider pricing through AT COST but adds a ~5.5% credit-purchase fee, so
+  the effective $/token is the listed price x1.055 — folded into the rate here so
+  measured cost is NOT understated (the task's "cost honesty" requirement). The
+  raw list price is kept in a comment beside each so the fee is auditable.
+    google/gemini-2.5-flash      list $0.30 / $2.50  -> x1.055 = $0.3165 / $2.6375
+    deepseek/deepseek-v4-flash   list $0.09 / $0.18  -> x1.055 = $0.09495 / $0.1899
 """
 from __future__ import annotations
 
-RATES = {  # $ per 1M tokens (input, output)
+OPENROUTER_FEE = 1.055  # ~5.5% credit-purchase fee applied on top of pass-through price
+
+RATES = {  # $ per 1M tokens (input, output) — effective (gateway fee already folded in)
     "opus-4.8": (5.00, 25.00),
     "sonnet-4.6": (3.00, 15.00),
     "haiku-4.5": (1.00, 5.00),
-    "gemini-2.5-flash": (0.30, 2.50),
+    "gemini-2.5-flash": (0.30, 2.50),                       # native Gemini, no fee (#16)
+    # OpenRouter slugs — list price x OPENROUTER_FEE:
+    "gemini-2.5-flash-or": (0.30 * OPENROUTER_FEE, 2.50 * OPENROUTER_FEE),
+    "deepseek-v4-flash-or": (0.09 * OPENROUTER_FEE, 0.18 * OPENROUTER_FEE),
 }
 
 

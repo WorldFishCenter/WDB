@@ -1,8 +1,9 @@
 """Tiny .env loader for the model_eval harness (read-only over the repo .env).
 
-Reads the two keys the eval needs (ANTHROPIC_API_KEY, GEMINI_API_KEY) from the
-repo-root .env WITHOUT printing them. Never writes, never mutates os.environ for
-anything but this process. Mirrors the isolation posture of proof_a/proof_c.
+Reads the keys the eval needs (ANTHROPIC_API_KEY, GEMINI_API_KEY, and — for the
+OpenRouter-gateway arm — OPENROUTER_API_KEY) from the repo-root .env WITHOUT
+printing them. Never writes, never mutates os.environ for anything but this
+process. Mirrors the isolation posture of proof_a/proof_c.
 """
 from __future__ import annotations
 
@@ -42,3 +43,9 @@ def gemini_key() -> str | None:
         or os.environ.get("GEMINI_API_KEY")
         or os.environ.get("GEMINAI_API_KEY")
     )
+
+
+def openrouter_key() -> str | None:
+    # The gateway key for every non-Anthropic candidate in the OpenRouter arm.
+    # STOP-and-report is handled by the caller (reach_probe) when it is absent.
+    return _E.get("OPENROUTER_API_KEY") or os.environ.get("OPENROUTER_API_KEY")

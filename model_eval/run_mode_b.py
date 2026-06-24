@@ -51,7 +51,9 @@ def _strip_md(t: str) -> str:
 
 
 def _system(backend) -> str:
-    return MODE_B_GEMINI if backend.provider == "gemini" else SYSTEM_PROMPT
+    # Non-Claude (native Gemini + every OpenRouter slug) -> the neutral re-expression;
+    # Claude models -> the pinned synth prompt.
+    return MODE_B_GEMINI if backend.provider in ("gemini", "openrouter") else SYSTEM_PROMPT
 
 
 def run_model(backend) -> dict:
@@ -100,13 +102,17 @@ def gate_check() -> dict:
     return {"empty_refused": not empty.ok, "reason": empty.reason}
 
 
-def main() -> int:
+def main(models=None, suffix="") -> int:
+    """Default (no args) reproduces #16: baseline Sonnet + Haiku + native Gemini ->
+    results/mode_b.json. The OpenRouter arm passes its own list + suffix."""
     RAW.mkdir(exist_ok=True)
     RESULTS.mkdir(exist_ok=True)
     report = {"gate": gate_check(), "models": []}
-    for b in [backends.sonnet(), backends.haiku(), backends.gemini_flash()]:
+    if models is None:
+        models = [backends.sonnet(), backends.haiku(), backends.gemini_flash()]
+    for b in models:
         report["models"].append(run_model(b))
-    (RESULTS / "mode_b.json").write_text(json.dumps(report, indent=2, default=str))
+    (RESULTS / f"mode_b{suffix}.json").write_text(json.dumps(report, indent=2, default=str))
 
     print(f"\n{'='*92}\nSUMMARY\n{'='*92}")
     for m in report["models"]:
@@ -114,7 +120,7 @@ def main() -> int:
         print(f"  {m['model']:18} covered={'PASS' if m['covered']['pass'] else 'FAIL'}  "
               f"overclaim={'PASS' if m['overclaim']['pass'] else 'FAIL'}  "
               f"${c['usd_per_op']:.5f}/op")
-    print(f"\nwrote {RESULTS / 'mode_b.json'}")
+    print(f"\nwrote {RESULTS / f'mode_b{suffix}.json'}")
     return 0
 
 

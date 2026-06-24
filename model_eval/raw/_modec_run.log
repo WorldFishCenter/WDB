@@ -1,0 +1,61 @@
+GROUND TRUTH (executed from recorded Opus resolutions):
+   Average weight of an individual catch in Kwale?    -> 13.86
+   Average CPUE in Kwale district?                    -> 1.64
+   Average trip duration for Gill Net trips in Zanzib -> 7.62
+   Average total catch per trip in Kwale?             -> 31.88
+   Average total catch per trip in Inhambane?         -> 441.18
+   Average crude protein across fish-meal ingredients -> 62.62
+
+====================================================================================
+MODE C — opus-4.8
+====================================================================================
+  [PASS       ] Average weight of an individual catch in Kwale correct figure 13.86 (truth 13.86)
+  [PASS       ] Average CPUE in Kwale district?                derived CPUE flagged + executes (1.64)
+  [PASS       ] Average trip duration for Gill Net trips?      correctly asked to disambiguate
+  [PASS       ] Average trip duration for Gill Net trips in Za correct figure 7.62 (truth 7.62)
+  [PASS       ] Average total catch per trip in Kwale?         correct figure 31.88 (truth 31.88)
+  [PASS       ] Average total catch per trip in Inhambane?     correct figure 441.18 (truth 441.18)
+  [PASS       ] Average catch in Kisumu county?                correctly refused: Kisumu is not among the GAUL level-1 county values 
+  [PASS       ] Average wind speed on Kenya trips?             correctly refused: No wind speed column exists in the Kenya trips tabl
+  [PASS       ] Average crude protein across fish-meal ingredi correct figure 62.62 (truth 62.62)
+
+====================================================================================
+MODE C — haiku-4.5
+====================================================================================
+  [PASS       ] Average weight of an individual catch in Kwale correct figure 13.86 (truth 13.86)
+  [FAIL/reason] Average CPUE in Kwale district?                gate refused: value 'Kwale' is not in gaul_2_name's enumerated domain 
+  [PASS       ] Average trip duration for Gill Net trips?      correctly asked to disambiguate
+  [PASS       ] Average trip duration for Gill Net trips in Za correct figure 7.62 (truth 7.62)
+  [PASS       ] Average total catch per trip in Kwale?         correct figure 31.88 (truth 31.88)
+  [PASS       ] Average total catch per trip in Inhambane?     correct figure 441.18 (truth 441.18)
+  [PASS       ] Average catch in Kisumu county?                correctly refused: Kisumu county is not present in any WDB table. The 
+  [PASS       ] Average wind speed on Kenya trips?             correctly refused: Wind speed is not recorded in any WDB table. The Pe
+  [FAIL/reason] Average crude protein across fish-meal ingredi expected a resolution, got CannotResolve
+
+====================================================================================
+MODE C — gemini-2.5-flash
+====================================================================================
+  [PASS       ] Average weight of an individual catch in Kwale correct figure 13.86 (truth 13.86)
+  [PASS       ] Average CPUE in Kwale district?                derived CPUE flagged + executes (1.64)
+  [PASS       ] Average trip duration for Gill Net trips?      correctly asked to disambiguate
+  [PASS       ] Average trip duration for Gill Net trips in Za correct figure 7.62 (truth 7.62)
+  [PASS       ] Average total catch per trip in Kwale?         correct figure 31.88 (truth 31.88)
+  [PASS       ] Average total catch per trip in Inhambane?     correct figure 441.18 (truth 441.18)
+  [PASS       ] Average catch in Kisumu county?                correctly refused: The specified county 'Kisumu' is not found in any o
+  [PASS       ] Average wind speed on Kenya trips?             correctly refused: The available data catalog does not contain any inf
+  [FAIL/reason] Average crude protein across fish-meal ingredi gate refused: value 'Fish meal' is not distinctive — it matches 2 tabl
+
+====================================================================================
+SUMMARY
+====================================================================================
+  opus-4.8           9/9 pass  grain-trap=PASS  $0.06273/op (in 11223 / out 264 tok)
+  haiku-4.5          7/9 pass  grain-trap=PASS  $0.00974/op (in 8372 / out 274 tok)
+  gemini-2.5-flash   8/9 pass  grain-trap=PASS  $0.00397/op (in 8004 / out 627 tok)
+
+NAIVE DIAGNOSTIC (no guard — does the model get grain/CPUE right on its own?):
+  opus-4.8           {'grain_Q4': {'grain_key': 'trip_id', 'derived': False, 'gate_ok': True, 'gate_reason': '', 'label': 'value'}, 'cpue_Q2': {'grain_key': 'trip_id', 'derived': True, 'gate_ok': True, 'gate_reason': '', 'label': 'cpue'}}
+  haiku-4.5          {'grain_Q4': {'grain_key': 'trip_id', 'derived': False, 'gate_ok': True, 'gate_reason': '', 'label': 'value'}, 'cpue_Q2': {'grain_key': 'trip_id', 'derived': True, 'gate_ok': False, 'gate_reason': "value 'Kwale' is not in gaul_2_name's enumerated domain ({Changamwe, Garsen, Kilifi North, Kilifi South, Kinango, Kisauni, Lamu East, Lamu West, Likoni, Lunga Lunga, Magarini, Malindi, Matuga, Msambweni, Mvita, Nyali})", 'label': 'cpue'}}
+  gemini-2.5-flash   {'grain_Q4': {'grain_key': 'trip_id', 'derived': False, 'gate_ok': True, 'gate_reason': '', 'label': 'Average total catch per trip'}, 'cpue_Q2': {'grain_key': 'trip_id', 'derived': True, 'gate_ok': False, 'gate_reason': 'derived metric without a surfaced denominator/assumption (a derived formula must register its choice, never a proxy)', 'label': 'CPUE'}}
+
+wrote /Users/lore/Desktop/work/wf_projects/WDB/model_eval/results/mode_c.json
+EXIT=0

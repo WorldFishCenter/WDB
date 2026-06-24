@@ -489,3 +489,205 @@
   flex-wrap: wrap;
   gap: var(--wf-space-2);
 }
+
+// Toggle layout switcher
+.toggleWrap {
+  margin-left: auto;
+  display: inline-flex;
+  background: var(--wf-color-gray-100);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-sm);
+  padding: 2px;
+  align-self: center;
+}
+
+.toggleBtn {
+  border: none;
+  background: transparent;
+  padding: 3px 12px;
+  font-size: var(--wf-font-3xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--wf-color-gray-500);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--wf-color-gray-800);
+  }
+}
+
+.toggleActive {
+  background: var(--wf-color-white);
+  color: var(--wf-color-gray-900) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+// ---- Summary Statistics Bar -------------------------------------------------
+.summaryBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  background: var(--wf-bg-elevated);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-md);
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.summaryLabel {
+  font-size: var(--wf-font-3xs);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--wf-text-muted);
+  margin-right: 6px;
+}
+
+.summaryChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: var(--wf-radius-pill);
+  font-size: var(--wf-font-xxs);
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.summaryChipActive {
+  border-color: currentColor;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.summaryChipCount {
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-font-3xs);
+  opacity: 0.7;
+}
+
+.summaryTotal {
+  margin-left: auto;
+  font-size: var(--wf-font-xxs);
+  color: var(--wf-text-muted);
+  font-family: var(--wf-font-mono);
+}
+
+// ---- Accordion Sections ----------------------------------------------------
+.accordion {
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-md);
+  overflow: hidden;
+  background: var(--wf-bg-elevated);
+  box-shadow: var(--wf-shadow-soft);
+  transition: box-shadow 0.2s ease;
+
+  & + & {
+    margin-top: 10px;
+  }
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--wf-color-gray-50);
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--wf-color-gray-100);
+  }
+}
+
+.accordionChevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  color: var(--wf-color-gray-400);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.accordionChevronOpen {
+  transform: rotate(90deg);
+}
+
+.accordionModeLine {
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.accordionTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-font-sm);
+  font-weight: 700;
+  color: var(--wf-color-gray-800);
+  flex: 1;
+}
+
+.accordionCount {
+  font-size: var(--wf-font-3xs);
+  font-weight: 700;
+  color: var(--wf-color-gray-500);
+  background: var(--wf-color-gray-200);
+  border-radius: var(--wf-radius-pill);
+  padding: 2px 10px;
+  font-family: var(--wf-font-mono);
+}
+
+.accordionContent {
+  padding: 16px 18px 18px;
+  animation: accordionSlideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes accordionSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---- Claims Multi-Column Grid -----------------------------------------------
+.claimsGrid {
+  column-count: 1;
+  column-gap: 14px;
+
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 1200px) {
+    column-count: 3;
+  }
+}
+
+.claimsGridItem {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
+

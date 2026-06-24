@@ -1,0 +1,178 @@
+{
+  "Average weight of an individual catch in Kwale?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Kwale",
+    "metric_column": "catch_kg",
+    "grain_key": null,
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "notes": "Question asks per individual catch item, which matches the row grain (one row = one catch item), so no collapse to trip_id is needed. Uses per-catch catch_kg, not the trip-level tot_catch_kg.",
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average CPUE in Kwale district?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Kwale",
+    "metric_column": null,
+    "metric_label": "cpue",
+    "derived_formula": "tot_catch_kg / trip_duration_hrs",
+    "derived_inputs": [
+      "tot_catch_kg",
+      "trip_duration_hrs"
+    ],
+    "assumptions": [
+      "CPUE computed per trip as total catch weight (kg) divided by trip duration (hours); collapse catch rows to one row per trip_id first since both inputs are trip-level.",
+      "Denominator chosen as trip_duration_hrs; alternatives: per n_fishers (catch per fisher) or per fisher-hour (n_fishers * trip_duration_hrs).",
+      "Trips with missing or zero trip_duration_hrs excluded."
+    ],
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "candidates": []
+  },
+  "Average trip duration for Gill Net trips?": {
+    "outcome": "needs_disambiguation",
+    "reason": "The gear value 'Gill Net' exists in all three sister Peskas trip tables (Kenya, Mozambique, Zanzibar) and nothing in the question pins a single country/region.",
+    "candidates": [
+      "peskas/kenya_validated_trips.csv",
+      "peskas/mozambique_validated_trips.csv",
+      "peskas/zanzibar_validated_trips.csv"
+    ],
+    "pinned_by": "Gill Net",
+    "aggregation": "AVG",
+    "metric_column": "trip_duration_hrs",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gear",
+        "op": "=",
+        "value": "Gill Net"
+      }
+    ],
+    "derived_inputs": [],
+    "assumptions": []
+  },
+  "Average trip duration for Gill Net trips in Zanzibar?": {
+    "outcome": "resolve",
+    "table": "peskas/zanzibar_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Zanzibar",
+    "metric_column": "trip_duration_hrs",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gear",
+        "op": "=",
+        "value": "Gill Net"
+      }
+    ],
+    "notes": "Collapse to one row per trip_id before averaging, since trip_duration_hrs is a trip-level field repeated across catch rows.",
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average total catch per trip in Kwale?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Kwale",
+    "metric_column": "tot_catch_kg",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "assumptions": "tot_catch_kg is a trip-level field; collapse to one row per trip_id before averaging to avoid weighting trips by their number of catch items.",
+    "notes": "Kwale is a Kenya GAUL level-1 county, uniquely pinning the Kenya table.",
+    "derived_inputs": [],
+    "candidates": []
+  },
+  "Average total catch per trip in Inhambane?": {
+    "outcome": "resolve",
+    "table": "peskas/mozambique_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Inhambane",
+    "metric_column": "tot_catch_kg",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Inhambane"
+      }
+    ],
+    "assumptions": [
+      "Collapse to one row per trip_id (tot_catch_kg is trip-level and repeats across catch rows) before averaging.",
+      "Interpreting 'total catch' as total catch weight (tot_catch_kg); could alternatively mean value (tot_catch_price)."
+    ],
+    "notes": "Inhambane is a GAUL level-1 province unique to the Mozambique table.",
+    "derived_inputs": [],
+    "candidates": []
+  },
+  "Average catch in Kisumu county?": {
+    "outcome": "cannot_resolve",
+    "reason": "Kisumu is not among the GAUL level-1 county values in kenya_validated_trips.csv (valid values: Kilifi, Kwale, Lamu, Mombasa, Tana River \u2014 all coastal counties). Kisumu is an inland lakeside county not present in any catalog table.",
+    "pinned_by": "Kisumu",
+    "filters": [],
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average wind speed on Kenya trips?": {
+    "outcome": "cannot_resolve",
+    "reason": "No wind speed column exists in the Kenya trips table (or any catalog table). Available trip fields are location, gear, vessel, effort (n_fishers, trip_duration_hrs), and per-catch detail \u2014 none capture wind or weather conditions.",
+    "table": null,
+    "pinned_by": "Kenya",
+    "filters": [],
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average crude protein across fish-meal ingredients?": {
+    "outcome": "resolve",
+    "table": "fasa/FICD_feed_ingredient_composition_database.csv",
+    "aggregation": "AVG",
+    "pinned_by": "crude_protein_percent",
+    "metric_column": "quantity",
+    "grain_key": null,
+    "filters": [
+      {
+        "column": "ingredient",
+        "op": "=",
+        "value": "crude_protein_percent"
+      },
+      {
+        "column": "description",
+        "op": "contains",
+        "value": "Fish meal"
+      }
+    ],
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [
+      "Fish-meal ingredients identified by matching 'Fish meal' in the description column; each (code) row already carries one crude_protein_percent value so no pre-collapse needed.",
+      "Averaging unweighted across matching ingredient codes (alternative: weight by some production volume, not available here)."
+    ],
+    "metric_label": "average crude_protein_percent of fish-meal ingredients",
+    "notes": "The misleadingly named 'ingredient' column is the parameter name; crude protein is stored as 'crude_protein_percent' (in %).",
+    "candidates": []
+  }
+}

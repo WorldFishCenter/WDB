@@ -80,20 +80,26 @@ def run_model(backend) -> dict:
     return out
 
 
-def main() -> int:
+def main(models=None, suffix="") -> int:
+    """Default (no args) reproduces #16: Opus + Haiku + native Gemini drafts ->
+    results/ingestion.json. The OpenRouter arm passes its own list + suffix; drafts
+    are written per-model (filename carries backend.name) so they never collide.
+    INGESTION_BRIEF is model-neutral already, so no per-provider prompt branch."""
     DRAFTS.mkdir(exist_ok=True)
     RESULTS.mkdir(exist_ok=True)
     report = {"models": []}
-    for b in [backends.opus(), backends.haiku(), backends.gemini_flash()]:
+    if models is None:
+        models = [backends.opus(), backends.haiku(), backends.gemini_flash()]
+    for b in models:
         report["models"].append(run_model(b))
-    (RESULTS / "ingestion.json").write_text(json.dumps(report, indent=2, default=str))
+    (RESULTS / f"ingestion{suffix}.json").write_text(json.dumps(report, indent=2, default=str))
     print(f"\n{'='*92}\nSUMMARY (structural proxies only — verdict is a human read of ingestion_drafts/)\n{'='*92}")
     for m in report["models"]:
         c = m["cost"]
         leaks = sum(len(d["proxies"]["shape_word_leak"]) for d in m["docs"].values())
         miss = sum(len(d["proxies"]["sections_missing"]) for d in m["docs"].values())
         print(f"  {m['model']:18} missing_sections={miss} shape_leaks={leaks} ${c['usd_per_op']:.5f}/op")
-    print(f"\nwrote {RESULTS / 'ingestion.json'} + drafts in {DRAFTS}")
+    print(f"\nwrote {RESULTS / f'ingestion{suffix}.json'} + drafts in {DRAFTS}")
     return 0
 
 
