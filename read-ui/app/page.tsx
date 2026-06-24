@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { Header, type Health } from "@/components/Header";
 import { QueryForm } from "@/components/QueryForm";
 import { AnswerView } from "@/components/AnswerView";
 import { ModeBadge, ConfidenceTag } from "@/components/chips";
 import { SourceViewerProvider } from "@/components/source/SourceViewerProvider";
+import { GlobalGraphExplorer } from "@/components/GlobalGraphExplorer";
 import { askQuestion, ApiError } from "@/lib/api";
 import type { RouterAnswer } from "@/lib/contract";
 import styles from "./page.module.scss";
@@ -15,6 +16,42 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState<RouterAnswer | null>(null);
   const [error, setError] = useState<{ message: string; unreachable: boolean } | null>(null);
+
+  // States for Global Graph Explorer
+  const [globalGraphOpen, setGlobalGraphOpen] = useState(false);
+  const [rawGraphData, setRawGraphData] = useState<any | null>(null);
+
+  // Fetch full graph.json from local repository on mount
+  useEffect(() => {
+    fetch("/api/source?path=graphify-out/graph.json")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && !data.error && data.text) {
+          try {
+            const parsed = JSON.parse(data.text);
+            setRawGraphData(parsed);
+          } catch (err) {
+            console.error("Failed to parse graph.json payload:", err);
+          }
+        }
+      })
+      .catch((err) => console.error("Error fetching graph.json:", err));
+  }, []);
+
+  // Compute a fast-lookup map of node details
+  const globalNodeMap = useMemo(() => {
+    const map = new Map<string, { label: string; community: number; file_type?: string }>();
+    if (rawGraphData?.nodes) {
+      rawGraphData.nodes.forEach((n: any) => {
+        map.set(n.id, {
+          label: n.label || n.id,
+          community: typeof n.community === "number" ? n.community : 9,
+          file_type: n.file_type,
+        });
+      });
+    }
+    return map;
+  }, [rawGraphData]);
 
   const handleAsk = useCallback(async (question: string) => {
     setLoading(true);
@@ -45,7 +82,7 @@ export default function Home() {
 
   return (
     <SourceViewerProvider>
-      <Header health={health} />
+      <Header health={health} onExploreGraph={() => setGlobalGraphOpen(true)} />
 
       <section className={styles.hero}>
         <div className="wf-container">
@@ -76,7 +113,7 @@ export default function Home() {
           </div>
         )}
 
-        {!loading && !error && answer && <AnswerView answer={answer} />}
+        {!loading && !error && answer && <AnswerView answer={answer} globalNodeMap={globalNodeMap} />}
 
         {!loading && !error && !answer && (
           <div className={styles.idle}>
@@ -87,9 +124,17 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {globalGraphOpen && (
+        <GlobalGraphExplorer
+          onClose={() => setGlobalGraphOpen(false)}
+          graphData={rawGraphData}
+        />
+      )}
     </SourceViewerProvider>
   );
 }
+
 
 /** Explains the at-a-glance honesty signals the answer view uses. */
 function Legend() {

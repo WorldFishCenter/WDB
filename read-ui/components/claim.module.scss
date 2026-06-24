@@ -4,6 +4,14 @@
   border-radius: var(--wf-radius-md);
   padding: 16px;
   box-shadow: var(--wf-shadow-soft);
+  // Prevent card from being split across columns in masonry layout
+  break-inside: avoid;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(16, 24, 40, 0.1), 0 1px 3px rgba(16, 24, 40, 0.08);
+    transform: translateY(-1px);
+  }
 }
 
 .head {

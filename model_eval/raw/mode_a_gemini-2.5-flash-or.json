@@ -1,0 +1,507 @@
+{
+  "Q1": {
+    "answer": "Peskas is connected to a variety of entities, including being referenced by the paper \"How Much Is Too Much Information? Digital Feedback on Fisher Behavior (Kenya)\" and the Dataverse Project. It references concepts such as Fish & Aquatic-Food Nutrition, Zanzibar, WorldFish, and the Harvard Dataverse. Peskas also has several components, including the Peskas Automated Validation Engine, Peskas Tracks App, Peskas COASTS (regional analysis platform), Peskas Data Ingestion & Analytics Pipeline, peskas.timor.portal (R package), peskas.timor.pipeline (R package), Peskas Web Dashboard (Shiny), and Peskas History & Global Scaling Timeline. It is conceptually related to PeskAAS (Peskas Automated Analytics System) and the COASTS (Small Scale Fisheries Analysis Platform). Peskas is also associated with datasets like Mozambique Validated Trips, Zanzibar Validated Trips, and Kenya Validated Trips. It is referenced by FishBase, KoboToolbox, and the WIOMSA Data Harmonization Presentation (Oct 2025). Peskas is also connected to individuals like Alexander Tilley, who produced it, and is referenced by the Nairobi Convention, and countries such as Tanzania, Malawi, Timor-Leste, Mozambique, and Kenya. It is also related to the concept of Small-Scale Fisheries (SSF), the Asia-Africa BlueTech Superhighway (AABS), Fishery Nutrient Profile (FNP), ProFishBlue, and IUU Fishing Monitoring. The paper \"Fishery Nutrient Profiles for Nutrition-Sensitive SSF Management in Timor-Leste (Nature Food 2026)\" shares data with Peskas, and Beach Management Units (BMUs) also share data with Peskas. Additionally, Peskas is conceptually related to Functional Requirements for Electronic Data Collection Tools.",
+    "connected": true,
+    "cited_edges": [
+      {
+        "source": "ssf_research_digital_feedback_fisher_behavior_kenya_2025_paper",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_fish_nutrition",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_dataverse",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_zanzibar",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_worldfish",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_validation_engine",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_mozambique_validated_trips_mozambique_validated_trips",
+        "relation": "produced_by",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "peskas_harvard_dataverse",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_fishery_nutrient_profiles_timor_leste_naturefood_2026",
+        "relation": "shares_data_with",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_timeline",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "conceptually_related_to",
+        "target": "peskas_peskaas",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_fishbase",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_tracks_app",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_coasts_platform",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "peskas_fad",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_coasts_platform",
+        "relation": "conceptually_related_to",
+        "target": "peskas_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_timor_portal_pkg",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_nairobi_convention",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_ingestion_pipeline",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_timor_pipeline_pkg",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "conceptually_related_to",
+        "target": "data_harmonization_digital_data_collection_requirements",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_tanzania",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "produced_by",
+        "target": "peskas_alex_tilley",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_kobotoolbox",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_malawi",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_monitoring_system_slides",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "ssf_research_digital_feedback_kenya_bmu",
+        "relation": "shares_data_with",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_automated_analytics_softwarex_2025",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_zanzibar_validated_trips_zanzibar_validated_trips",
+        "relation": "produced_by",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_timor_leste",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_small_scale_fisheries",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_aabs",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "shared_fishery_nutrient_profile",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_profishblue",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_wiomsa_harmonization_oct2025_presentation",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_kenya_validated_trips_kenya_validated_trips",
+        "relation": "produced_by",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_mozambique",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_kenya",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_dashboard",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "peskas_iuu_fishing",
+        "confidence": "EXTRACTED"
+      }
+    ],
+    "inferred_flags": [
+      {
+        "source": "peskas_coasts_platform",
+        "relation": "part_of",
+        "target": "peskas_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "data_harmonization_coasts_platform",
+        "relation": "conceptually_related_to",
+        "target": "peskas_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "conceptually_related_to",
+        "target": "data_harmonization_digital_data_collection_requirements",
+        "confidence": "INFERRED"
+      }
+    ]
+  },
+  "Q2": {
+    "answer": "Peskas is connected to the WIO SSF Data Harmonization Initiative in several ways. The Data Harmonization Initiative references Peskas as a case study in its WIOMSA Data Harmonization Presentation. Specifically, Peskas shares data via Dataverse, uses KoboToolbox for fishing trip information, and is referenced in relation to FishBase for data mining. Peskas is also conceptually related to the COASTS (Small Scale Fisheries Analysis Platform) within the context of the Data Harmonization Initiative, and Peskas is presented as an exemplar digital SSF monitoring system, conceptually related to the Functional Requirements for Electronic Data Collection Tools. Both Peskas and the WIO SSF Data Harmonization Initiative are associated with WorldFish, the Nairobi Convention, and Small-Scale Fisheries (SSF).",
+    "connected": true,
+    "cited_edges": [
+      {
+        "source": "data_harmonization_wiomsa_harmonization_oct2025_presentation",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_dataverse",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_kobotoolbox",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_fishbase",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_coasts_platform",
+        "relation": "conceptually_related_to",
+        "target": "peskas_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "conceptually_related_to",
+        "target": "data_harmonization_digital_data_collection_requirements",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_worldfish",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "references",
+        "target": "shared_worldfish",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_nairobi_convention",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "references",
+        "target": "shared_nairobi_convention",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_small_scale_fisheries",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "references",
+        "target": "shared_small_scale_fisheries",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_wiomsa_harmonization_oct2025_presentation",
+        "relation": "part_of",
+        "target": "data_harmonization_hub",
+        "confidence": "EXTRACTED"
+      }
+    ],
+    "inferred_flags": [
+      {
+        "source": "data_harmonization_coasts_platform",
+        "relation": "conceptually_related_to",
+        "target": "peskas_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "peskas_hub",
+        "relation": "conceptually_related_to",
+        "target": "data_harmonization_digital_data_collection_requirements",
+        "confidence": "INFERRED"
+      }
+    ]
+  },
+  "Q4": {
+    "answer": "The provided subgraph does not contain any edges connecting the FASA Feed Formulation Engine and the WIO SSF Data Harmonization Initiative. Therefore, based on the available information, I cannot describe a relationship between them.",
+    "connected": false,
+    "cited_edges": [],
+    "inferred_flags": []
+  },
+  "Q6": {
+    "answer": "The provided subgraph does not contain any direct or indirect connections between Peskas and the FASA Feed Formulation Engine. Therefore, I cannot describe how they relate based on the given information.",
+    "connected": false,
+    "cited_edges": [],
+    "inferred_flags": []
+  },
+  "Q7": {
+    "answer": "Peskas and the Digital Transformation Accelerator are connected through a shared reference to WorldFish. Both Peskas and the Digital Transformation Accelerator reference WorldFish.",
+    "connected": true,
+    "cited_edges": [
+      {
+        "source": "peskas_hub",
+        "relation": "references",
+        "target": "shared_worldfish",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "dta_hub",
+        "relation": "references",
+        "target": "shared_worldfish",
+        "confidence": "EXTRACTED"
+      }
+    ],
+    "inferred_flags": []
+  },
+  "Q8": {
+    "answer": "The provided subgraph does not contain any direct or indirect connections between the Digital Transformation Accelerator and the FASA Feed Formulation Engine. Therefore, based on the available information, I cannot describe how they relate.",
+    "connected": false,
+    "cited_edges": [],
+    "inferred_flags": []
+  },
+  "Q9": {
+    "answer": "The WIO SSF Data Harmonization Initiative is conceptually related to the Digital Transformation Accelerator (DTA) and its Data Ecosystem (AoW1) through the shared concept of FAIR / AI-ready Data. The DTA also has a conceptual relationship with the WIO SSF Data Harmonization Initiative. Additionally, the WIO SSF Data Harmonization Initiative references the Aquatic Food Ontology (AQFO), which is also referenced by the Peskas Data Ingestion & Analytics Pipeline. The initiative also references the Peskas initiative, as seen in the WIOMSA Data Harmonization Presentation (Oct 2025). The CGIAR Data Harmonization Workshop & Guidelines are conceptually related to the WIO SSF Data Harmonization Initiative, and the initiative itself references the broader concept of Fisheries Data Harmonization. The Peskas Kenya Validated Trips dataset and Mozambique Validated Trips dataset are also conceptually related to Fisheries Data Harmonization.",
+    "connected": true,
+    "cited_edges": [
+      {
+        "source": "data_harmonization_hub",
+        "relation": "conceptually_related_to",
+        "target": "shared_fair_ai_ready_data",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "dta_aow_data_ecosystem",
+        "relation": "references",
+        "target": "shared_fair_ai_ready_data",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "conceptually_related_to",
+        "target": "dta_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "dta_hub",
+        "relation": "references",
+        "target": "shared_fair_ai_ready_data",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "references",
+        "target": "shared_aquatic_food_ontology",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_ingestion_pipeline",
+        "relation": "references",
+        "target": "shared_aquatic_food_ontology",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_wiomsa_harmonization_oct2025_presentation",
+        "relation": "references",
+        "target": "peskas_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "data_harmonization_wiomsa_harmonization_oct2025_presentation",
+        "relation": "part_of",
+        "target": "data_harmonization_hub",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "dta_data_harmonization_workshop",
+        "relation": "conceptually_related_to",
+        "target": "data_harmonization_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "references",
+        "target": "shared_data_harmonization",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_kenya_validated_trips_kenya_validated_trips",
+        "relation": "conceptually_related_to",
+        "target": "shared_data_harmonization",
+        "confidence": "EXTRACTED"
+      },
+      {
+        "source": "peskas_mozambique_validated_trips_mozambique_validated_trips",
+        "relation": "conceptually_related_to",
+        "target": "shared_data_harmonization",
+        "confidence": "EXTRACTED"
+      }
+    ],
+    "inferred_flags": [
+      {
+        "source": "data_harmonization_hub",
+        "relation": "conceptually_related_to",
+        "target": "shared_fair_ai_ready_data",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "data_harmonization_hub",
+        "relation": "conceptually_related_to",
+        "target": "dta_hub",
+        "confidence": "INFERRED"
+      },
+      {
+        "source": "dta_data_harmonization_workshop",
+        "relation": "conceptually_related_to",
+        "target": "data_harmonization_hub",
+        "confidence": "INFERRED"
+      }
+    ]
+  },
+  "Q10": {
+    "answer": "The provided subgraph does not contain any information about FASA Feed Formulation Engine sharing methods or data with other initiatives. Therefore, I cannot identify any such connections.",
+    "connected": false,
+    "cited_edges": [],
+    "inferred_flags": []
+  }
+}

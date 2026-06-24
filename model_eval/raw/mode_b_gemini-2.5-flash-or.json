@@ -1,0 +1,4 @@
+{
+  "covered": "The platform automatically validates small-scale fishery catch survey data through outlier detection and error identification [1]. It also includes an email alert system to maintain data quality in near real-time [1].",
+  "overclaim": "This question cannot be answered from the given passages. The passages mention that Peskas uses outlier detection but do not specify the machine-learning algorithm used or its measured precision [1]."
+}

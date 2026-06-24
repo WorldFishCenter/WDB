@@ -1,27 +1,66 @@
+import { useState } from "react";
 import type { Association } from "@/lib/contract";
 import { ConfidenceTag } from "./chips";
 import { SourceLink } from "./source/SourceLink";
+import { GraphViewer } from "./GraphViewer";
+import { useSourceViewer } from "./source/SourceViewerProvider";
 import styles from "./panes.module.scss";
 
+interface AssociationsPaneProps {
+  associations: Association[];
+  globalNodeMap?: Map<string, { label: string; community: number; file_type?: string; source_file?: string }>;
+}
+
+
 /**
- * The "how this connects to everything else" view — the graph edges around the answer's entities
- * (the merged `associations` payload). Grouped by relation; every edge shows its EXTRACTED/
- * INFERRED provenance and links to the note that stated it. This is the cross-initiative value
- * the graph exists for, surfaced alongside the answer.
+ * Full-width associations section — graph is the visual hero with a toggle to switch
+ * to the traditional grouped list view. Simplified from the old cramped sidebar layout.
  */
-export function AssociationsPane({ associations }: { associations: Association[] }) {
+export function AssociationsPane({ associations, globalNodeMap }: AssociationsPaneProps) {
+  const { openSource } = useSourceViewer();
+  const [viewMode, setViewMode] = useState<"graph" | "list">("graph");
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+
   const groups = groupByRelation(associations);
 
   return (
     <section className={styles.pane} aria-label="Graph associations">
       <div className={styles.paneHead}>
-        <span className={styles.paneTitle}>Associations</span>
-        <span className={styles.count}>{associations.length}</span>
+        <span className={styles.paneTitle}>Knowledge Graph</span>
+        <span className={styles.count}>{associations.length} connections</span>
+        
+        {/* Toggle switch for Graph vs List view */}
+        {associations.length > 0 && (
+          <div className={styles.toggleWrap}>
+            <button
+              className={`${styles.toggleBtn} ${viewMode === "graph" ? styles.toggleActive : ""}`}
+              onClick={() => setViewMode("graph")}
+              aria-label="Switch to Graph View"
+            >
+              Graph
+            </button>
+            <button
+              className={`${styles.toggleBtn} ${viewMode === "list" ? styles.toggleActive : ""}`}
+              onClick={() => setViewMode("list")}
+              aria-label="Switch to List View"
+            >
+              List
+            </button>
+          </div>
+        )}
       </div>
-      <p className={styles.paneSub}>How the answer’s entities connect across the knowledge graph.</p>
+      <p className={styles.paneSub}>How the answer&apos;s entities connect across the knowledge graph.</p>
 
       {associations.length === 0 ? (
         <div className={styles.empty}>No graph associations for this answer.</div>
+      ) : viewMode === "graph" ? (
+        <GraphViewer
+          associations={associations}
+          globalNodeMap={globalNodeMap}
+          onSelectNode={setSelectedNodeId}
+          selectedNodeId={selectedNodeId}
+          onViewSource={openSource}
+        />
       ) : (
         groups.map(([relation, edges]) => (
           <div className={styles.relGroup} key={relation}>

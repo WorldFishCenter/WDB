@@ -1,0 +1,164 @@
+{
+  "Average weight of an individual catch in Kwale?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Kwale",
+    "metric_column": "catch_kg",
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "grain_key": null,
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "candidates": []
+  },
+  "Average CPUE in Kwale district?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Kwale",
+    "metric_column": null,
+    "derived_formula": "tot_catch_kg / trip_duration_hrs",
+    "derived_inputs": [
+      "tot_catch_kg",
+      "trip_duration_hrs"
+    ],
+    "assumptions": "CPUE defined as total catch weight (kg) per trip duration (hours). Alternative definitions could use n_fishers or n_catch as effort; trip_duration_hrs chosen as the standard effort measure.",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "candidates": []
+  },
+  "Average trip duration for Gill Net trips?": {
+    "outcome": "needs_disambiguation",
+    "candidates": [
+      "peskas/kenya_validated_trips.csv",
+      "peskas/mozambique_validated_trips.csv",
+      "peskas/zanzibar_validated_trips.csv"
+    ],
+    "filters": [],
+    "derived_inputs": [],
+    "assumptions": []
+  },
+  "Average trip duration for Gill Net trips in Zanzibar?": {
+    "outcome": "resolve",
+    "table": "peskas/zanzibar_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Zanzibar",
+    "metric_column": "trip_duration_hrs",
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gear",
+        "op": "=",
+        "value": "Gill Net"
+      }
+    ],
+    "candidates": []
+  },
+  "Average total catch per trip in Kwale?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Kwale",
+    "metric_column": "tot_catch_kg",
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "candidates": []
+  },
+  "Average total catch per trip in Inhambane?": {
+    "outcome": "resolve",
+    "table": "peskas/mozambique_validated_trips.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Inhambane",
+    "metric_column": "tot_catch_kg",
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Inhambane"
+      }
+    ],
+    "candidates": []
+  },
+  "Average catch in Kisumu county?": {
+    "outcome": "cannot_resolve",
+    "table": null,
+    "aggregation": "AVG",
+    "pinned_by": null,
+    "metric_column": null,
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "notes": "The user request mentions 'Kisumu county'. The only tables with GAUL administrative names are the Peskas validated trips for Kenya, Mozambique, and Zanzibar. The Kenya table lists counties (gaul_1_name) as Kilifi, Kwale, Lamu, Mombasa, and Tana River \u2014 none is 'Kisumu'. The Mozambique table lists provinces, none named Kisumu. The Zanzibar table lists regions, none named Kisumu. No other table contains a 'county' or 'gaul' column. 'Kisumu' does not appear in any table's columns or distinct values, so this question cannot be resolved with the given catalog.",
+    "grain_key": null,
+    "filters": [],
+    "candidates": []
+  },
+  "Average wind speed on Kenya trips?": {
+    "outcome": "cannot_resolve",
+    "table": null,
+    "aggregation": null,
+    "pinned_by": "Kenya",
+    "metric_column": null,
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "grain_key": null,
+    "filters": [],
+    "candidates": [],
+    "notes": "No wind speed column exists in any table in the catalog."
+  },
+  "Average crude protein across fish-meal ingredients?": {
+    "outcome": "resolve",
+    "table": "fasa/FICD_feed_ingredient_composition_database.csv",
+    "aggregation": "AVG",
+    "pinned_by": "Fish meal",
+    "metric_column": "quantity",
+    "derived_formula": null,
+    "derived_inputs": [],
+    "assumptions": [],
+    "grain_key": null,
+    "filters": [
+      {
+        "column": "ingredient",
+        "op": "=",
+        "value": "crude_protein_percent"
+      },
+      {
+        "column": "description",
+        "op": "contains",
+        "value": "Fish meal"
+      }
+    ],
+    "candidates": [],
+    "notes": "Averaged nutrient composition parameter 'crude_protein_percent' over ingredient codes whose description contains 'Fish meal'. Unit is percent."
+  }
+}

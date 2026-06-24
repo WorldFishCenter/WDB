@@ -88,3 +88,27 @@
 .dotUnknown {
   background: var(--wf-text-slate-400);
 }
+
+.exploreBtn {
+  background: rgba(87, 179, 209, 0.1);
+  border: 1px solid var(--wf-border-accent-medium);
+  color: var(--wf-accent);
+  padding: 6px 14px;
+  font-size: var(--wf-font-xxs);
+  font-weight: 700;
+  border-radius: var(--wf-radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 8px;
+
+  &:hover {
+    background: rgba(87, 179, 209, 0.25);
+    border-color: var(--wf-accent);
+    color: var(--wf-color-white);
+    box-shadow: 0 0 12px var(--wf-glow-accent);
+  }
+}
+
