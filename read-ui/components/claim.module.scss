@@ -1,31 +1,41 @@
 .card {
-  background: var(--wf-bg-elevated);
+  background: var(--wf-surface-2);
   border: 1px solid var(--wf-border);
   border-radius: var(--wf-radius-md);
-  padding: 16px;
+  padding: var(--wf-space-4);
   box-shadow: var(--wf-shadow-soft);
+  transition: border-color 0.2s ease, transform 0.15s ease;
+  min-width: 0;
+
+  &:hover {
+    border-color: var(--wf-border-strong);
+    transform: translateY(-1px);
+  }
 }
 
 .head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  gap: var(--wf-space-2);
+  margin-bottom: var(--wf-space-2);
 }
 
 .text {
   margin: 0;
-  font-size: var(--wf-font-md);
-  line-height: 1.55;
-  color: var(--wf-color-gray-900);
+  font-size: var(--wf-text-body-lg);
+  line-height: var(--wf-leading-normal);
+  color: var(--wf-text);
+  overflow-wrap: anywhere;
 }
 
+// Mode accent — a top hairline in the source-type hue.
 .modeA {
-  border-top: 2px solid var(--wf-mode-a);
+  border-top: 2px solid var(--wf-mode-a-line);
 }
 .modeB {
-  border-top: 2px solid var(--wf-mode-b);
+  border-top: 2px solid var(--wf-mode-b-line);
 }
 .modeC {
-  border-top: 2px solid var(--wf-mode-c);
+  border-top: 2px solid var(--wf-mode-c-line);
 }

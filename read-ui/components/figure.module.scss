@@ -1,48 +1,50 @@
 .figure {
   margin: 0;
-  background: var(--wf-bg-elevated);
+  background: var(--wf-surface-2);
   border: 1px solid var(--wf-border);
-  border-top: 2px solid var(--wf-mode-c);
+  border-top: 2px solid var(--wf-mode-c-line);
   border-radius: var(--wf-radius-md);
-  padding: 16px;
+  padding: var(--wf-space-4);
   box-shadow: var(--wf-shadow-soft);
 }
 
 .cap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--wf-space-3);
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: var(--wf-space-4);
 }
 
 .capKind {
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.06em;
   color: var(--wf-mode-c);
   background: var(--wf-mode-c-bg);
-  padding: 2px 10px;
+  padding: 2px var(--wf-space-3);
   border-radius: var(--wf-radius-pill);
 }
 
 .capAxes {
   font-family: var(--wf-font-heading);
-  font-size: var(--wf-font-sm);
+  font-size: var(--wf-text-body);
   font-weight: 600;
-  color: var(--wf-color-gray-800);
+  color: var(--wf-text-2);
+  overflow-wrap: anywhere;
 }
 
 .toggle {
   margin-left: auto;
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   font-weight: 600;
   color: var(--wf-mode-c);
   background: transparent;
-  border: 1px solid rgba(226, 149, 120, 0.5);
+  border: 1px solid var(--wf-mode-c-line);
   border-radius: var(--wf-radius-pill);
-  padding: 3px 12px;
+  padding: 3px var(--wf-space-3);
+  transition: background 0.15s ease;
 
   &:hover {
     background: var(--wf-mode-c-bg);
@@ -52,19 +54,19 @@
 .bars {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--wf-space-2);
 }
 
 .barRow {
   display: grid;
   grid-template-columns: 130px 1fr 64px;
   align-items: center;
-  gap: 10px;
+  gap: var(--wf-space-3);
 }
 
 .barLabel {
-  font-size: var(--wf-font-xxs);
-  color: var(--wf-color-gray-700);
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-3);
   text-align: right;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -72,7 +74,8 @@
 }
 
 .barTrack {
-  background: var(--wf-color-gray-100);
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
   border-radius: var(--wf-radius-pill);
   height: 18px;
   overflow: hidden;
@@ -82,32 +85,35 @@
   height: 100%;
   min-width: 2px;
   border-radius: var(--wf-radius-pill);
-  background: linear-gradient(90deg, var(--wf-color-orange-900), var(--wf-color-orange-500));
-  transition: width 0.4s ease;
+  background: linear-gradient(90deg, var(--wf-mode-c-line), var(--wf-mode-c));
+  box-shadow: 0 0 12px rgba(226, 149, 120, 0.3);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .barValue {
   font-family: var(--wf-font-mono);
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   font-weight: 700;
-  color: var(--wf-color-gray-800);
+  color: var(--wf-text);
   text-align: right;
 }
 
 .detail {
-  margin-top: 14px;
-  padding-top: 14px;
+  margin-top: var(--wf-space-4);
+  padding-top: var(--wf-space-4);
   border-top: 1px dashed var(--wf-border);
+  min-width: 0;
 }
 
 .sql {
-  margin: 0 0 10px;
-  padding: 12px;
-  background: var(--wf-surface-panel);
-  color: var(--wf-text-slate-200);
+  margin: 0 0 var(--wf-space-3);
+  padding: var(--wf-space-3);
+  background: var(--wf-surface-deep);
+  color: var(--wf-text-3);
   font-family: var(--wf-font-mono);
-  font-size: var(--wf-font-xxs);
-  line-height: 1.55;
+  font-size: var(--wf-text-caption);
+  line-height: var(--wf-leading-normal);
+  border: 1px solid var(--wf-border);
   border-radius: var(--wf-radius-sm);
   overflow-x: auto;
   white-space: pre;

@@ -1,70 +1,74 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: var(--wf-space-2);
+  margin-top: var(--wf-space-3);
 }
 
 .cite {
   border: 1px solid var(--wf-border);
   border-left-width: 3px;
   border-radius: var(--wf-radius-sm);
-  padding: 10px 12px;
-  background: var(--wf-color-white);
+  padding: var(--wf-space-3);
+  background: var(--wf-surface-1);
+  min-width: 0;
 }
 
 .citeA {
-  border-left-color: var(--wf-mode-a);
+  border-left-color: var(--wf-mode-a-line);
 }
 .citeB {
-  border-left-color: var(--wf-mode-b);
+  border-left-color: var(--wf-mode-b-line);
 }
 .citeC {
-  border-left-color: var(--wf-mode-c);
+  border-left-color: var(--wf-mode-c-line);
 }
 
 .citeHead {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: var(--wf-space-2);
+  margin-bottom: var(--wf-space-2);
 }
 
 .kind {
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   font-weight: 700;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--wf-text-muted);
 }
 
 .location {
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   font-family: var(--wf-font-mono);
-  color: var(--wf-color-gray-600);
-  background: var(--wf-color-gray-100);
-  padding: 1px 8px;
+  color: var(--wf-text-3);
+  background: var(--wf-surface-inset);
+  padding: 1px var(--wf-space-2);
   border-radius: var(--wf-radius-pill);
 }
 
-// Mode A triple
+// ---- Mode A — the graph edge triple ----------------------------------------
 .triple {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--wf-space-2);
   font-family: var(--wf-font-mono);
-  font-size: var(--wf-font-xxs);
-  margin-bottom: 8px;
+  font-size: var(--wf-text-caption);
+  margin-bottom: var(--wf-space-2);
 }
 
 .node {
-  background: var(--wf-color-gray-100);
+  background: var(--wf-surface-inset);
   border: 1px solid var(--wf-border);
   border-radius: var(--wf-radius-sm);
-  padding: 2px 7px;
-  color: var(--wf-color-gray-800);
+  padding: 2px var(--wf-space-2);
+  color: var(--wf-text-2);
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .rel {
@@ -73,72 +77,81 @@
 }
 
 .arrow {
-  color: var(--wf-color-gray-400);
+  color: var(--wf-accent);
+  flex: none;
 }
 
-// Mode B quote
+// ---- Mode B — the verbatim passage quote -----------------------------------
 .quote {
-  margin: 0 0 8px;
-  padding: 8px 12px;
+  margin: 0 0 var(--wf-space-2);
+  padding: var(--wf-space-2) var(--wf-space-3);
   border-left: 3px solid var(--wf-mode-b-line);
   background: var(--wf-mode-b-bg);
-  color: var(--wf-color-gray-800);
-  font-size: var(--wf-font-sm);
-  line-height: 1.55;
+  color: var(--wf-text-2);
+  font-size: var(--wf-text-body);
+  line-height: var(--wf-leading-normal);
   border-radius: 0 var(--wf-radius-sm) var(--wf-radius-sm) 0;
+  overflow-wrap: break-word;
 }
 
 .nodes {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
+  gap: var(--wf-space-2);
+  margin-top: var(--wf-space-2);
 }
 
 .nodesLabel {
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   color: var(--wf-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
 }
 
 .nodeChip {
   font-family: var(--wf-font-mono);
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   background: var(--wf-mode-a-bg);
-  color: var(--wf-color-green-1000);
-  padding: 1px 6px;
+  color: var(--wf-mode-a);
+  border: 1px solid var(--wf-border-accent-soft);
+  padding: 1px var(--wf-space-2);
   border-radius: var(--wf-radius-sm);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
-// Mode C computed
+// ---- Mode C — the SQL + its result rows -------------------------------------
 .toggle {
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   font-weight: 600;
   color: var(--wf-mode-c);
   background: var(--wf-mode-c-bg);
-  border: 1px solid rgba(226, 149, 120, 0.4);
+  border: 1px solid var(--wf-mode-c-line);
   border-radius: var(--wf-radius-pill);
-  padding: 3px 12px;
+  padding: 3px var(--wf-space-3);
+  transition: background 0.15s ease;
 
   &:hover {
-    background: var(--wf-color-white);
+    background: var(--wf-surface-inset-strong);
   }
 }
 
 .computed {
-  margin-bottom: 8px;
+  margin-bottom: var(--wf-space-2);
+  min-width: 0;
 }
 
 .sql {
-  margin: 0 0 10px;
-  padding: 12px;
-  background: var(--wf-surface-panel);
-  color: var(--wf-text-slate-200);
+  margin: 0 0 var(--wf-space-3);
+  padding: var(--wf-space-3);
+  background: var(--wf-surface-deep);
+  color: var(--wf-text-3);
   font-family: var(--wf-font-mono);
-  font-size: var(--wf-font-xxs);
-  line-height: 1.55;
+  font-size: var(--wf-text-caption);
+  line-height: var(--wf-leading-normal);
+  border: 1px solid var(--wf-border);
   border-radius: var(--wf-radius-sm);
   overflow-x: auto;
   white-space: pre;
@@ -153,26 +166,26 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
 
   th,
   td {
     text-align: left;
-    padding: 6px 10px;
+    padding: var(--wf-space-2) var(--wf-space-3);
     border-bottom: 1px solid var(--wf-border);
     white-space: nowrap;
   }
 
   th {
-    background: var(--wf-color-gray-50);
+    background: var(--wf-surface-inset);
     font-family: var(--wf-font-mono);
     font-weight: 700;
-    color: var(--wf-color-gray-600);
+    color: var(--wf-text-muted);
   }
 
   td {
     font-family: var(--wf-font-mono);
-    color: var(--wf-color-gray-800);
+    color: var(--wf-text-2);
   }
 
   tr:last-child td {
@@ -184,11 +197,13 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--wf-space-2);
+  min-width: 0;
 }
 
 .note {
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   color: var(--wf-text-muted);
   font-style: italic;
+  overflow-wrap: anywhere;
 }

@@ -1,56 +1,87 @@
 .wrap {
-  margin-top: 28px;
+  margin-top: var(--wf-space-7);
 }
 
+// ---- Question echo (full-width headline above the workspace) ----------------
 .echo {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  margin-bottom: 22px;
-  padding-bottom: 16px;
+  gap: var(--wf-space-3);
+  margin-bottom: var(--wf-space-6);
+  padding-bottom: var(--wf-space-4);
   border-bottom: 1px solid var(--wf-border);
 }
 
 .echoLabel {
   flex: none;
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--wf-text-muted);
+  transform: translateY(-2px);
 }
 
 .echoText {
   font-family: var(--wf-font-heading);
-  font-size: var(--wf-font-xl);
+  font-size: var(--wf-text-h2);
   font-weight: 600;
-  color: var(--wf-color-gray-900);
-  line-height: 1.35;
+  color: var(--wf-text);
+  line-height: var(--wf-leading-snug);
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
 }
 
-.grid {
+// ---- Balanced dual-view workspace (answer | graph, co-equal) -----------------
+// Two co-primary panes. The answer column scrolls; the graph stage is a sticky map that stays
+// in view, so the two read as peers that share the screen — not a panel + a sidebar.
+$header-h: 60px; // sticky app bar height
+
+.workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--wf-space-6);
   align-items: start;
 }
 
-.left,
-.right {
-  min-width: 0;
-}
-
-.right {
-  position: sticky;
-  top: 16px;
-}
-
-@media (max-width: 980px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+// One orchestrated reveal: the answer rises in, then the graph illuminates a beat later — the
+// "asking lights up the map" narrative, not scattered micro-motion.
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  .right {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.answerCol {
+  min-width: 0;
+  animation: revealUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.graphCol {
+  min-width: 0;
+  position: sticky;
+  top: calc(#{$header-h} + var(--wf-space-3));
+  height: calc(100vh - #{$header-h} - var(--wf-space-6));
+  animation: revealUp 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+// Tablet / stacked: the graph becomes a tall block, still prominent (never collapsed).
+@media (max-width: 1024px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    gap: var(--wf-space-7);
+  }
+  .graphCol {
     position: static;
+    height: min(68vh, 560px);
+    order: 2;
+  }
+  .answerCol {
+    order: 1;
   }
 }

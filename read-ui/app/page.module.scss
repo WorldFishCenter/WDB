@@ -1,36 +1,25 @@
 .hero {
-  background: var(--wf-gradient-hero);
-  border-bottom: 1px solid var(--wf-border-card);
-  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--wf-border-subtle);
+  padding: var(--wf-space-9) 0 var(--wf-space-7);
   position: relative;
   overflow: hidden;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: -120px;
-    right: -80px;
-    width: 380px;
-    height: 380px;
-    background: radial-gradient(circle, var(--wf-glow-accent) 0%, transparent 70%);
-    pointer-events: none;
-  }
 }
 
 .title {
-  font-size: clamp(34px, 5vw, 52px);
-  line-height: 1.1;
-  color: var(--wf-text-on-dark, #fff);
-  margin-bottom: 12px;
+  font-size: var(--wf-text-display);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--wf-text);
+  margin-bottom: var(--wf-space-3);
   position: relative;
 }
 
 .tagline {
-  color: var(--wf-text-slate-300);
-  font-size: var(--wf-font-md);
-  line-height: 1.6;
-  max-width: 64ch;
-  margin: 0 0 28px;
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-body-lg);
+  line-height: var(--wf-leading-normal);
+  max-width: 68ch;
+  margin: 0 0 var(--wf-space-7);
   position: relative;
 }
 
@@ -38,53 +27,52 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
+  gap: var(--wf-space-2);
+  margin-top: var(--wf-space-5);
 }
 
 .legendLabel {
-  font-size: var(--wf-font-xxs);
-  color: var(--wf-text-slate-400);
-  margin-right: 2px;
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  margin-right: var(--wf-space-1);
 }
 
 .legendSep {
-  color: var(--wf-text-slate-400);
-  margin: 0 2px;
+  color: var(--wf-text-faint);
+  margin: 0 var(--wf-space-1);
 }
 
 .main {
-  padding: 8px 24px 80px;
+  padding: var(--wf-space-2) var(--wf-space-6) var(--wf-space-11);
 }
 
 .idle {
-  margin-top: 40px;
+  margin: var(--wf-space-8) auto 0;
   text-align: center;
   color: var(--wf-text-muted);
-  font-size: var(--wf-font-md);
+  font-size: var(--wf-text-body-lg);
   max-width: 60ch;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
+  line-height: var(--wf-leading-normal);
 }
 
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  margin-top: 60px;
-  color: var(--wf-text-muted);
-  font-size: var(--wf-font-md);
+  gap: var(--wf-space-3);
+  margin-top: var(--wf-space-10);
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-body-lg);
 }
 
 .spinner {
   width: 22px;
   height: 22px;
-  border: 3px solid var(--wf-color-gray-200);
+  border: 3px solid var(--wf-border-strong);
   border-top-color: var(--wf-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+  box-shadow: var(--wf-glow-soft);
 }
 
 @keyframes spin {
@@ -94,38 +82,37 @@
 }
 
 .error {
-  margin-top: 36px;
+  margin: var(--wf-space-8) auto 0;
   max-width: 680px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px 24px;
+  padding: var(--wf-space-5) var(--wf-space-6);
   border-radius: var(--wf-radius-lg);
-  background: var(--wf-bg-elevated);
-  border: 1px solid var(--wf-color-danger);
+  background: var(--wf-surface-2);
+  border: 1px solid var(--wf-unanswered-line);
   box-shadow: var(--wf-shadow-soft);
 }
 
 .errorUnreachable {
-  border-color: var(--wf-color-warning);
+  border-color: var(--wf-inferred-line);
 }
 
 .errorTitle {
   display: block;
   font-family: var(--wf-font-heading);
-  font-size: var(--wf-font-lg);
-  margin-bottom: 6px;
-  color: var(--wf-color-gray-900);
+  font-size: var(--wf-text-h4);
+  margin-bottom: var(--wf-space-2);
+  color: var(--wf-text);
 }
 
 .errorHint {
-  margin-top: 10px;
-  font-size: var(--wf-font-sm);
+  margin-top: var(--wf-space-3);
+  font-size: var(--wf-text-body);
   color: var(--wf-text-muted);
 
   code {
-    background: var(--wf-color-gray-100);
-    padding: 2px 8px;
+    background: var(--wf-surface-inset);
+    padding: 2px var(--wf-space-2);
     border-radius: var(--wf-radius-sm);
-    font-size: var(--wf-font-xs);
+    font-size: var(--wf-text-meta);
+    color: var(--wf-text-2);
   }
 }

@@ -1,0 +1,163 @@
+// The entity view — the left pane when the view is reframed to a graph node. It reads the graph,
+// it does not generate prose: "what the knowledge graph records about this entity."
+
+.entity {
+  animation: entityIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes entityIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  padding: var(--wf-space-1) var(--wf-space-3) var(--wf-space-1) var(--wf-space-2);
+  margin-bottom: var(--wf-space-4);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-pill);
+  background: var(--wf-surface-inset);
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-caption);
+  font-weight: 600;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: var(--wf-text);
+    border-color: var(--wf-border-accent-medium);
+  }
+}
+
+.eyebrow {
+  display: block;
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wf-accent);
+  margin-bottom: var(--wf-space-1);
+}
+
+.name {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-h2);
+  font-weight: 700;
+  color: var(--wf-text);
+  line-height: var(--wf-leading-snug);
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2);
+  margin-top: var(--wf-space-2);
+}
+
+.metaChip {
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 1px var(--wf-space-2);
+  border-radius: var(--wf-radius-pill);
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  color: var(--wf-text-3);
+}
+
+.metaText {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+}
+
+.note {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  line-height: var(--wf-leading-normal);
+  margin: var(--wf-space-3) 0 var(--wf-space-5);
+  padding: var(--wf-space-3) var(--wf-space-4);
+  background: var(--wf-surface-1);
+  border: 1px solid var(--wf-border);
+  border-left: 2px solid var(--wf-border-accent-soft);
+  border-radius: 0 var(--wf-radius-sm) var(--wf-radius-sm) 0;
+}
+
+.empty {
+  padding: var(--wf-space-5);
+  border: 1px dashed var(--wf-border-strong);
+  border-radius: var(--wf-radius-md);
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-body);
+  text-align: center;
+}
+
+.relGroup {
+  margin-bottom: var(--wf-space-4);
+}
+
+.relName {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  font-weight: 700;
+  color: var(--wf-mode-a);
+  background: var(--wf-mode-a-bg);
+  border: 1px solid var(--wf-border-accent-soft);
+  padding: 2px var(--wf-space-3);
+  border-radius: var(--wf-radius-pill);
+  margin-bottom: var(--wf-space-2);
+}
+
+.relRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2);
+  width: 100%;
+  text-align: left;
+  padding: var(--wf-space-2) var(--wf-space-3);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-sm);
+  background: var(--wf-surface-2);
+  margin-bottom: var(--wf-space-2);
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: var(--wf-border-accent-medium);
+    background: var(--wf-surface-3);
+  }
+}
+
+.dir {
+  flex: none;
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-micro);
+  color: var(--wf-text-faint);
+}
+
+.relTarget {
+  font-weight: 600;
+  font-size: var(--wf-text-body);
+  color: var(--wf-text);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.relMeta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+}

@@ -49,7 +49,7 @@ function CiteA({ citation }: { citation: ReturnType<typeof citationA> }) {
         )}
       </div>
       <div className={styles.provenance}>
-        {citation.source_file && <SourceLink path={citation.source_file} icon="📄" />}
+        {citation.source_file && <SourceLink path={citation.source_file} icon="doc" />}
         {citation.note && <span className={styles.note}>{citation.note}</span>}
       </div>
     </div>
@@ -66,8 +66,8 @@ function CiteB({ citation }: { citation: ReturnType<typeof citationB> }) {
       </div>
       <blockquote className={styles.quote}>“{citation.quote}”</blockquote>
       <div className={styles.provenance}>
-        {citation.source_file && <SourceLink path={citation.source_file} icon="📄" label={fileName(citation.source_file)} />}
-        {citation.note && <SourceLink path={citation.note} icon="🗒️" label={fileName(citation.note)} />}
+        {citation.source_file && <SourceLink path={citation.source_file} icon="doc" label={fileName(citation.source_file)} />}
+        {citation.note && <SourceLink path={citation.note} icon="note" label={fileName(citation.note)} />}
       </div>
       {citation.nodes.length > 0 && (
         <div className={styles.nodes}>
@@ -101,7 +101,7 @@ function CiteC({ citation }: { citation: ReturnType<typeof citationC> }) {
         </div>
       )}
       <div className={styles.provenance}>
-        {citation.source_file && <SourceLink path={citation.source_file} icon="📊" />}
+        {citation.source_file && <SourceLink path={citation.source_file} icon="data" />}
         {citation.note && <span className={styles.note}>{citation.note}</span>}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import type { RouterAnswer } from "@/lib/contract";
 import { RoutePosture } from "./RoutePosture";
+import { Icon } from "./Icon";
 import styles from "./panes.module.scss";
 
 /**
@@ -11,7 +12,7 @@ export function Refusal({ answer }: { answer: RouterAnswer }) {
   return (
     <div className={styles.refusal}>
       <div className={styles.refusalIcon} aria-hidden>
-        🔍
+        <Icon name="search" size={24} />
       </div>
       <h2 className={styles.refusalTitle}>The knowledge base doesn’t cover this</h2>
       <p className={styles.refusalLead}>
