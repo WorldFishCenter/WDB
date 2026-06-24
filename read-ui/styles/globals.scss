@@ -14,12 +14,20 @@ body {
 
 body {
   font-family: var(--wf-font-body);
-  font-size: var(--wf-font-sm);
-  line-height: 24px;
+  font-size: var(--wf-text-body);
+  line-height: var(--wf-leading-normal);
   color: var(--wf-text);
   background: var(--wf-bg);
+  // The dark space the brain lives in — a faint accent aurora, never noisy.
+  background-image:
+    radial-gradient(1100px 620px at 78% -8%, rgba(87, 179, 209, 0.07), transparent 60%),
+    radial-gradient(900px 540px at 8% 4%, rgba(80, 143, 218, 0.05), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // Long graph ids / paths must never blow out a container.
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -31,23 +39,24 @@ h6 {
   font-family: var(--wf-font-heading);
   color: var(--wf-text);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: var(--wf-leading-tight);
   margin: 0;
 }
 
 a {
-  color: var(--wf-color-primary);
+  color: var(--wf-accent);
   text-decoration: none;
   transition: color 0.15s ease;
 
   &:hover {
-    color: var(--wf-color-green-1000);
+    color: var(--wf-accent-strong);
   }
 }
 
 button {
   font-family: var(--wf-font-body);
   cursor: pointer;
+  color: inherit;
 }
 
 code,
@@ -58,7 +67,7 @@ kbd {
 
 ::selection {
   background: var(--wf-border-accent-medium);
-  color: var(--wf-color-white);
+  color: var(--wf-text);
 }
 
 // Shared focus ring (accessibility — keyboard users see where they are)
@@ -68,9 +77,41 @@ kbd {
   border-radius: 2px;
 }
 
+// Custom scrollbars in the dark theme — recede until needed.
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--wf-border-medium) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--wf-border-medium);
+  border-radius: var(--wf-radius-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--wf-border-strong);
+  background-clip: padding-box;
+}
+
 .wf-container {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--wf-space-6);
+}
+
+// Respect reduced-motion — the immersion is in the focus, never the motion.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

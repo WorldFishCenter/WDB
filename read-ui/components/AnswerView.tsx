@@ -1,26 +1,23 @@
+"use client";
+
 import type { RouterAnswer } from "@/lib/contract";
-import { ClaimsSection } from "./AnswerPane";
+import { AnswerPane } from "./AnswerPane";
 import { AssociationsPane } from "./AssociationsPane";
-import { RoutePosture } from "./RoutePosture";
-import { FigureView } from "./FigureView";
-import { Unanswered } from "./Unanswered";
+import { EntityView } from "./EntityView";
 import { Refusal } from "./Refusal";
+import { ExplorationProvider, useExploration } from "@/lib/exploration";
+import { useGraphData } from "@/lib/graphData";
 import styles from "./answerview.module.scss";
 
 /**
- * Vertical-flow answer layout: question echo → route posture → full-width interactive graph →
- * summary stats bar → accordion-grouped claims → figures → unanswered.
+ * The balanced dual-view: the question echoes full-width, then the answer (left) and the
+ * knowledge-graph stage (right) sit as co-equal, co-primary panes that drive each other through
+ * shared state (ExplorationProvider). Hovering a citation lights its nodes in the graph; clicking
+ * a node reframes the left pane to that entity. The answer column scrolls; the graph stays in view.
  *
- * Replaces the old cramped two-pane grid with a single-column flow where every section gets
- * the full viewport width. The graph is the visual hero; claims are compact accordions.
+ * A full refusal (nothing grounded) renders as an honest, full-width refusal panel instead.
  */
-export function AnswerView({
-  answer,
-  globalNodeMap,
-}: {
-  answer: RouterAnswer;
-  globalNodeMap?: Map<string, { label: string; community: number; file_type?: string; source_file?: string }>;
-}) {
+export function AnswerView({ answer }: { answer: RouterAnswer }) {
   const isFullRefusal = !answer.answered && answer.claims.length === 0 && answer.figures.length === 0;
 
   if (isFullRefusal) {
@@ -34,47 +31,35 @@ export function AnswerView({
 
   return (
     <div className={styles.wrap}>
-      {/* ── Question Echo ── */}
       <QuestionEcho question={answer.question} />
-
-      {/* ── Route Posture (compact, full-width) ── */}
-      <RoutePosture routes={answer.routes} grounded={answer.modes_grounded} />
-
-      {/* ── Interactive Graph (full-width hero) ── */}
-      {answer.associations.length > 0 && (
-        <section className={styles.section} aria-label="Graph associations">
-          <AssociationsPane associations={answer.associations} globalNodeMap={globalNodeMap} />
-        </section>
-      )}
-
-      {/* ── Claims Summary + Accordions ── */}
-      {(answer.claims.length > 0 || answer.unanswered.length > 0) && (
-        <section className={styles.section} aria-label="Claims">
-          <ClaimsSection claims={answer.claims} />
-        </section>
-      )}
-
-      {/* ── Figures ── */}
-      {answer.figures.length > 0 && (
-        <section className={styles.section} aria-label="Figures">
-          <div className={styles.sectionHead}>
-            <span className={styles.sectionTitle}>Figures</span>
-            <span className={styles.sectionCount}>{answer.figures.length}</span>
-          </div>
-          <div className={styles.stack}>
-            {answer.figures.map((f, i) => (
-              <FigureView key={i} figure={f} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* ── Unanswered ── */}
-      <Unanswered items={answer.unanswered} />
+      {/* key by question: a new answer is a fresh exploration (focus + graph reset). */}
+      <ExplorationProvider key={answer.question}>
+        <Workspace answer={answer} />
+      </ExplorationProvider>
     </div>
   );
 }
 
+/** The two co-equal panes. The left swaps to the entity view when a graph node is in focus. */
+function Workspace({ answer }: { answer: RouterAnswer }) {
+  const { focusEntity } = useExploration();
+  const { graph, nodeMeta } = useGraphData();
+
+  return (
+    <div className={styles.workspace}>
+      <div className={styles.answerCol}>
+        {focusEntity ? (
+          <EntityView entityId={focusEntity} graph={graph} nodeMeta={nodeMeta} />
+        ) : (
+          <AnswerPane answer={answer} />
+        )}
+      </div>
+      <div className={styles.graphCol}>
+        <AssociationsPane associations={answer.associations} graph={graph} nodeMeta={nodeMeta} />
+      </div>
+    </div>
+  );
+}
 
 function QuestionEcho({ question }: { question: string }) {
   return (

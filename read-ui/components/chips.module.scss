@@ -1,10 +1,10 @@
 .modeBadge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 2px 10px 2px 2px;
+  gap: var(--wf-space-2);
+  padding: 2px var(--wf-space-3) 2px 2px;
   border-radius: var(--wf-radius-pill);
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
@@ -18,14 +18,14 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  color: var(--wf-color-white);
-  font-size: var(--wf-font-xxs);
+  color: var(--wf-surface-deep);
+  font-size: var(--wf-text-caption);
   font-weight: 700;
 }
 
 .modeText {
   font-family: var(--wf-font-heading);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.01em;
 }
 
 .modeA {
@@ -40,7 +40,7 @@
 .modeB {
   background: var(--wf-mode-b-bg);
   color: var(--wf-mode-b);
-  border-color: rgba(80, 143, 218, 0.2);
+  border-color: rgba(111, 159, 230, 0.28);
   .modeLetter {
     background: var(--wf-mode-b);
   }
@@ -48,8 +48,8 @@
 
 .modeC {
   background: var(--wf-mode-c-bg);
-  color: #a4502f;
-  border-color: rgba(226, 149, 120, 0.35);
+  color: var(--wf-mode-c);
+  border-color: rgba(226, 149, 120, 0.32);
   .modeLetter {
     background: var(--wf-mode-c);
   }
@@ -58,12 +58,12 @@
 .confTag {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 2px 8px;
+  gap: var(--wf-space-1);
+  padding: 2px var(--wf-space-2);
   border-radius: var(--wf-radius-pill);
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   font-weight: 700;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.03em;
   line-height: 1.4;
   white-space: nowrap;
 }
@@ -71,8 +71,11 @@
 .extracted {
   background: var(--wf-extracted-bg);
   color: var(--wf-extracted);
+  box-shadow: inset 0 0 0 1px rgba(6, 214, 160, 0.25);
 }
 
+// INFERRED is marked DISTINCTLY — amber, an explicit diamond glyph, a ring: it must never read
+// as a hard, stated fact.
 .inferred {
   background: var(--wf-inferred-bg);
   color: var(--wf-inferred);

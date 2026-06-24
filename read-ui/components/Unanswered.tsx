@@ -1,3 +1,4 @@
+import { Icon } from "./Icon";
 import styles from "./panes.module.scss";
 
 /**
@@ -10,7 +11,7 @@ export function Unanswered({ items }: { items: string[] }) {
   return (
     <section className={styles.unanswered} aria-label="Parts the knowledge base could not ground">
       <header className={styles.unansweredHead}>
-        <span aria-hidden>⚠️</span>
+        <Icon name="warn" />
         <span className={styles.unansweredTitle}>
           Not grounded · {items.length} {items.length === 1 ? "part" : "parts"}
         </span>

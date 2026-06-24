@@ -1,174 +1,131 @@
 "use client";
 
-import { useState, useRef, useMemo, useCallback } from "react";
 import type { RouterAnswer, Claim, Mode } from "@/lib/contract";
-import { MODE_LABEL } from "@/lib/contract";
+import { citationA } from "@/lib/contract";
 import { ClaimCard } from "./ClaimCard";
-import { ModeBadge } from "./chips";
+import { FigureView } from "./FigureView";
+import { RoutePosture } from "./RoutePosture";
+import { Unanswered } from "./Unanswered";
+import { ConfidenceTag } from "./chips";
+import { SourceLink } from "./source/SourceLink";
+import { useExploration } from "@/lib/exploration";
+import { claimNodeIds } from "@/lib/graphData";
 import styles from "./panes.module.scss";
 
+// Reading order: the prose answer (B) and the computed number (C) lead; the many graph-fact
+// relationships (A) follow as a scannable list — the same relationships the graph stage maps.
+const MODE_ORDER: Mode[] = ["B", "C", "A"];
+const GROUP_TITLE: Record<Mode, string> = {
+  A: "Graph facts",
+  B: "Grounded passage",
+  C: "Computed figure",
+};
+
 /**
- * Claims grouped by source mode in collapsible accordions, with a summary bar above.
- * Replaces the old vertical card stack with a compact, scannable layout.
- * Each mode group renders its claims in a responsive multi-column masonry grid.
+ * The answer pane, flat: a quiet routing line, then one calm section per source mode — each a
+ * plain header (the reference point) over flat, rail-marked claims. No cards-in-cards. Honesty is
+ * structural: every claim shows its source TYPE (the section + rail) and its citation; inferred
+ * links are flagged; what wasn't grounded is shown as such.
  */
-export function ClaimsSection({ claims }: { claims: Claim[] }) {
-  // Group claims by mode
-  const grouped = useMemo(() => {
-    const groups: Record<Mode, Claim[]> = { A: [], B: [], C: [] };
-    claims.forEach((c) => {
-      if (groups[c.mode]) groups[c.mode].push(c);
-    });
-    return groups;
-  }, [claims]);
+export function AnswerPane({ answer }: { answer: RouterAnswer }) {
+  const { claims, figures, unanswered } = answer;
+  const { highlightNodes, clearHighlight } = useExploration();
 
-  // Modes with claims, sorted by count (most claims first)
-  const activeModes = useMemo(() => {
-    return (Object.entries(grouped) as [Mode, Claim[]][])
-      .filter(([, arr]) => arr.length > 0)
-      .sort((a, b) => b[1].length - a[1].length)
-      .map(([mode]) => mode);
-  }, [grouped]);
-
-  // Track which accordion sections are open — default: the mode with most claims
-  const [openModes, setOpenModes] = useState<Set<Mode>>(() => {
-    return new Set(activeModes.length > 0 ? [activeModes[0]] : []);
-  });
-
-  // Refs for scrolling to sections
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
-  const toggleMode = useCallback((mode: Mode) => {
-    setOpenModes((prev) => {
-      const next = new Set(prev);
-      if (next.has(mode)) {
-        next.delete(mode);
-      } else {
-        next.add(mode);
-      }
-      return next;
-    });
-  }, []);
-
-  const jumpToMode = useCallback((mode: Mode) => {
-    // Open the accordion if not already open
-    setOpenModes((prev) => {
-      const next = new Set(prev);
-      next.add(mode);
-      return next;
-    });
-    // Scroll to the section
-    setTimeout(() => {
-      sectionRefs.current[mode]?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 50);
-  }, []);
-
-  if (claims.length === 0) {
-    return (
-      <div className={styles.empty}>
-        No grounded claims for this question — see what wasn&apos;t grounded below.
-      </div>
-    );
-  }
-
-  const MODE_COLORS: Record<Mode, string> = {
-    A: "var(--wf-mode-a)",
-    B: "var(--wf-mode-b)",
-    C: "var(--wf-mode-c)",
-  };
-
-  const MODE_BG_COLORS: Record<Mode, string> = {
-    A: "var(--wf-mode-a-bg)",
-    B: "var(--wf-mode-b-bg)",
-    C: "var(--wf-mode-c-bg)",
-  };
+  const grouped: Record<Mode, Claim[]> = { A: [], B: [], C: [] };
+  claims.forEach((c) => grouped[c.mode]?.push(c));
+  const activeModes = MODE_ORDER.filter((m) => grouped[m].length > 0);
 
   return (
-    <>
-      {/* ── Summary Bar ── */}
-      <div className={styles.summaryBar}>
-        <span className={styles.summaryLabel}>Claims by source</span>
-        {activeModes.map((mode) => (
-          <button
-            key={mode}
-            className={`${styles.summaryChip} ${openModes.has(mode) ? styles.summaryChipActive : ""}`}
-            style={{
-              background: MODE_BG_COLORS[mode],
-              color: MODE_COLORS[mode],
-            }}
-            onClick={() => jumpToMode(mode)}
-            aria-label={`Jump to ${MODE_LABEL[mode]} claims`}
-          >
-            {MODE_LABEL[mode]}
-            <span className={styles.summaryChipCount}>
-              {grouped[mode].length}
-            </span>
-          </button>
-        ))}
-        <span className={styles.summaryTotal}>
-          {claims.length} total
-        </span>
+    <section className={styles.pane} aria-label="Answer">
+      <div className={styles.answerHead}>
+        <h2 className={styles.answerTitle}>Answer</h2>
       </div>
+      <RoutePosture routes={answer.routes} grounded={answer.modes_grounded} />
 
-      {/* ── Mode Accordions ── */}
-      {activeModes.map((mode) => {
-        const isOpen = openModes.has(mode);
-        const modeClaims = grouped[mode];
-        return (
-          <div
-            key={mode}
-            className={styles.accordion}
-            ref={(el) => { sectionRefs.current[mode] = el; }}
-          >
-            <button
-              className={styles.accordionHeader}
-              onClick={() => toggleMode(mode)}
-              aria-expanded={isOpen}
-              aria-controls={`claims-panel-${mode}`}
-            >
-              <span
-                className={`${styles.accordionChevron} ${isOpen ? styles.accordionChevronOpen : ""}`}
-              >
-                ▸
-              </span>
-              <span
-                className={styles.accordionModeLine}
-                style={{ background: MODE_COLORS[mode] }}
-              />
-              <ModeBadge mode={mode} />
-              <span className={styles.accordionTitle}>
-                {MODE_LABEL[mode]}
-              </span>
-              <span className={styles.accordionCount}>
-                {modeClaims.length} {modeClaims.length === 1 ? "claim" : "claims"}
-              </span>
-            </button>
+      {claims.length > 0 ? (
+        activeModes.map((mode) => (
+          <section className={styles.group} key={mode} aria-label={GROUP_TITLE[mode]}>
+            <header className={styles.groupHead}>
+              <span className={`${styles.modeDot} ${styles[`dot${mode}`]}`} aria-hidden />
+              <span className={styles.groupTitle}>{GROUP_TITLE[mode]}</span>
+              {grouped[mode].length > 1 && <span className={styles.groupCount}>{grouped[mode].length}</span>}
+            </header>
 
-            {isOpen && (
-              <div className={styles.accordionContent} id={`claims-panel-${mode}`}>
-                <div className={styles.claimsGrid}>
-                  {modeClaims.map((c, i) => (
-                    <div key={i} className={styles.claimsGridItem}>
-                      <ClaimCard claim={c} />
-                    </div>
-                  ))}
-                </div>
+            {mode === "A" ? (
+              <ul className={styles.factList}>
+                {grouped.A.map((c, i) => (
+                  <FactRow key={i} claim={c} />
+                ))}
+              </ul>
+            ) : (
+              <div className={styles.claimStack}>
+                {grouped[mode].map((c, i) => (
+                  <div
+                    key={i}
+                    onMouseEnter={() => highlightNodes(claimNodeIds(c))}
+                    onMouseLeave={() => clearHighlight()}
+                  >
+                    <ClaimCard claim={c} />
+                  </div>
+                ))}
               </div>
             )}
+          </section>
+        ))
+      ) : (
+        <div className={styles.empty}>
+          No grounded claims for this question — see what wasn&apos;t grounded below.
+        </div>
+      )}
+
+      {figures.length > 0 && (
+        <section className={styles.group} aria-label="Figures">
+          <header className={styles.groupHead}>
+            <span className={`${styles.modeDot} ${styles.dotC}`} aria-hidden />
+            <span className={styles.groupTitle}>Figures</span>
+            {figures.length > 1 && <span className={styles.groupCount}>{figures.length}</span>}
+          </header>
+          <div className={styles.claimStack}>
+            {figures.map((f, i) => (
+              <FigureView key={i} figure={f} />
+            ))}
           </div>
-        );
-      })}
-    </>
+        </section>
+      )}
+
+      <Unanswered items={unanswered} />
+    </section>
   );
 }
 
 /**
- * Backwards-compatible export: the old AnswerPane wrapper, now delegating to ClaimsSection.
- * Kept so AnswerView can import it without a rename.
+ * One Mode-A graph fact, compact and flat: the relationship text on a rail, with a quiet
+ * provenance line. EXTRACTED is the baseline (implicit); INFERRED is flagged — amber rail + tag —
+ * so a reasoned lead never reads as a hard fact. Hovering pulses the fact's nodes in the graph.
  */
-export function AnswerPane({ answer }: { answer: RouterAnswer }) {
-  return <ClaimsSection claims={answer.claims} />;
+function FactRow({ claim }: { claim: Claim }) {
+  const { highlightNodes, clearHighlight } = useExploration();
+  const isInferred = claim.citations.some((c) => citationA(c).confidence === "INFERRED");
+  return (
+    <li
+      className={`${styles.factRow} ${isInferred ? styles.factRowInferred : ""}`}
+      onMouseEnter={() => highlightNodes(claimNodeIds(claim))}
+      onMouseLeave={() => clearHighlight()}
+    >
+      <span className={styles.factText}>{claim.text}</span>
+      <span className={styles.factMeta}>
+        {isInferred && <ConfidenceTag confidence="INFERRED" />}
+        {claim.citations.map((c, i) => {
+          const a = citationA(c);
+          return a.source_file ? (
+            <SourceLink key={i} path={a.source_file} icon="doc" label={fileName(a.source_file)} />
+          ) : null;
+        })}
+      </span>
+    </li>
+  );
+}
+
+function fileName(p: string): string {
+  return p.split("/").pop() || p;
 }

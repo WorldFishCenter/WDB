@@ -1,6 +1,7 @@
 "use client";
 
 import { useSourceViewer } from "./SourceViewerProvider";
+import { Icon, type IconName } from "../Icon";
 import styles from "./source.module.scss";
 
 /**
@@ -11,18 +12,18 @@ import styles from "./source.module.scss";
 export function SourceLink({
   path,
   label,
-  icon = "📄",
+  icon = "doc",
 }: {
   path: string;
   label?: string;
-  icon?: string;
+  icon?: IconName;
 }) {
   const { openSource } = useSourceViewer();
   if (!path) return null;
   return (
     <button type="button" className={styles.link} onClick={() => openSource(path)} title={`Open source: ${path}`}>
-      <span className={styles.icon} aria-hidden>
-        {icon}
+      <span className={styles.icon}>
+        <Icon name={icon} />
       </span>
       <span className={styles.linkText}>{label || path}</span>
     </button>

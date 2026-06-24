@@ -18,7 +18,7 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wf-space-3);
 }
 
 .mark {
@@ -32,41 +32,42 @@
   color: var(--wf-surface-deep);
   font-family: var(--wf-font-heading);
   font-weight: 700;
-  font-size: var(--wf-font-xs);
-  letter-spacing: 0.5px;
+  font-size: var(--wf-text-meta);
+  letter-spacing: 0.04em;
+  box-shadow: var(--wf-glow-soft);
 }
 
 .brandText {
   font-family: var(--wf-font-heading);
   font-weight: 600;
-  font-size: var(--wf-font-md);
-  color: var(--wf-text-slate-50);
+  font-size: var(--wf-text-body-lg);
+  color: var(--wf-text);
 }
 
 .status {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wf-space-3);
 }
 
 .metaLabel {
-  font-size: var(--wf-font-3xs);
+  font-size: var(--wf-text-micro);
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--wf-text-slate-400);
+  letter-spacing: 0.08em;
+  color: var(--wf-text-muted);
 }
 
 .pill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 4px 12px;
+  padding: var(--wf-space-1) var(--wf-space-3);
   border-radius: var(--wf-radius-pill);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--wf-surface-inset-strong);
   border: 1px solid var(--wf-border-medium);
-  font-size: var(--wf-font-xxs);
+  font-size: var(--wf-text-caption);
   font-weight: 600;
-  color: var(--wf-text-slate-200);
+  color: var(--wf-text-2);
 }
 
 .dot {
