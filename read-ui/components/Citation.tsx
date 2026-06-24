@@ -29,15 +29,14 @@ export function CitationList({ claim }: { claim: Claim }) {
 function CiteA({ citation }: { citation: ReturnType<typeof citationA> }) {
   const triple = parseTriple(citation.locator);
   return (
-    <div className={`${styles.cite} ${styles.citeA}`}>
-      <div className={styles.citeHead}>
-        <span className={styles.kind}>Graph edge</span>
-        <ConfidenceTag confidence={citation.confidence} />
-      </div>
+    <div className={styles.cite}>
       <div className={styles.triple}>
         {triple ? (
           <>
             <span className={styles.node}>{triple.source}</span>
+            <span className={styles.arrow} aria-hidden>
+              →
+            </span>
             <span className={styles.rel}>{triple.relation}</span>
             <span className={styles.arrow} aria-hidden>
               →
@@ -48,7 +47,8 @@ function CiteA({ citation }: { citation: ReturnType<typeof citationA> }) {
           <code>{citation.locator}</code>
         )}
       </div>
-      <div className={styles.provenance}>
+      <div className={styles.prov}>
+        {citation.confidence === "INFERRED" && <ConfidenceTag confidence="INFERRED" />}
         {citation.source_file && <SourceLink path={citation.source_file} icon="doc" />}
         {citation.note && <span className={styles.note}>{citation.note}</span>}
       </div>
@@ -56,29 +56,24 @@ function CiteA({ citation }: { citation: ReturnType<typeof citationA> }) {
   );
 }
 
-// ---- Mode B — the verbatim passage quote -----------------------------------
+// ---- Mode B — the verbatim passage -----------------------------------------
 function CiteB({ citation }: { citation: ReturnType<typeof citationB> }) {
   return (
-    <div className={`${styles.cite} ${styles.citeB}`}>
-      <div className={styles.citeHead}>
-        <span className={styles.kind}>Verbatim quote</span>
-        {citation.location && <span className={styles.location}>{citation.location}</span>}
-      </div>
+    <div className={styles.cite}>
       <blockquote className={styles.quote}>“{citation.quote}”</blockquote>
-      <div className={styles.provenance}>
+      <div className={styles.prov}>
+        {citation.location && <span className={styles.loc}>{citation.location}</span>}
         {citation.source_file && <SourceLink path={citation.source_file} icon="doc" label={fileName(citation.source_file)} />}
         {citation.note && <SourceLink path={citation.note} icon="note" label={fileName(citation.note)} />}
+        {citation.nodes.length > 0 && (
+          <span className={styles.resolves}>
+            resolves to {citation.nodes.length} graph {citation.nodes.length === 1 ? "node" : "nodes"}
+            <span className={styles.resolvesArrow} aria-hidden>
+              →
+            </span>
+          </span>
+        )}
       </div>
-      {citation.nodes.length > 0 && (
-        <div className={styles.nodes}>
-          <span className={styles.nodesLabel}>resolves to graph node(s):</span>
-          {citation.nodes.map((n) => (
-            <code key={n} className={styles.nodeChip}>
-              {n}
-            </code>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
@@ -87,20 +82,18 @@ function CiteB({ citation }: { citation: ReturnType<typeof citationB> }) {
 function CiteC({ citation }: { citation: ReturnType<typeof citationC> }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`${styles.cite} ${styles.citeC}`}>
-      <div className={styles.citeHead}>
-        <span className={styles.kind}>Computed — SQL + rows</span>
-        <button type="button" className={styles.toggle} onClick={() => setOpen((v) => !v)} aria-expanded={open}>
-          {open ? "Hide query" : "Show query & rows"}
-        </button>
-      </div>
+    <div className={styles.cite}>
+      <button type="button" className={styles.toggle} onClick={() => setOpen((v) => !v)} aria-expanded={open}>
+        {open ? "Hide query & rows" : "Show query & rows"}
+        <span aria-hidden>{open ? "▴" : "▾"}</span>
+      </button>
       {open && (
         <div className={styles.computed}>
           <pre className={styles.sql}>{citation.sql}</pre>
           <RowsTable rows={citation.result} />
         </div>
       )}
-      <div className={styles.provenance}>
+      <div className={styles.prov}>
         {citation.source_file && <SourceLink path={citation.source_file} icon="data" />}
         {citation.note && <span className={styles.note}>{citation.note}</span>}
       </div>

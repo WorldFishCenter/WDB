@@ -65,60 +65,52 @@
   gap: var(--wf-space-2);
 }
 
-// ---- Routing posture --------------------------------------------------------
-.posture {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wf-space-2);
-  margin-bottom: var(--wf-space-5);
-  padding: var(--wf-space-3) var(--wf-space-4);
-  background: var(--wf-surface-1);
-  border: 1px solid var(--wf-border);
-  border-radius: var(--wf-radius-md);
-}
-
-.postureTop {
-  font-size: var(--wf-text-micro);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--wf-text-muted);
-  margin-bottom: var(--wf-space-1);
-}
-
-.route {
+// ---- Answer header (the left-pane anchor, parallel to the graph header) ------
+.answerHead {
   display: flex;
   align-items: center;
-  gap: var(--wf-space-3);
-  flex-wrap: wrap;
+  height: 34px;
+  margin-bottom: var(--wf-space-2);
 }
 
-.routeReason {
+.answerTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-h3);
+  font-weight: 700;
+  color: var(--wf-text);
+  letter-spacing: -0.01em;
+}
+
+// ---- Routing posture — one quiet line, not a card ---------------------------
+.routeStrip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2) var(--wf-space-4);
+  margin-bottom: var(--wf-space-6);
+  padding-bottom: var(--wf-space-4);
+  border-bottom: 1px solid var(--wf-border);
   font-size: var(--wf-text-caption);
   color: var(--wf-text-muted);
-  font-family: var(--wf-font-mono);
-  min-width: 0;
-  overflow-wrap: anywhere;
 }
 
-.statusGrounded,
-.statusEmpty {
-  margin-left: auto;
+.routeLabel {
+  color: var(--wf-text-muted);
+}
+
+.routeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  color: var(--wf-text-3);
+}
+
+.routeMiss {
   font-size: var(--wf-text-micro);
   font-weight: 700;
   letter-spacing: 0.03em;
-  padding: 1px var(--wf-space-2);
-  border-radius: var(--wf-radius-pill);
-}
-
-.statusGrounded {
-  background: var(--wf-extracted-bg);
-  color: var(--wf-extracted);
-}
-
-.statusEmpty {
-  background: var(--wf-surface-inset);
-  color: var(--wf-text-muted);
+  text-transform: uppercase;
+  color: var(--wf-unanswered);
 }
 
 // ---- Unanswered (first-class, never hidden) ---------------------------------
@@ -407,64 +399,86 @@
   color: var(--wf-accent);
 }
 
-// ---- Claims grouped by source mode ------------------------------------------
-.claimGroup {
+// ---- Claims grouped by source mode (calm headers = the reference points) -----
+.group {
   & + & {
-    margin-top: var(--wf-space-6);
+    margin-top: var(--wf-space-7);
   }
 }
 
-.claimGroupHead {
+.groupHead {
   display: flex;
   align-items: center;
-  gap: var(--wf-space-3);
-  margin-bottom: var(--wf-space-3);
-  padding-bottom: var(--wf-space-2);
-  border-bottom: 1px solid var(--wf-border);
+  gap: var(--wf-space-2);
+  margin-bottom: var(--wf-space-4);
 }
 
-.claimGroupBlurb {
+.modeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+.dotA {
+  background: var(--wf-mode-a-line);
+}
+.dotB {
+  background: var(--wf-mode-b-line);
+}
+.dotC {
+  background: var(--wf-mode-c-line);
+}
+
+.groupTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-body-lg);
+  font-weight: 700;
+  color: var(--wf-text);
+}
+
+.groupCount {
   font-size: var(--wf-text-caption);
   color: var(--wf-text-muted);
-  margin-left: auto;
-  text-align: right;
-
-  @media (max-width: 560px) {
-    display: none;
-  }
 }
 
-// Compact graph-fact rows (Mode A) — a scannable list, not a wall of cards.
+.claimStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-space-5);
+}
+
+// Compact graph-fact rows (Mode A) — a flat, scannable list, not a wall of cards.
 .factList {
   display: flex;
   flex-direction: column;
-  gap: var(--wf-space-2);
 }
 
 .factRow {
   display: flex;
   flex-direction: column;
   gap: var(--wf-space-1);
-  padding: var(--wf-space-3);
-  background: var(--wf-surface-1);
-  border: 1px solid var(--wf-border);
-  border-left: 2px solid var(--wf-mode-a-line);
-  border-radius: 0 var(--wf-radius-sm) var(--wf-radius-sm) 0;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  padding: var(--wf-space-3) 0 var(--wf-space-3) var(--wf-space-4);
+  border-left: 2px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  & + & {
+    border-top: 1px solid var(--wf-border-subtle);
+  }
 
   &:hover {
-    background: var(--wf-surface-2);
+    background: var(--wf-surface-inset);
+    border-left-color: var(--wf-mode-a-line);
   }
 }
 
-// INFERRED facts are visually distinct — amber rail + the INFERRED tag — never a hard fact.
+// INFERRED facts stay distinct even at rest — an amber rail + the INFERRED tag; never a hard fact.
 .factRowInferred {
   border-left-color: var(--wf-inferred-line);
 }
 
 .factText {
   font-size: var(--wf-text-body);
-  color: var(--wf-text);
+  color: var(--wf-text-2);
   line-height: var(--wf-leading-snug);
   overflow-wrap: anywhere;
 }
@@ -474,11 +488,4 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--wf-space-2);
-}
-
-.factNote {
-  font-size: var(--wf-text-caption);
-  color: var(--wf-text-muted);
-  font-style: italic;
-  overflow-wrap: anywhere;
 }

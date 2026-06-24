@@ -84,7 +84,7 @@ const CY_STYLE = ([
       "border-color": C.borderNode,
       width: "mapData(deg, 1, 10, 16, 40)",
       height: "mapData(deg, 1, 10, 16, 40)",
-      label: "data(label)",
+      label: "",
       color: C.textNode,
       "font-size": 9,
       "font-weight": 600,
@@ -103,6 +103,12 @@ const CY_STYLE = ([
   {
     selector: "node.seed",
     style: { "background-color": C.bgNodeSeed, "border-color": C.borderSeed, color: C.textSeed },
+  },
+  // Labels only where they help — hubs / expanded / selected / hovered (.showlabel) / pulsed.
+  // Everything else stays an unlabelled dot until hovered, so the map never reads as a word-cloud.
+  {
+    selector: "node.lbl, node:selected, node.pulse, node.showlabel",
+    style: { label: "data(label)" },
   },
   {
     selector: "node:selected",
@@ -212,6 +218,9 @@ export function GraphView({ associations, graph, nodeMeta }: GraphViewProps) {
     cy.on("tap", (evt) => {
       if (evt.target === cy) clearReframeRef.current();
     });
+    // Reveal labels for the hovered node + its neighbours, so the local area is readable on demand.
+    cy.on("mouseover", "node", (evt) => evt.target.closedNeighborhood().addClass("showlabel"));
+    cy.on("mouseout", "node", (evt) => evt.target.closedNeighborhood().removeClass("showlabel"));
 
     return () => {
       cy.destroy();
@@ -235,11 +244,14 @@ export function GraphView({ associations, graph, nodeMeta }: GraphViewProps) {
     shownNodes.current = new Set();
     shownEdges.current = new Set();
 
+    // Label hubs by default (and everything when the subgraph is small); the rest reveal on hover.
+    const labelAll = seed.nodeIds.size <= 14;
     seed.nodeIds.forEach((id) => {
       shownNodes.current.add(id);
+      const major = labelAll || (degree[id] || 0) >= 3;
       els.push({
         data: { id, label: labelFor(id), deg: Math.min(degree[id] || 1, 10) },
-        classes: "seed",
+        classes: major ? "seed lbl" : "seed",
       });
     });
     seed.edges.forEach((e) => {
@@ -369,7 +381,8 @@ export function GraphView({ associations, graph, nodeMeta }: GraphViewProps) {
       nodes.forEach((nid) => {
         if (shownNodes.current.has(nid)) return;
         shownNodes.current.add(nid);
-        cy.add({ data: { id: nid, label: labelFor(nid), deg: 2 }, classes: "context" });
+        // Expanded nodes were asked for explicitly — label them.
+        cy.add({ data: { id: nid, label: labelFor(nid), deg: 2 }, classes: "context lbl" });
       });
       edges.forEach((e) => {
         const key = `${e.source}->${e.target}:${e.relation}`;
