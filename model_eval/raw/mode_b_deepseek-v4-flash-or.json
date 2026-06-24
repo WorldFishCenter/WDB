@@ -1,0 +1,4 @@
+{
+  "covered": "The platform automatically validates catch survey data through outlier detection and error identification, supported by an email alert system that enables near-real time maintenance of data quality [1].",
+  "overclaim": "The provided passages do not specify which machine-learning algorithm Peskas uses for outlier detection, nor do they mention any measured precision. [1]"
+}
