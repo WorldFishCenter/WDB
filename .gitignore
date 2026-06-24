@@ -36,9 +36,17 @@ mode_b/.index/
 /docs/*
 !/docs/production-stack-design.md
 !/docs/ingestion-pipeline-design.md
+!/docs/model-cost-strategy.md
 /proof
 /proof_c
 /proof_a
+
+# model_eval/ — throwaway model-evaluation experiment (like proof_a/proof_c). The
+# curated deliverable (harness + FINDINGS.md + results/ + drafts) is committed so the
+# PR into feat-rag has a real diff; only the regenerable byproducts are ignored.
+model_eval/raw/
+model_eval/__pycache__/
+model_eval/.venv/
 
 .env
 /civ-kb

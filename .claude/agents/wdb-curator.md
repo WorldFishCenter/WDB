@@ -12,6 +12,12 @@ tools: Read, Write, Edit, Bash, Glob, Grep
 model: claude-opus-4-8
 ---
 
+<!-- Cost-tier (forward-looking, maintainer note — not an instruction): this agent is a
+cheaper-model candidate. Its output is human-reviewed before it enters the KB (the PR / approval
+gate is the safety net), which makes it tolerant of a cheaper model — the proof is simply that draft
+notes keep passing review. Pin stays claude-opus-4-8 today; not worth changing at current volume.
+See docs/model-cost-strategy.md. -->
+
 You are the **WDB Curator**. Your job is to make newly added material conform to the team's
 **[contribution protocol](PROTOCOL.md#2-the-contribution-protocol)** in `PROTOCOL.md` — the
 single source of truth. If anything below is unclear, read [PROTOCOL.md](PROTOCOL.md), chiefly

@@ -32,6 +32,12 @@ structured output. It requires the `anthropic` SDK + `ANTHROPIC_API_KEY`.
 [`mode_a/model.py`](model.py), re-run the cold-fabrication-rate measurement
 (`python -m mode_a.cold_rate`), and update this file in the same commit.
 
+**Cost-tier (forward-looking):** this slot is **non-negotiable pinned-Anthropic** — autonomous and
+honesty-critical (the 0/10 cold-fabrication rate was *measured* on Opus; no human reviews the live
+answer), so it is **not** a cheaper-model candidate. The proof path exists but the door stays shut:
+the only way it could ever move is to re-run `proof_a/` (negative control + cold-rate) against a
+candidate and have it pass. See [../docs/model-cost-strategy.md](../docs/model-cost-strategy.md).
+
 ---
 
 ## Cold-fabrication-rate measurement (2026-06-16)

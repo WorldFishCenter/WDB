@@ -1,0 +1,60 @@
+SoftwareX 29 (2025) 102028
+Contents lists available at ScienceDirect
+SoftwareX
+journal homepage: www.elsevier.com/locate/softx
+Original Software Publication
+Peskas: Automated analytics for small-scale, data-deficient fisheries
+Lorenzo Longobardi a,1 , Villiam Sozinho a, Hamza Altarturi a , E. Fernando Cagua a,2 ,
+Alexander Tilley a,b,1,*
+a
+b
+WorldFish, Batu Maung, Penang, 11960, Malaysia
+School of Global Development, University of East Anglia, Norwich, Norfolk, NR4 7TJ, UK
+A R T I C L E I N F O
+A B S T R A C T
+Keywords:
+Near-real-time
+Small-scale fisheries
+Dashboard
+Stock assessment
+IUU fishing
+Small-scale fisheries account for almost 90 % of global fisheries employment and are responsible for landing >40
+% of the world’s fish catch. Yet their importance to livelihoods and food and nutrition security in Least
+Developed Countries are only recently emerging due to the logistical, financial, and capacity challenges of
+gathering and interpreting data in this diverse, dispersed and informal sector. Peskas was designed as a low-cost
+solution to tackle this problem, providing a template workflow for ingestion and analysis to a decision dash­
+board, which can be adapted to different contexts and needs.
+Metadata
+1. Motivation and significance
+Nr
+Code metadata description
+Please fill in this column
+C1
+Current code version
+C2
+Permanent link to code/repository
+used for this code version
+C3
+Permanent link to reproducible
+capsule
+C4
+C5
+C6
+Legal code licence
+Code versioning system used
+Software code languages, tools
+and services used
+Compilation requirements,
+operating environments and
+dependencies
+peskas.timor.portal v1.0.0
+peskas.timor.data.pipeline v3.1.0
+portal: https://github.com/WorldFish
+Center/peskas.timor.portal
+pipeline: https://github.com/WorldFish
+Center/peskas.timor.data.pipeline
+portal: https://doi.org/10.5281/zenodo
+.10906764
+pipeline: https://doi.org/10.5281/zeno
+do.10906697
+Apache License

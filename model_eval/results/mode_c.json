@@ -1,0 +1,455 @@
+{
+  "ground_truth": {
+    "Average weight of an individual catch in Kwale?": 13.86,
+    "Average CPUE in Kwale district?": 1.64,
+    "Average trip duration for Gill Net trips in Zanzibar?": 7.62,
+    "Average total catch per trip in Kwale?": 31.88,
+    "Average total catch per trip in Inhambane?": 441.18,
+    "Average crude protein across fish-meal ingredients?": 62.62
+  },
+  "models": [
+    {
+      "model": "opus-4.8",
+      "passed": 9,
+      "total": 9,
+      "grain_trap_pass": true,
+      "rows": [
+        {
+          "q": "Average weight of an individual catch in Kwale?",
+          "passed": true,
+          "verdict": "correct figure 13.86 (truth 13.86)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": null,
+            "figure": 13.86
+          }
+        },
+        {
+          "q": "Average CPUE in Kwale district?",
+          "passed": true,
+          "verdict": "derived CPUE flagged + executes (1.64)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": "trip_id",
+            "derived_formula": "tot_catch_kg / trip_duration_hrs",
+            "assumptions": [
+              "CPUE computed per trip as total catch weight (kg) divided by trip duration (hours); collapse catch rows to one row per trip_id first since both inputs are trip-level.",
+              "Denominator chosen as trip_duration_hrs; alternatives: per n_fishers (catch per fisher) or per fisher-hour (n_fishers * trip_duration_hrs).",
+              "Trips with missing or zero trip_duration_hrs excluded."
+            ],
+            "figure": 1.64
+          }
+        },
+        {
+          "q": "Average trip duration for Gill Net trips?",
+          "passed": true,
+          "verdict": "correctly asked to disambiguate",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "NeedsDisambiguation"
+          }
+        },
+        {
+          "q": "Average trip duration for Gill Net trips in Zanzibar?",
+          "passed": true,
+          "verdict": "correct figure 7.62 (truth 7.62)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/zanzibar_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 7.62
+          }
+        },
+        {
+          "q": "Average total catch per trip in Kwale?",
+          "passed": true,
+          "verdict": "correct figure 31.88 (truth 31.88)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 31.88
+          }
+        },
+        {
+          "q": "Average total catch per trip in Inhambane?",
+          "passed": true,
+          "verdict": "correct figure 441.18 (truth 441.18)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/mozambique_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 441.18
+          }
+        },
+        {
+          "q": "Average catch in Kisumu county?",
+          "passed": true,
+          "verdict": "correctly refused: Kisumu is not among the GAUL level-1 county values in kenya_",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        },
+        {
+          "q": "Average wind speed on Kenya trips?",
+          "passed": true,
+          "verdict": "correctly refused: No wind speed column exists in the Kenya trips table (or any",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        },
+        {
+          "q": "Average crude protein across fish-meal ingredients?",
+          "passed": true,
+          "verdict": "correct figure 62.62 (truth 62.62)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "fasa/FICD_feed_ingredient_composition_database.csv",
+            "grain_key": null,
+            "figure": 62.62
+          }
+        }
+      ],
+      "cost": {
+        "model": "opus-4.8",
+        "ops": 9,
+        "in_tok_total": 101010,
+        "out_tok_total": 2380,
+        "thinking_tok_total": 0,
+        "avg_in_tok": 11223.3,
+        "avg_out_tok": 264.4,
+        "usd_total": 0.56455,
+        "usd_per_op": 0.062728
+      }
+    },
+    {
+      "model": "haiku-4.5",
+      "passed": 7,
+      "total": 9,
+      "grain_trap_pass": true,
+      "rows": [
+        {
+          "q": "Average weight of an individual catch in Kwale?",
+          "passed": true,
+          "verdict": "correct figure 13.86 (truth 13.86)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": null,
+            "figure": 13.86
+          }
+        },
+        {
+          "q": "Average CPUE in Kwale district?",
+          "passed": false,
+          "verdict": "gate refused: value 'Kwale' is not in gaul_2_name's enumerated domain ({Changamwe, Garsen, Kilifi North, Kilifi South, Kinango, Kisauni, Lamu East, Lamu West, Likoni, Lunga Lunga, Magarini, Malindi, Matuga, Msambweni, Mvita, Nyali})",
+          "attribution": "reasoning",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": false,
+            "gate_reason": "value 'Kwale' is not in gaul_2_name's enumerated domain ({Changamwe, Garsen, Kilifi North, Kilifi South, Kinango, Kisauni, Lamu East, Lamu West, Likoni, Lunga Lunga, Magarini, Malindi, Matuga, Msambweni, Mvita, Nyali})",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": "trip_id"
+          }
+        },
+        {
+          "q": "Average trip duration for Gill Net trips?",
+          "passed": true,
+          "verdict": "correctly asked to disambiguate",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "NeedsDisambiguation"
+          }
+        },
+        {
+          "q": "Average trip duration for Gill Net trips in Zanzibar?",
+          "passed": true,
+          "verdict": "correct figure 7.62 (truth 7.62)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/zanzibar_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 7.62
+          }
+        },
+        {
+          "q": "Average total catch per trip in Kwale?",
+          "passed": true,
+          "verdict": "correct figure 31.88 (truth 31.88)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 31.88
+          }
+        },
+        {
+          "q": "Average total catch per trip in Inhambane?",
+          "passed": true,
+          "verdict": "correct figure 441.18 (truth 441.18)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/mozambique_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 441.18
+          }
+        },
+        {
+          "q": "Average catch in Kisumu county?",
+          "passed": true,
+          "verdict": "correctly refused: Kisumu county is not present in any WDB table. The Peskas fi",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        },
+        {
+          "q": "Average wind speed on Kenya trips?",
+          "passed": true,
+          "verdict": "correctly refused: Wind speed is not recorded in any WDB table. The Peskas Keny",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        },
+        {
+          "q": "Average crude protein across fish-meal ingredients?",
+          "passed": false,
+          "verdict": "expected a resolution, got CannotResolve",
+          "attribution": "reasoning",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        }
+      ],
+      "cost": {
+        "model": "haiku-4.5",
+        "ops": 9,
+        "in_tok_total": 75347,
+        "out_tok_total": 2469,
+        "thinking_tok_total": 0,
+        "avg_in_tok": 8371.9,
+        "avg_out_tok": 274.3,
+        "usd_total": 0.087692,
+        "usd_per_op": 0.009744
+      }
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "passed": 8,
+      "total": 9,
+      "grain_trap_pass": true,
+      "rows": [
+        {
+          "q": "Average weight of an individual catch in Kwale?",
+          "passed": true,
+          "verdict": "correct figure 13.86 (truth 13.86)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": null,
+            "figure": 13.86
+          }
+        },
+        {
+          "q": "Average CPUE in Kwale district?",
+          "passed": true,
+          "verdict": "derived CPUE flagged + executes (1.64)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": "trip_id",
+            "derived_formula": "tot_catch_kg / trip_duration_hrs",
+            "assumptions": [
+              "CPUE is calculated as total catch weight (kg) per trip duration (hours)."
+            ],
+            "figure": 1.64
+          }
+        },
+        {
+          "q": "Average trip duration for Gill Net trips?",
+          "passed": true,
+          "verdict": "correctly asked to disambiguate",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "NeedsDisambiguation"
+          }
+        },
+        {
+          "q": "Average trip duration for Gill Net trips in Zanzibar?",
+          "passed": true,
+          "verdict": "correct figure 7.62 (truth 7.62)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/zanzibar_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 7.62
+          }
+        },
+        {
+          "q": "Average total catch per trip in Kwale?",
+          "passed": true,
+          "verdict": "correct figure 31.88 (truth 31.88)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/kenya_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 31.88
+          }
+        },
+        {
+          "q": "Average total catch per trip in Inhambane?",
+          "passed": true,
+          "verdict": "correct figure 441.18 (truth 441.18)",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": true,
+            "gate_reason": "",
+            "table": "peskas/mozambique_validated_trips.csv",
+            "grain_key": "trip_id",
+            "figure": 441.18
+          }
+        },
+        {
+          "q": "Average catch in Kisumu county?",
+          "passed": true,
+          "verdict": "correctly refused: The specified county 'Kisumu' is not found in any of the ava",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        },
+        {
+          "q": "Average wind speed on Kenya trips?",
+          "passed": true,
+          "verdict": "correctly refused: The available data catalog does not contain any information ",
+          "attribution": "",
+          "detail": {
+            "outcome_type": "CannotResolve"
+          }
+        },
+        {
+          "q": "Average crude protein across fish-meal ingredients?",
+          "passed": false,
+          "verdict": "gate refused: value 'Fish meal' is not distinctive \u2014 it matches 2 tables (fasa/FICD_feed_ingredient_composition_database.csv, fasa/PAFF_practical_aquaculture_feed_formulation_database_Feed_Formulations.csv); ask which.",
+          "attribution": "reasoning",
+          "detail": {
+            "outcome_type": "Resolution",
+            "gate_ok": false,
+            "gate_reason": "value 'Fish meal' is not distinctive \u2014 it matches 2 tables (fasa/FICD_feed_ingredient_composition_database.csv, fasa/PAFF_practical_aquaculture_feed_formulation_database_Feed_Formulations.csv); ask which.",
+            "table": "fasa/FICD_feed_ingredient_composition_database.csv",
+            "grain_key": null
+          }
+        }
+      ],
+      "cost": {
+        "model": "gemini-2.5-flash",
+        "ops": 9,
+        "in_tok_total": 72034,
+        "out_tok_total": 5640,
+        "thinking_tok_total": 4598,
+        "avg_in_tok": 8003.8,
+        "avg_out_tok": 626.7,
+        "usd_total": 0.03571,
+        "usd_per_op": 0.003968
+      }
+    }
+  ],
+  "naive_diagnostic": {
+    "opus-4.8": {
+      "grain_Q4": {
+        "grain_key": "trip_id",
+        "derived": false,
+        "gate_ok": true,
+        "gate_reason": "",
+        "label": "value"
+      },
+      "cpue_Q2": {
+        "grain_key": "trip_id",
+        "derived": true,
+        "gate_ok": true,
+        "gate_reason": "",
+        "label": "cpue"
+      }
+    },
+    "haiku-4.5": {
+      "grain_Q4": {
+        "grain_key": "trip_id",
+        "derived": false,
+        "gate_ok": true,
+        "gate_reason": "",
+        "label": "value"
+      },
+      "cpue_Q2": {
+        "grain_key": "trip_id",
+        "derived": true,
+        "gate_ok": false,
+        "gate_reason": "value 'Kwale' is not in gaul_2_name's enumerated domain ({Changamwe, Garsen, Kilifi North, Kilifi South, Kinango, Kisauni, Lamu East, Lamu West, Likoni, Lunga Lunga, Magarini, Malindi, Matuga, Msambweni, Mvita, Nyali})",
+        "label": "cpue"
+      }
+    },
+    "gemini-2.5-flash": {
+      "grain_Q4": {
+        "grain_key": "trip_id",
+        "derived": false,
+        "gate_ok": true,
+        "gate_reason": "",
+        "label": "Average total catch per trip"
+      },
+      "cpue_Q2": {
+        "grain_key": "trip_id",
+        "derived": true,
+        "gate_ok": false,
+        "gate_reason": "derived metric without a surfaced denominator/assumption (a derived formula must register its choice, never a proxy)",
+        "label": "CPUE"
+      }
+    }
+  }
+}
