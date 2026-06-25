@@ -64,8 +64,29 @@ The renderer targets the **actual** JSON captured from the running API in STEP 0
 
 The TypeScript types in [`lib/contract.ts`](lib/contract.ts) mirror these shapes.
 
+## Ingestion prototype — the write side (`/contribute` + `/curate`)
+
+Two **styled, interactive prototype** routes that realize the parked write-side flow from
+[`../docs/ingestion-pipeline-design.md`](../docs/ingestion-pipeline-design.md) — built as the *second
+page of this same product*, reusing the read UI's design system wholesale (same
+[`styles/tokens.scss`](styles/tokens.scss), the shared root layout/fonts, the same card/chip/button
+idioms). They run **entirely on mock data** — there is **no ingestion backend yet** (this is the same
+fixtures-first stage the read side was in before Live).
+
+| Route | View | What it does |
+| --- | --- | --- |
+| `/contribute` | Contributor | submit a file → mock auto-draft (companion note, Template A/B) → review/edit → **approve → PENDING** ("awaiting curator review", *cannot go live*) |
+| `/curate` | Curator | the **PENDING queue** (fed by contributor approvals) → review/edit (curator override) → **sign off → QUEUED** or send back; a single-builder build drains QUEUED → BUILT → LIVE |
+
+The **two-stage approval gate** is the point and is enforced *by construction* in
+[`lib/ingestion/store.tsx`](lib/ingestion/store.tsx): contributor actions can only reach **PENDING**;
+only the curator moves PENDING → QUEUED. The two views share one mock workflow store (React context +
+localStorage), so a contributor approval really shows up in the curator queue. Every mock shape in
+[`lib/ingestion/`](lib/ingestion) mirrors the eventual ingestion API (design §8) so wiring a real
+backend later is a swap, not a rewrite. Labelled throughout as **prototype · mock data**.
+
 ## Scope (deliberately narrow)
 
-One clean dual-pane query page. **No** contribution/upload/edit UI (that's the parked ingestion
-phase), **no** deployment/Vercel config, **no** auth. Those come later, gated on production-stack
-sign-off.
+The read side is one clean dual-pane query page; the write side is a **mock prototype** (above), not a
+live ingestion backend. **No** real ingestion API/workflow store/server-side agents, **no**
+deployment/Vercel config, **no** auth. Those come later, gated on production-stack sign-off.
