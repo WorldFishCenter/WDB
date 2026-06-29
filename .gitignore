@@ -15,6 +15,11 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 # re-extraction. To keep the repo small instead, ignore the whole cache: uncomment below.
 # graphify-out/cache/
 
+# Ingestion service local state — the workflow DB + staged uploads (design §8: workflow state
+# lives in a database; binaries are staged before sign-off). Machine-local, never committed.
+wdb_ingest/_state/
+wdb_ingest/_staging/
+
 # OS / editor cruft
 .DS_Store
 

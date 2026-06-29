@@ -13,13 +13,13 @@ const NAV = [
 
 /**
  * The ingestion app bar — reuses the read UI's header chrome (same blur, brand mark, pill styling)
- * so it reads as the SAME product, with an Ask / Contribute / Curate switch. The role pill names
- * whose surface you're on; the MOCK tag + Reset make the prototype nature honest.
+ * so it reads as the SAME product, with an Ask / Contribute / Curate switch. Shows the live status of
+ * the real ingestion backend and which role/view you're on.
  */
 export function IngestionHeader({ role }: { role: "contributor" | "curator" }) {
   const pathname = usePathname();
-  const { currentContributor, resetDemo } = useIngestion();
-  const who = role === "curator" ? "Curator" : `Contributor · ${currentContributor}`;
+  const { currentUser, backendOnline } = useIngestion();
+  const who = role === "curator" ? "Curator" : `Contributor · ${currentUser}`;
 
   return (
     <header className={s.bar}>
@@ -42,16 +42,21 @@ export function IngestionHeader({ role }: { role: "contributor" | "curator" }) {
         </nav>
 
         <div className={s.barRight}>
-          <span className={s.mockTag} title="This is a styled prototype against mock data — no ingestion backend is wired yet.">
-            prototype · mock data
+          <span className={s.rolePill} title={backendOnline ? "Ingestion service reachable" : "Ingestion service offline"}>
+            <span
+              className={s.rolePillDot}
+              style={{
+                background: backendOnline ? "var(--wf-color-success)" : "var(--wf-color-danger)",
+                boxShadow: backendOnline ? "0 0 0 3px rgba(6,214,160,0.2)" : "0 0 0 3px rgba(239,71,111,0.2)",
+              }}
+              aria-hidden
+            />
+            ingest · {backendOnline ? "live" : "offline"}
           </span>
           <span className={s.rolePill}>
             <span className={s.rolePillDot} aria-hidden />
             {who}
           </span>
-          <button className={s.resetBtn} onClick={resetDemo} title="Reset the mock workflow to its seed state">
-            Reset
-          </button>
         </div>
       </div>
     </header>

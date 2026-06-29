@@ -64,29 +64,45 @@ The renderer targets the **actual** JSON captured from the running API in STEP 0
 
 The TypeScript types in [`lib/contract.ts`](lib/contract.ts) mirror these shapes.
 
-## Ingestion prototype — the write side (`/contribute` + `/curate`)
+## Ingestion — the write side (`/contribute` + `/curate`), wired to a REAL backend
 
-Two **styled, interactive prototype** routes that realize the parked write-side flow from
-[`../docs/ingestion-pipeline-design.md`](../docs/ingestion-pipeline-design.md) — built as the *second
-page of this same product*, reusing the read UI's design system wholesale (same
-[`styles/tokens.scss`](styles/tokens.scss), the shared root layout/fonts, the same card/chip/button
-idioms). They run **entirely on mock data** — there is **no ingestion backend yet** (this is the same
-fixtures-first stage the read side was in before Live).
+Two routes realizing the write-side flow from
+[`../docs/ingestion-pipeline-design.md`](../docs/ingestion-pipeline-design.md) — the *second page of
+this same product* (same [`styles/tokens.scss`](styles/tokens.scss), root layout/fonts, component
+idioms). These are **wired to a real backend** — the [`wdb_ingest`](../wdb_ingest) FastAPI service —
+not mock data: submitting really stages a file, drafting really runs the enricher, sign-off really
+writes the companion note into the initiative folder in git, and Build really hands off to the pinned
+graph build.
 
-| Route | View | What it does |
+| Route | View | What it really does |
 | --- | --- | --- |
-| `/contribute` | Contributor | submit a file → mock auto-draft (companion note, Template A/B) → review/edit → **approve → PENDING** ("awaiting curator review", *cannot go live*) |
-| `/curate` | Curator | the **PENDING queue** (fed by contributor approvals) → review/edit (curator override) → **sign off → QUEUED** or send back; a single-builder build drains QUEUED → BUILT → LIVE |
+| `/contribute` | Contributor | upload a file → the enricher drafts the companion note (Template A/B, real value domains for tables) → review/edit → **approve → PENDING** ("awaiting curator review", *cannot go live*) |
+| `/curate` | Curator | the **PENDING queue** → review/edit (curator override) → **sign off → writes note to git + QUEUED**, or send back; **Build** hands the queue off to the pinned single-builder build, then publishes QUEUED → BUILT → LIVE |
 
-The **two-stage approval gate** is the point and is enforced *by construction* in
-[`lib/ingestion/store.tsx`](lib/ingestion/store.tsx): contributor actions can only reach **PENDING**;
-only the curator moves PENDING → QUEUED. The two views share one mock workflow store (React context +
-localStorage), so a contributor approval really shows up in the curator queue. Every mock shape in
-[`lib/ingestion/`](lib/ingestion) mirrors the eventual ingestion API (design §8) so wiring a real
-backend later is a swap, not a rewrite. Labelled throughout as **prototype · mock data**.
+The **two-stage gate** is enforced **server-side** in [`../wdb_ingest/gate.py`](../wdb_ingest/gate.py)
+(not just the UI): the role is derived from the route and sent as a header; a contributor request for
+the curator sign-off is refused with **403**. The two views share the one backend, so a contributor
+approval really appears in the curator queue.
 
-## Scope (deliberately narrow)
+**How it connects:** [`lib/ingestion/api.ts`](lib/ingestion/api.ts) → the same-origin proxy
+[`app/api/ingest/[...path]/route.ts`](app/api/ingest) → `WDB_INGEST_URL` (default
+`http://127.0.0.1:8001`). If the service is down, the views show an **honest offline banner** (the read
+UI's Live/Replay posture) — they never fabricate data.
 
-The read side is one clean dual-pane query page; the write side is a **mock prototype** (above), not a
-live ingestion backend. **No** real ingestion API/workflow store/server-side agents, **no**
-deployment/Vercel config, **no** auth. Those come later, gated on production-stack sign-off.
+```bash
+# 1. ingestion backend (write side):
+uv run uvicorn wdb_ingest.app:app --port 8001
+# 2. read API + UI as above; then open /contribute and /curate.
+```
+
+**Build fidelity (important):** the guarded WDB build (the two CLAUDE.md extraction guards + the
+canonical-entity remap) only applies in the maintainer's pinned `claude-opus-4-8` `/graphify` session —
+it is **not** in the `graphify` CLI. So Build does **not** fake a headless build: it hands the queue off
+to the pinned build (surfacing the exact command) and detects completion. See
+[`../wdb_ingest/README.md`](../wdb_ingest/README.md).
+
+## Scope
+
+The read side is the dual-pane query page; the write side is the real `wdb_ingest` service above. Local,
+production-shaped: the workflow store (SQLite) and blob staging are swap-in seams for Atlas/GCS, and
+auth/deploy are deferred — see [`../wdb_ingest/README.md`](../wdb_ingest/README.md).

@@ -3,38 +3,33 @@
 import { useEffect, useMemo, useState } from "react";
 import { IngestionHeader } from "@/components/ingestion/IngestionHeader";
 import { GateBanner } from "@/components/ingestion/GateBanner";
+import { OfflineBanner } from "@/components/ingestion/OfflineBanner";
 import { StatePill } from "@/components/ingestion/StatePill";
 import { StateTrack } from "@/components/ingestion/StateTrack";
 import { NoteEditor } from "@/components/ingestion/NoteEditor";
 import { ProvenancePanel, HistoryTimeline } from "@/components/ingestion/ProvenancePanel";
 import { useIngestion } from "@/lib/ingestion/store";
+import type { BuildState } from "@/lib/ingestion/api";
 import type { Submission } from "@/lib/ingestion/types";
 import s from "@/components/ingestion/ingestion.module.scss";
 
 export default function CuratePage() {
-  const { submissions, building, runBuild } = useIngestion();
+  const { submissions, backendOnline, error, build, building, runBuild, confirmBuild } = useIngestion();
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [buildMsg, setBuildMsg] = useState<string | null>(null);
 
   const pending = useMemo(() => submissions.filter((x) => x.state === "PENDING"), [submissions]);
   const queued = useMemo(() => submissions.filter((x) => x.state === "QUEUED" || x.state === "BUILT"), [submissions]);
   const processed = useMemo(
-    () => submissions.filter((x) => x.state === "QUEUED" || x.state === "BUILT" || x.state === "LIVE" || x.state === "REJECTED"),
+    () => submissions.filter((x) => ["QUEUED", "BUILT", "LIVE", "REJECTED"].includes(x.state)),
     [submissions],
   );
 
-  // Keep a sensible default selection — the first pending item, so the queue isn't empty-looking.
   useEffect(() => {
     if (selectedId && submissions.some((x) => x.id === selectedId)) return;
     setSelectedId(pending[0]?.id ?? processed[0]?.id ?? null);
   }, [selectedId, submissions, pending, processed]);
 
   const selected = submissions.find((x) => x.id === selectedId) ?? null;
-
-  function onBuild() {
-    const n = runBuild();
-    setBuildMsg(n === 0 ? "Nothing queued to build." : `Single-builder build started over ${n} queued contribution${n > 1 ? "s" : ""}…`);
-  }
 
   return (
     <>
@@ -46,10 +41,21 @@ export default function CuratePage() {
           <p className={s.pageSub}>
             Contributions contributors have approved arrive here as <strong>pending</strong> — the
             second gate. Review the drafted note, edit anything (curator override), then sign off or
-            send it back. Sign-off <strong>queues</strong> a single-builder rebuild; it doesn’t
-            publish instantly.
+            send it back. Sign-off writes the note to git and <strong>queues</strong> the
+            single-builder rebuild; it doesn’t publish instantly.
           </p>
         </div>
+
+        {!backendOnline && <OfflineBanner />}
+        {error && (
+          <div className={`${s.notice} ${s.noticeRejected}`} style={{ marginBottom: "var(--wf-space-5)" }}>
+            <span className={s.noticeIcon}>⚠</span>
+            <div>
+              <div className={s.noticeTitle}>Action refused</div>
+              <div className={s.noticeBody}>{error}</div>
+            </div>
+          </div>
+        )}
 
         <div style={{ marginBottom: "var(--wf-space-6)" }}>
           <GateBanner emphasis="curator" />
@@ -57,7 +63,14 @@ export default function CuratePage() {
 
         <div className={s.split}>
           <div className={s.col}>
-            <BuildPanel queuedCount={queued.length} building={building} onBuild={onBuild} message={buildMsg} />
+            <BuildPanel
+              build={build}
+              building={building}
+              queuedCount={queued.length}
+              disabled={!backendOnline}
+              onBuild={runBuild}
+              onConfirm={confirmBuild}
+            />
 
             <div className={s.card}>
               <div className={s.cardHead}>
@@ -71,7 +84,7 @@ export default function CuratePage() {
                     Queue clear — no contributions awaiting curator sign-off.
                   </div>
                 ) : (
-                  <QueueList items={pending} selectedId={selectedId} onSelect={setSelectedId} showContributor />
+                  <QueueList items={pending} selectedId={selectedId} onSelect={setSelectedId} />
                 )}
               </div>
             </div>
@@ -83,7 +96,7 @@ export default function CuratePage() {
                   <span className={s.cardKicker}>queued · built · live · sent back</span>
                 </div>
                 <div className={s.cardBody}>
-                  <QueueList items={processed} selectedId={selectedId} onSelect={setSelectedId} showContributor />
+                  <QueueList items={processed} selectedId={selectedId} onSelect={setSelectedId} />
                 </div>
               </div>
             )}
@@ -105,17 +118,21 @@ export default function CuratePage() {
   );
 }
 
-// ───────────────────────────────────────────────────────────── build panel
+// ───────────────────────────────────────────────────────────── build panel (tracked handoff)
 function BuildPanel({
-  queuedCount,
+  build,
   building,
+  queuedCount,
+  disabled,
   onBuild,
-  message,
+  onConfirm,
 }: {
-  queuedCount: number;
+  build: BuildState | null;
   building: boolean;
+  queuedCount: number;
+  disabled?: boolean;
   onBuild: () => void;
-  message: string | null;
+  onConfirm: () => void;
 }) {
   return (
     <div className={s.card}>
@@ -125,26 +142,45 @@ function BuildPanel({
       </div>
       <div className={s.cardBody}>
         <p className={s.noteText} style={{ fontSize: "var(--wf-text-caption)", marginBottom: "var(--wf-space-4)" }}>
-          Sign-off <strong>queues</strong> a contribution; it doesn’t build. One controlled build
-          drains the whole queue at once (batched, pinned <span className={s.mono}>claude-opus-4-8</span>) —
-          never a build per approval.
+          Sign-off <strong>queues</strong> a contribution. The guarded build (the two extraction guards
+          + canonical remap) only applies in the pinned <span className={s.mono}>claude-opus-4-8</span>{" "}
+          session — so this hands the queue off to that build rather than faking one, then detects when
+          it’s done.
         </p>
-        <div className={s.btnRow} style={{ justifyContent: "space-between" }}>
-          <span className={s.subMeta}>
-            <StatePill state="QUEUED" sm /> &nbsp;{queuedCount} queued
-          </span>
-          <button className={`${s.btn} ${s.btnGhost} ${s.btnSm}`} onClick={onBuild} disabled={building || queuedCount === 0}>
-            {building ? (
-              <>
-                <span className={s.spinner} aria-hidden /> Building…
-              </>
-            ) : (
-              "Run single-builder build"
-            )}
-          </button>
-        </div>
-        {message && (
-          <div className={s.provNote} style={{ marginTop: "var(--wf-space-3)" }}>{message}</div>
+
+        {building ? (
+          <div className={`${s.notice} ${s.noticeQueued}`}>
+            <span className={s.noticeIcon}>⧖</span>
+            <div>
+              <div className={s.noticeTitle}>Handed off — run the pinned build</div>
+              <div className={s.noticeBody}>
+                {build?.message}
+                <div style={{ marginTop: "var(--wf-space-2)" }}>
+                  Run in a pinned session: <span className={s.mono}>{build?.command}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className={s.btnRow} style={{ justifyContent: "space-between" }}>
+            <span className={s.subMeta}>
+              <StatePill state="QUEUED" sm /> &nbsp;{queuedCount} queued
+            </span>
+            <button className={`${s.btn} ${s.btnGhost} ${s.btnSm}`} onClick={onBuild} disabled={disabled || queuedCount === 0}>
+              Hand off to single-builder build
+            </button>
+          </div>
+        )}
+
+        {building && (
+          <div className={s.btnRow} style={{ marginTop: "var(--wf-space-4)" }}>
+            <button className={`${s.btn} ${s.btnPrimary} ${s.btnSm}`} onClick={onConfirm}>
+              Mark build complete → publish
+            </button>
+            <span className={s.muted} style={{ fontSize: "var(--wf-text-caption)" }}>
+              Auto-detected when the graph is rebuilt; or confirm manually.
+            </span>
+          </div>
         )}
       </div>
     </div>
@@ -156,12 +192,10 @@ function QueueList({
   items,
   selectedId,
   onSelect,
-  showContributor,
 }: {
   items: Submission[];
   selectedId: string | null;
   onSelect: (id: string) => void;
-  showContributor?: boolean;
 }) {
   return (
     <div className={s.subList}>
@@ -176,12 +210,8 @@ function QueueList({
             <StatePill state={sub.state} sm />
           </div>
           <div className={s.subMeta}>
-            {showContributor && (
-              <>
-                <span>by {sub.provenance.contributor}</span>
-                <span className={s.subMetaSep}>·</span>
-              </>
-            )}
+            <span>by {sub.provenance.contributor}</span>
+            <span className={s.subMetaSep}>·</span>
             <span>{sub.initiative}</span>
             {sub.curatorEdited && (
               <>
@@ -198,7 +228,7 @@ function QueueList({
 
 // ───────────────────────────────────────────────────────────── curator detail
 function CuratorDetail({ submission }: { submission: Submission }) {
-  const { curatorUpdateDraft, curatorApprove, curatorReject } = useIngestion();
+  const { editDraft, curatorApprove, reject } = useIngestion();
   const [rejecting, setRejecting] = useState(false);
   const [reason, setReason] = useState("");
   const isPending = submission.state === "PENDING";
@@ -238,7 +268,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
               note={submission.draft}
               provenance={submission.provenance}
               editable={isPending}
-              onChange={(next) => curatorUpdateDraft(submission.id, next)}
+              onChange={(next) => editDraft(submission.id, next)}
             />
 
             {isPending && (
@@ -246,7 +276,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
                 {!rejecting ? (
                   <div className={s.btnRow}>
                     <button className={`${s.btn} ${s.btnPrimary}`} onClick={() => curatorApprove(submission.id)}>
-                      Sign off → queue for build
+                      Sign off → write to git &amp; queue
                     </button>
                     <button className={`${s.btn} ${s.btnDanger}`} onClick={() => setRejecting(true)}>
                       Send back
@@ -269,7 +299,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
                       <button
                         className={`${s.btn} ${s.btnDanger}`}
                         disabled={!reason.trim()}
-                        onClick={() => curatorReject(submission.id, reason.trim())}
+                        onClick={() => reject(submission.id, reason.trim())}
                       >
                         Confirm — send back
                       </button>
@@ -309,7 +339,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
 
 function CuratorStatusNotice({ submission }: { submission: Submission }) {
   const map = {
-    QUEUED: { cls: s.noticeQueued, icon: "⧖", title: "Queued for the next build", body: "Signed off — waiting for the single-builder build to drain the queue. Not live yet." },
+    QUEUED: { cls: s.noticeQueued, icon: "⧖", title: "Queued for the next build", body: "Signed off and the note is in git — waiting for the single-builder build to publish. Not live yet." },
     BUILT: { cls: s.noticeQueued, icon: "⚙", title: "Build ran — publishing", body: "Artifacts produced; publishing to the read service." },
     LIVE: { cls: s.noticeLive, icon: "✓", title: "Live in the knowledge base", body: "Built and published. Curator override can still edit or supersede it at any time." },
     REJECTED: { cls: s.noticeRejected, icon: "↩", title: "Sent back to the contributor", body: submission.rejectionReason ?? "Returned with a reason." },

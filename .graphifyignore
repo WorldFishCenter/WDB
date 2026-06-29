@@ -27,6 +27,7 @@ mode_b/
 mode_c/
 wdb_router/
 wdb_api/
+wdb_ingest/
 read-ui/
 tests/
 pyproject.toml

@@ -62,10 +62,21 @@ uv run pytest          # all four suites in one run (uses testpaths + --import-m
 ```
 
 Per-suite counts (the green baseline): **mode_c 40, mode_a 21, wdb_router 29, mode_b 33,
-wdb_api 21** — 144 passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
-`--import-mode=importlib` because two suites share test-file basenames (`test_gate.py`,
+wdb_api 21, wdb_ingest 15** — 159 passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
+`--import-mode=importlib` because some suites share test-file basenames (`test_gate.py`,
 `test_pipeline.py`). The `@pytest.mark.live` reranker-refusal test runs end-to-end when the models
 are available and self-skips otherwise, so offline CI still passes.
+
+## The services (read + write)
+
+```bash
+uv run uvicorn wdb_api.app:app                       # read API (the read UI's backend) → :8000
+uv run uvicorn wdb_ingest.app:app --port 8001        # ingestion write-side (the /contribute + /curate backend)
+```
+
+`wdb_ingest` is the contribution workflow: submit → enrich-draft → the two-stage gate → note-to-git on
+sign-off → single-builder build handoff. See [`wdb_ingest/README.md`](wdb_ingest/README.md). Its local
+state (`wdb_ingest/_state`, `_staging`) is gitignored.
 
 ## Models (embedder + reranker)
 

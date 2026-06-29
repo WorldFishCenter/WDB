@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IngestionHeader } from "@/components/ingestion/IngestionHeader";
 import { GateBanner } from "@/components/ingestion/GateBanner";
+import { OfflineBanner } from "@/components/ingestion/OfflineBanner";
 import { StatePill } from "@/components/ingestion/StatePill";
 import { StateTrack } from "@/components/ingestion/StateTrack";
 import { NoteEditor } from "@/components/ingestion/NoteEditor";
@@ -20,7 +21,6 @@ const INITIATIVES = [
   "civ-kb",
 ];
 
-// Phase-1 formats are active; richer formats are shown but disabled (design §5).
 const PHASE1 = [
   { id: "tabular", label: "Tabular", icon: "▦", exts: ".csv, .xlsx" },
   { id: "pdf", label: "PDF", icon: "▤", exts: ".pdf" },
@@ -32,10 +32,19 @@ const LATER = [
   { id: "url", label: "URL", icon: "🔗" },
 ];
 
-const SAMPLES: { filename: string; format: Phase1Format; sizeLabel: string }[] = [
-  { filename: "kenya_yield_2025.csv", format: "tabular", sizeLabel: "1.1 MB" },
-  { filename: "mombasa_market_survey.pdf", format: "pdf", sizeLabel: "1.8 MB" },
-  { filename: "aquaculture_brief.md", format: "doc", sizeLabel: "22 KB" },
+// Demo samples carry REAL bytes so the live pipeline actually runs (the tabular one is a tidy CSV
+// the enricher fills with real value domains).
+const SAMPLES: { filename: string; format: Phase1Format; content: string }[] = [
+  {
+    filename: "kenya_yield_2025.csv",
+    format: "tabular",
+    content:
+      "plot_id,harvest_date,yield_kg,variety\n" +
+      "P001,2025-02-14,42.5,DK8031\nP002,2025-03-02,38.1,H614\nP003,2025-03-20,51.7,DK8031\n" +
+      "P004,2025-04-01,29.4,Pioneer\nP005,2025-04-12,47.0,H614\nP006,2025-05-03,33.8,DK8031\n",
+  },
+  { filename: "aquaculture_brief.md", format: "doc", content: "# Aquaculture brief\n\nA short brief for the initiative.\n" },
+  { filename: "mombasa_market_survey.pdf", format: "pdf", content: "%PDF-1.4 placeholder survey bytes\n" },
 ];
 
 function inferFormat(filename: string): Phase1Format | "later" | null {
@@ -54,13 +63,11 @@ function humanSize(bytes: number): string {
 }
 
 export default function ContributePage() {
-  const { submissions, currentContributor, submit } = useIngestion();
+  const { submissions, backendOnline, error, submit } = useIngestion();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const mine = useMemo(
-    () => submissions.filter((x) => x.provenance.contributor === currentContributor),
-    [submissions, currentContributor],
-  );
+  // The server already scopes the list to this contributor.
+  const mine = submissions;
   const selected = mine.find((x) => x.id === selectedId) ?? null;
 
   return (
@@ -71,11 +78,22 @@ export default function ContributePage() {
           <div className={s.eyebrow}>✎ Contribute</div>
           <h1 className={s.pageTitle}>Add to the shared knowledge base</h1>
           <p className={s.pageSub}>
-            Upload a file, review the companion note the agents draft for it, then approve it for
+            Upload a file, review the companion note the enricher drafts for it, then approve it for
             curator review. Approving hands it off — it does <strong>not</strong> go live. Only a
             curator can sign it into the knowledge base.
           </p>
         </div>
+
+        {!backendOnline && <OfflineBanner />}
+        {error && (
+          <div className={`${s.notice} ${s.noticeRejected}`} style={{ marginBottom: "var(--wf-space-5)" }}>
+            <span className={s.noticeIcon}>⚠</span>
+            <div>
+              <div className={s.noticeTitle}>Action refused</div>
+              <div className={s.noticeBody}>{error}</div>
+            </div>
+          </div>
+        )}
 
         <div style={{ marginBottom: "var(--wf-space-6)" }}>
           <GateBanner emphasis="contributor" />
@@ -84,9 +102,10 @@ export default function ContributePage() {
         <div className={s.split}>
           <div className={s.col}>
             <SubmitCard
-              onSubmit={(input) => {
-                const id = submit(input);
-                setSelectedId(id);
+              disabled={!backendOnline}
+              onSubmit={async (input, bytes) => {
+                const sub = await submit(input, bytes);
+                if (sub) setSelectedId(sub.id);
               }}
             />
             <SubmissionList mine={mine} selectedId={selectedId} onSelect={setSelectedId} />
@@ -110,15 +129,21 @@ export default function ContributePage() {
 }
 
 // ───────────────────────────────────────────────────────────── submit card
-function SubmitCard({ onSubmit }: { onSubmit: (input: SubmissionInput) => void }) {
+function SubmitCard({
+  onSubmit,
+  disabled,
+}: {
+  onSubmit: (input: SubmissionInput, bytes: Blob) => void;
+  disabled?: boolean;
+}) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [file, setFile] = useState<{ filename: string; format: Phase1Format; sizeLabel: string } | null>(null);
+  const [file, setFile] = useState<{ filename: string; format: Phase1Format; sizeLabel: string; blob: Blob } | null>(null);
   const [unsupported, setUnsupported] = useState<string | null>(null);
   const [initiative, setInitiative] = useState(INITIATIVES[0]);
   const [author, setAuthor] = useState("");
   const [sourceUrl, setSourceUrl] = useState("");
 
-  function choose(filename: string, sizeLabel: string) {
+  function chooseBlob(filename: string, blob: Blob) {
     const fmt = inferFormat(filename);
     if (fmt === "later") {
       setUnsupported("Video, images, and URLs come in a later phase — Phase 1 is PDF, tabular, and docs.");
@@ -131,24 +156,27 @@ function SubmitCard({ onSubmit }: { onSubmit: (input: SubmissionInput) => void }
       return;
     }
     setUnsupported(null);
-    setFile({ filename, format: fmt, sizeLabel });
+    setFile({ filename, format: fmt, sizeLabel: humanSize(blob.size), blob });
   }
 
   function onPick(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
-    if (f) choose(f.name, humanSize(f.size));
+    if (f) chooseBlob(f.name, f);
   }
 
   function doSubmit() {
     if (!file) return;
-    onSubmit({
-      filename: file.filename,
-      format: file.format,
-      sizeLabel: file.sizeLabel,
-      initiative,
-      author: author.trim(),
-      source_url: sourceUrl.trim(),
-    });
+    onSubmit(
+      {
+        filename: file.filename,
+        format: file.format,
+        sizeLabel: file.sizeLabel,
+        initiative,
+        author: author.trim(),
+        source_url: sourceUrl.trim(),
+      },
+      file.blob,
+    );
     setFile(null);
     setAuthor("");
     setSourceUrl("");
@@ -188,7 +216,7 @@ function SubmitCard({ onSubmit }: { onSubmit: (input: SubmissionInput) => void }
               key={sm.filename}
               className={s.sampleChip}
               type="button"
-              onClick={() => choose(sm.filename, sm.sizeLabel)}
+              onClick={() => chooseBlob(sm.filename, new Blob([sm.content], { type: "text/plain" }))}
             >
               {sm.filename}
             </button>
@@ -240,7 +268,12 @@ function SubmitCard({ onSubmit }: { onSubmit: (input: SubmissionInput) => void }
           </div>
         </div>
 
-        <button className={`${s.btn} ${s.btnPrimary}`} disabled={!file} onClick={doSubmit} style={{ width: "100%", justifyContent: "center" }}>
+        <button
+          className={`${s.btn} ${s.btnPrimary}`}
+          disabled={!file || disabled}
+          onClick={doSubmit}
+          style={{ width: "100%", justifyContent: "center" }}
+        >
           Submit for drafting
         </button>
       </div>
@@ -295,7 +328,7 @@ function SubmissionList({
 
 // ───────────────────────────────────────────────────────────── detail panel
 function DetailPanel({ submission }: { submission: Submission }) {
-  const { openForReview, updateDraft, contributorApprove, contributorResubmit } = useIngestion();
+  const { openForReview, editDraft, approve, resubmit } = useIngestion();
   const editable = submission.state === "UNDER_REVIEW" || submission.state === "REJECTED";
 
   return (
@@ -313,13 +346,11 @@ function DetailPanel({ submission }: { submission: Submission }) {
         </div>
       </div>
 
-      {/* The drafted companion note (once the agents have produced it) */}
       {submission.state === "SUBMITTED" ? (
         <div className={s.card}>
           <div className={s.cardBody}>
             <div className={s.empty}>
-              <span className={s.spinner} aria-hidden /> &nbsp;The curate/enrich agents are drafting the
-              companion note…
+              <span className={s.spinner} aria-hidden /> &nbsp;The enricher is drafting the companion note…
             </div>
           </div>
         </div>
@@ -335,10 +366,10 @@ function DetailPanel({ submission }: { submission: Submission }) {
                 note={submission.draft}
                 provenance={submission.provenance}
                 editable={editable}
-                onChange={(next) => updateDraft(submission.id, next)}
+                onChange={(next) => editDraft(submission.id, next)}
               />
               <div className={s.btnRow} style={{ marginTop: "var(--wf-space-5)" }}>
-                <ContributorActions submission={submission} openForReview={openForReview} approve={contributorApprove} resubmit={contributorResubmit} />
+                <ContributorActions submission={submission} openForReview={openForReview} approve={approve} resubmit={resubmit} />
               </div>
             </div>
           </div>
@@ -411,7 +442,6 @@ function ContributorActions({
   }
 }
 
-/** The honest, state-specific status message — never implies "live" before it is. */
 function StatusNotice({ submission }: { submission: Submission }) {
   switch (submission.state) {
     case "PENDING":
@@ -425,8 +455,8 @@ function StatusNotice({ submission }: { submission: Submission }) {
     case "QUEUED":
       return (
         <Notice tone="queued" icon="⧖" title="Curator signed off — queued for the next build">
-          The curator approved it. It’s <strong>queued</strong> for the controlled single-builder
-          rebuild and will appear after that build — not instantly.
+          The curator approved it and wrote the note to git. It’s <strong>queued</strong> for the
+          controlled single-builder rebuild and will appear after that build — not instantly.
         </Notice>
       );
     case "BUILT":
@@ -457,7 +487,7 @@ function StatusNotice({ submission }: { submission: Submission }) {
     case "DRAFTED":
       return (
         <Notice tone="pending" icon="✦" title="Draft ready">
-          The agents drafted a companion note. Open it for review to edit and approve.
+          The enricher drafted a companion note. Open it for review to edit and approve.
         </Notice>
       );
     default:
