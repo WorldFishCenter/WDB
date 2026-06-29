@@ -90,6 +90,22 @@
   background: var(--wf-text-slate-400);
 }
 
+.contributeLink {
+  font-size: var(--wf-font-xxs);
+  font-weight: 700;
+  color: var(--wf-text-muted);
+  padding: 6px 12px;
+  border-radius: var(--wf-radius-sm);
+  border: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    color: var(--wf-accent);
+    border-color: var(--wf-border-accent-soft);
+    background: rgba(87, 179, 209, 0.08);
+  }
+}
+
 .exploreBtn {
   background: rgba(87, 179, 209, 0.1);
   border: 1px solid var(--wf-border-accent-medium);

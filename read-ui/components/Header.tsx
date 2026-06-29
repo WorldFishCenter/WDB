@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./header.module.scss";
 
 export interface Health {
@@ -23,6 +24,9 @@ export function Header({
           <span className={styles.brandText}>WorldFish Digital Brain</span>
         </div>
         <div className={styles.status} title={health ? `API: ${health.target}` : "checking API…"}>
+          <Link href="/contribute" className={styles.contributeLink} title="Contribute to the knowledge base (write side)">
+            ✎ Contribute
+          </Link>
           {onExploreGraph && (
             <button
               className={styles.exploreBtn}
