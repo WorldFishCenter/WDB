@@ -69,9 +69,25 @@ are available and self-skips otherwise, so offline CI still passes.
 
 ## The services (read + write)
 
+**Secrets from `.env`** — add `ANTHROPIC_API_KEY=sk-ant-…` (and optionally `GEMINI_API_KEY` /
+`OPENROUTER_API_KEY`) to `.env` at the repo root (already gitignored). Pass `--env-file .env`
+to uvicorn so the running process sees the key automatically — no manual `export` required:
+
 ```bash
-uv run uvicorn wdb_api.app:app                       # read API (the read UI's backend) → :8000
-uv run uvicorn wdb_ingest.app:app --port 8001        # ingestion write-side (the /contribute + /curate backend)
+uv run uvicorn wdb_api.app:app --env-file .env              # read API → :8000 (Live + cost-tracked)
+uv run uvicorn wdb_ingest.app:app --port 8001 --env-file .env  # ingestion write-side → :8001
+```
+
+**Verify live mode** — hit `http://localhost:8000/health`; should return `"backend": "live"` and
+`"cost_tracking": true`. Without `ANTHROPIC_API_KEY` the app starts in Replay (offline) mode.
+
+**Cost tracking** — while using the read UI, open `http://localhost:8000/cost/report` in another
+tab to watch per-question LLM costs accumulate in real time.
+
+**Read UI** — run `npm run dev` from `read-ui/` (separate terminal):
+
+```bash
+cd read-ui && npm run dev      # → http://localhost:3000
 ```
 
 `wdb_ingest` is the contribution workflow: submit → enrich-draft → the two-stage gate → note-to-git on

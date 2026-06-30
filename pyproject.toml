@@ -81,6 +81,7 @@ packages = [
     "wdb_router",
     "wdb_api",
     "wdb_ingest",
+    "cost_sim",
 ]
 
 [tool.setuptools.package-data]

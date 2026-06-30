@@ -83,24 +83,30 @@ def assemble(question: str, res: Resolution, result: ExecResult, catalog: Catalo
 
     if res.group_by:
         spec = catalog.get(res.table)
+        sql_label = res.metric_label if re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", res.metric_label or "") else "value"
         figure = Figure(
-            spec={"kind": "bar", "x": res.group_by, "y": res.metric_label},
+            spec={"kind": "bar", "x": res.group_by, "y": sql_label},
             query=result.sql,
             result=result.rows,
         )
         top = result.rows[0]
         text = (
             f"{_humanise_metric(res)} by {res.group_by} for {_table_label(res, catalog)} "
-            f"(top: {top.get(res.group_by)} = {top.get(res.metric_label)}; "
+            f"(top: {top.get(res.group_by)} = {top.get(sql_label)}; "
             f"{len(result.rows)} groups). Every figure below is computed from rows."
         )
         return Answer(claims=[Claim(text=text, citations=(citation,))], figures=[figure])
 
     row = result.rows[0]
-    value = row.get(res.metric_label)
+    # The executor falls back to "value" when metric_label isn't a valid SQL identifier;
+    # mirror that normalization here so the lookup always matches the SQL column alias.
+    sql_label = res.metric_label if re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", res.metric_label or "") else "value"
+    value = row.get(sql_label)
     n = row.get("n")
+    filter_str = _filter_clause(res)
+    location = f" {filter_str}" if filter_str else ""
     text = (
-        f"{_humanise_metric(res)} {_filter_clause(res)} is {value} "
+        f"{_humanise_metric(res)}{location} is {value} "
         f"(computed over {n} {'trips' if res.grain_key == 'trip_id' else 'rows'})."
     )
     if res.derived_formula:

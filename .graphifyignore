@@ -33,3 +33,4 @@ tests/
 pyproject.toml
 proof_a/
 model_eval/
+cost_sim/
