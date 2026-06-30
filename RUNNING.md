@@ -62,10 +62,37 @@ uv run pytest          # all four suites in one run (uses testpaths + --import-m
 ```
 
 Per-suite counts (the green baseline): **mode_c 40, mode_a 21, wdb_router 29, mode_b 33,
-wdb_api 21** — 144 passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
-`--import-mode=importlib` because two suites share test-file basenames (`test_gate.py`,
+wdb_api 21, wdb_ingest 15** — 159 passed, 1 skipped (live synthesis self-skips without `ANTHROPIC_API_KEY`). The combined run uses
+`--import-mode=importlib` because some suites share test-file basenames (`test_gate.py`,
 `test_pipeline.py`). The `@pytest.mark.live` reranker-refusal test runs end-to-end when the models
 are available and self-skips otherwise, so offline CI still passes.
+
+## The services (read + write)
+
+**Secrets from `.env`** — add `ANTHROPIC_API_KEY=sk-ant-…` (and optionally `GEMINI_API_KEY` /
+`OPENROUTER_API_KEY`) to `.env` at the repo root (already gitignored). Pass `--env-file .env`
+to uvicorn so the running process sees the key automatically — no manual `export` required:
+
+```bash
+uv run uvicorn wdb_api.app:app --env-file .env              # read API → :8000 (Live + cost-tracked)
+uv run uvicorn wdb_ingest.app:app --port 8001 --env-file .env  # ingestion write-side → :8001
+```
+
+**Verify live mode** — hit `http://localhost:8000/health`; should return `"backend": "live"` and
+`"cost_tracking": true`. Without `ANTHROPIC_API_KEY` the app starts in Replay (offline) mode.
+
+**Cost tracking** — while using the read UI, open `http://localhost:8000/cost/report` in another
+tab to watch per-question LLM costs accumulate in real time.
+
+**Read UI** — run `npm run dev` from `read-ui/` (separate terminal):
+
+```bash
+cd read-ui && npm run dev      # → http://localhost:3000
+```
+
+`wdb_ingest` is the contribution workflow: submit → enrich-draft → the two-stage gate → note-to-git on
+sign-off → single-builder build handoff. See [`wdb_ingest/README.md`](wdb_ingest/README.md). Its local
+state (`wdb_ingest/_state`, `_staging`) is gitignored.
 
 ## Models (embedder + reranker)
 

@@ -73,7 +73,11 @@ needs_disambiguation. If the value or column is absent from every table, return 
 cannot_resolve. Put the distinctive token you routed on in `pinned_by`.
 
 Return a single JSON object matching the schema. For a concrete answer use \
-outcome="resolve"; otherwise "cannot_resolve" or "needs_disambiguation".
+outcome="resolve"; otherwise "cannot_resolve" or "needs_disambiguation". \
+When outcome is cannot_resolve or needs_disambiguation, set table="", aggregation="AVG", \
+pinned_by="", metric_column=null, derived_formula=null, derived_inputs=[], grain_key=null, \
+group_by=null, metric_label="value", round_digits=0, confidence=0.0, assumptions=[], \
+filters=[] — these fields are required by the schema but ignored for non-resolve outcomes.
 
 {catalog.render_corpus()}
 """
@@ -88,14 +92,14 @@ RESOLUTION_SCHEMA = {
         "reason": {"type": "string"},
         "candidates": {"type": "array", "items": {"type": "string"}},
         "table": {"type": "string"},
-        "aggregation": {"type": "string"},
+        "aggregation": {"type": "string", "enum": ["AVG", "COUNT", "SUM", "MIN", "MAX"]},
         "pinned_by": {"type": "string"},
-        "metric_column": {"type": ["string", "null"]},
-        "derived_formula": {"type": ["string", "null"]},
+        "metric_column": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+        "derived_formula": {"anyOf": [{"type": "string"}, {"type": "null"}]},
         "derived_inputs": {"type": "array", "items": {"type": "string"}},
-        "grain_key": {"type": ["string", "null"]},
-        "group_by": {"type": ["string", "null"]},
-        "metric_label": {"type": "string"},
+        "grain_key": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+        "group_by": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+        "metric_label": {"type": "string", "description": "snake_case SQL identifier for the computed column, e.g. avg_catch_kg, total_trips"},
         "round_digits": {"type": "integer"},
         "confidence": {"type": "number"},
         "assumptions": {"type": "array", "items": {"type": "string"}},
@@ -113,7 +117,11 @@ RESOLUTION_SCHEMA = {
             },
         },
     },
-    "required": ["outcome"],
+    "required": [
+        "outcome", "reason", "candidates", "table", "aggregation", "pinned_by",
+        "metric_column", "derived_formula", "derived_inputs", "grain_key", "group_by",
+        "metric_label", "round_digits", "confidence", "assumptions", "filters",
+    ],
 }
 
 
@@ -180,6 +188,10 @@ class LiveResolver:
             # structured output forces a valid JSON object; no temperature on Opus 4.8
             output_config={"format": {"type": "json_schema", "schema": RESOLUTION_SCHEMA}},
         )
+        if resp.stop_reason == "max_tokens":
+            return CannotResolve(reason="resolver hit max_tokens — response truncated")
+        if resp.stop_reason == "refusal":
+            return CannotResolve(reason="resolver refused the request (safety filter)")
         text = next(b.text for b in resp.content if b.type == "text")
         return outcome_from_dict(json.loads(text))
 

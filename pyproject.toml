@@ -80,6 +80,8 @@ packages = [
     "mode_c", "mode_c.fixtures",
     "wdb_router",
     "wdb_api",
+    "wdb_ingest",
+    "cost_sim",
 ]
 
 [tool.setuptools.package-data]
@@ -90,7 +92,7 @@ packages = [
 # All four suites under one run. `--import-mode=importlib` is required: tests/ and
 # mode_b/tests/ both define test_gate.py, and mode_a/tests/ and mode_b/tests/ both
 # define test_pipeline.py — duplicate basenames the legacy prepend importer rejects.
-testpaths = ["tests", "mode_a/tests", "mode_b/tests", "wdb_router/tests", "wdb_api/tests"]
+testpaths = ["tests", "mode_a/tests", "mode_b/tests", "wdb_router/tests", "wdb_api/tests", "wdb_ingest/tests"]
 addopts = "--import-mode=importlib"
 markers = [
     "live: exercises real models / network (Chroma + cross-encoder, or the Anthropic API); self-skips when unavailable",

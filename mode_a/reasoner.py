@@ -160,6 +160,10 @@ class LiveReasoner:
             # structured output forces a valid JSON object; no temperature on Opus 4.8
             output_config={"format": {"type": "json_schema", "schema": RESPONSE_SCHEMA}},
         )
+        if resp.stop_reason == "max_tokens":
+            raise RuntimeError("Mode A reasoner hit max_tokens — response truncated, cannot parse")
+        if resp.stop_reason == "refusal":
+            raise RuntimeError("Mode A reasoner refused the request (safety filter)")
         return json.loads(next(b.text for b in resp.content if b.type == "text"))
 
 

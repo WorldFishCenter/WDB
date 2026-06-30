@@ -27,8 +27,10 @@ mode_b/
 mode_c/
 wdb_router/
 wdb_api/
+wdb_ingest/
 read-ui/
 tests/
 pyproject.toml
 proof_a/
 model_eval/
+cost_sim/

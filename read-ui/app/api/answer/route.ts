@@ -29,8 +29,8 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ question: question.trim() }),
-      // the router can take a moment under Live; generous but bounded
-      signal: AbortSignal.timeout(120_000),
+      // Live pipeline: Mode A (Opus) + Mode B (Sonnet) + Mode C (Opus) can run 2-4 min
+      signal: AbortSignal.timeout(300_000),
     });
   } catch {
     return NextResponse.json(
