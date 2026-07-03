@@ -36,11 +36,9 @@ export default function CuratePage() {
       <IngestionHeader role="curator" />
       <main className={`wf-container ${s.page}`}>
         <div className={s.pageHead}>
-          <div className={s.eyebrow}>✓ Curate</div>
           <h1 className={s.pageTitle}>The approval queue</h1>
           <p className={s.pageSub}>
-            Approved contributions arrive here as <strong>pending</strong> — the second gate. Sign
-            off to write the note to git and queue the rebuild, or send it back with a reason.
+            Sign off to write the note to git and queue the rebuild, or send it back with a reason.
           </p>
         </div>
 
@@ -55,22 +53,13 @@ export default function CuratePage() {
           </div>
         )}
 
-        <div style={{ marginBottom: "var(--wf-space-6)" }}>
+        <div className={s.gateWrap}>
           <GateBanner emphasis="curator" />
         </div>
 
         <div className={s.split}>
           <div className={s.col}>
-            <BuildPanel
-              build={build}
-              building={building}
-              queuedCount={queued.length}
-              disabled={!backendOnline}
-              onBuild={runBuild}
-              onConfirm={confirmBuild}
-            />
-
-            <div className={s.card}>
+            <div className={`${s.card} ${s.cardPrimary}`}>
               <div className={s.cardHead}>
                 <span className={s.cardTitle}>Pending review</span>
                 <span className={s.cardKicker}>{pending.length} awaiting sign-off</span>
@@ -87,8 +76,17 @@ export default function CuratePage() {
               </div>
             </div>
 
+            <BuildPanel
+              build={build}
+              building={building}
+              queuedCount={queued.length}
+              disabled={!backendOnline}
+              onBuild={runBuild}
+              onConfirm={confirmBuild}
+            />
+
             {processed.length > 0 && (
-              <div className={s.card}>
+              <div className={`${s.card} ${s.cardQuiet}`}>
                 <div className={s.cardHead}>
                   <span className={s.cardTitle}>Processed</span>
                   <span className={s.cardKicker}>queued · built · live · sent back</span>
@@ -240,12 +238,12 @@ function CuratorDetail({ submission }: { submission: Submission }) {
         </div>
         <div className={s.cardBody}>
           <StateTrack state={submission.state} />
-          <div className={s.subMeta} style={{ marginTop: "var(--wf-space-4)" }}>
+          <div className={`${s.subMeta} ${s.blockGapSm}`}>
             <span>Target placement:</span>
             <span className={s.mono}>{submission.targetPlacement}</span>
           </div>
           {!isPending && (
-            <div style={{ marginTop: "var(--wf-space-4)" }}>
+            <div className={s.blockGapSm}>
               <CuratorStatusNotice submission={submission} />
             </div>
           )}
@@ -253,7 +251,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
       </div>
 
       {submission.draft && (
-        <div className={s.card}>
+        <div className={`${s.card} ${s.cardPrimary}`}>
           <div className={s.cardHead}>
             <span className={s.cardTitle}>Companion note</span>
             <span className={s.cardKicker}>
@@ -270,7 +268,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
             />
 
             {isPending && (
-              <div style={{ marginTop: "var(--wf-space-5)" }}>
+              <div className={s.blockGap}>
                 {!rejecting ? (
                   <div className={s.btnRow}>
                     <button className={`${s.btn} ${s.btnPrimary}`} onClick={() => curatorApprove(submission.id)}>
@@ -313,7 +311,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
         </div>
       )}
 
-      <div className={s.card}>
+      <div className={`${s.card} ${s.cardQuiet}`}>
         <div className={s.cardHead}>
           <span className={s.cardTitle}>Provenance &amp; source</span>
         </div>
@@ -322,7 +320,7 @@ function CuratorDetail({ submission }: { submission: Submission }) {
         </div>
       </div>
 
-      <div className={s.card}>
+      <div className={`${s.card} ${s.cardQuiet}`}>
         <div className={s.cardHead}>
           <span className={s.cardTitle}>History</span>
           <span className={s.cardKicker}>audit trail</span>

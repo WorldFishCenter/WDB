@@ -22,12 +22,16 @@
   position: relative;
 }
 
+// The source-type key — shown WITH the answer (where the badges below actually appear), not at the
+// idle entry, so the entry stays a single clear "ask" focal point.
 .legend {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--wf-space-2);
-  margin-top: var(--wf-space-3);
+  margin: var(--wf-space-4) 0 var(--wf-space-5);
+  padding-bottom: var(--wf-space-4);
+  border-bottom: 1px solid var(--wf-border-subtle);
 }
 
 .legendLabel {

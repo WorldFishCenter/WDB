@@ -91,7 +91,6 @@ export default function Home() {
             Every claim cites its source. What can&apos;t be grounded is stated, never invented.
           </p>
           <QueryForm onSubmit={handleAsk} loading={loading} />
-          <Legend />
         </div>
       </section>
 
@@ -112,7 +111,12 @@ export default function Home() {
           </div>
         )}
 
-        {!loading && !error && answer && <AnswerView answer={answer} />}
+        {!loading && !error && answer && (
+          <>
+            <Legend />
+            <AnswerView answer={answer} />
+          </>
+        )}
 
         {!loading && !error && !answer && (
           <div className={styles.idle}>

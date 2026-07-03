@@ -21,17 +21,6 @@ const INITIATIVES = [
   "civ-kb",
 ];
 
-const PHASE1 = [
-  { id: "tabular", label: "Tabular", icon: "▦", exts: ".csv, .xlsx" },
-  { id: "pdf", label: "PDF", icon: "▤", exts: ".pdf" },
-  { id: "doc", label: "Docs", icon: "✎", exts: ".md, .txt, .docx" },
-];
-const LATER = [
-  { id: "video", label: "Video", icon: "►" },
-  { id: "image", label: "Image / diagram", icon: "▣" },
-  { id: "url", label: "URL", icon: "🔗" },
-];
-
 // Demo samples carry REAL bytes so the live pipeline actually runs (the tabular one is a tidy CSV
 // the enricher fills with real value domains).
 const SAMPLES: { filename: string; format: Phase1Format; content: string }[] = [
@@ -75,11 +64,10 @@ export default function ContributePage() {
       <IngestionHeader role="contributor" />
       <main className={`wf-container ${s.page}`}>
         <div className={s.pageHead}>
-          <div className={s.eyebrow}>✎ Contribute</div>
           <h1 className={s.pageTitle}>Add to the shared knowledge base</h1>
           <p className={s.pageSub}>
-            Upload a file, approve the companion note the enricher drafts, then hand it off for
-            curator review. It does <strong>not</strong> go live until the curator signs off.
+            Upload a file and approve the companion note the enricher drafts. Nothing goes live until a
+            curator signs off.
           </p>
         </div>
 
@@ -94,7 +82,7 @@ export default function ContributePage() {
           </div>
         )}
 
-        <div style={{ marginBottom: "var(--wf-space-6)" }}>
+        <div className={s.gateWrap}>
           <GateBanner emphasis="contributor" />
         </div>
 
@@ -183,7 +171,7 @@ function SubmitCard({
   }
 
   return (
-    <div className={s.card}>
+    <div className={`${s.card} ${s.cardPrimary}`}>
       <div className={s.cardHead}>
         <span className={s.cardTitle}>Submit a file</span>
         <span className={s.cardKicker}>Phase 1 formats</span>
@@ -232,24 +220,13 @@ function SubmitCard({
           </div>
         )}
 
-        <div className={s.formatRow}>
-          {PHASE1.map((f) => (
-            <span key={f.id} className={`${s.formatChip} ${file?.format === f.id ? s.formatChipOn : ""}`} title={f.exts}>
-              <span aria-hidden>{f.icon}</span> {f.label}
-            </span>
-          ))}
-          {LATER.map((f) => (
-            <span key={f.id} className={`${s.formatChip} ${s.formatChipLater}`}>
-              <span aria-hidden>{f.icon}</span> {f.label} <span className={s.formatLaterTag}>later</span>
-            </span>
-          ))}
-        </div>
+        <p className={s.laterNote}>Video, images and URLs come in a later phase.</p>
 
-        <div style={{ height: "1px", background: "var(--wf-border-subtle)", margin: "var(--wf-space-5) 0" }} />
+        <div className={s.formDivider} />
 
-        <div className={s.sectionLabel}>Provenance — captured now, carried onto the graph (§8)</div>
+        <div className={s.sectionLabel}>Provenance</div>
         <div className={s.field}>
-          <label className={s.label}>Initiative <span className={s.labelHint}>(Project-First placement)</span></label>
+          <label className={s.label}>Initiative</label>
           <select className={s.select} value={initiative} onChange={(e) => setInitiative(e.target.value)}>
             {INITIATIVES.map((i) => (
               <option key={i} value={i}>{i}</option>
@@ -258,11 +235,11 @@ function SubmitCard({
         </div>
         <div className={s.fieldRow}>
           <div className={s.field}>
-            <label className={s.label}>Author <span className={s.labelHint}>(who made it)</span></label>
+            <label className={s.label}>Author <span className={s.labelHint}>who made it</span></label>
             <input className={s.input} value={author} placeholder="e.g. Peskas field team" onChange={(e) => setAuthor(e.target.value)} />
           </div>
           <div className={s.field}>
-            <label className={s.label}>Source <span className={s.labelHint}>(origin / link)</span></label>
+            <label className={s.label}>Source <span className={s.labelHint}>link or origin</span></label>
             <input className={`${s.input} ${s.inputMono}`} value={sourceUrl} placeholder="https://… or upload://" onChange={(e) => setSourceUrl(e.target.value)} />
           </div>
         </div>
@@ -339,7 +316,7 @@ function DetailPanel({ submission }: { submission: Submission }) {
         </div>
         <div className={s.cardBody}>
           <StateTrack state={submission.state} />
-          <div style={{ marginTop: "var(--wf-space-5)" }}>
+          <div className={s.blockGap}>
             <StatusNotice submission={submission} />
           </div>
         </div>
@@ -355,7 +332,7 @@ function DetailPanel({ submission }: { submission: Submission }) {
         </div>
       ) : (
         submission.draft && (
-          <div className={s.card}>
+          <div className={`${s.card} ${s.cardPrimary}`}>
             <div className={s.cardHead}>
               <span className={s.cardTitle}>Companion note</span>
               <span className={s.cardKicker}>{editable ? "editable" : "read-only"} · Template {submission.draft.template}</span>
@@ -367,7 +344,7 @@ function DetailPanel({ submission }: { submission: Submission }) {
                 editable={editable}
                 onChange={(next) => editDraft(submission.id, next)}
               />
-              <div className={s.btnRow} style={{ marginTop: "var(--wf-space-5)" }}>
+              <div className={`${s.btnRow} ${s.blockGap}`}>
                 <ContributorActions submission={submission} openForReview={openForReview} approve={approve} resubmit={resubmit} />
               </div>
             </div>
@@ -375,7 +352,7 @@ function DetailPanel({ submission }: { submission: Submission }) {
         )
       )}
 
-      <div className={s.card}>
+      <div className={`${s.card} ${s.cardQuiet}`}>
         <div className={s.cardHead}>
           <span className={s.cardTitle}>Provenance</span>
         </div>
@@ -384,7 +361,7 @@ function DetailPanel({ submission }: { submission: Submission }) {
         </div>
       </div>
 
-      <div className={s.card}>
+      <div className={`${s.card} ${s.cardQuiet}`}>
         <div className={s.cardHead}>
           <span className={s.cardTitle}>History</span>
           <span className={s.cardKicker}>audit trail</span>

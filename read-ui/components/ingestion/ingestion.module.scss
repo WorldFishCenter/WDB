@@ -158,18 +158,6 @@
   margin-bottom: var(--wf-space-5);
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--wf-space-2);
-  font-size: var(--wf-text-micro);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 700;
-  color: var(--wf-accent);
-  margin-bottom: var(--wf-space-2);
-}
-
 .pageTitle {
   font-size: var(--wf-text-h2);
   line-height: 1.15;
@@ -181,7 +169,12 @@
   color: var(--wf-text-muted);
   font-size: var(--wf-text-body);
   line-height: var(--wf-leading-normal);
-  max-width: 60ch;
+  max-width: 62ch;
+}
+
+// Consistent gap below the gate strip before the master/detail split.
+.gateWrap {
+  margin-bottom: var(--wf-space-6);
 }
 
 // two-column master/detail — echoes the read UI's dual-pane
@@ -236,6 +229,44 @@
 
 .cardBody {
   padding: var(--wf-space-5);
+}
+
+// The anchor of a column — the one card the eye should land on first (submit form, companion note).
+// A hairline accent top edge marks it without adding a competing block of colour.
+.cardPrimary {
+  border-color: var(--wf-border-accent-soft);
+
+  .cardHead {
+    background: var(--wf-surface-3);
+    box-shadow: inset 0 2px 0 var(--wf-accent-deep);
+  }
+}
+
+// Reference detail (provenance, history) — present but subordinate. No filled header bar, no shadow,
+// title demoted to a quiet section label so it reads as an appendix, never a peer of the anchor.
+.cardQuiet {
+  background: transparent;
+  border-color: var(--wf-border-subtle);
+  box-shadow: none;
+
+  .cardHead {
+    background: transparent;
+    border-bottom: 1px solid var(--wf-border-subtle);
+    padding: var(--wf-space-3) var(--wf-space-4) var(--wf-space-2);
+  }
+
+  .cardTitle {
+    font-family: var(--wf-font-body);
+    font-size: var(--wf-text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--wf-text-muted);
+  }
+
+  .cardBody {
+    padding: var(--wf-space-4);
+  }
 }
 
 .sectionLabel {
@@ -458,72 +489,85 @@
   top: -14px;
 }
 
-// ─────────────────────────────────────────────────────────────────── gate banner
+// ─────────────────────────────────────────────────────────────────── gate strip
+// A slim reference bar, not a lecture. The current view's stage is lit; the other stays neutral so
+// colour keeps meaning "status" elsewhere.
 .gate {
   display: flex;
-  align-items: stretch;
-  gap: var(--wf-space-3);
+  align-items: center;
   flex-wrap: wrap;
-  padding: var(--wf-space-4) var(--wf-space-5);
-  border-radius: var(--wf-radius-lg);
-  background: var(--wf-surface-1);
-  border: 1px solid var(--wf-border);
-}
-
-.gateStage {
-  flex: 1 1 220px;
-  min-width: 0;
-  padding: var(--wf-space-3) var(--wf-space-4);
+  gap: var(--wf-space-3) var(--wf-space-5);
+  padding: var(--wf-space-3) var(--wf-space-5);
   border-radius: var(--wf-radius-md);
   background: var(--wf-surface-inset);
   border: 1px solid var(--wf-border-subtle);
 }
 
-.gateStageNum {
+.gateLabel {
+  font-size: var(--wf-text-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 700;
+  color: var(--wf-text-muted);
+}
+
+.gateSteps {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2) var(--wf-space-3);
+}
+
+.gateStep {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  white-space: nowrap;
+
+  strong {
+    font-weight: 700;
+    color: var(--wf-text-3);
+  }
+}
+
+.gateStepOn {
+  color: var(--wf-text-2);
+
+  strong {
+    color: var(--wf-text);
+  }
+
+  .gateStepNum {
+    background: var(--wf-accent);
+    color: var(--wf-surface-deep);
+    border-color: transparent;
+  }
+}
+
+.gateStepNum {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   font-size: var(--wf-text-micro);
   font-weight: 800;
-  background: var(--wf-accent);
-  color: var(--wf-surface-deep);
-  margin-right: var(--wf-space-2);
+  color: var(--wf-text-muted);
+  background: transparent;
+  border: 1px solid var(--wf-border-medium);
 }
 
-.gateStageTitle {
-  font-family: var(--wf-font-heading);
-  font-size: var(--wf-text-body);
-  font-weight: 700;
-  margin-bottom: var(--wf-space-1);
-}
-
-.gateStageWho {
-  font-size: var(--wf-text-caption);
-  color: var(--wf-accent);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.gateStageBody {
-  font-size: var(--wf-text-caption);
-  color: var(--wf-text-3);
-  line-height: var(--wf-leading-snug);
-  margin-top: var(--wf-space-1);
-}
-
-.gateArrow {
-  display: flex;
-  align-items: center;
+.gateSep {
   color: var(--wf-text-faint);
-  font-size: var(--wf-text-h4);
+}
 
-  @media (max-width: 720px) {
-    display: none;
-  }
+.gateNote {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-faint);
+  margin-left: auto;
 }
 
 // ─────────────────────────────────────────────────────────────────── note (view + edit)
@@ -872,44 +916,18 @@
   padding: 0 var(--wf-space-2);
 }
 
-// format phasing — the "coming later" chips
-.formatRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--wf-space-2);
+// format phasing — one quiet line, not a row of chips advertising what you can't do yet
+.laterNote {
   margin-top: var(--wf-space-3);
-}
-
-.formatChip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--wf-space-2);
-  border-radius: var(--wf-radius-pill);
-  padding: var(--wf-space-1) var(--wf-space-3);
   font-size: var(--wf-text-caption);
-  font-weight: 600;
-  border: 1px solid var(--wf-border);
-  background: var(--wf-surface-inset);
-  color: var(--wf-text-3);
-}
-
-.formatChipOn {
-  border-color: var(--wf-border-accent-medium);
-  color: var(--wf-accent);
-  background: var(--wf-mode-a-bg);
-}
-
-.formatChipLater {
-  opacity: 0.65;
-  border-style: dashed;
   color: var(--wf-text-faint);
+  line-height: var(--wf-leading-snug);
 }
 
-.formatLaterTag {
-  font-size: var(--wf-text-micro);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--wf-text-faint);
+.formDivider {
+  height: 1px;
+  background: var(--wf-border-subtle);
+  margin: var(--wf-space-5) 0;
 }
 
 // ─────────────────────────────────────────────────────────────────── provenance + history
@@ -1086,6 +1104,15 @@
 
 .muted {
   color: var(--wf-text-muted);
+}
+
+// Consistent vertical gap between stacked blocks inside a card body (track → notice, note → actions).
+.blockGap {
+  margin-top: var(--wf-space-5);
+}
+
+.blockGapSm {
+  margin-top: var(--wf-space-4);
 }
 
 .mono {
