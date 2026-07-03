@@ -151,11 +151,11 @@
 
 // ─────────────────────────────────────────────────────────────────── page scaffold
 .page {
-  padding: var(--wf-space-8) 0 var(--wf-space-11);
+  padding: var(--wf-space-6) 0 var(--wf-space-11);
 }
 
 .pageHead {
-  margin-bottom: var(--wf-space-7);
+  margin-bottom: var(--wf-space-5);
 }
 
 .eyebrow {
@@ -167,21 +167,21 @@
   letter-spacing: 0.1em;
   font-weight: 700;
   color: var(--wf-accent);
-  margin-bottom: var(--wf-space-3);
+  margin-bottom: var(--wf-space-2);
 }
 
 .pageTitle {
-  font-size: var(--wf-text-h1);
-  line-height: 1.1;
-  letter-spacing: -0.012em;
-  margin-bottom: var(--wf-space-3);
+  font-size: var(--wf-text-h2);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--wf-space-2);
 }
 
 .pageSub {
-  color: var(--wf-text-3);
-  font-size: var(--wf-text-body-lg);
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-body);
   line-height: var(--wf-leading-normal);
-  max-width: 76ch;
+  max-width: 60ch;
 }
 
 // two-column master/detail — echoes the read UI's dual-pane
@@ -218,14 +218,14 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--wf-space-3);
-  padding: var(--wf-space-4) var(--wf-space-5);
+  padding: var(--wf-space-3) var(--wf-space-4);
   border-bottom: 1px solid var(--wf-border-subtle);
   background: var(--wf-surface-3);
 }
 
 .cardTitle {
   font-family: var(--wf-font-heading);
-  font-size: var(--wf-text-h4);
+  font-size: var(--wf-text-body-lg);
   font-weight: 700;
 }
 

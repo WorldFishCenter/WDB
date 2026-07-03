@@ -88,8 +88,7 @@ export default function Home() {
         <div className="wf-container">
           <h1 className={styles.title}>Ask the knowledge base</h1>
           <p className={styles.tagline}>
-            One grounded answer with its sources — and the graph connections around it. Every claim
-            shows where it came from; what can’t be grounded is shown as such, never invented.
+            Every claim cites its source. What can&apos;t be grounded is stated, never invented.
           </p>
           <QueryForm onSubmit={handleAsk} loading={loading} />
           <Legend />
@@ -113,14 +112,11 @@ export default function Home() {
           </div>
         )}
 
-        {!loading && !error && answer && <AnswerView answer={answer} globalNodeMap={globalNodeMap} />}
+        {!loading && !error && answer && <AnswerView answer={answer} />}
 
         {!loading && !error && !answer && (
           <div className={styles.idle}>
-            <p>
-              Ask a question above, or pick an example. Answers are routed across three grounding
-              modes and shown side-by-side with the graph associations they touch.
-            </p>
+            <p>Enter a question or pick an example above.</p>
           </div>
         )}
       </main>

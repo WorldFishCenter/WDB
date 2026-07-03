@@ -1,25 +1,24 @@
 .hero {
   border-bottom: 1px solid var(--wf-border-subtle);
-  padding: var(--wf-space-9) 0 var(--wf-space-7);
+  padding: var(--wf-space-7) 0 var(--wf-space-6);
   position: relative;
   overflow: hidden;
 }
 
 .title {
-  font-size: var(--wf-text-display);
-  line-height: 1.05;
+  font-size: clamp(26px, 3.5vw, 40px);
+  line-height: 1.08;
   letter-spacing: -0.015em;
   color: var(--wf-text);
-  margin-bottom: var(--wf-space-3);
+  margin-bottom: var(--wf-space-2);
   position: relative;
 }
 
 .tagline {
-  color: var(--wf-text-3);
-  font-size: var(--wf-text-body-lg);
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-body);
   line-height: var(--wf-leading-normal);
-  max-width: 68ch;
-  margin: 0 0 var(--wf-space-7);
+  margin: 0 0 var(--wf-space-5);
   position: relative;
 }
 
@@ -28,7 +27,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--wf-space-2);
-  margin-top: var(--wf-space-5);
+  margin-top: var(--wf-space-3);
 }
 
 .legendLabel {
@@ -47,11 +46,11 @@
 }
 
 .idle {
-  margin: var(--wf-space-8) auto 0;
+  margin: var(--wf-space-6) auto 0;
   text-align: center;
-  color: var(--wf-text-muted);
-  font-size: var(--wf-text-body-lg);
-  max-width: 60ch;
+  color: var(--wf-text-faint);
+  font-size: var(--wf-text-body);
+  max-width: 48ch;
   line-height: var(--wf-leading-normal);
 }
 

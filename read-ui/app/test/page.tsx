@@ -22,7 +22,7 @@ export default function TestPage() {
     <SourceViewerProvider>
       <div style={{ background: "var(--wf-bg)", minHeight: "100vh" }}>
         <div className="wf-container" style={{ padding: "8px 24px 80px" }}>
-          <AnswerView answer={answer} globalNodeMap={globalNodeMap} />
+          <AnswerView answer={answer} />
         </div>
       </div>
     </SourceViewerProvider>

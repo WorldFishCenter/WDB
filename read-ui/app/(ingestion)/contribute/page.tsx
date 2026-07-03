@@ -78,9 +78,8 @@ export default function ContributePage() {
           <div className={s.eyebrow}>✎ Contribute</div>
           <h1 className={s.pageTitle}>Add to the shared knowledge base</h1>
           <p className={s.pageSub}>
-            Upload a file, review the companion note the enricher drafts for it, then approve it for
-            curator review. Approving hands it off — it does <strong>not</strong> go live. Only a
-            curator can sign it into the knowledge base.
+            Upload a file, approve the companion note the enricher drafts, then hand it off for
+            curator review. It does <strong>not</strong> go live until the curator signs off.
           </p>
         </div>
 

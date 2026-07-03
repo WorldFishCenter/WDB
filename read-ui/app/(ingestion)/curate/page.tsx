@@ -39,10 +39,8 @@ export default function CuratePage() {
           <div className={s.eyebrow}>✓ Curate</div>
           <h1 className={s.pageTitle}>The approval queue</h1>
           <p className={s.pageSub}>
-            Contributions contributors have approved arrive here as <strong>pending</strong> — the
-            second gate. Review the drafted note, edit anything (curator override), then sign off or
-            send it back. Sign-off writes the note to git and <strong>queues</strong> the
-            single-builder rebuild; it doesn’t publish instantly.
+            Approved contributions arrive here as <strong>pending</strong> — the second gate. Sign
+            off to write the note to git and queue the rebuild, or send it back with a reason.
           </p>
         </div>
 
