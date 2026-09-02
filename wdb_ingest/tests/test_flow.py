@@ -23,9 +23,9 @@ def test_happy_path_to_live(store, to_pending):
     sub = service.act(store, sub.id, "curator_approve", Role.CURATOR)
     assert sub.state == S.QUEUED
 
-    # the hard handoff really wrote the file + companion note into the existing initiative folder
-    assert (config.WDB_ROOT / "ssf_research" / "ssf_notes.md").exists()
-    note = config.WDB_ROOT / "ssf_research" / "ssf_notes_context.md"
+    # the hard handoff really wrote the file + companion note into the KB's initiative folder
+    assert (config.KB_ROOT / "ssf_research" / "ssf_notes.md").exists()
+    note = config.KB_ROOT / "ssf_research" / "ssf_notes_context.md"
     assert note.exists()
     assert "## Summary" in note.read_text()  # PROTOCOL §6 Template B shape
 

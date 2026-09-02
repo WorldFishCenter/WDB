@@ -74,6 +74,9 @@ wdb-router = "wdb_router.cli:main"
 # The `fixtures` subpackages are RUNTIME (mode_a/mode_c CLIs import their Replay
 # fixtures), not test-only, so they ship. The `tests/` dirs do not.
 [tool.setuptools]
+# wdb_paths.py is a top-level module (not a package): the single source of truth for
+# REPO_ROOT / KB_ROOT that every mode, the router and the services import.
+py-modules = ["wdb_paths"]
 packages = [
     "mode_a", "mode_a.fixtures",
     "mode_b", "mode_b.fixtures",

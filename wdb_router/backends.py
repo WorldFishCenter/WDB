@@ -28,7 +28,11 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-WDB_ROOT = str(Path(__file__).resolve().parent.parent)
+from wdb_paths import KB_ROOT
+
+# Kept as the public name the API and cost_sim already import; it is the KB root, which is
+# what every backend actually needs (corpus walk, catalog glob, graph load).
+WDB_ROOT = str(KB_ROOT)
 
 
 @dataclass

@@ -1,9 +1,10 @@
 """Paths and settings for the ingestion service.
 
-WDB_ROOT is the repo root (the dir holding ``graphify-out/`` and the initiative folders). The
-service writes staged uploads and the workflow DB under ``wdb_ingest/_state`` and ``_staging``
-(both gitignored), and writes approved notes/files into the **existing** initiative folders
-(no folder reorganization — that is a separate PR).
+The service straddles the two trees (see :mod:`wdb_paths`): WDB_ROOT is the **app** repo root
+(it owns ``wdb_ingest/_state``, ``_staging`` and the ``.claude/`` enricher script), while KB_ROOT
+is the **knowledge base** — where approved notes/files land in their initiative folder and where
+the built graph lives. Both are overridable (``WDB_ROOT`` / ``WDB_KB``) so the test suite can run
+hermetically against a temp tree.
 """
 
 from __future__ import annotations
@@ -14,28 +15,34 @@ from pathlib import Path
 # wdb_ingest/ lives at the repo root, so its parent is WDB_ROOT. Override with WDB_ROOT.
 WDB_ROOT = Path(os.environ.get("WDB_ROOT", Path(__file__).resolve().parent.parent))
 
+# The knowledge base the service writes contributions into. Defaults to WDB_ROOT/knowledge_base
+# (via wdb_paths) but follows WDB_ROOT when the tests repoint it at a temp tree.
+KB_ROOT = Path(os.environ.get("WDB_KB", WDB_ROOT / "knowledge_base"))
+
 STATE_DIR = WDB_ROOT / "wdb_ingest" / "_state"
 STAGING_DIR = WDB_ROOT / "wdb_ingest" / "_staging"
 DB_PATH = Path(os.environ.get("WDB_INGEST_DB", STATE_DIR / "workflow.db"))
 
-GRAPHIFY_OUT = WDB_ROOT / "graphify-out"
+GRAPHIFY_OUT = KB_ROOT / "graphify-out"
 GRAPH_JSON = GRAPHIFY_OUT / "graph.json"
 BUILD_INFO = GRAPHIFY_OUT / "BUILD_INFO.md"
 ENRICHER = WDB_ROOT / ".claude" / "scripts" / "dict_enricher.py"
 
 # The pinned build command the maintainer runs (the only place the two CLAUDE.md guards + the
 # canonical-entity remap apply). Surfaced by the build orchestrator as the handoff command.
-PINNED_BUILD_COMMAND = "/graphify . --update"
+PINNED_BUILD_COMMAND = "/graphify knowledge_base --update"
 PINNED_MODEL = "claude-opus-4-8"
 
-# The initiative folders an upload may target (they live where they currently are — no reorg).
+# The initiative folders an upload may target — the five that exist in the knowledge base.
+# "civ-kb" used to be listed here; it is a SEPARATE project, never a WDB initiative (Mode B
+# vendored its retrieval core as a library — see mode_b/extract.py — and imports nothing from
+# it at runtime). Selecting it minted an initiative folder for an initiative that does not exist.
 INITIATIVES = [
     "peskas",
     "fasa",
     "data_harmonization",
     "digital_transformation_accelerator",
     "ssf_research",
-    "civ-kb",
 ]
 
 

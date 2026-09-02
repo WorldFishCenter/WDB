@@ -3,7 +3,7 @@
 Mode B uses models in three places. Per the three-mode architecture doc §9
 (governance) and the repo's pinned-model discipline ([../CLAUDE.md](../CLAUDE.md)),
 each is a deliberate, recorded choice so a change is a visible diff — the same
-philosophy as [graphify-out/BUILD_INFO.md](../graphify-out/BUILD_INFO.md).
+philosophy as `knowledge_base/graphify-out/BUILD_INFO.md`.
 
 | Role | Model | Where pinned | Networked? |
 |---|---|---|---|

@@ -152,10 +152,10 @@ def edit_draft(store: WorkflowStore, sub_id: str, draft: DraftedNote, role: Role
 def _promote_to_git(sub: Submission) -> None:
     """Copy the staged file into its EXISTING initiative folder and write the companion note to git.
 
-    No folder reorganization: the file lands at ``<initiative>/<filename>`` where that initiative
-    folder currently lives. From this point git is the system of record for the note (design §5).
+    The file lands at ``<KB_ROOT>/<initiative>/<filename>`` — initiative folders live in the
+    knowledge base, not the app repo. From this point git is the system of record (design §5).
     """
-    target_dir = config.WDB_ROOT / sub.initiative
+    target_dir = config.KB_ROOT / sub.initiative
     target_dir.mkdir(parents=True, exist_ok=True)
 
     staged = _staged_path(sub)

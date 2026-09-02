@@ -9,7 +9,7 @@ direct-enumeration path uses **no model at all**.
 Per the three-mode architecture doc §9 (governance) and the repo's pinned-model
 discipline ([../CLAUDE.md](../CLAUDE.md)), that choice is pinned and recorded here so a
 reasoning change is a deliberate, visible diff — the same philosophy as
-[graphify-out/BUILD_INFO.md](../graphify-out/BUILD_INFO.md) and
+`knowledge_base/graphify-out/BUILD_INFO.md` and
 [mode_c/MODEL.md](../mode_c/MODEL.md).
 
 | Field | Value |
@@ -19,7 +19,7 @@ reasoning change is a deliberate, visible diff — the same philosophy as
 | **Max tokens** | `8000` (`REASONER_MAX_TOKENS`) — see cold-rate note below |
 | **Output mode** | structured JSON (`output_config.format`, `RESPONSE_SCHEMA`); no sampling params (removed on Opus 4.8) |
 | **Safety gate (mandatory)** | the mechanical cite-check C1–C4 — `mode_a/citecheck.py` — runs BEFORE any reasoned answer is surfaced; a failed check downgrades |
-| **Proof basis** | [`proof_a/FINDINGS.md`](../proof_a/FINDINGS.md) (the constrained-middle decision: depth-2 extraction; the cite-check is what makes the LLM safe) |
+| **Proof basis** | `proof_a/FINDINGS.md` (the constrained-middle decision: depth-2 extraction; the cite-check is what makes the LLM safe) |
 
 **Tested vs live.** The regression suite runs the **offline `ReplayReasoner`**, which
 replays the structured answers the proof's Opus 4.8 produced
@@ -80,7 +80,7 @@ is pinned as headroom regardless.
 
 C1 proves a cited edge *exists*; it does **not** prove the prose gloss of that edge is
 faithful (e.g. calling a generic-hub co-reference "sharing"). This is the proof's residual
-risk 1 ([`proof_a/FINDINGS.md`](../proof_a/FINDINGS.md)). It is handled as **prompt
+risk 1 (`proof_a/FINDINGS.md`). It is handled as **prompt
 discipline + spot review**, not a mechanical guarantee, and is owned here explicitly:
 
 - **Prompt:** `SYSTEM_PROMPT` rule 6 (`reasoner.py`) instructs the reasoner to describe an

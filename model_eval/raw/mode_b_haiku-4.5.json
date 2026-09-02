@@ -1,4 +1,0 @@
-{
-  "covered": "Based on the provided document, the platform automatically validates small-scale fishery catch survey data through **outlier detection and error identification** [1]. When issues are detected, the system sends **email alerts** to enable near-real-time maintenance of data quality [1].\n\nHowever, the document does not provide specific details about the actual methods, algorithms, or criteria used to perform the outlier detection and error identification.",
-  "overclaim": "The provided passage does not contain enough information to answer your question. While passage [1] mentions that Peskas performs outlier detection as part of its validation stage, it does not specify which machine-learning algorithm is used for this purpose, nor does it provide any measured precision metrics for the outlier detection."
-}

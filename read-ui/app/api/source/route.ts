@@ -3,7 +3,8 @@
  * graph edge is "clickable to its source." Strictly local and read-only — it only READS files
  * the citations already name, never writes.
  *
- * Safety: the requested path is resolved under WDB_ROOT and rejected if it escapes (path
+ * Safety: the requested path is resolved under the KNOWLEDGE-BASE root and rejected if it escapes
+ * (path
  * traversal) or isn't an allow-listed text type. Binary sources (PDF/CSV/images) aren't streamed
  * here — the UI shows their path + the evidence the citation already carries (B's verbatim quote,
  * C's rows). Markdown notes and the converted .md docs ARE served, which is where the prose lives.
@@ -13,8 +14,10 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 
-// Default: the WDB repo root is one level up from read-ui/.
-const WDB_ROOT = process.env.WDB_ROOT || path.resolve(process.cwd(), "..");
+// Citation paths are knowledge-base-relative ("peskas/...", "graphify-out/graph.json"), so the
+// sandbox root is the KB, not the app repo — which also means this route cannot read application
+// source files at all. Default: ../knowledge_base, one level up from read-ui/.
+const KB_ROOT = process.env.WDB_KB || path.resolve(process.cwd(), "..", "knowledge_base");
 const TEXT_EXT = new Set([".md", ".txt", ".csv", ".json", ".yml", ".yaml", ".py", ".sql"]);
 
 export async function GET(request: Request) {
@@ -23,10 +26,10 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Missing ?path=" }, { status: 400 });
   }
 
-  const resolved = path.resolve(WDB_ROOT, rel);
-  const rootPrefix = WDB_ROOT.endsWith(path.sep) ? WDB_ROOT : WDB_ROOT + path.sep;
-  if (resolved !== WDB_ROOT && !resolved.startsWith(rootPrefix)) {
-    return NextResponse.json({ error: "Path escapes the repository root." }, { status: 403 });
+  const resolved = path.resolve(KB_ROOT, rel);
+  const rootPrefix = KB_ROOT.endsWith(path.sep) ? KB_ROOT : KB_ROOT + path.sep;
+  if (resolved !== KB_ROOT && !resolved.startsWith(rootPrefix)) {
+    return NextResponse.json({ error: "Path escapes the knowledge-base root." }, { status: 403 });
   }
 
   const ext = path.extname(resolved).toLowerCase();

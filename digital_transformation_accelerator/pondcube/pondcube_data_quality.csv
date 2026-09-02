@@ -1,8 +1,0 @@
-location,period,row,issue
-Fish Tank 2,morning,70,non-numeric tank label: '90 for FT2'
-Fish Tank 2,afternoon,140,non-numeric tank label: '90 for FT2'
-Hatchery,morning,2025-07-11 tank1,"nitrate=0 (preserved; plausible undetectable, verify not a placeholder)"
-Hatchery,morning,2025-07-16 tank4,"nitrate=0 (preserved; plausible undetectable, verify not a placeholder)"
-Hatchery,morning,2025-07-16 tank12,"nitrate=0 (preserved; plausible undetectable, verify not a placeholder)"
-Hatchery,morning,2025-07-13 tank14,"nitrate=0 (preserved; plausible undetectable, verify not a placeholder)"
-Pond,morning,2025-07-10 tank2,"nitrate=0 (preserved; plausible undetectable, verify not a placeholder)"

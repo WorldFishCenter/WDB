@@ -33,7 +33,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from mode_b.join import load_graph  # noqa: E402
 
-GRAPH_PATH = str(Path(__file__).resolve().parent.parent / "graphify-out" / "graph.json")
+from wdb_paths import GRAPH_JSON  # noqa: E402  (after the sys.path insert above)
+
+GRAPH_PATH = str(GRAPH_JSON)
 
 # Initiative id-prefixes (the canonical-hub discipline: every node id is <initiative>_<slug>
 # or shared_<slug>). "shared" is the cross-cutting bridge namespace, not an initiative.

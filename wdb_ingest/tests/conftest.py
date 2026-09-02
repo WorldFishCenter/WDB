@@ -1,5 +1,9 @@
 """Fixtures for the ingestion suite — hermetic: every test runs against a temp WDB_ROOT + temp
-SQLite store, so file/note writes and the build handoff never touch the real repo."""
+SQLite store, so file/note writes and the build handoff never touch the real repo.
+
+The temp tree mirrors the real layout: ``tmp_path`` is the app repo root and
+``tmp_path/knowledge_base`` is the KB, so contributions land in a KB initiative folder exactly
+as they do in production (see :mod:`wdb_paths`)."""
 
 import sys
 from pathlib import Path
@@ -19,11 +23,14 @@ from wdb_ingest.store import SqliteWorkflowStore  # noqa: E402
 
 @pytest.fixture
 def tmp_env(tmp_path, monkeypatch):
+    kb = tmp_path / "knowledge_base"
+    kb.mkdir()
     monkeypatch.setattr(config, "WDB_ROOT", tmp_path)
+    monkeypatch.setattr(config, "KB_ROOT", kb)
     monkeypatch.setattr(config, "STATE_DIR", tmp_path / "_state")
     monkeypatch.setattr(config, "STAGING_DIR", tmp_path / "_staging")
     monkeypatch.setattr(config, "DB_PATH", tmp_path / "_state" / "workflow.db")
-    out = tmp_path / "graphify-out"
+    out = kb / "graphify-out"
     out.mkdir()
     monkeypatch.setattr(config, "GRAPHIFY_OUT", out)
     monkeypatch.setattr(config, "GRAPH_JSON", out / "graph.json")

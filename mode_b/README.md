@@ -6,7 +6,7 @@ WDB's prose + companion notes, **synthesizing a cited answer**, and **joining ea
 passage to its graph associations** at document grain — or returning a clean "not
 available" when retrieval is thin. It never synthesizes from the model's own
 knowledge. See [`../docs/three-mode-architecture.md`](../docs/three-mode-architecture.md)
-§3/§6/§7 and the proof ([`../proof/FINDINGS.md`](../proof/FINDINGS.md)).
+§3/§6/§7 and the proof (`proof/FINDINGS.md`).
 
 This is a **standalone, tested module with a CLI** — not a router, serving layer,
 or UI. The eventual router calls `answer_question`. The retrieval core is

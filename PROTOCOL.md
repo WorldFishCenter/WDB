@@ -71,7 +71,7 @@ maintainer's. They are identical from the command line or from the click-by-clic
    **`/enrich <file>`**: it gates the shape (and **stops and says exactly what to fix** if the table
    isn't tidy) and fills the dictionary's `## Columns` value domains deterministically.
 6. **Commit source files only, then open a pull request.** Never commit anything under `graphify-out/`.
-7. **Maintainer rebuilds.** After merge, the maintainer runs `/graphify . --update` and commits the
+7. **Maintainer rebuilds.** After merge, the maintainer runs `/graphify knowledge_base --update` and commits the
    regenerated `graphify-out/` ([§9](#9-maintainer-and-build-reference)).
 
 ### Order of the two checks: `/curate` → then `/enrich`
@@ -113,7 +113,13 @@ They are **sequential, not interchangeable**:
 
 ## 3. Project-First placement
 
-Group materials by **initiative**, not by file format.
+Every initiative folder lives inside the **knowledge base** — the `knowledge_base/` directory,
+which holds the whole graph corpus and nothing else. The application (the modes, the router, the
+services) lives outside it in the repo root; see [`wdb_paths.py`](wdb_paths.py). Paths in this
+document are **knowledge-base-relative**: `peskas/…` means `knowledge_base/peskas/…` on disk, and
+that is exactly how they appear in the graph.
+
+Within the knowledge base, group materials by **initiative**, not by file format.
 
 - **Correct:** `project_kenya_pilot/` holds that pilot's code, datasets, PDFs, and notes together.
 - **Avoid:** a single `datasets/` folder mixing unrelated projects.
@@ -528,7 +534,7 @@ claude-opus-4-8` before building). Pin the **exact** model, not the floating `op
 Opus changes the graph only when the pin is deliberately bumped. The `/curate` and `/enrich` subagents
 are pinned to the same model in their `.claude/agents/*.md` frontmatter.
 
-After every successful build, (over)write **`graphify-out/BUILD_INFO.md`** with: the date; the exact
+After every successful build, (over)write **`knowledge_base/graphify-out/BUILD_INFO.md`** with: the date; the exact
 model ID you ran as (not the `opus` alias); the graphify version (`graphify --version`); the build mode;
 and node & edge counts from `graph.json`. Commit it with `graphify-out/` — a model/tool change then
 shows up as a `BUILD_INFO.md` diff in the PR. **To upgrade the model,** change the pin in three places
@@ -536,14 +542,17 @@ together — `/model …`, `CLAUDE.md`, and both `.claude/agents/*.md` — then 
 
 ### Building & updating
 ```bash
-/graphify .                 # build the graph for the current folder
-/graphify ./subfolder       # build for one folder only
-/graphify . --update        # re-extract only changed files (use after a merge)
-/graphify . --update --force # overwrite even if node count drops (e.g. after deletes)
-/graphify . --no-viz        # skip the HTML, just report + JSON
-/graphify . --cluster-only  # rerun clustering without re-extracting
+/graphify knowledge_base                 # build the graph for the whole knowledge base
+/graphify knowledge_base/peskas           # build for one initiative only
+/graphify knowledge_base --update         # re-extract only changed files (use after a merge)
+/graphify knowledge_base --update --force # overwrite even if node count drops (after deletes)
+/graphify knowledge_base --no-viz         # skip the HTML, just report + JSON
+/graphify knowledge_base --cluster-only   # rerun clustering without re-extracting
 ```
-For a periodic from-scratch rebuild, run the standard **`/graphify .`** — **not** `--mode deep`.
+For a periodic from-scratch rebuild, run the standard **`/graphify knowledge_base`** — **not**
+`--mode deep`. **Always build with `knowledge_base` as the root, never the repo root:** graph paths
+must stay knowledge-base-relative, because the first path segment is read as an initiative name
+throughout the system.
 Standard mode keeps inferred links conservative and high-signal; `--mode deep` over-generates
 speculative cross-domain edges on this corpus and amplifies exactly the noise the format-blind guard
 suppresses, so it is **not** used for routine rebuilds (see [CLAUDE.md](CLAUDE.md)). `graph.html`
@@ -553,17 +562,17 @@ refreshes on every build; regenerate the README preview with `graphify export sv
 Contributors branch → add + document (`/curate`, `/enrich`) → PR; the maintainer reviews, merges, then
 rebuilds and commits `graphify-out/`. **Don't run `graphify hook install`** on this repo — its no-LLM
 structural pass turns markdown docs into header-only "junk" nodes; always rebuild through the assistant
-(`/graphify . --update`).
+(`/graphify knowledge_base --update`).
 
 **Add to `.gitignore`** (local-only; break when shared) — keep each comment on its **own line**:
 ```
-graphify-out/manifest.json
-graphify-out/cost.json
-graphify-out/cache/stat-index.json
-graphify-out/.graphify_*
-graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
+knowledge_base/graphify-out/manifest.json
+knowledge_base/graphify-out/cost.json
+knowledge_base/graphify-out/cache/stat-index.json
+knowledge_base/graphify-out/.graphify_*
+knowledge_base/graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 # The content-hashed cache (cache/ast, cache/semantic) is committed so teammates skip
-# re-extraction. To keep the repo small instead, ignore graphify-out/cache/ entirely.
+# re-extraction. To keep the repo small instead, ignore knowledge_base/graphify-out/cache/ entirely.
 ```
 
 ### Controlling what gets indexed
@@ -582,24 +591,29 @@ graphify clone https://github.com/owner/repo       # pull in a remote repo
 ### Reference project layout
 ```
 WDB/
-├── .graphifyignore              # what to exclude from the graph
 ├── .gitignore
 ├── PROTOCOL.md                  # this file — the normative spec
 ├── README.md / USER_GUIDE.md    # practical guides (link here)
 ├── CLAUDE.md                    # build-operator rules (model pin, extraction guard)
+├── wdb_paths.py                 # the one place REPO_ROOT / KB_ROOT are resolved
+├── mode_a/ mode_b/ mode_c/      # the application — outside the knowledge base
+├── wdb_router/ wdb_api/ wdb_ingest/ read-ui/
 │
-├── project_kenya_pilot/
-│   ├── ingest_yields.py
-│   ├── kenya_yield_data_2025.csv
-│   ├── kenya_yield_data_2025_dict.md        # Template A
-│   ├── grant_proposal_kenya.pdf
-│   ├── grant_proposal_kenya_context.md      # Template B
-│   └── project_kenya_pilot_about.md         # living current-state overview
-│
-└── graphify-out/                # generated — maintainer commits this folder
-    ├── graph.html
-    ├── GRAPH_REPORT.md
-    └── graph.json
+└── knowledge_base/              # THE KNOWLEDGE BASE — graphify's root
+    ├── .graphifyignore          # what to exclude from the graph
+    │
+    ├── project_kenya_pilot/
+    │   ├── ingest_yields.py
+    │   ├── kenya_yield_data_2025.csv
+    │   ├── kenya_yield_data_2025_dict.md    # Template A
+    │   ├── grant_proposal_kenya.pdf
+    │   ├── grant_proposal_kenya_context.md  # Template B
+    │   └── project_kenya_pilot_about.md     # living current-state overview
+    │
+    └── graphify-out/            # generated — maintainer commits this folder
+        ├── graph.html
+        ├── GRAPH_REPORT.md
+        └── graph.json
 ```
 
 ---
@@ -615,8 +629,8 @@ graphify install                 # one-time: register the skill
 
 **Maintainer:**
 ```bash
-/graphify .                      # build graph
-/graphify . --update             # refresh changed files
+/graphify knowledge_base         # build graph
+/graphify knowledge_base --update # refresh changed files
 /graphify add <url>              # add a paper/video
 graphify clone <github-url>      # add a remote repo
 /graphify query "what connects X to Y?"

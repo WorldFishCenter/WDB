@@ -1,11 +1,11 @@
 # Mode A — graph relationships / enumeration (reasoning-strength, routed)
 
 Mode A answers **"what connects to what"** over WDB's committed graph
-([graphify-out/graph.json](../graphify-out/graph.json)). It is a **routed augmentation**,
+(`knowledge_base/graphify-out/graph.json`). It is a **routed augmentation**,
 not a replacement, of the cheap enumeration stand-in: direct questions stay cheap;
 multi-hop / explanatory ones get an LLM reasoning over a deterministically-extracted
 subgraph, **gated by a mechanical cite-check**. This is the "constrained middle" the proof
-recommended ([../proof_a/FINDINGS.md](../proof_a/FINDINGS.md)).
+recommended (`proof_a/FINDINGS.md`).
 
 ## The two paths (routed by question shape — `route.py`)
 

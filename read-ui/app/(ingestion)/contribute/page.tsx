@@ -12,13 +12,15 @@ import { useIngestion } from "@/lib/ingestion/store";
 import type { Phase1Format, Submission, SubmissionInput } from "@/lib/ingestion/types";
 import s from "@/components/ingestion/ingestion.module.scss";
 
+// The five initiative folders that exist in the knowledge base. Keep in sync with
+// wdb_ingest/config.py INITIATIVES ("civ-kb" was a stale entry — a separate project, never a
+// WDB initiative).
 const INITIATIVES = [
   "peskas",
   "fasa",
   "data_harmonization",
   "digital_transformation_accelerator",
   "ssf_research",
-  "civ-kb",
 ];
 
 // Demo samples carry REAL bytes so the live pipeline actually runs (the tabular one is a tidy CSV

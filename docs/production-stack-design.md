@@ -24,10 +24,10 @@ different lifecycles share one tree.
 
 | Lifecycle | Paths | Tracked? |
 |---|---|---|
-| **Knowledge base — data; changes on contribution** | Initiative folders [peskas/](../peskas/), [fasa/](../fasa/), [data_harmonization/](../data_harmonization/), [ssf_research/](../ssf_research/), [digital_transformation_accelerator/](../digital_transformation_accelerator/) (incl. `pondcube/`): source files (`.csv`, `.pdf`, `.docx`, `.pptx`) **+** companion notes (`_dict.md`, `_context.md`, `_about.md`). Plus the **built graph** in [graphify-out/](../graphify-out/). | git |
+| **Knowledge base — data; changes on contribution** | Initiative folders `knowledge_base/peskas/`, `knowledge_base/fasa/`, `knowledge_base/data_harmonization/`, `knowledge_base/ssf_research/`, `knowledge_base/digital_transformation_accelerator/` (incl. `pondcube/`): source files (`.csv`, `.pdf`, `.docx`, `.pptx`) **+** companion notes (`_dict.md`, `_context.md`, `_about.md`). Plus the **built graph** in `knowledge_base/graphify-out/`. | git |
 | **Application — code; changes on release** | [mode_a/](../mode_a/), [mode_b/](../mode_b/), [mode_c/](../mode_c/), [wdb_router/](../wdb_router/), [tests/](../tests/), [pyproject.toml](../pyproject.toml), [uv.lock](../uv.lock), [.python-version](../.python-version), [RUNNING.md](../RUNNING.md). | git |
 | **Scaffolding — POC / dead weight** | `civ-kb/`, `proof/`, `proof_a/`, `proof_c/`, `docs/` | **gitignored** ([.gitignore](../.gitignore)) — 0 tracked files; `.graphifyignore`d too. Local only. |
-| **Governance** | [PROTOCOL.md](../PROTOCOL.md), [README.md](../README.md), [USER_GUIDE.md](../USER_GUIDE.md), [CLAUDE.md](../CLAUDE.md), [CHANGELOG.md](../CHANGELOG.md), [.graphifyignore](../.graphifyignore), [.claude/](../.claude/) (curator/enricher agents, skills) | git |
+| **Governance** | [PROTOCOL.md](../PROTOCOL.md), [README.md](../README.md), [USER_GUIDE.md](../USER_GUIDE.md), [CLAUDE.md](../CLAUDE.md), [CHANGELOG.md](../CHANGELOG.md), `knowledge_base/.graphifyignore`, [.claude/](../.claude/) (curator/enricher agents, skills) | git |
 
 `graphify-out/` itself splits: **committed** (`graph.json`, `graph.html`, `graph.svg`,
 `GRAPH_REPORT.md`, `BUILD_INFO.md`, `cache/semantic/`, `converted/`) vs. **gitignored, regenerable**

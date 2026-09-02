@@ -5,8 +5,8 @@ Mode C answers **quantitative / computed** questions ("average CPUE in Kwale",
 never by retrieving prose. It is the other half of the passage verdict: the data
 the passage index must keep *out* (raw tables) is answered correctly here by
 querying it. See [`../docs/three-mode-architecture.md`](../docs/three-mode-architecture.md)
-§4 and the two proofs ([`../proof_c/FINDINGS.md`](../proof_c/FINDINGS.md),
-[`../proof_c/RESOLVER_FINDINGS.md`](../proof_c/RESOLVER_FINDINGS.md)).
+§4 and the two proofs (`proof_c/FINDINGS.md`,
+`proof_c/RESOLVER_FINDINGS.md`).
 
 This is a **standalone, tested module with a CLI** — not a router, serving layer,
 or UI. The eventual router calls `answer_question`.

@@ -208,7 +208,8 @@ def _identity_tokens(table_rel: str) -> frozenset[str]:
 def load_catalog(root: str | None = None) -> Catalog:
     """Load every tidy table's ``_dict.md`` into a :class:`Catalog`."""
     if root is None:
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        from wdb_paths import KB_ROOT
+        root = str(KB_ROOT)
     tables: dict[str, TableSpec] = {}
     for path in sorted(glob.glob(os.path.join(root, "**", "*_dict.md"), recursive=True)):
         if "graphify-out" in path:

@@ -1,3 +1,138 @@
+# WDB 0.0.4
+
+The release where WDB stops being a knowledge-graph repo you read and becomes a **system you
+query** — three answering modes, a router, a read UI and a write-side ingestion service — and
+where the **knowledge base is separated from the application** that reads it. The graph is no
+longer the product; it is one of three grounded evidence sources behind a single honest answer.
+
+Two properties are load-bearing throughout: **every claim carries its source**, and **a mode that
+cannot ground an answer says so** instead of synthesizing one.
+
+## Application
+
+* **NEW Mode A — graph relationships / enumeration** ([`mode_a/`](mode_a/)). Answers "what
+  connects to what" over the committed graph. A **routed augmentation**, not a replacement, of the
+  cheap enumeration stand-in: direct questions stay cheap, while multi-hop/explanatory ones get an
+  LLM reasoning over a **deterministically-extracted subgraph**, gated by a **mechanical
+  cite-check** so a claim that isn't in the subgraph cannot survive.
+* **NEW Mode B — passage retrieval + cited synthesis** ([`mode_b/`](mode_b/)). Retrieves verbatim
+  passages from WDB's prose and companion notes, synthesizes a cited answer, and joins each passage
+  to its **graph associations** at document grain. Returns a clean "not available" when retrieval
+  is thin, and **never synthesizes from the model's own knowledge**. Raw tables are deliberately
+  kept out of the passage index — they are Mode C's job.
+* **NEW Mode C — structured query over the tidy CSVs** ([`mode_c/`](mode_c/)). Answers
+  quantitative questions by *querying* the committed CSVs with **DuckDB** rather than retrieving
+  prose, reading each table in place and reporting the SQL it ran. Grain-aware: it aggregates over
+  the row's real subject (§5 tidy data + the `## Grain` line below), which is what keeps a
+  per-catch-item table from being averaged as though it were per-trip.
+* **NEW `wdb_router` — the production router** ([`wdb_router/`](wdb_router/)). Classifies a
+  question to the relevant mode(s), dispatches to the **real** modes in one pass, and composes one
+  answer where every claim keeps its mode tag and native citation, associations are merged and
+  deduped, and each mode's refusal is preserved in an `unanswered` list. Reimplements none of the
+  modes.
+* **NEW `wdb_api` — the local read API** ([`wdb_api/`](wdb_api/)). A thin, faithful FastAPI bridge:
+  `POST /answer` returns the full router answer serialized with no field flattened and **no
+  synthesis of its own**. A refusal surfaces as what it is — empty `claims`, populated
+  `unanswered`, `answered: false`.
+* **NEW `read-ui` — the read query UI** ([`read-ui/`](read-ui/)). A local **Next.js + SCSS**
+  dual-pane interface: a grounded answer with its sources beside the **interactive knowledge
+  graph** of associations around it. Read-only and local; its job is to make the system's honesty
+  legible rather than to dress it up. Citations are clickable to their source text through a
+  path-sandboxed read-only viewer.
+* **NEW `wdb_ingest` — the write-side ingestion service** ([`wdb_ingest/`](wdb_ingest/)). The real
+  backend for the contribution flow: a persisted workflow state machine, the **two-stage approval
+  gate enforced server-side** (a contributor cannot sign off on their own submission), an approval
+  queue, real file + companion-note writes into git, and a **single-builder build handoff** that
+  hands the pinned `/graphify` build to the maintainer rather than running an unpinned build itself.
+* **NEW `cost_sim`** ([`cost_sim/`](cost_sim/)) — measures real LLM spend under configurable
+  per-slot model assignments.
+* **NEW One reproducible environment** ([`pyproject.toml`](pyproject.toml) + `uv.lock`,
+  Python 3.14 pinned). All modes, the router, the services and every test suite share one declared,
+  locked dependency set recreated with `uv sync --extra dev` — replacing the borrowed `civ-kb`
+  virtualenv the code used to depend on.
+* **CHANGED The knowledge base is separated from the application.** Initiative folders and the
+  built graph move under **`knowledge_base/`**; the app locates them through
+  [`wdb_paths.py`](wdb_paths.py) — the single source of truth for `REPO_ROOT` / `KB_ROOT` —
+  replacing the `Path(__file__).parent.parent` walk each module did for itself. `KB_ROOT` is
+  overridable with **`WDB_KB`**, so the application can be pointed at any knowledge base. This is
+  the boundary [`docs/production-stack-design.md`](docs/production-stack-design.md) §2 recommended,
+  and it is what lets the repo be published as a reusable system: a user brings their own
+  `knowledge_base/`.
+* **FIXED** Mode B's corpus walk indexed **application** files — 39 where the intended corpus is
+  **34** (`RUNNING.md`, `mode_a/MODEL.md`, `proof_a/FINDINGS.md`). Rooting the walk at the
+  knowledge base removes the leak by construction instead of by maintaining a blocklist of the
+  app's own filenames.
+* **CHANGED** `read-ui`'s source-viewer sandbox is rooted at the knowledge base rather than the
+  repo, so it can no longer read application source files.
+
+## Contributing Protocol
+
+* **NEW** Every table's `_dict.md` states its **grain** in a dedicated `## Grain` section: what one
+  row *is* in domain terms (its real-world subject), and which higher-grain columns repeat across a
+  coarser key. This closes the silent grain trap at the source for every consumer of the data, not
+  just Mode C.
+* **NEW** A **habit-4 carve-out** separating grain from shape. Grain names the row's real-world
+  subject and this table's own columns, so it can only link **same-subject** tables (two
+  per-catch-item trip tables) — never every table of a shape. Naming the subject is domain meaning;
+  naming the wide/long form is not, and stays banned.
+* **CHANGED** Habit 1 — notes are drafted as **self-contained prose that names its subject by the
+  initiative's one canonical name** ("Peskas", never "the platform" or a pronoun), so a note reads,
+  retrieves and resolves well as a Mode-B passage. Self-containedness must never be reached for via
+  shape, encoding, file type or producing script; grain stays in its own `## Grain` line, never the
+  Summary.
+* **CHANGED** Initiative folders live in **`knowledge_base/`**, not the repo root. Paths in the
+  protocol are knowledge-base-relative — `peskas/…` means `knowledge_base/peskas/…` on disk, and
+  that is how they appear in the graph. §3 and the layout tree say so; `USER_GUIDE.md` step 2 points
+  contributors at the folder.
+* **CHANGED** The maintainer build is **`/graphify knowledge_base --update`** (was
+  `/graphify . --update`). Building from the repo root is now wrong, not merely noisy: the **first
+  path segment is read as an initiative name** throughout the system (Mode C derives a table's
+  identity tokens from it; the router derives `known_initiatives` from it), so a repo-root build
+  would invent a `knowledge_base` "initiative" and pollute entity resolution.
+* **CHANGED** `.graphifyignore` moves to `knowledge_base/.graphifyignore` and drops its long list of
+  application excludes (`mode_a/`, `read-ui/`, `tests/`, `docs/`, …) — those paths sit outside
+  graphify's root now, so they cannot leak into the corpus at all.
+
+## Automated Tooling
+
+* **CHANGED** `dict_enricher.py` derives **grain deterministically** — for long tables the
+  measurement and its dimension columns; for wide tables a non-unique id/code key and the columns
+  constant within it. Emitted in the text report and `--json`. It names domain columns, never the
+  wide/long form.
+* **CHANGED** `/enrich` (`dict-enricher.md`) fills `## Grain` from the script's facts plus the
+  Summary's row-subject noun; the blanket grain ban is lifted while the format/tooling ban stays.
+* **CHANGED** `/curate` (`wdb-curator.md`) gains a "write prose that also reads well out of context"
+  subsection carrying the habit-1 enforcement detail, with an explicit habit-4 guard and a
+  frozen-snapshot caveat (forward-looking; never rewrite a frozen section).
+
+## Documentation
+
+* **NEW** [`RUNNING.md`](RUNNING.md) — the one reproducible environment: prerequisites, `uv sync`,
+  and how to run every mode, the router, the API and the tests.
+* **NEW** [`docs/production-stack-design.md`](docs/production-stack-design.md) — the
+  knowledge-base / application separation, a grounded coupling audit, and the build-and-publish
+  flow. **NEW** [`docs/ingestion-pipeline-design.md`](docs/ingestion-pipeline-design.md) — the
+  write-side contribution pipeline `wdb_ingest` implements. **NEW**
+  [`docs/model-cost-strategy.md`](docs/model-cost-strategy.md) — which model slots may move
+  cheaper, and the proof each move is gated on.
+* **NEW** `model_eval/` (**not published** — its samples and drafts carry real rows and
+  extracted paper text; kept local like `proof_a`/`proof_c`) — a fair-prompt, proof-gated honesty
+  and cost evaluation of cheaper models per slot (Haiku 4.5, Gemini 2.5 Flash, and DeepSeek via an
+  OpenRouter gateway arm). **Verdict: no pin changed.** Mode A and Mode C stay on Opus 4.8 — Haiku
+  fabricates, and both gateway candidates still miss Mode C's EAV case. DeepSeek's clean Mode-A
+  sheet is the strongest cheap result so far but rests on n=10, so it is recorded as
+  *inconclusive-promising*, not earned. The harness validated itself against both baselines first
+  (Mode C 9/9, Mode A 0 fabrications/10).
+
+## Knowledge Graph Infrastructure
+
+* **CHANGED** Full graph rebuild, reducing node and edge counts in favour of consistency: **172
+  nodes · 324 edges · 9 communities**, a single connected component over an 11-file, ~15.7k-word
+  corpus.
+* **NEW** `BUILD_INFO.md` records the provenance of every build — date, the exact model ID, the
+  graphify version, the build mode, and the node/edge counts — so a model or tool-version change
+  shows up as a reviewable diff in the pull request.
+
 # WDB 0.0.3
 
 Turns the `_about.md` overview from a free-form note into a structured, connected
