@@ -1,3 +1,53 @@
+# WDB 0.0.4
+
+Separates the **knowledge base** from the **application**. Every initiative folder and the
+built graph now live under `knowledge_base/`; the modes, router and services stay in the repo
+root and locate the knowledge base through one configurable root instead of assuming it sits
+as sibling directories. This is the boundary
+[`docs/production-stack-design.md`](docs/production-stack-design.md) §2 recommended, and it
+makes the repo publishable as a reusable system: a new user supplies their own
+`knowledge_base/`, and nothing else has to change.
+
+## Contributing Protocol
+
+* **CHANGED** Initiative folders live in **`knowledge_base/`**, not the repo root. Paths in
+  the protocol are knowledge-base-relative — `peskas/…` means `knowledge_base/peskas/…` on
+  disk, and that is how they appear in the graph. `PROTOCOL.md` §3 and the layout tree say so;
+  `USER_GUIDE.md` step 2 points contributors at the folder.
+* **CHANGED** The maintainer build is **`/graphify knowledge_base --update`** (was
+  `/graphify . --update`). Building from the repo root is now wrong, not merely noisy: graph
+  paths must stay knowledge-base-relative because the **first path segment is read as an
+  initiative name** throughout the system (Mode C derives a table's identity tokens from it;
+  the router derives `known_initiatives` from it). A repo-root build would invent a
+  `knowledge_base` "initiative" and pollute entity resolution.
+* **CHANGED** `.graphifyignore` moved to `knowledge_base/.graphifyignore` and lost its long
+  list of application excludes (`mode_a/`, `read-ui/`, `tests/`, `docs/`, …) — those paths are
+  outside graphify's root now, so they cannot leak into the corpus at all.
+
+## Application
+
+* **NEW** [`wdb_paths.py`](wdb_paths.py) — the single source of truth for `REPO_ROOT` and
+  `KB_ROOT`, replacing the `Path(__file__).parent.parent` walk each module did for itself
+  (the coupling design doc §1.3 called out). `KB_ROOT` is overridable with **`WDB_KB`**, so
+  the app can be pointed at any knowledge base.
+* **CHANGED** Mode A's `GRAPH_PATH`, Mode B's `DEFAULT_ROOT`/`DEFAULT_GRAPH`, Mode C's
+  `load_catalog()` default and the router's `WDB_ROOT` all resolve through `wdb_paths`.
+  `wdb_api` and `cost_sim` follow transitively.
+* **CHANGED** `wdb_ingest` now distinguishes the two roots: `WDB_ROOT` keeps the workflow DB,
+  staging and the `.claude/` enricher; `KB_ROOT` receives approved contributions and holds
+  `graphify-out/`. Its test fixture mirrors the real layout hermetically.
+* **FIXED** Mode B's corpus walk no longer indexes application files. It listed **39** files
+  (`RUNNING.md`, `mode_a/MODEL.md`, `proof_a/FINDINGS.md`, …) where the intended corpus is
+  **34**; rooting it at the knowledge base removes the leak by construction rather than by
+  maintaining a blocklist of the app's own filenames.
+* **CHANGED** `read-ui`'s source-viewer sandbox is rooted at the knowledge base (`WDB_KB`)
+  instead of the repo. Citation paths are KB-relative, and the route can no longer read
+  application source files.
+
+**No graph rebuild.** Because paths stay knowledge-base-relative, `graph.json` is byte-identical
+across the move — 172 nodes · 324 edges, unchanged — and no fixture or recorded answer needed
+editing.
+
 # WDB 0.0.3
 
 Turns the `_about.md` overview from a free-form note into a structured, connected

@@ -95,7 +95,9 @@ flowchart TD
 - Look at the **bottom-left corner** — it shows the current branch (probably `main`). Click it → **Create new branch** → name it `yourname/short-topic` (e.g. `maria/kenya-yield-data`). Press Enter. *(This is the golden rule in action — you're now on your own branch.)*
 
 **Step 2 — Pick the initiative folder.**
-In the **left sidebar (Explorer)**, open the folder for the initiative your item belongs to (e.g. `project_kenya_pilot/`). We organize **by initiative, not by file type** — everything for one effort lives together. If no folder fits, right-click the empty Explorer space → **New Folder** and name it in `lower_snake_case` (e.g. `genetic_improvement`). **If you're unsure which initiative it belongs to, ask the maintainer — don't guess.**
+In the **left sidebar (Explorer)**, open **`knowledge_base/`** — everything that goes into the brain
+lives in there (the other top-level folders are the software that reads it, not content). Inside it,
+open the folder for the initiative your item belongs to (e.g. `project_kenya_pilot/`). We organize **by initiative, not by file type** — everything for one effort lives together. If no folder fits, right-click the empty Explorer space → **New Folder** and name it in `lower_snake_case` (e.g. `genetic_improvement`). **If you're unsure which initiative it belongs to, ask the maintainer — don't guess.**
 
 **Step 3 — Add the file, named by the rule.**
 Drag your file into that folder, then rename it (right-click → **Rename**) to follow the rule: **`lower_snake_case`, descriptive, with year/region when they apply** — `kenya_yield_2025.csv`, not `data.csv` or `Final Report.pdf`. Don't change a spreadsheet's column headers; keep a published paper's real title. *(See [Part 3](#part-3--what-you-can-add) for each file type.)*

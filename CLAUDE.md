@@ -24,10 +24,10 @@ pin is deliberately bumped. The `/curate` and `/enrich` subagents are pinned to 
 `claude-opus-4-8` in their `.claude/agents/*.md` frontmatter.
 
 **Stamp provenance on every build.** After a successful `/graphify` build, (over)write
-`graphify-out/BUILD_INFO.md` with: the date; the **exact model ID you are running as** (from your
+`knowledge_base/graphify-out/BUILD_INFO.md` with: the date; the **exact model ID you are running as** (from your
 system context — do not write the `opus` alias); the graphify version (`graphify --version`); the
 build mode (`standard` / `--update` / `--mode deep`); and the node & edge counts from
-`graph.json`. Commit it with the rest of `graphify-out/`. It is the committed record of what
+`graph.json`. Commit it with the rest of `knowledge_base/graphify-out/`. It is the committed record of what
 produced the current graph — a model or tool-version change then shows up as a `BUILD_INFO.md`
 diff in the pull request.
 
@@ -76,7 +76,8 @@ new wide/long file would multiply that noise without this guard.
 
 ### Note on `--mode deep`
 
-The documented default for this repo is **standard** mode (`/graphify .` or `--update`);
+The documented default for this repo is **standard** mode (`/graphify knowledge_base` or
+`--update`);
 see [PROTOCOL §9 — Building & updating](PROTOCOL.md#9-maintainer-and-build-reference).
 `--mode deep` instructs subagents to be **aggressive with INFERRED edges**, which amplifies
 exactly the speculative similarity noise this guard suppresses — so it is **not** recommended

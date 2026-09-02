@@ -20,8 +20,11 @@ from .model import RERANK_TOP_K
 from .retrieve import Retriever
 from .synth import Synthesizer
 
-DEFAULT_ROOT = str(Path(__file__).resolve().parent.parent)
-DEFAULT_GRAPH = os.path.join(DEFAULT_ROOT, "graphify-out", "graph.json")
+from wdb_paths import GRAPH_JSON, KB_ROOT
+
+# The corpus and the graph both live in the knowledge base, not the app repo.
+DEFAULT_ROOT = str(KB_ROOT)
+DEFAULT_GRAPH = str(GRAPH_JSON)
 
 
 def answer_question(question: str, retriever: Retriever, synthesizer: Synthesizer,

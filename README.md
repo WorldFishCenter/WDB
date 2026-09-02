@@ -15,21 +15,21 @@ when in doubt, that file wins.
 
 ### 🧠 The knowledge graph
 
-[![WDB knowledge graph — communities colour-coded](graphify-out/graph.svg)](graphify-out/GRAPH_REPORT.md)
+[![WDB knowledge graph — communities colour-coded](knowledge_base/graphify-out/graph.svg)](knowledge_base/graphify-out/GRAPH_REPORT.md)
 
-*The current graph, each colour a community. Click for the readable **[GRAPH_REPORT.md](graphify-out/GRAPH_REPORT.md)**.* **Interactive version:** clone the repo and open **`graphify-out/graph.html`** in any browser (GitHub serves `.html` as raw source, so the live graph is local-only).
+*The current graph, each colour a community. Click for the readable **[GRAPH_REPORT.md](knowledge_base/graphify-out/GRAPH_REPORT.md)**.* **Interactive version:** clone the repo and open **`graphify-out/graph.html`** in any browser (GitHub serves `.html` as raw source, so the live graph is local-only).
 
 ## What this is
 
 Graphify points at a folder and builds a queryable knowledge graph instead of grepping files. A build
-produces, in `graphify-out/`: `graph.html` (interactive), `GRAPH_REPORT.md` (key concepts + suggested
+produces, in `knowledge_base/graphify-out/`: `graph.html` (interactive), `GRAPH_REPORT.md` (key concepts + suggested
 questions), and `graph.json` (the full graph). Code is parsed locally; docs/PDFs/images go to the
 model for semantic extraction; relationships are tagged `EXTRACTED`/`INFERRED`/`AMBIGUOUS`. It is *not*
 filename matching — it connects what your files make **explicit** (see [PROTOCOL §8](PROTOCOL.md#8-how-graphify-extraction-works)).
 
 **Who runs what.** Contributors self-check with **`/curate`** (placement, naming, context note) and
 **`/enrich`** (table shape + value domains) before opening a PR. **Only the maintainer runs the build
-(`/graphify`)** and commits `graphify-out/`. One build owner keeps the shared map conflict-free
+(`/graphify`)** and commits `knowledge_base/graphify-out/`. One build owner keeps the shared map conflict-free
 ([PROTOCOL §1](PROTOCOL.md#1-roles-and-the-single-builder-rule)). This repo runs on **Claude Code**.
 
 ## Add something — the protocol in 7 steps
@@ -42,7 +42,7 @@ Full detail for each step is in [PROTOCOL §2](PROTOCOL.md#2-the-contribution-pr
 4. **Write its context note** — required for every dataset/PDF/document. Run **`/curate`** to draft it; name it by replacing the extension with `_dict.md` (tables) or `_context.md` (else). Fill every section — especially **Related files** ([§6](PROTOCOL.md#6-context-notes)).
 5. **Validate tables with `/enrich`** — gates the shape and fills the `## Columns` value domains.
 6. **Commit source files only** (never `graphify-out/`), then open a **pull request**.
-7. **Maintainer rebuilds** — `/graphify . --update` after merge. *(Contributors never build.)*
+7. **Maintainer rebuilds** — `/graphify knowledge_base --update` after merge. *(Contributors never build.)*
 
 The map below covers every path: adding a file, writing a note, sharing a link, or updating/superseding something already in the brain ([§7](PROTOCOL.md#7-recording-updates-and-supersession-over-time)).
 
@@ -65,7 +65,7 @@ flowchart TD
   N --> G
   U --> G
   L --> Z([Maintainer adds it])
-  G --> H["Maintainer rebuilds:<br/>/graphify . --update"]
+  G --> H["Maintainer rebuilds:<br/>/graphify knowledge_base --update"]
 ```
 
 ### What am I adding?
