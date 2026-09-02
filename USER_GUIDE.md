@@ -1,6 +1,6 @@
 # Adding things to the WDB graph — a guide for non-coders
 
-![Version](https://img.shields.io/badge/version-0.0.3-blue) · [CHANGELOG](CHANGELOG.md)
+![Version](https://img.shields.io/badge/version-0.0.4-blue) · [CHANGELOG](CHANGELOG.md)
 
 This guide is for team members who have **never used a code editor** and don't write code. It walks you, click by click, through adding something new — a dataset, a PDF, a photo, even just an **idea** — to the WorldFish Digital Brain (WDB) so it becomes part of the shared knowledge graph.
 

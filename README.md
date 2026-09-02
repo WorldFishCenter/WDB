@@ -1,6 +1,6 @@
 # WDB — WorldFish Digital Brain
 
-![Version](https://img.shields.io/badge/version-0.0.3-blue) · [CHANGELOG](CHANGELOG.md)
+![Version](https://img.shields.io/badge/version-0.0.4-blue) · [CHANGELOG](CHANGELOG.md)
 
 A shared Graphify knowledge graph for the WorldFish Digital Brain (WDB). This README is the **practical
 guide** to adding material; the complete, authoritative rules live in **[PROTOCOL.md](PROTOCOL.md)** —
