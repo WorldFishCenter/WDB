@@ -1,0 +1,28 @@
+
+============================================================================================
+INGESTION — opus-4.8
+============================================================================================
+  zanzibar_trips (Template A)  sections=4/4 canonical=True shape_leak=[] chars=3435
+  peskas_softwarex (Template B) sections=3/3 canonical=True shape_leak=[] chars=2942
+
+============================================================================================
+INGESTION — haiku-4.5
+============================================================================================
+  zanzibar_trips (Template A)  sections=4/4 canonical=True shape_leak=['.csv'] chars=3735
+  peskas_softwarex (Template B) sections=3/3 canonical=True shape_leak=['long'] chars=2108
+
+============================================================================================
+INGESTION — gemini-2.5-flash
+============================================================================================
+  zanzibar_trips (Template A)  sections=4/4 canonical=True shape_leak=[] chars=2874
+  peskas_softwarex (Template B) sections=3/3 canonical=True shape_leak=[] chars=1427
+
+============================================================================================
+SUMMARY (structural proxies only — verdict is a human read of ingestion_drafts/)
+============================================================================================
+  opus-4.8           missing_sections=0 shape_leaks=0 $0.03649/op
+  haiku-4.5          missing_sections=0 shape_leaks=2 $0.00471/op
+  gemini-2.5-flash   missing_sections=0 shape_leaks=0 $0.00654/op
+
+wrote /Users/lore/Desktop/work/wf_projects/WDB/model_eval/results/ingestion.json + drafts in /Users/lore/Desktop/work/wf_projects/WDB/model_eval/ingestion_drafts
+EXIT=0

@@ -7,6 +7,12 @@ In the FASA engine these values are the **correctness target**: the engine recom
 composition from FICD ingredient data and must match these numbers (the PAFF benchmark
 gate). 1,296 rows across 36 species/stage tuples and 36 nutrients.
 
+## Grain
+One row = one calculated nutrient value (`value`) for one recipe (`species`, a species/stage label),
+in one `unit` — i.e. one (species × nutrient × unit) cell (energy appears in both MJ/kg and kcal/kg
+rows, so `unit` is part of the key). `value` is at the finest grain; no higher-grain column repeats
+across rows.
+
 ## Columns
 - nutrient: the nutrient/composition metric, e.g. `Crude Protein`, `Crude Lipid`, `Digestible P`, `Dig CP -fish`, `EPA+DHA`, `Calcium`, `Arginine`, `DE Fish Carni MJ` (36 distinct: proximates, amino acids, fatty acids, energy, minerals)
 - unit: measurement unit — `%`, `MJ/kg`, `kcal/kg`, or `mg`

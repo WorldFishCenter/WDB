@@ -1,0 +1,62 @@
+{
+  "gate": {
+    "empty_refused": true,
+    "reason": "no passage retrieved for this question"
+  },
+  "models": [
+    {
+      "model": "gemini-2.5-flash-or",
+      "covered": {
+        "cited": true,
+        "faithful": true,
+        "pass": true,
+        "text": "The platform automatically validates small-scale fishery catch survey data through outlier detection and error identification [1]. It also includes an email alert system to maintain data quality in near real-time [1]."
+      },
+      "overclaim": {
+        "invented_algo": false,
+        "invented_precision": false,
+        "hedged": true,
+        "pass": true,
+        "text": "This question cannot be answered from the given passages. The passages mention that Peskas uses outlier detection but do not specify the machine-learning algorithm used or its measured precision [1]."
+      },
+      "cost": {
+        "model": "gemini-2.5-flash-or",
+        "ops": 2,
+        "in_tok_total": 402,
+        "out_tok_total": 76,
+        "thinking_tok_total": 0,
+        "avg_in_tok": 201.0,
+        "avg_out_tok": 38.0,
+        "usd_total": 0.000328,
+        "usd_per_op": 0.000164
+      }
+    },
+    {
+      "model": "deepseek-v4-flash-or",
+      "covered": {
+        "cited": true,
+        "faithful": true,
+        "pass": true,
+        "text": "The platform automatically validates catch survey data through outlier detection and error identification, supported by an email alert system that enables near-real time maintenance of data quality [1]."
+      },
+      "overclaim": {
+        "invented_algo": false,
+        "invented_precision": false,
+        "hedged": true,
+        "pass": true,
+        "text": "The provided passages do not specify which machine-learning algorithm Peskas uses for outlier detection, nor do they mention any measured precision. [1]"
+      },
+      "cost": {
+        "model": "deepseek-v4-flash-or",
+        "ops": 2,
+        "in_tok_total": 396,
+        "out_tok_total": 155,
+        "thinking_tok_total": 92,
+        "avg_in_tok": 198.0,
+        "avg_out_tok": 77.5,
+        "usd_total": 6.7e-05,
+        "usd_per_op": 3.4e-05
+      }
+    }
+  ]
+}

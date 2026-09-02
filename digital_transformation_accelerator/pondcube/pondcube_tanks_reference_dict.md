@@ -5,6 +5,11 @@ Reference list of every location/zone/tank in the PondCube dataset — the looku
 for joins, app dropdowns, and validation. 296 distinct tanks across the logged areas
 (July 2025 source).
 
+## Grain
+One row = one tank entry, identified by the pair (`location`, `tank_id`). `tank_id` alone is not
+unique — the same number is reused across locations — so no single column keys a row and no
+higher-grain attribute repeats.
+
 ## Columns
 - location: physical area / source sheet (`Aqua`, `Block L`, `Fish Tank 1/2/3`, `Hatchery`, `Pond`, `Water Storage`)
 - zone: grouping label — `Fish Tanks` for the three fish-tank locations (continuous numbering 1–210); other areas are their own zone

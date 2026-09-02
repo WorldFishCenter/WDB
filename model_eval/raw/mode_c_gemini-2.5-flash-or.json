@@ -1,0 +1,144 @@
+{
+  "Average weight of an individual catch in Kwale?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "metric_column": "catch_kg",
+    "grain_key": null,
+    "pinned_by": "Kwale",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average CPUE in Kwale district?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "metric_column": null,
+    "derived_formula": "tot_catch_kg / trip_duration_hrs",
+    "derived_inputs": [
+      "tot_catch_kg",
+      "trip_duration_hrs"
+    ],
+    "assumptions": "CPUE is defined as total catch in kilograms per hour of trip duration.",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "pinned_by": "Kwale",
+    "candidates": []
+  },
+  "Average trip duration for Gill Net trips?": {
+    "outcome": "needs_disambiguation",
+    "candidates": [
+      "peskas/kenya_validated_trips.csv",
+      "peskas/mozambique_validated_trips.csv",
+      "peskas/zanzibar_validated_trips.csv"
+    ],
+    "filters": [],
+    "derived_inputs": [],
+    "assumptions": []
+  },
+  "Average trip duration for Gill Net trips in Zanzibar?": {
+    "outcome": "resolve",
+    "table": "peskas/zanzibar_validated_trips.csv",
+    "aggregation": "AVG",
+    "metric_column": "trip_duration_hrs",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gear",
+        "op": "=",
+        "value": "Gill Net"
+      }
+    ],
+    "pinned_by": "Zanzibar",
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average total catch per trip in Kwale?": {
+    "outcome": "resolve",
+    "table": "peskas/kenya_validated_trips.csv",
+    "aggregation": "AVG",
+    "metric_column": "tot_catch_kg",
+    "grain_key": "trip_id",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Kwale"
+      }
+    ],
+    "pinned_by": "Kwale",
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average total catch per trip in Inhambane?": {
+    "outcome": "resolve",
+    "table": "peskas/mozambique_validated_trips.csv",
+    "aggregation": "AVG",
+    "metric_column": "tot_catch_kg",
+    "grain_key": "trip_id",
+    "pinned_by": "Inhambane",
+    "filters": [
+      {
+        "column": "gaul_1_name",
+        "op": "=",
+        "value": "Inhambane"
+      }
+    ],
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average catch in Kisumu county?": {
+    "outcome": "cannot_resolve",
+    "filters": [],
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average wind speed on Kenya trips?": {
+    "outcome": "cannot_resolve",
+    "filters": [],
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  },
+  "Average crude protein across fish-meal ingredients?": {
+    "outcome": "resolve",
+    "table": "fasa/FICD_feed_ingredient_composition_database.csv",
+    "aggregation": "AVG",
+    "metric_column": "quantity",
+    "grain_key": null,
+    "filters": [
+      {
+        "column": "description",
+        "op": "contains",
+        "value": "Fish meal"
+      },
+      {
+        "column": "ingredient",
+        "op": "contains",
+        "value": "crude_protein_percent"
+      }
+    ],
+    "pinned_by": "Fish meal",
+    "derived_inputs": [],
+    "candidates": [],
+    "assumptions": []
+  }
+}

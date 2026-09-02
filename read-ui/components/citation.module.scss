@@ -1,0 +1,160 @@
+// Evidence rendered flat — no nested cards. The quote is an indented passage; the SQL reveals
+// inline; provenance is a single quiet line. One restrained treatment per mode.
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-space-3);
+  margin-top: var(--wf-space-3);
+}
+
+.cite {
+  min-width: 0;
+}
+
+// ---- Mode A — the graph edge triple (rarely used in claims; A renders as fact rows) ----------
+.triple {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2);
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  margin-bottom: var(--wf-space-2);
+}
+
+.node {
+  color: var(--wf-text-2);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.rel {
+  color: var(--wf-mode-a);
+  font-weight: 700;
+}
+
+.arrow {
+  color: var(--wf-text-faint);
+  flex: none;
+}
+
+// ---- Mode B — the verbatim passage ----------------------------------------------------------
+.quote {
+  margin: var(--wf-space-1) 0 var(--wf-space-3);
+  padding: 0 0 0 var(--wf-space-4);
+  border-left: 1px solid var(--wf-border-strong);
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-body);
+  line-height: var(--wf-leading-normal);
+  font-style: italic;
+  overflow-wrap: break-word;
+}
+
+// ---- Mode C — the SQL + rows reveal ---------------------------------------------------------
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-1);
+  font-size: var(--wf-text-caption);
+  font-weight: 600;
+  color: var(--wf-accent);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: var(--wf-space-1) 0 var(--wf-space-2);
+
+  &:hover {
+    color: var(--wf-accent-strong);
+  }
+}
+
+.computed {
+  margin-bottom: var(--wf-space-2);
+  min-width: 0;
+}
+
+.sql {
+  margin: 0 0 var(--wf-space-3);
+  padding: var(--wf-space-3);
+  background: var(--wf-surface-deep);
+  color: var(--wf-text-3);
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  line-height: var(--wf-leading-normal);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-sm);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--wf-text-caption);
+
+  th,
+  td {
+    text-align: left;
+    padding: var(--wf-space-2) var(--wf-space-3);
+    border-bottom: 1px solid var(--wf-border);
+    white-space: nowrap;
+  }
+
+  th {
+    font-family: var(--wf-font-mono);
+    font-weight: 700;
+    color: var(--wf-text-muted);
+  }
+
+  td {
+    font-family: var(--wf-font-mono);
+    color: var(--wf-text-2);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// ---- Provenance: one quiet line (source + where it resolves in the graph) --------------------
+.prov {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2) var(--wf-space-3);
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  min-width: 0;
+}
+
+.loc {
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-faint);
+}
+
+.note {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  overflow-wrap: anywhere;
+}
+
+// "resolves to N graph nodes →" — replaces the wall of node chips. Hovering the claim pulses
+// these nodes in the graph; this line just names how many and points there.
+.resolves {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-1);
+  color: var(--wf-text-muted);
+}
+
+.resolvesArrow {
+  color: var(--wf-accent);
+}

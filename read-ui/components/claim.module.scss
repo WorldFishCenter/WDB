@@ -1,0 +1,26 @@
+// A claim is a single surface on the page — a thin mode-coloured left rail, the statement, and
+// its evidence inline beneath. No cards, no nested boxes; hierarchy is typographic.
+
+.claim {
+  position: relative;
+  padding: 2px 0 2px var(--wf-space-4);
+  border-left: 2px solid var(--wf-border-strong);
+}
+
+.railA {
+  border-left-color: var(--wf-mode-a-line);
+}
+.railB {
+  border-left-color: var(--wf-mode-b-line);
+}
+.railC {
+  border-left-color: var(--wf-mode-c-line);
+}
+
+.text {
+  margin: 0;
+  font-size: var(--wf-text-body-lg);
+  line-height: var(--wf-leading-normal);
+  color: var(--wf-text);
+  overflow-wrap: anywhere;
+}

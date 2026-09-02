@@ -1,0 +1,692 @@
+// Shared chrome for the panes + the honesty blocks (posture, unanswered, refusal, associations).
+// Dark theme · semantic tokens · 4px spacing scale · overflow-safe ids.
+
+.pane {
+  background: transparent;
+  min-width: 0;
+}
+
+// ---- Section / pane header primitive (one shared header style) --------------
+.paneHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--wf-space-3);
+  margin-bottom: var(--wf-space-4);
+  padding-bottom: var(--wf-space-3);
+  border-bottom: 1px solid var(--wf-border);
+}
+
+.paneTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-h3);
+  font-weight: 700;
+  color: var(--wf-text);
+}
+
+.paneSub {
+  font-size: var(--wf-text-meta);
+  color: var(--wf-text-muted);
+  margin: calc(-1 * var(--wf-space-2)) 0 var(--wf-space-4);
+}
+
+.count {
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  color: var(--wf-text-3);
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-pill);
+  padding: 1px var(--wf-space-3);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-space-3);
+}
+
+.empty {
+  padding: var(--wf-space-5);
+  border: 1px dashed var(--wf-border-strong);
+  border-radius: var(--wf-radius-md);
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-body);
+  text-align: center;
+}
+
+.subhead {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-body-lg);
+  font-weight: 700;
+  color: var(--wf-text-2);
+  margin: var(--wf-space-6) 0 var(--wf-space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+}
+
+// ---- Answer header (the left-pane anchor, parallel to the graph header) ------
+.answerHead {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  margin-bottom: var(--wf-space-2);
+}
+
+.answerTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-h3);
+  font-weight: 700;
+  color: var(--wf-text);
+  letter-spacing: -0.01em;
+}
+
+// ---- Routing posture — one quiet line, not a card ---------------------------
+.routeStrip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2) var(--wf-space-4);
+  margin-bottom: var(--wf-space-6);
+  padding-bottom: var(--wf-space-4);
+  border-bottom: 1px solid var(--wf-border);
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+}
+
+.routeLabel {
+  color: var(--wf-text-muted);
+}
+
+.routeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  color: var(--wf-text-3);
+}
+
+.routeMiss {
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--wf-unanswered);
+}
+
+// ---- Unanswered (first-class, never hidden) ---------------------------------
+.unanswered {
+  margin-top: var(--wf-space-6);
+  border: 1px solid var(--wf-unanswered-line);
+  border-radius: var(--wf-radius-md);
+  background: var(--wf-unanswered-bg);
+  overflow: hidden;
+}
+
+.unansweredHead {
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  padding: var(--wf-space-3) var(--wf-space-4);
+  background: rgba(239, 71, 111, 0.1);
+  color: var(--wf-unanswered);
+}
+
+.unansweredTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-body);
+  font-weight: 700;
+  color: var(--wf-unanswered);
+}
+
+.unansweredNote {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  margin-left: auto;
+}
+
+.unansweredList {
+  margin: 0;
+  padding: var(--wf-space-3) var(--wf-space-4) var(--wf-space-3) var(--wf-space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-space-2);
+}
+
+.unansweredItem {
+  font-size: var(--wf-text-body);
+  line-height: var(--wf-leading-normal);
+  color: var(--wf-text-2);
+}
+
+// ---- Full refusal (honest, never blank / never fabricated) ------------------
+.refusal {
+  max-width: 720px;
+  margin: var(--wf-space-6) auto;
+  text-align: center;
+  padding: var(--wf-space-8) var(--wf-space-7);
+  background: var(--wf-surface-1);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-lg);
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.refusalIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--wf-space-3);
+  border-radius: 50%;
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  color: var(--wf-text-muted);
+  font-size: 24px;
+}
+
+.refusalTitle {
+  font-size: var(--wf-text-h2);
+  margin-bottom: var(--wf-space-2);
+  color: var(--wf-text);
+}
+
+.refusalLead {
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-body-lg);
+  margin: 0 auto var(--wf-space-5);
+  max-width: 52ch;
+  line-height: var(--wf-leading-normal);
+}
+
+.refusalReasons {
+  text-align: left;
+  background: var(--wf-surface-2);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-md);
+  padding: var(--wf-space-4);
+  margin-bottom: var(--wf-space-4);
+}
+
+.refusalReasonsHead {
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wf-text-muted);
+  margin-bottom: var(--wf-space-2);
+}
+
+// ---- Associations (grouped-list fallback view) ------------------------------
+.relGroup {
+  margin-bottom: var(--wf-space-4);
+}
+
+.relName {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  font-weight: 700;
+  color: var(--wf-mode-a);
+  background: var(--wf-mode-a-bg);
+  border: 1px solid var(--wf-border-accent-soft);
+  padding: 2px var(--wf-space-3);
+  border-radius: var(--wf-radius-pill);
+  margin-bottom: var(--wf-space-2);
+}
+
+.edge {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2) var(--wf-space-2);
+  padding: var(--wf-space-2) var(--wf-space-3);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-sm);
+  background: var(--wf-surface-2);
+  margin-bottom: var(--wf-space-2);
+}
+
+.edgeNode {
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-2);
+  // Long graph ids must wrap, never overflow the row.
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.edgeArrow {
+  color: var(--wf-accent);
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-caption);
+  flex: none;
+}
+
+.edgeMeta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2);
+}
+
+// ---- Graph stage (the right, co-equal pane) ---------------------------------
+// A framed map that fills its column; header stays put while the body scrolls. In Phase 4 the
+// body holds the live Cytoscape canvas; the grouped-edge list is the fallback / "List" view.
+.stage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--wf-surface-1);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.stageHead {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-3);
+  padding: var(--wf-space-3) var(--wf-space-4);
+  border-bottom: 1px solid var(--wf-border);
+  background: linear-gradient(180deg, var(--wf-surface-2), transparent);
+}
+
+.stageIcon {
+  display: inline-flex;
+  color: var(--wf-accent);
+}
+
+.stageTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-body-lg);
+  font-weight: 700;
+  color: var(--wf-text);
+}
+
+.stageHeadMeta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+}
+
+.stageBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--wf-space-4);
+}
+
+// Flush body for the live graph canvas — fills the frame, handles its own pan/zoom.
+.stageBodyFlush {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.stageSub {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  margin: 0 0 var(--wf-space-4);
+  line-height: var(--wf-leading-snug);
+}
+
+.stageEmpty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--wf-space-3);
+  color: var(--wf-text-muted);
+  padding: var(--wf-space-6);
+}
+
+.stageEmptyIcon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  color: var(--wf-text-faint);
+}
+
+.stageEmptyText {
+  font-size: var(--wf-text-body);
+  max-width: 34ch;
+  line-height: var(--wf-leading-normal);
+}
+
+// View toggle (Graph / List) — used from Phase 4 on.
+.toggleWrap {
+  display: inline-flex;
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-pill);
+  padding: 2px;
+}
+
+.toggleBtn {
+  border: none;
+  background: transparent;
+  padding: 3px var(--wf-space-3);
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wf-text-muted);
+  border-radius: var(--wf-radius-pill);
+  transition: color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    color: var(--wf-text-2);
+  }
+}
+
+.toggleActive {
+  background: var(--wf-mode-a-bg);
+  color: var(--wf-accent);
+}
+
+// ---- Claims grouped by source mode (calm headers = the reference points) -----
+.group {
+  & + & {
+    margin-top: var(--wf-space-7);
+  }
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  margin-bottom: var(--wf-space-4);
+}
+
+.modeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+.dotA {
+  background: var(--wf-mode-a-line);
+}
+.dotB {
+  background: var(--wf-mode-b-line);
+}
+.dotC {
+  background: var(--wf-mode-c-line);
+}
+
+.groupTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-body-lg);
+  font-weight: 700;
+  color: var(--wf-text);
+}
+
+.groupCount {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+}
+
+.claimStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-space-5);
+}
+
+// Compact graph-fact rows (Mode A) — a flat, scannable list, not a wall of cards.
+.factList {
+  display: flex;
+  flex-direction: column;
+}
+
+.factRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wf-space-1);
+  padding: var(--wf-space-3) 0 var(--wf-space-3) var(--wf-space-4);
+  border-left: 2px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  & + & {
+    border-top: 1px solid var(--wf-border-subtle);
+  }
+
+  &:hover {
+    background: var(--wf-surface-inset);
+    border-left-color: var(--wf-mode-a-line);
+  }
+}
+
+// INFERRED facts stay distinct even at rest — an amber rail + the INFERRED tag; never a hard fact.
+.factRowInferred {
+  border-left-color: var(--wf-inferred-line);
+}
+
+.factText {
+  font-size: var(--wf-text-body);
+  color: var(--wf-text-2);
+  line-height: var(--wf-leading-snug);
+  overflow-wrap: anywhere;
+}
+
+.factMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2);
+}
+
+// Toggle layout switcher (variant with auto-margin for inline placement)
+.toggleWrap {
+  margin-left: auto;
+  align-self: center;
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-pill);
+  padding: 2px;
+  cursor: pointer;
+}
+
+.toggleBtn {
+  border: none;
+  background: transparent;
+  padding: 3px 12px;
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wf-text-muted);
+  border-radius: var(--wf-radius-pill);
+  transition: color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    color: var(--wf-text-2);
+  }
+}
+
+.toggleActive {
+  background: var(--wf-mode-a-bg);
+  color: var(--wf-accent);
+  box-shadow: none;
+}
+
+// ---- Summary Statistics Bar -------------------------------------------------
+.summaryBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  background: var(--wf-bg-elevated);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-md);
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.summaryLabel {
+  font-size: var(--wf-font-3xs);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--wf-text-muted);
+  margin-right: 6px;
+}
+
+.summaryChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: var(--wf-radius-pill);
+  font-size: var(--wf-font-xxs);
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.summaryChipActive {
+  border-color: currentColor;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.summaryChipCount {
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-font-3xs);
+  opacity: 0.7;
+}
+
+.summaryTotal {
+  margin-left: auto;
+  font-size: var(--wf-font-xxs);
+  color: var(--wf-text-muted);
+  font-family: var(--wf-font-mono);
+}
+
+// ---- Accordion Sections ----------------------------------------------------
+.accordion {
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-md);
+  overflow: hidden;
+  background: var(--wf-bg-elevated);
+  box-shadow: var(--wf-shadow-soft);
+  transition: box-shadow 0.2s ease;
+
+  & + & {
+    margin-top: 10px;
+  }
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--wf-surface-2);
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--wf-surface-3);
+  }
+}
+
+.accordionChevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  color: var(--wf-text-muted);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.accordionChevronOpen {
+  transform: rotate(90deg);
+}
+
+.accordionModeLine {
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.accordionTitle {
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-body);
+  font-weight: 700;
+  color: var(--wf-text);
+  flex: 1;
+}
+
+.accordionCount {
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  color: var(--wf-text-muted);
+  background: var(--wf-surface-inset-strong);
+  border-radius: var(--wf-radius-pill);
+  padding: 2px 10px;
+  font-family: var(--wf-font-mono);
+}
+
+.accordionContent {
+  padding: 16px 18px 18px;
+  animation: accordionSlideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes accordionSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---- Claims Multi-Column Grid -----------------------------------------------
+.claimsGrid {
+  column-count: 1;
+  column-gap: 14px;
+
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 1200px) {
+    column-count: 3;
+  }
+}
+
+.claimsGridItem {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
+

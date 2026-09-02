@@ -15,6 +15,11 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 # re-extraction. To keep the repo small instead, ignore the whole cache: uncomment below.
 # graphify-out/cache/
 
+# Ingestion service local state — the workflow DB + staged uploads (design §8: workflow state
+# lives in a database; binaries are staged before sign-off). Machine-local, never committed.
+wdb_ingest/_state/
+wdb_ingest/_staging/
+
 # OS / editor cruft
 .DS_Store
 
@@ -22,3 +27,32 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 __pycache__/
 *.pyc
 .venv/
+*.egg-info/
+# Build artifacts (uv build / setuptools — the container-prep step in RUNNING.md)
+build/
+dist/
+
+# Mode B passage index — a regenerable artifact (rebuild with `python -m mode_b --ingest`),
+# never committed (keeps the PR diff code + tests; same stance as a re-derived graph).
+mode_b/.index/
+
+# docs/ holds local-only POC design docs (untracked). Exclude its contents but keep
+# the dir traversable so the negation below can re-include the one tracked deliverable.
+/docs/*
+!/docs/production-stack-design.md
+!/docs/ingestion-pipeline-design.md
+!/docs/model-cost-strategy.md
+/proof
+/proof_c
+/proof_a
+
+# model_eval/ — throwaway model-evaluation experiment (like proof_a/proof_c). The
+# curated deliverable (harness + FINDINGS.md + results/ + drafts) is committed so the
+# PR into feat-rag has a real diff; only the regenerable byproducts are ignored.
+model_eval/raw/
+model_eval/__pycache__/
+model_eval/.venv/
+
+.env
+/civ-kb
+commands

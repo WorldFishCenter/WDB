@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WDB — one consolidated, reproducible environment for the whole system.
+#
+# This single manifest replaces the former per-module pyproject files (the root
+# `wdb-mode-c` one and `mode_b/pyproject.toml`) — the modes import one another
+# (mode_a → mode_b.join, router → mode_a/mode_b/mode_c), so they are one system,
+# not independently shippable units. Everything below — all three modes, the
+# router harness, and every test suite — runs under ONE environment built from
+# this file + the committed `uv.lock`.
+#
+# Reproducibility:  `uv sync` recreates the env exactly from `uv.lock`. The Python
+# minor is pinned (3.14, `.python-version`), matching the pinned-model discipline
+# in CLAUDE.md §"Build model & provenance" — exact pin, not a floating alias.
+# Recreate from this manifest alone; no "and also pip install duckdb by hand".
+#
+# Container-ready (see RUNNING.md): this declared set + the `wdb-router` entry
+# point make a future Dockerfile a short step. Mode B loads ML models on startup,
+# so the host must be persistent/container-style (Cloud Run, per team infra), not
+# serverless. Model weights are fetched from the HF hub at runtime (RUNNING.md),
+# never committed.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[project]
+name = "wdb"
+version = "0.1.0"
+description = "WDB — WorldFish shared knowledge brain: Modes A/B/C + router over the graph, prose, and tidy CSVs"
+requires-python = ">=3.14,<3.15"
+
+dependencies = [
+    # Mode B — passage retrieval + cited synthesis (the heavy ML arm, load-bearing
+    # for Mode B's honesty: the cross-encoder reranker refuses off-topic questions).
+    "chromadb>=0.5",                 # passage index (HNSW, cosine)
+    "sentence-transformers>=3.0",    # multilingual bi-encoder + cross-encoder reranker
+    "torch>=2.2",                    # backs sentence-transformers (CPU is sufficient)
+    "pymupdf>=1.24",                 # per-page PDF extraction
+    "python-docx>=1.0",              # .docx extraction
+    "python-pptx>=1.0",              # .pptx extraction
+    # Mode C — structured query over the tidy CSVs.
+    "duckdb>=1.0",                   # in-process SQL engine (the proof installed it ad-hoc; now declared)
+    # Live LLM calls — Mode B synthesis (Sonnet 4.6) + Mode C resolver (Opus 4.8)
+    # via the Anthropic SDK. The offline Replay backends + the regression suites
+    # need none of this, but the one declared env carries it so `--live` runs too.
+    "anthropic>=0.40",
+    # The read API (wdb_api) — a thin HTTP wrapper over wdb_router.answer() for the
+    # read UI. FastAPI is the app; uvicorn serves it locally (`uvicorn wdb_api.app:app`).
+    # Persistent host (Cloud Run, per RUNNING.md): Mode B's models load once on startup.
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+# The regression suites (mode_a 21, mode_b 33, mode_c 40, wdb_router 29, wdb_api 21).
+# pytest runs them; httpx backs the FastAPI TestClient the wdb_api suite uses — both are the
+# only test-time additions; everything else the tests exercise is already a core dep.
+dev = [
+    "pytest>=7",
+    "httpx>=0.27",                   # Starlette/FastAPI TestClient (wdb_api suite; offline)
+]
+
+[project.scripts]
+# Per-mode CLIs (Replay by default; `--live` where supported).
+mode-a = "mode_a.cli:main"
+mode-b = "mode_b.cli:main"
+mode-c = "mode_c.cli:main"
+# The system entry point: the production router dispatches a question across all three
+# modes and composes one §6 answer — see wdb_router/README.md.
+wdb-router = "wdb_router.cli:main"
+
+# Flat layout: each top-level dir is a package of the single `wdb` distribution.
+# The `fixtures` subpackages are RUNTIME (mode_a/mode_c CLIs import their Replay
+# fixtures), not test-only, so they ship. The `tests/` dirs do not.
+[tool.setuptools]
+packages = [
+    "mode_a", "mode_a.fixtures",
+    "mode_b", "mode_b.fixtures",
+    "mode_c", "mode_c.fixtures",
+    "wdb_router",
+    "wdb_api",
+    "wdb_ingest",
+    "cost_sim",
+]
+
+[tool.setuptools.package-data]
+# Replay fixture data loaded at runtime by the offline backends.
+"mode_a.fixtures" = ["*.json"]
+
+[tool.pytest.ini_options]
+# All four suites under one run. `--import-mode=importlib` is required: tests/ and
+# mode_b/tests/ both define test_gate.py, and mode_a/tests/ and mode_b/tests/ both
+# define test_pipeline.py — duplicate basenames the legacy prepend importer rejects.
+testpaths = ["tests", "mode_a/tests", "mode_b/tests", "wdb_router/tests", "wdb_api/tests", "wdb_ingest/tests"]
+addopts = "--import-mode=importlib"
+markers = [
+    "live: exercises real models / network (Chroma + cross-encoder, or the Anthropic API); self-skips when unavailable",
+]

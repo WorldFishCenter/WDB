@@ -1,0 +1,121 @@
+.hero {
+  border-bottom: 1px solid var(--wf-border-subtle);
+  padding: var(--wf-space-7) 0 var(--wf-space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.title {
+  font-size: clamp(26px, 3.5vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--wf-text);
+  margin-bottom: var(--wf-space-2);
+  position: relative;
+}
+
+.tagline {
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-body);
+  line-height: var(--wf-leading-normal);
+  margin: 0 0 var(--wf-space-5);
+  position: relative;
+}
+
+// The source-type key — shown WITH the answer (where the badges below actually appear), not at the
+// idle entry, so the entry stays a single clear "ask" focal point.
+.legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--wf-space-2);
+  margin: var(--wf-space-4) 0 var(--wf-space-5);
+  padding-bottom: var(--wf-space-4);
+  border-bottom: 1px solid var(--wf-border-subtle);
+}
+
+.legendLabel {
+  font-size: var(--wf-text-caption);
+  color: var(--wf-text-muted);
+  margin-right: var(--wf-space-1);
+}
+
+.legendSep {
+  color: var(--wf-text-faint);
+  margin: 0 var(--wf-space-1);
+}
+
+.main {
+  padding: var(--wf-space-2) var(--wf-space-6) var(--wf-space-11);
+}
+
+.idle {
+  margin: var(--wf-space-6) auto 0;
+  text-align: center;
+  color: var(--wf-text-faint);
+  font-size: var(--wf-text-body);
+  max-width: 48ch;
+  line-height: var(--wf-leading-normal);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--wf-space-3);
+  margin-top: var(--wf-space-10);
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-body-lg);
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--wf-border-strong);
+  border-top-color: var(--wf-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  box-shadow: var(--wf-glow-soft);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  margin: var(--wf-space-8) auto 0;
+  max-width: 680px;
+  padding: var(--wf-space-5) var(--wf-space-6);
+  border-radius: var(--wf-radius-lg);
+  background: var(--wf-surface-2);
+  border: 1px solid var(--wf-unanswered-line);
+  box-shadow: var(--wf-shadow-soft);
+}
+
+.errorUnreachable {
+  border-color: var(--wf-inferred-line);
+}
+
+.errorTitle {
+  display: block;
+  font-family: var(--wf-font-heading);
+  font-size: var(--wf-text-h4);
+  margin-bottom: var(--wf-space-2);
+  color: var(--wf-text);
+}
+
+.errorHint {
+  margin-top: var(--wf-space-3);
+  font-size: var(--wf-text-body);
+  color: var(--wf-text-muted);
+
+  code {
+    background: var(--wf-surface-inset);
+    padding: 2px var(--wf-space-2);
+    border-radius: var(--wf-radius-sm);
+    font-size: var(--wf-text-meta);
+    color: var(--wf-text-2);
+  }
+}

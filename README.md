@@ -83,15 +83,19 @@ flowchart TD
 ### Context notes — the quality lever
 
 Each note turns a lone file into a connected node; **`## Related files`** is where you hand the graph
-its edges (list real siblings and **cross-link across initiatives**). Copy the **canonical templates +
+its edges (list real siblings and **cross-link across initiatives**). Write `## Summary` and
+`## Key concepts` so each sentence stands on its own, naming its subject by the project's **one
+canonical name** ("Peskas", not "the platform" or a pronoun) — a line that reads well out of context
+also retrieves and resolves well. Copy the **canonical templates +
 worked examples** from [PROTOCOL §6](PROTOCOL.md#6-context-notes). Skeletons:
 
 ```markdown
-# Data dictionary: <file>.csv        |   # Context: <file>.pdf
-## Summary                           |   ## Summary
-## Columns   (value domains: /enrich)|   ## Key concepts / entities
-## Related files                     |   ## Related files
-## Notes / caveats                   |   (## Updates — only when superseded; see §7)
+# Data dictionary: <file>.csv           |   # Context: <file>.pdf
+## Summary                              |   ## Summary
+## Grain      (what one row is: /enrich)|   ## Key concepts / entities
+## Columns    (value domains:  /enrich) |   ## Related files
+## Related files                        |   (## Updates — only when superseded; see §7)
+## Notes / caveats                      |
 ```
 
 A whole-initiative overview instead uses **[Template C](PROTOCOL.md#template-c--initiative-overview-_aboutmd)** — a lighter *living-node* scaffold (proper-name

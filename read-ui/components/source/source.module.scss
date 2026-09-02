@@ -1,0 +1,138 @@
+// ---- SourceLink: an inline, clickable citation source ----
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-1);
+  max-width: 100%;
+  min-width: 0;
+  padding: 2px var(--wf-space-2);
+  background: var(--wf-surface-inset);
+  border: 1px solid var(--wf-border);
+  border-radius: var(--wf-radius-sm);
+  color: var(--wf-text-3);
+  font-size: var(--wf-text-caption);
+  font-family: var(--wf-font-mono);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: var(--wf-border-accent-medium);
+    color: var(--wf-accent);
+    background: var(--wf-surface-inset-strong);
+  }
+}
+
+.icon {
+  flex: none;
+  display: inline-flex;
+  color: var(--wf-text-muted);
+}
+
+.linkText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ---- Modal viewer (read-only source note) ----
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 3, 10, 0.62);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.panel {
+  width: min(720px, 100%);
+  height: 100%;
+  background: var(--wf-surface-1);
+  border-left: 1px solid var(--wf-border-strong);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--wf-shadow-3);
+  animation: slideIn 0.18s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(24px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--wf-space-4);
+  padding: var(--wf-space-5) var(--wf-space-6);
+  border-bottom: 1px solid var(--wf-border);
+  background: var(--wf-surface-2);
+}
+
+.eyebrow {
+  font-size: var(--wf-text-micro);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wf-text-muted);
+  margin-bottom: var(--wf-space-1);
+}
+
+.path {
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-meta);
+  color: var(--wf-text-2);
+  word-break: break-all;
+}
+
+.close {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--wf-radius-sm);
+  border: 1px solid var(--wf-border);
+  background: var(--wf-surface-inset);
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-body);
+
+  &:hover {
+    background: var(--wf-surface-inset-strong);
+    color: var(--wf-text);
+  }
+}
+
+.body {
+  flex: 1;
+  overflow: auto;
+  padding: var(--wf-space-6);
+}
+
+.text {
+  margin: 0;
+  font-family: var(--wf-font-mono);
+  font-size: var(--wf-text-meta);
+  line-height: var(--wf-leading-normal);
+  color: var(--wf-text-3);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.notice {
+  padding: var(--wf-space-4);
+  border-radius: var(--wf-radius-md);
+  background: var(--wf-surface-2);
+  border: 1px solid var(--wf-border);
+}
+
+.muted {
+  color: var(--wf-text-muted);
+  font-size: var(--wf-text-meta);
+}
