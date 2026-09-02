@@ -22,6 +22,18 @@ knowledge_base/graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 wdb_ingest/_state/
 wdb_ingest/_staging/
 
+# ---------------------------------------------------------------------------
+# THE KNOWLEDGE BASE — never published.
+# ---------------------------------------------------------------------------
+# WDB ships as a reusable system, not as WorldFish's data. The initiative folders and the
+# built graph hold datasets, papers and extracted document text that stay private; a user of
+# this repo creates their OWN knowledge_base/ (see PROTOCOL.md §3 for the required shape, or
+# point the app elsewhere with WDB_KB — see wdb_paths.py).
+#
+# NOTE: ignoring a path does nothing to copies already committed. See RUNNING.md / the repo
+# history note — the published history must not contain this directory either.
+knowledge_base/
+
 # OS / editor cruft
 .DS_Store
 
@@ -44,16 +56,17 @@ mode_b/.index/
 !/docs/production-stack-design.md
 !/docs/ingestion-pipeline-design.md
 !/docs/model-cost-strategy.md
+!/docs/three-mode-architecture.md
 /proof
 /proof_c
 /proof_a
 
-# model_eval/ — throwaway model-evaluation experiment (like proof_a/proof_c). The
-# curated deliverable (harness + FINDINGS.md + results/ + drafts) is committed so the
-# PR into feat-rag has a real diff; only the regenerable byproducts are ignored.
-model_eval/raw/
-model_eval/__pycache__/
-model_eval/.venv/
+# model_eval/ — throwaway model-evaluation experiment (like proof_a/proof_c), now ignored in
+# full. Its sample_docs/, ingestion_drafts/, raw/ and results/ carry real rows, extracted paper
+# text and model-written dictionaries OF the private datasets — data by any reading, so none of
+# it is published. Nothing in the application imports it (it is not a declared package; the
+# dependency runs one way, model_eval -> the modes), so ignoring it costs the app nothing.
+model_eval/
 
 .env
 /civ-kb

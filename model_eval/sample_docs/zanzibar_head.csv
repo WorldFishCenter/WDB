@@ -1,9 +1,0 @@
-survey_id,trip_id,landing_date,gaul_1_code,gaul_1_name,gaul_2_code,gaul_2_name,n_fishers,trip_duration_hrs,gear,vessel_type,catch_habitat,catch_outcome,n_catch,catch_taxon,scientific_name,length_cm,catch_kg,catch_price,tot_catch_kg,tot_catch_price
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645323011,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,1,13,Hand Line,Dhow,Reef,1,1,IAX,Sepia spp,22.5,19.2737770829529,,19.2737770829529,47000
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645327358,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,6,5,Gill Net,Motorized Boat,Open Sea,1,1,CGX,Carangidae,,6,,6,80000
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645327970,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,22,8,Ring Net,Dhow,Open Sea,1,1,BZX,Sarda spp,22.5,2.40538470023885,,2.40538470023885,1e+05
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645342506,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,60,9,Ring Net,Wooden Boat,Open Sea,1,1,RAG,Rastrelliger kanagurta,,600,,600,4e+06
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645345840,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,1,8,Ring Net,Motorized Boat,Reef,1,1,EMP,Lethrinidae,,7,,7,40000
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645345845,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,2,6,Trap,Motorized Boat,Reef,1,1,EMP,Lethrinidae,,14,,14,55000
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645347227,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,4,6,Tangle Net,Dhow,Open Sea,1,1,SRX,Rajiformes,120,21.9255961719215,,43.8511923438429,410000
-ajEruvrFJCzmi4cmWs9PAc,TRIP_645347227,2025-02-19T00:00:00Z,1696,Mjini Magharibi,106459,Mjini,4,6,Tangle Net,Dhow,Open Sea,1,2,SRX,Rajiformes,120,21.9255961719215,,43.8511923438429,410000

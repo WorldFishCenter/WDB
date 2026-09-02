@@ -8,7 +8,7 @@ to compute — every number comes from DuckDB over the committed CSVs.
 Per the three-mode architecture doc §9 (governance) and the repo's pinned-model
 discipline ([../CLAUDE.md](../CLAUDE.md)), that choice is pinned and recorded here
 so a routing change is a deliberate, visible diff — the same philosophy as
-[graphify-out/BUILD_INFO.md](../graphify-out/BUILD_INFO.md).
+`knowledge_base/graphify-out/BUILD_INFO.md`.
 
 | Field | Value |
 |---|---|

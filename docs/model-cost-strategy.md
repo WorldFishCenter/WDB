@@ -74,17 +74,17 @@ and read the verdict."* A candidate that **passes** has earned the slot; one tha
 
 | Candidate slot | Proof to re-run against the candidate | Pass condition |
 |---|---|---|
-| **Mode B synthesis** | The faithfulness / refusal checks ([../mode_b/tests/test_synth.py](../mode_b/tests/test_synth.py), [../mode_b/tests/test_gate.py](../mode_b/tests/test_gate.py); [../proof/FINDINGS.md](../proof/FINDINGS.md)). The soft risk to watch is **prose-overclaim** — does the candidate overclaim *beyond* the retrieved passages? The refuse gate does not catch that. | Refuses when retrieval is thin; synthesis stays faithful to the cited passages. |
+| **Mode B synthesis** | The faithfulness / refusal checks ([../mode_b/tests/test_synth.py](../mode_b/tests/test_synth.py), [../mode_b/tests/test_gate.py](../mode_b/tests/test_gate.py); `proof/FINDINGS.md`). The soft risk to watch is **prose-overclaim** — does the candidate overclaim *beyond* the retrieved passages? The refuse gate does not catch that. | Refuses when retrieval is thin; synthesis stays faithful to the cited passages. |
 | **Curate / enrich agents** | No formal proof harness — the **review gate is the proof**: have the candidate draft notes and confirm they pass curator/maintainer review **reliably enough to be worth it**. | Draft notes pass review at a rate that makes the saving worthwhile. |
 
 **For the non-negotiable slots, the proof path exists but the door stays shut.** Recorded here only
 so it is not *bricked* shut — not as an invitation:
 
 - **Mode A** (if ever reconsidered) → re-run `proof_a/` — the **negative control**
-  ([../proof_a/negative_control.py](../proof_a/negative_control.py)) **and** the cold-fabrication-rate
+  (`proof_a/negative_control.py`) **and** the cold-fabrication-rate
   measurement (`python -m mode_a.cold_rate`).
 - **Mode C** (if ever reconsidered) → re-run `proof_c/` — the **9 resolver questions + the
-  naive-control traps** ([../proof_c/query.py](../proof_c/query.py); `proof_c/RESOLVER_FINDINGS.md`).
+  naive-control traps** (`proof_c/query.py`; `proof_c/RESOLVER_FINDINGS.md`).
 
 A free or cheaper model that **passes** these proofs would have earned the slot. Until one is run
 and passes, these slots remain pinned Anthropic.

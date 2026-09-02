@@ -46,7 +46,7 @@ SUBMITTED → DRAFTED → UNDER_REVIEW → PENDING → QUEUED → BUILT → LIVE
 **Finding (verified):** the guarded WDB build — the two [`CLAUDE.md`](../CLAUDE.md) extraction guards
 (format-blind similarity + canonical-entity) and the canonical-id remap — is performed by the
 maintainer's pinned **`claude-opus-4-8`** `/graphify` session, which injects those guards into the
-extraction subagents (see [`../graphify-out/BUILD_INFO.md`](../graphify-out/BUILD_INFO.md)). They are
+extraction subagents (see `../graphify-out/BUILD_INFO.md`). They are
 **not** built into the `graphify` CLI. So there is **no faithful headless build**.
 
 Therefore [`builder.py`](builder.py) does **not** run a headless build and call it faithful. `POST /build`

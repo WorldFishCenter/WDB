@@ -15,9 +15,12 @@ when in doubt, that file wins.
 
 ### 🧠 The knowledge graph
 
-[![WDB knowledge graph — communities colour-coded](knowledge_base/graphify-out/graph.svg)](knowledge_base/graphify-out/GRAPH_REPORT.md)
+> **The graph is not in this repository.** WDB ships as the *system*; the knowledge base it
+> reads — datasets, papers, notes and the built graph — stays private and is `.gitignore`d.
+> You supply your own `knowledge_base/` (see [PROTOCOL.md](PROTOCOL.md) §3 for the shape), and
+> the build renders your own `graph.svg`, `graph.html` and `GRAPH_REPORT.md` into it.
 
-*The current graph, each colour a community. Click for the readable **[GRAPH_REPORT.md](knowledge_base/graphify-out/GRAPH_REPORT.md)**.* **Interactive version:** clone the repo and open **`graphify-out/graph.html`** in any browser (GitHub serves `.html` as raw source, so the live graph is local-only).
+*Once built, `GRAPH_REPORT.md` is the readable view of your graph — each colour a community.* **Interactive version:** clone the repo and open **`graphify-out/graph.html`** in any browser (GitHub serves `.html` as raw source, so the live graph is local-only).
 
 ## What this is
 

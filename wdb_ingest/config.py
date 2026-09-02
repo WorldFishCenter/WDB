@@ -33,14 +33,16 @@ ENRICHER = WDB_ROOT / ".claude" / "scripts" / "dict_enricher.py"
 PINNED_BUILD_COMMAND = "/graphify knowledge_base --update"
 PINNED_MODEL = "claude-opus-4-8"
 
-# The initiative folders an upload may target (they live where they currently are — no reorg).
+# The initiative folders an upload may target — the five that exist in the knowledge base.
+# "civ-kb" used to be listed here; it is a SEPARATE project, never a WDB initiative (Mode B
+# vendored its retrieval core as a library — see mode_b/extract.py — and imports nothing from
+# it at runtime). Selecting it minted an initiative folder for an initiative that does not exist.
 INITIATIVES = [
     "peskas",
     "fasa",
     "data_harmonization",
     "digital_transformation_accelerator",
     "ssf_research",
-    "civ-kb",
 ]
 
 
