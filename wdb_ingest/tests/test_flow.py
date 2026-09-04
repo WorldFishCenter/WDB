@@ -33,7 +33,9 @@ def test_happy_path_to_live(store, to_pending):
     config.GRAPH_JSON.write_text(json.dumps({"nodes": [1, 2], "edges": []}))
     bs = builder.start_build(store)
     assert bs["status"] == "AWAITING_BUILD"
-    assert "/graphify" in bs["command"]
+    # the EXACT command, not a substring: `/graphify . --update` builds from the repo root,
+    # which CHANGELOG.md records as wrong (the first path segment must be the initiative).
+    assert bs["command"] == "/graphify knowledge_base --update"
     assert bs["model"] == "claude-opus-4-8"
 
     done = builder.confirm(store)
@@ -60,7 +62,7 @@ def test_build_autodetects_real_graph_change(store, to_pending):
 
     # simulate the real pinned build rewriting the graph (node/edge counts change)
     config.GRAPH_JSON.write_text(json.dumps({"nodes": [1, 2, 3], "edges": [9]}))
-    st = builder.poll(store)
+    st = builder.poll(store, promote=True)
     assert st["status"] == "DONE"
     assert store.get(sub.id).state == S.LIVE
 

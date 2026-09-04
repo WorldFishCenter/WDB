@@ -26,8 +26,10 @@ modes, or to the contract. Today the dispatcher (``dispatch.py``) calls this exa
 
 from __future__ import annotations
 
+from wdb_contract import merge
+
 from .backends import Backends
-from .contract import RouterAnswer, RoutingDecision, add_associations
+from .contract import RouterAnswer, RoutingDecision
 
 
 def _run_mode_a(question: str, b: Backends):
@@ -54,27 +56,22 @@ def compose(question: str, decision: RoutingDecision, backends: Backends) -> Rou
 
     Modes are dispatched in a fixed A→B→C order for deterministic output, regardless of the
     order signals fired in. Each mode already returns the §6 shape and enforces "no claim
-    without a citation"; merging is concatenate + de-dup (associations by edge triple).
+    without a citation"; merging is :func:`wdb_contract.merge` — concatenate, de-dup
+    associations by edge triple, and carry every field.
+
+    The merge is a single shared function on purpose. This used to be three hand-written
+    blocks, one per mode, each reading a different subset of the fragment's fields — which is
+    how a verified not-connected verdict and Mode C's disambiguation candidates were silently
+    dropped on the way to the UI.
     """
     ra = RouterAnswer(question=question, routes=list(decision.routes))
     fired = set(decision.modes)
 
     if "A" in fired:
-        a = _run_mode_a(question, backends)
-        ra.claims.extend(a.claims)
-        add_associations(ra, a.associations)
-        ra.unanswered.extend(a.unanswered)
-
+        merge(ra, _run_mode_a(question, backends))
     if "B" in fired:
-        b = _run_mode_b(question, backends)
-        ra.claims.extend(b.claims)
-        add_associations(ra, b.associations)
-        ra.unanswered.extend(b.unanswered)
-
+        merge(ra, _run_mode_b(question, backends))
     if "C" in fired:
-        c = _run_mode_c(question, backends)
-        ra.claims.extend(c.claims)
-        ra.figures.extend(c.figures)
-        ra.unanswered.extend(c.unanswered)
+        merge(ra, _run_mode_c(question, backends))
 
     return ra

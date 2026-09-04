@@ -1,59 +1,48 @@
-"""The answer contract (three-mode architecture doc §6), as far as Mode B needs.
+"""Mode B's half of the §6 answer contract: turning passages into a cited answer.
 
-A grounded answer is a list of ``Claim``s (here all ``mode="B"``) plus a typed
-``associations`` payload and an ``unanswered`` list. The defining Mode-B rule
-(§6): a ``Claim``'s citation is the **passage span + civ-kb location + verbatim
-quote + the matching graph node(s)** — synthesized prose, never un-sourced. Every
-claim carries ≥1 citation or it is not emitted (§6 rule 1). A refusal is an
-``Answer`` with no claims and the question in ``unanswered`` (§6 rule 4 — stated,
-never silently dropped).
+The contract *shape* (``Citation``, ``Claim``, ``Answer``, ``Unanswered``) is declared once in
+:mod:`wdb_contract`; this module holds only what is Mode-B specific — how a retrieved passage
+becomes a citation, and how a synthesis is assembled.
 
-The dual payload the proof delivered (proof/FINDINGS.md Q1): each citation names
-the graph node(s) its passage resolves to (document grain, via join.py), and the
-answer's ``associations`` carries the edges touching those nodes.
+The defining Mode-B rule (§6): a ``Claim``'s citation is the **passage span + civ-kb location +
+verbatim quote + the matching graph node(s)** — synthesized prose, never un-sourced. Every
+claim carries ≥1 citation or it is not emitted (§6 rule 1; the shared ``Claim`` now enforces
+that in its constructor).
+
+The dual payload the proof delivered (proof/FINDINGS.md Q1): each citation names the graph
+node(s) its passage resolves to (document grain, via join.py), and the answer's
+``associations`` carries the edges touching those nodes.
 """
 
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+
+from wdb_contract import (
+    Answer,
+    CitationB as Citation,
+    Claim,
+    Unanswered,
+    UnansweredCode,
+    Verdict,
+)
 
 from . import join
 from .corpus import companion_note
 from .retrieve import Passage
 
-
-@dataclass(frozen=True)
-class Citation:
-    source_file: str          # WDB-relative path of the source doc — the join key (#4)
-    note: str                 # companion-note pointer, e.g. "..._context.md" ("" if none)
-    location: str             # civ-kb mechanical span, e.g. "page 2 [part 4/4]"
-    quote: str                # the verbatim passage text (the span)
-    nodes: tuple[str, ...]    # matching graph node id(s) at document grain
+__all__ = [
+    "Answer", "Citation", "Claim", "Unanswered", "UnansweredCode", "Verdict",
+    "refusal", "assemble",
+]
 
 
-@dataclass(frozen=True)
-class Claim:
-    text: str
-    citations: tuple[Citation, ...]
-    mode: str = "B"
-
-
-@dataclass
-class Answer:
-    claims: list[Claim] = field(default_factory=list)
-    associations: list = field(default_factory=list)   # Mode-A edges for the cited nodes
-    unanswered: list[str] = field(default_factory=list)
-    figures: list = field(default_factory=list)        # Mode C only — empty here
-
-    @property
-    def answered(self) -> bool:
-        return bool(self.claims)
-
-
-def refusal(question: str, reason: str) -> Answer:
+def refusal(question: str, reason: str,
+            code: UnansweredCode = UnansweredCode.UNSPECIFIED) -> Answer:
     """§6 rule 4: state what no mode could ground, never back-fill by invention."""
-    return Answer(unanswered=[f"{question} — {reason}"])
+    return Answer(unanswered=[
+        Unanswered(part=question, mode="B", code=code, detail=reason)
+    ])
 
 
 def _cited_indices(text: str, n: int) -> list[int]:
@@ -87,8 +76,9 @@ def assemble(question: str, passages: list[Passage], synthesis_text: str,
         ))
 
     if not citations:                       # never emit an un-sourced claim (§6 rule 1)
-        return refusal(question, "no citable passage after synthesis")
+        return refusal(question, "no citable passage after synthesis",
+                       UnansweredCode.NO_CITABLE_PASSAGE)
 
     edges = join.associations(all_node_ids, links)
-    claim = Claim(text=synthesis_text.strip(), citations=tuple(citations))
+    claim = Claim(text=synthesis_text.strip(), citations=tuple(citations), mode="B")
     return Answer(claims=[claim], associations=edges)

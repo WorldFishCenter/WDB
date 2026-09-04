@@ -268,7 +268,12 @@ def create_app(backends_factory: Callable[[], Backends] | None = None) -> FastAP
             "status": "ok",
             "backend": request.app.state.backend_mode,
             "cost_tracking": request.app.state.backend_mode == "live",
-            "reranker_loaded": getattr(backends.b_retriever, "reranker", None) is not None,
+            # The adapter states which floor Mode B's gate is judging — read from the
+            # declared `Reranker.kind`, not sniffed from a private attribute. `rerank_kind`
+            # is the useful field ("rerank" | "cosine" | "replay"); `reranker_loaded` is kept
+            # because the UI header reads it.
+            "rerank_kind": getattr(backends.b_retriever, "ranking_kind", "replay"),
+            "reranker_loaded": getattr(backends.b_retriever, "ranking_kind", None) == "rerank",
         }
 
     @app.post("/answer")

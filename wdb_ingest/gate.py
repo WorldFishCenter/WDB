@@ -12,7 +12,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .models import Role, WorkflowState
+from .models import HistoryEntry, Role, Submission, WorkflowState
+from .ops import now_iso
 
 S = WorkflowState
 
@@ -44,14 +45,34 @@ USER_TRANSITIONS: tuple[Transition, ...] = (
     Transition("reject", Role.CURATOR, frozenset({S.PENDING}), S.REJECTED),
 )
 
-# System transitions (not role-driven): the auto-draft agents and the single-builder build.
-AUTODRAFT = Transition("autodraft", Role.CONTRIBUTOR, frozenset({S.SUBMITTED}), S.DRAFTED)
-BUILD_TRANSITIONS: tuple[tuple[WorkflowState, WorkflowState], ...] = (
-    (S.QUEUED, S.BUILT),
-    (S.BUILT, S.LIVE),
+@dataclass(frozen=True)
+class SystemTransition:
+    """A move no HTTP actor can request: the auto-draft and the single-builder build.
+
+    No ``role`` field — these are performed by the service and the build orchestrator, never by a
+    request. Keeping them in a table (rather than as bare ``advance`` calls) is what makes
+    ``BUILT`` and ``LIVE`` reachable *only* here.
+    """
+
+    action: str
+    from_states: frozenset[WorkflowState]
+    to_state: WorkflowState
+
+
+# Every system transition. A self-transition (from == to) is an audit annotation: it appends a
+# history entry without moving the contribution, and must be declared like any other move.
+SYSTEM_TRANSITIONS: tuple[SystemTransition, ...] = (
+    SystemTransition("autodraft", frozenset({S.SUBMITTED}), S.DRAFTED),
+    # the build: handoff annotation, then QUEUED -> BUILT -> LIVE
+    SystemTransition("handoff", frozenset({S.QUEUED}), S.QUEUED),
+    SystemTransition("build_built", frozenset({S.QUEUED}), S.BUILT),
+    SystemTransition("build_live", frozenset({S.BUILT}), S.LIVE),
+    # the curator's CURATOR_OVERRIDE edit — records who edited, without advancing
+    SystemTransition("curator_override", frozenset({S.PENDING}), S.PENDING),
 )
 
 _BY_ACTION: dict[str, Transition] = {t.action: t for t in USER_TRANSITIONS}
+_BY_SYSTEM_ACTION: dict[str, SystemTransition] = {t.action: t for t in SYSTEM_TRANSITIONS}
 
 
 def apply_transition(action: str, role: Role, current: WorkflowState) -> WorkflowState:
@@ -73,6 +94,41 @@ def apply_transition(action: str, role: Role, current: WorkflowState) -> Workflo
         raise GateError(f"Cannot {action!r} from state {current.value} (needs one of "
                         f"{sorted(s.value for s in t.from_states)}).")
     return t.to_state
+
+
+def apply(sub: Submission, action: str, *, role: Role | None = None,
+          actor: str, note: str | None = None) -> Submission:
+    """**The only** way a contribution changes state. Check, then move, then record.
+
+    Returns a copy of ``sub`` in the action's target state with an (append-only) history entry
+    appended. Raises :class:`GateError` if the action is unknown, the role is wrong (403) or the
+    action is not legal from the current state (409).
+
+    ``role`` is required for a role-driven action and refused for a system one — passing a role to
+    ``build_live`` would imply an actor can request it, and none can.
+    """
+    if action in _BY_ACTION:
+        if role is None:
+            raise GateError(f"{action!r} is role-driven; a role is required.", forbidden=True)
+        to = apply_transition(action, role, sub.state)
+    elif action in _BY_SYSTEM_ACTION:
+        if role is not None:
+            raise GateError(
+                f"{action!r} is a system transition; no role may request it.", forbidden=True
+            )
+        t = _BY_SYSTEM_ACTION[action]
+        if sub.state not in t.from_states:
+            raise GateError(f"Cannot {action!r} from state {sub.state.value} (needs one of "
+                            f"{sorted(s.value for s in t.from_states)}).")
+        to = t.to_state
+    else:
+        raise GateError(f"Unknown action: {action!r}", forbidden=True)
+
+    return sub.model_copy(update={
+        "state": to,
+        "history": [*sub.history,
+                    HistoryEntry(state=to, at=now_iso(), actor=actor, note=note)],
+    })
 
 
 def can_edit_draft(role: Role, state: WorkflowState) -> bool:

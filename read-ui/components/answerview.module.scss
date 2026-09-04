@@ -37,6 +37,20 @@
 // in view, so the two read as peers that share the screen — not a panel + a sidebar.
 $header-h: 60px; // sticky app bar height
 
+// A stated failure, not a silently empty graph stage: shown when graph.json could not be
+// loaded (most often a knowledge base the server could not locate — see lib/kbRoot.ts).
+.graphNotice {
+  margin-bottom: var(--wf-space-4);
+  padding: var(--wf-space-3) var(--wf-space-4);
+  border: 1px solid var(--wf-amber-border, #e0c069);
+  border-left-width: 3px;
+  border-radius: var(--wf-radius-sm, 4px);
+  background: var(--wf-amber-bg, #fdf6e3);
+  color: var(--wf-text, #1f2933);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

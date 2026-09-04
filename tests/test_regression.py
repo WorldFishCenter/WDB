@@ -11,6 +11,7 @@ import pytest
 from mode_c import answer_question, load_catalog, ReplayResolver
 from mode_c.fixtures import PROOF_QUESTIONS, RECORDED
 from mode_c.fixtures.resolutions import Q1, Q2, Q3A, Q3B, Q4, Q4B, Q5A, Q5B, Q6
+from wdb_contract import UnansweredCode
 
 
 @pytest.fixture(scope="module")
@@ -60,7 +61,8 @@ def test_answered_questions(cat, resolver, q, expected):
 def test_genuine_refusals(cat, resolver, q):
     answer = answer_question(q, resolver, cat)
     assert not answer.answered
-    assert answer.unanswered and answer.disambiguation is None
+    assert answer.unanswered
+    assert answer.unanswered[0].code is not UnansweredCode.NEEDS_DISAMBIGUATION
 
 
 # --- the one genuine ambiguity (ask, don't guess) -------------------------- #
@@ -68,8 +70,10 @@ def test_genuine_refusals(cat, resolver, q):
 def test_disambiguation_not_a_guess(cat, resolver):
     answer = answer_question(Q3A, resolver, cat)
     assert not answer.answered
-    assert answer.disambiguation is not None
-    assert len(answer.disambiguation.candidates) == 3  # the three sister tables
+    # the candidates ride on the unanswered entry now, so the router carries them through
+    ask = answer.unanswered[0]
+    assert ask.code is UnansweredCode.NEEDS_DISAMBIGUATION
+    assert len(ask.candidates) == 3  # the three sister tables
 
 
 def test_no_over_refusal_and_no_fabrication(cat, resolver):

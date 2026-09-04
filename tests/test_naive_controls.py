@@ -17,6 +17,7 @@ from mode_c.fixtures import (
     RECORDED,
 )
 from mode_c.fixtures.resolutions import Q2, Q4
+from wdb_contract import UnansweredCode
 
 
 @pytest.fixture(scope="module")
@@ -32,7 +33,10 @@ def test_kenya_grain_trap_is_refused_not_computed(cat):
     assert not vetted_band(NAIVE_KENYA_GRAIN_TRAP, cat).ok
     # ... so the pipeline returns "not available", never 28.99 ...
     answer = answer_question(Q4, ReplayResolver({Q4: NAIVE_KENYA_GRAIN_TRAP}), cat)
-    assert not answer.answered and "grain trap" in answer.unanswered[0]
+    assert not answer.answered
+    # assert the refusal ARM (the stable code), not the gate's wording
+    assert answer.unanswered[0].code is UnansweredCode.OUT_OF_BAND
+    assert "grain trap" in answer.unanswered[0].detail
     # ... while the guarded resolution computes 31.88 (trip grain).
     good = answer_question(Q4, ReplayResolver(RECORDED), cat)
     assert good.claims[0].citations[0].result[0]["avg_total_catch_kg_per_trip"] == pytest.approx(
@@ -66,4 +70,4 @@ def test_out_of_band_question_is_refused(cat):
         cat,
     )
     assert not answer.answered
-    assert "vetted band" in answer.unanswered[0]
+    assert answer.unanswered[0].code is UnansweredCode.OUT_OF_BAND

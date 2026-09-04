@@ -104,6 +104,11 @@ Mode B loads two models from the Hugging Face hub **at runtime**, cached under `
 
 First live run downloads them (a few hundred MB); subsequent runs hit the cache.
 
+**The passage index** lives at `$WDB_KB/.index` (default `knowledge_base/.index`), not inside the
+`mode_b` package — it is derived from a specific knowledge base's corpus, so it follows the KB
+that `WDB_KB` points at rather than staying with the application. Override with `WDB_INDEX`;
+rebuild with `uv run python -m mode_b --ingest`. It is gitignored and regenerable.
+
 ## Containerizing later (deployment-aware — not built here)
 
 This environment is shaped so a `Dockerfile` is a short hop; **no deployment infra is built in

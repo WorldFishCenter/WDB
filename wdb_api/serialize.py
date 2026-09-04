@@ -13,9 +13,17 @@ via :func:`dataclasses.asdict`, so a future contract change can never silently d
 here — the round-trip test pins exactly that.
 
 The figures (Mode C), the merged graph ``associations`` (already plain ``graph.json`` edge
-dicts), and the ``unanswered`` list pass through unflattened. ``answered`` / ``modes_fired`` /
-``modes_grounded`` are the contract's own computed views (not synthesis) — included so the UI
-can show the routing/grounding posture without re-deriving it.
+dicts), and the ``unanswered`` list pass through unflattened. ``answered`` / ``verdict`` /
+``modes_fired`` / ``modes_grounded`` are the contract's own computed views (not synthesis) —
+included so the UI can show the routing/grounding posture without re-deriving it.
+
+``verdict`` and ``unanswered_detail`` are additive: ``answered`` keeps its exact meaning and
+``unanswered`` still serializes as rendered strings, so nothing that reads the old keys
+changes. ``verdict`` is what lets the UI tell a **verified negative** ("we checked the graph
+and it records no connection" — a correct answer) apart from an ungrounded refusal ("the
+knowledge base doesn't cover this"). It could not, before: the router discarded the
+distinction, so the UI inferred refusal from three empty lists and mislabelled Mode A's
+honest negative.
 """
 
 from __future__ import annotations
@@ -51,6 +59,22 @@ def serialize_figure(figure) -> dict:
     return asdict(figure)
 
 
+def serialize_unanswered(item) -> dict:
+    """One ``Unanswered`` → dict: the stable ``code``, the rendered prose, and any candidates.
+
+    ``code`` is the field to branch on; ``text`` is for display. Mode C's disambiguation
+    candidates ride here now — they used to be flattened into the prose and lost.
+    """
+    return {
+        "part": item.part,
+        "mode": item.mode,
+        "code": item.code.value,
+        "detail": item.detail,
+        "text": item.text,
+        "candidates": list(item.candidates),
+    }
+
+
 def serialize_route(route) -> dict:
     """One ``Route`` → ``{mode, reason}`` — the signal that selected the mode (transparency)."""
     return {"mode": route.mode, "reason": route.reason}
@@ -68,11 +92,13 @@ def serialize_answer(answer) -> dict:
     return {
         "question": answer.question,
         "answered": answer.answered,
+        "verdict": answer.verdict.value,            # GROUNDED | VERIFIED_NEGATIVE | UNGROUNDED
         "modes_fired": answer.modes_fired,          # modes routed-to
         "modes_grounded": answer.modes_grounded,    # modes that actually contributed
         "routes": [serialize_route(r) for r in answer.routes],
         "claims": [serialize_claim(c) for c in answer.claims],
         "associations": [dict(e) for e in answer.associations],
         "figures": [serialize_figure(f) for f in answer.figures],
-        "unanswered": list(answer.unanswered),
+        "unanswered": [u.text for u in answer.unanswered],           # unchanged wire shape
+        "unanswered_detail": [serialize_unanswered(u) for u in answer.unanswered],
     }

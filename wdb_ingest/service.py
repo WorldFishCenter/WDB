@@ -11,17 +11,44 @@ from __future__ import annotations
 import shutil
 import threading
 import uuid
+from pathlib import Path
 
 from . import config, gate
 from .drafting import draft_for
 from .models import DraftedNote, Role, Submission, SubmissionInput, WorkflowState
 from .notes import note_to_markdown
-from .ops import advance, now_iso
+from .ops import now_iso
 from .store import WorkflowStore
 
 
 class NotFound(Exception):
     pass
+
+
+class InvalidPlacement(ValueError):
+    """The upload names an initiative that does not exist, or a filename that escapes the KB."""
+
+
+def validate_placement(initiative: str, filename: str) -> None:
+    """Refuse an upload that could not land inside a real initiative folder.
+
+    ``config.INITIATIVES`` carried a comment describing a real past bug — selecting a
+    non-existent initiative minted a folder for it — and had **no uses**: the API took
+    ``initiative`` as an unvalidated query parameter and :func:`_promote_to_git` did
+    ``mkdir(parents=True)`` on it. ``filename`` was equally unchecked, so ``../../etc/x`` would
+    have been copied outside ``KB_ROOT`` entirely. Both are checked here, before anything is
+    staged, because this runs on the write path that creates directories.
+    """
+    if initiative not in config.INITIATIVES:
+        raise InvalidPlacement(
+            f"Unknown initiative {initiative!r}. Must be one of: "
+            f"{', '.join(config.INITIATIVES)}."
+        )
+    name = Path(filename).name
+    if not filename or name != filename or name in (".", ".."):
+        raise InvalidPlacement(
+            f"Filename {filename!r} must be a plain file name with no path separators."
+        )
 
 
 def _new_id() -> str:
@@ -41,6 +68,7 @@ def submit(
     background: bool = True,
 ) -> Submission:
     """Create a SUBMITTED contribution: stage the real file, stamp provenance, kick the draft."""
+    validate_placement(inp.initiative, inp.filename)   # before anything touches the filesystem
     config.ensure_dirs()
     sub_id = _new_id()
     sub = Submission(
@@ -90,7 +118,7 @@ def run_draft(store: WorkflowStore, sub_id: str) -> Submission | None:
         sourceUrl=sub.provenance.source_url,
     )
     note = draft_for(inp, _staged_path(sub))
-    drafted = advance(sub, WorkflowState.DRAFTED, "Auto-draft (enrich + scaffold)").model_copy(
+    drafted = gate.apply(sub, "autodraft", actor="Auto-draft (enrich + scaffold)").model_copy(
         update={"draft": note}
     )
     store.upsert(drafted)
@@ -110,7 +138,9 @@ def act(
     sub = store.get(sub_id)
     if not sub:
         raise NotFound(sub_id)
-    next_state = gate.apply_transition(action, role, sub.state)  # raises GateError (403/409)
+    # Validate BEFORE any side effect: `curator_approve` writes to git below, and a refused
+    # transition must not leave a note behind. `gate.apply` re-checks and performs the move.
+    gate.apply_transition(action, role, sub.state)  # raises GateError (403/409)
     actor = actor or role.value
 
     note = {
@@ -124,7 +154,7 @@ def act(
     if action == "curator_approve":
         _promote_to_git(sub)  # the hard handoff: file + note into git, BEFORE we advance to QUEUED
 
-    updated = advance(sub, next_state, actor, note)
+    updated = gate.apply(sub, action, role=role, actor=actor, note=note)
     if action == "reject":
         updated = updated.model_copy(update={"rejection_reason": reason})
     elif action == "resubmit":
@@ -142,9 +172,10 @@ def edit_draft(store: WorkflowStore, sub_id: str, draft: DraftedNote, role: Role
         raise gate.GateError(f"Role {role.value!r} may not edit the draft in state {sub.state.value}.", forbidden=True)
     updated = sub.model_copy(update={"draft": draft})
     if role == Role.CURATOR:
-        updated = advance(updated, updated.state, actor or "curator", "Curator override: edited draft").model_copy(
-            update={"curator_edited": True}
-        )
+        updated = gate.apply(
+            updated, "curator_override", actor=actor or "curator",
+            note="Curator override: edited draft",
+        ).model_copy(update={"curator_edited": True})
     store.upsert(updated)
     return updated
 

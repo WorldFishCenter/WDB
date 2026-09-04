@@ -17,23 +17,19 @@ from .contract import Answer
 from .fixtures import RECORDED
 from .model import RESOLVER_MODEL
 from .pipeline import answer_question
+from wdb_contract import claim_lines, figure_lines, unanswered_lines
+
 from .resolver import LiveResolver, ReplayResolver
 
 
 def _render(answer: Answer) -> str:
     out: list[str] = []
     for claim in answer.claims:
-        out.append(f"CLAIM [{claim.mode}]: {claim.text}")
-        for cit in claim.citations:
-            out.append(f"  source : {cit.source_file}  ({cit.note})")
-            out.append("  sql    : " + cit.sql.replace("\n", "\n           "))
-            out.append("  result : " + json.dumps(cit.result))
+        out.extend(claim_lines(claim))
     for fig in answer.figures:
-        out.append(f"FIGURE {fig.spec}")
-        out.append("  query  : " + fig.query.replace("\n", "\n           "))
-        out.append("  result : " + json.dumps(fig.result))
-    for u in answer.unanswered:
-        out.append(f"NOT AVAILABLE: {u}")
+        out.extend(figure_lines(fig))
+    if answer.unanswered:
+        out.extend(unanswered_lines(answer.unanswered))
     return "\n".join(out) if out else "(empty answer)"
 
 

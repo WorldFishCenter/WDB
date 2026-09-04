@@ -54,4 +54,4 @@ def test_refusal_shape_states_the_question():
     answer = refusal("Impossible question?", "not available: no passage retrieved")
     assert not answer.answered
     assert answer.claims == []
-    assert answer.unanswered and "Impossible question?" in answer.unanswered[0]
+    assert answer.unanswered and "Impossible question?" in answer.unanswered[0].text

@@ -1,122 +1,131 @@
 # WDB — operator instructions
 
-This is a **collaborative Graphify knowledge-graph repo**. The conventions are specified in
-[PROTOCOL.md](PROTOCOL.md) (the normative spec) and surfaced practically in [README.md](README.md)
-and [USER_GUIDE.md](USER_GUIDE.md) (all `.graphifyignore`d). This file carries the rules Claude must
-enforce when **operating** the graph — chiefly during `/graphify` extraction, which those conventions
-cannot reach because the extractor never reads them.
+WorldFish's shared knowledge brain: one queryable graph over every initiative's data, documents
+and notes, plus the application that answers questions from it. The value is the
+**cross-initiative connections** the graph surfaces, not any single file.
 
-**The aim.** WDB is WorldFish's shared knowledge brain — one queryable graph over every initiative's
-data, documents, and notes, whose value is the **cross-initiative connections** it surfaces, not any
-single file. Operate it to keep that graph **connected, honest, and de-duplicated**: edges only on
-real domain meaning, **one node per real-world entity**, and provenance you can trust. The guards
-below exist to protect exactly those three properties at build time.
+Keep the graph **connected, honest, and de-duplicated**: edges only on real domain meaning, one
+node per real-world entity, provenance you can trust. Keep the application **honest**: it answers
+from committed sources or says it cannot — it never invents.
 
-Per the protocol ([PROTOCOL §2](PROTOCOL.md#2-the-contribution-protocol)),
-only the **maintainer** runs `/graphify`. These rules apply to whoever is in that seat.
+| Need | Read |
+|---|---|
+| Contribution conventions (normative) | [PROTOCOL.md](PROTOCOL.md) |
+| Commands, environment, services | [RUNNING.md](RUNNING.md) |
+| Answer-contract spec (§6), the three modes | [docs/three-mode-architecture.md](docs/three-mode-architecture.md) |
+
+This file carries what those cannot reach: the rules for **operating** the graph during
+`/graphify` extraction (the extractor never reads the protocol), and the invariants the
+application's tests cannot state for themselves.
+
+## Two trees, one repo
+
+- **The application** — the mode packages, router, services, `read-ui/`, `.claude/`. Changes on release.
+- **The knowledge base** (`knowledge_base/`, gitignored) — initiative folders plus `graphify-out/`. Changes on contribution.
+
+Resolve every path through `wdb_paths` (`REPO_ROOT`, `KB_ROOT`, `GRAPH_JSON`, `INDEX_DIR`), which
+reads `WDB_KB` / `WDB_INDEX`. Deriving a root by climbing from `__file__` is what made the write
+side write into one knowledge base while the readers read another.
+
+Paths inside the graph, the catalog and every citation stay **KB-relative** (`peskas/trips.csv`,
+never `knowledge_base/peskas/trips.csv`): the first segment is an **initiative name** throughout
+the system, so a container directory there invents a bogus initiative.
 
 ## Build model & provenance
 
-Run `/graphify` builds with the session model **pinned to `claude-opus-4-8`** (Opus 4.8) — set
-it with `/model claude-opus-4-8` before building. Pin the **exact** model, not the floating
-`opus` alias: that keeps rebuilds reproducible, so a newer Opus only changes the graph when the
-pin is deliberately bumped. The `/curate` and `/enrich` subagents are pinned to the same
-`claude-opus-4-8` in their `.claude/agents/*.md` frontmatter.
+Only the **maintainer** runs `/graphify` ([PROTOCOL §2](PROTOCOL.md#2-the-contribution-protocol)).
 
-**Stamp provenance on every build.** After a successful `/graphify` build, (over)write
-`knowledge_base/graphify-out/BUILD_INFO.md` with: the date; the **exact model ID you are running as** (from your
-system context — do not write the `opus` alias); the graphify version (`graphify --version`); the
-build mode (`standard` / `--update` / `--mode deep`); and the node & edge counts from
-`graph.json`. Commit it with the rest of `knowledge_base/graphify-out/`. It is the committed record of what
-produced the current graph — a model or tool-version change then shows up as a `BUILD_INFO.md`
-diff in the pull request.
+Build with the session model pinned to the **exact** id — `/model claude-opus-4-8` — never the
+floating `opus` alias, so a newer Opus changes the graph only when the pin is deliberately bumped.
+The `/curate` and `/enrich` subagents pin the same id in their `.claude/agents/*.md` frontmatter.
 
-**To upgrade the model:** change the pin in three places together — `/model …` (build session),
-and `model:` in both `.claude/agents/wdb-curator.md` and `.claude/agents/dict-enricher.md` — then
-rebuild so the new `BUILD_INFO.md` records the switch.
+The build command is **`/graphify knowledge_base --update`**. Building from the repo root
+(`/graphify . --update`) is wrong, not merely noisy: it puts a container directory in the first
+path segment, where an initiative name belongs.
 
-## Graphify extraction: format-blind similarity guard
+**Stamp provenance on every build.** After a successful build, (over)write
+`knowledge_base/graphify-out/BUILD_INFO.md` with the date; the exact model id you are running as
+(from your system context, not the alias); `graphify --version`; the build mode; and the node and
+edge counts from `graph.json`. Commit it with the rest of `graphify-out/`. A model or tool-version
+change then shows up as a `BUILD_INFO.md` diff in the pull request.
 
-When you run `/graphify` on this repo (full build **or** `--update`), every
-semantic-extraction subagent prompt you dispatch **MUST** carry this rule (verbatim in
-intent). It applies to all backends — Claude subagents or Gemini — so inject it into
-whatever prompt drives extraction:
+**To bump the model**, change three places together — `/model …`, and `model:` in both
+`.claude/agents/wdb-curator.md` and `.claude/agents/dict-enricher.md` — then rebuild.
 
-> **Never emit a `semantically_similar_to` edge (or any similarity / "related" edge)
-> whose basis is a dataset's _shape, format, or storage pattern_** — wide vs long,
-> tidy-data structure, EAV / "one row per (entity × parameter)", row-per-X,
-> parameter-per-column, file type, or encoding. These properties are shared by every
-> file of that form, so linking on them mints **quadratic, uninformative** cross-links
-> (every long table tied to every other long table). Link two tables **only on domain
-> meaning** — same study, shared variables, one feeds the other, same
-> site / species / measurement subject. If the *only* thing two nodes share is
-> structural shape, emit **no** edge.
+Standard mode is the documented default. `--mode deep` tells subagents to be aggressive with
+INFERRED edges, which amplifies exactly the speculative noise the first guard suppresses — reserve
+it for deliberate one-off exploration and review the extra edges. Both guards still apply in deep mode.
 
-**Carve-out — grain (the row's domain subject) is *not* shape.** The ban on `row-per-X` targets X as
-the **structural unit** shared by every table of the form — a "record", a "measurement", an
-"(entity × parameter)" cell. It does **not** target a `## Grain` line that names X as a **domain
-subject**: *one row = one catch item of a trip*, *one nutrient value for one ingredient*. That is the
-row's subject — the same "measurement subject" the rule above already allows — so it **may** support a
-**same-subject** edge. Two grain lines that share only the template "one row per …" but whose subjects
-differ (catch item vs. ingredient) are **not** similar: never mint a structural edge from the shared
-word "row", and never *suppress* a real same-subject link just because a grain line contains it. (Grain
-is recorded per [PROTOCOL §6, Template A](PROTOCOL.md#6-context-notes); habit 4's carve-out keeps it
-domain-only on the input side.)
+## Graphify extraction: the two guards
 
-**Why this is a separate enforcement point, not just a note-writing rule.**
-[Habit 4 (PROTOCOL §6)](PROTOCOL.md#6-context-notes) keeps shape language *out
-of the notes*. But a `_dict.md` still reveals shape through its **column list, node
-label, and filename** (`..._observations_wide`, `..._measurements_long`) even when the
-prose is clean — so the extractor can re-derive shape and mint the noise anyway. Habit 4
-governs the *input*; this guard governs the *extractor*. **Both are required.**
+Every semantic-extraction subagent prompt you dispatch **must** carry both guards, verbatim in
+intent, on every backend (Claude subagents or Gemini) and in every mode (full build or `--update`).
+Each guard has an input-side rule the protocol already enforces *and* this extractor-side
+injection. **Both halves are required**: the protocol governs what contributors write, these govern
+what the extractor re-derives anyway.
 
-This was added after a build linked `pondcube_observations_wide` ↔ `FICD` purely because
-both are tidy tables — a cross-domain, zero-information edge. As the corpus grows, every
-new wide/long file would multiply that noise without this guard.
+### Format-blind similarity guard
 
-### Note on `--mode deep`
+Protects **edges only on real domain meaning**.
 
-The documented default for this repo is **standard** mode (`/graphify knowledge_base` or
-`--update`);
-see [PROTOCOL §9 — Building & updating](PROTOCOL.md#9-maintainer-and-build-reference).
-`--mode deep` instructs subagents to be **aggressive with INFERRED edges**, which amplifies
-exactly the speculative similarity noise this guard suppresses — so it is **not** recommended
-for routine rebuilds. Reserve it for deliberate one-off exploration, and expect to review the
-extra edges. The guard above still applies in deep mode.
+> **Never emit a `semantically_similar_to` edge (or any similarity / "related" edge) whose basis is
+> a dataset's _shape, format, or storage pattern_** — wide vs long, tidy-data structure, EAV /
+> "one row per (entity × parameter)", row-per-X, parameter-per-column, file type, or encoding.
+> These properties are shared by every file of that form, so linking on them mints **quadratic,
+> uninformative** cross-links (every long table tied to every other long table). Link two tables
+> **only on domain meaning** — same study, shared variables, one feeds the other, same
+> site / species / measurement subject. If the *only* thing two nodes share is structural shape,
+> emit **no** edge.
 
-## Graphify extraction: canonical-entity guard
+**Carve-out — grain is not shape.** The ban on `row-per-X` targets X as the **structural unit**
+every table of the form shares: a "record", a "measurement", an "(entity × parameter)" cell. A
+`## Grain` line naming X as a **domain subject** — *one row = one catch item of a trip*, *one
+nutrient value for one ingredient* — is the measurement subject the rule already allows, so it
+**may** support a **same-subject** edge. Two grain lines sharing only the template "one row per …"
+with different subjects (catch item vs. ingredient) are not similar. Mint no structural edge from
+the shared word "row", and keep a real same-subject link that happens to be phrased as a grain line.
 
-Protects the **one node per real-world entity** property. Like the similarity guard, it governs the
-**extractor**, which cannot read the protocol's canonical-name rule
-([PROTOCOL §6 — satellites](PROTOCOL.md#initiative-perspective-docs-satellites--the-canonical-name)).
-It has two parts — an injection (input side) and a maintainer build step (output side). **Both are
-required**: the injection alone does not fix it, because graphify's dedup refuses to merge short labels.
+A `_dict.md` reveals shape through its column list, node label and filename
+(`..._observations_wide`, `..._measurements_long`) even when [habit 4](PROTOCOL.md#6-context-notes)
+has kept the prose clean — so the extractor can re-derive shape and mint the noise regardless. Added
+after a build linked `pondcube_observations_wide` ↔ `FICD` purely because both are tidy tables.
 
-**1. Inject into every extraction subagent prompt** (verbatim in intent, all backends — Claude or
-Gemini):
+### Canonical-entity guard
 
-> Refer to each initiative/system by its **one canonical name** — the proper name in that initiative's
-> hub `# H1` (e.g. **"Peskas"**, never "Peskas platform" / "Peskas Monitoring System"). For a shared
-> real-world entity that already exists in the graph (the platform, a cited paper, a dataset, a place),
-> **reference the existing node — do not re-mint the initiative concept under a variant label or a new
-> id.** A satellite (`_about` child) anchors to its hub with a `part_of` edge; it must **not** create
-> its own copy of the initiative concept.
+Protects **one node per real-world entity**.
 
-**2. Reconcile entity ids at merge (maintainer build step).** graphify's dedup (`dedup.py`) **will not
-merge labels under 12 characters** (e.g. "Peskas") or coincidental cross-file matches — so a fresh
-extraction of a short-named entity mints a **new duplicate node** rather than merging onto the
-existing one. So after extraction, **before `build_merge`, remap the new fragment onto existing
-canonical node ids**: for any node the extractor minted under a variant id/label that denotes an
-entity already in `graph.json`, rewrite that node's edges' `source`/`target` to the existing id and
-**drop the new node entry** (so it cannot clobber the canonical node's attrs). This is what held the
-Peskas-timeline re-extraction at **zero** new duplicates; skipping it added `peskas` + "Peskas
-Overview" + `PeskAAS` duplicate nodes.
+> Refer to each initiative/system by its **one canonical name** — the proper name in that
+> initiative's hub `# H1` (e.g. **"Peskas"**, never "Peskas platform" / "Peskas Monitoring
+> System"). For a shared real-world entity that already exists in the graph (the platform, a cited
+> paper, a dataset, a place), **reference the existing node — do not re-mint the initiative concept
+> under a variant label or a new id.** A satellite (`_about` child) anchors to its hub with a
+> `part_of` edge; it must **not** create its own copy of the initiative concept.
 
-**Why a separate enforcement point.** [PROTOCOL §6](PROTOCOL.md#6-context-notes) makes contributors
-*write* the canonical name and `/curate` drafts notes that way — but the extractor re-invents labels
-and per-file ids on every run, and short proper names never auto-merge, so the input rule alone still
-leaves duplicate entity nodes. The injection keeps new extractions consistent; the remap collapses
-them onto one node. **Both are required**, same as Habit 4 + the similarity guard. Residual variants
-from **frozen** `_dict`/`_context` snapshots are accepted (we never rewrite a frozen note); a heavier
-consolidation is graphify's LLM dedup pass (`build_merge(dedup_llm_backend=…)`), **off by default**
-(cost, determinism — it conflicts with the pinned-model reproducibility above).
+**Then reconcile ids at merge — a maintainer build step.** graphify's `dedup.py` will not merge
+labels under 12 characters ("Peskas") or coincidental cross-file matches, so a fresh extraction of
+a short-named entity mints a **duplicate** node instead of merging. After extraction and **before
+`build_merge`**, remap the new fragment onto existing canonical ids: for any node minted under a
+variant id/label denoting an entity already in `graph.json`, rewrite its edges' `source`/`target`
+to the existing id and drop the new node entry, so it cannot clobber the canonical node's attrs.
+This held the Peskas-timeline re-extraction at **zero** new duplicates; skipping it added `peskas`
++ "Peskas Overview" + `PeskAAS` duplicates.
+
+Residual variants frozen into an existing `_dict`/`_context` snapshot are accepted — a frozen note
+is never rewritten. graphify's LLM dedup pass (`build_merge(dedup_llm_backend=…)`) stays **off**:
+it conflicts with the pinned-model reproducibility above.
+
+## Application invariants
+
+Detail loads from `.claude/rules/` when you open the matching package. The four that hold everywhere:
+
+- **The §6 answer contract lives in `wdb_contract`.** Import `Citation` / `Claim` / `Answer` /
+  `Verdict` / `Unanswered` from there and merge fragments with `merge()`. It was declared in six
+  places once, and the router's merge read four fields of it — which is how Mode A's verified
+  "the graph records no connection" reached the UI as "the knowledge base doesn't cover this".
+- **`wdb_ingest.gate.apply()` is the only thing that moves a contribution between states.** Every
+  move, including the build's, is a declared transition in `gate.py`.
+- **A mode's honesty gate decides refusals; the router surfaces them.** The router never
+  back-fills one mode's gap with another mode's content, and never routes around a refusal.
+- **Tests run offline and deterministically** by default, on the Replay backends. Live models and
+  the Anthropic API sit behind adapters passed in at construction — see [RUNNING.md](RUNNING.md)
+  for `uv run pytest` and the services.

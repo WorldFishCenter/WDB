@@ -100,8 +100,14 @@ export async function build(user: string): Promise<BuildState> {
   return json(await fetch(`${BASE}/build`, { method: "POST", headers: h("curator", user) }));
 }
 
-export async function buildStatus(): Promise<BuildState> {
-  return json(await fetch(`${BASE}/build/status`, { cache: "no-store" }));
+/**
+ * Read the build status. Identity rides along because the server publishes handed-off
+ * contributions only on a CURATOR's poll — a contributor's poll is a pure read.
+ */
+export async function buildStatus(role: Role, user: string): Promise<BuildState> {
+  return json(
+    await fetch(`${BASE}/build/status`, { headers: h(role, user), cache: "no-store" }),
+  );
 }
 
 export async function confirmBuild(user: string): Promise<BuildState> {

@@ -19,7 +19,7 @@ from pydantic import BaseModel
 from . import builder, config, service
 from .gate import GateError
 from .models import DraftedNote, Role, Submission
-from .service import NotFound
+from .service import InvalidPlacement, NotFound
 from .store import SqliteWorkflowStore, WorkflowStore
 
 
@@ -51,6 +51,11 @@ def create_app(store_factory: Callable[[], WorkflowStore] | None = None) -> Fast
     @app.exception_handler(NotFound)
     async def _not_found(request: Request, exc: NotFound):  # noqa: ANN202
         return JSONResponse(status_code=404, content={"error": f"No such submission: {exc}"})
+
+    @app.exception_handler(InvalidPlacement)
+    async def _bad_placement(request: Request, exc: InvalidPlacement):  # noqa: ANN202
+        # an unknown initiative or a path-bearing filename — refused before anything is staged
+        return JSONResponse(status_code=400, content={"error": str(exc)})
 
     @app.get("/health")
     def health() -> dict:
@@ -123,8 +128,10 @@ def create_app(store_factory: Callable[[], WorkflowStore] | None = None) -> Fast
         return builder.start_build(store)
 
     @app.get("/build/status")
-    def build_status() -> dict:
-        return builder.poll(store)
+    def build_status(request: Request) -> dict:
+        # Everyone may READ the status; only the curator's poll may publish (see builder.poll).
+        role, _ = _identity(request)
+        return builder.poll(store, promote=role == Role.CURATOR)
 
     @app.post("/build/confirm")
     def build_confirm(request: Request) -> dict:
@@ -132,7 +139,9 @@ def create_app(store_factory: Callable[[], WorkflowStore] | None = None) -> Fast
         return builder.confirm(store)
 
     @app.post("/reset")
-    def reset() -> dict:
+    def reset(request: Request) -> dict:
+        """Wipe the workflow store (dev/test affordance) — curator only."""
+        _require_curator(request)
         store.reset()
         return {"status": "reset"}
 

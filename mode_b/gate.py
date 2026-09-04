@@ -42,6 +42,8 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
+from wdb_contract import UnansweredCode
+
 from .retrieve import Passage
 
 # PROVISIONAL placeholders — see the module docstring. Do not treat as calibrated.
@@ -51,8 +53,16 @@ COSINE_FLOOR_PCT = 25.0  # cosine similarity %, used only when no reranker. Plac
 
 @dataclass(frozen=True)
 class GateResult:
+    """Why the gate refused, as a stable ``code`` plus its prose ``reason``.
+
+    ``code`` exists so downstream tests (``wdb_router``, ``wdb_api``) assert on the refusal
+    *arm* rather than on wording authored here — editing a message used to break tests in two
+    other packages.
+    """
+
     ok: bool
     reason: str = ""
+    code: UnansweredCode = UnansweredCode.UNSPECIFIED
 
 
 def _floor_for(kind: str) -> float:
@@ -87,7 +97,8 @@ def refuse_when_thin(question: str, passages: list[Passage],
     it. Omit it to gate on the score floor alone.
     """
     if not passages:
-        return GateResult(False, "no passage retrieved for this question")
+        return GateResult(False, "no passage retrieved for this question",
+                          UnansweredCode.NO_PASSAGE)
 
     top = passages[0]
     kind = top.ranking_kind()
@@ -97,9 +108,11 @@ def refuse_when_thin(question: str, passages: list[Passage],
             False,
             f"top passage {kind} score {top.ranking_score():.2f} is below the "
             f"provisional floor {floor:.2f} — retrieval too thin to answer",
+            UnansweredCode.THIN_RETRIEVAL,
         )
 
     if known_initiatives is not None and not covers_question(question, passages, known_initiatives):
-        return GateResult(False, "no retrieved passage covers the initiative the question names")
+        return GateResult(False, "no retrieved passage covers the initiative the question names",
+                          UnansweredCode.NO_COVERAGE)
 
     return GateResult(True)

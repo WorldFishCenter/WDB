@@ -170,7 +170,7 @@ For each file you touched, confirm:
 
 Then **summarize** what you placed, renamed, and documented, and remind the user of the protocol
 steps you don't perform: commit **source files only**, open a **pull request**; the **maintainer**
-rebuilds the graph with `/graphify . --update`.
+rebuilds the graph with `/graphify knowledge_base --update`.
 
 ## External sources (protocol / Adding external sources)
 
@@ -191,7 +191,7 @@ the maintainer run `/graphify add <url>` or `graphify clone <repo>`.
   keep it present-tense and current. Snapshot companion notes stay frozen records of their time.
 - **Never touch `graphify-out/`**, and never run `graphify hook install` (its no-LLM pass mangles
   markdown into header-junk nodes). The graph is rebuilt only by the maintainer via
-  `/graphify . --update`.
+  `/graphify knowledge_base --update`.
 - **Don't commit or open PRs** unless asked — leave changes staged for the contributor's own
   commit/PR (the golden rule: branch → PR → maintainer merges).
 - **Ask, don't assume**, when a choice is genuinely the user's (which initiative a file belongs

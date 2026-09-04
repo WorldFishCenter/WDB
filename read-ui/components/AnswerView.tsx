@@ -15,12 +15,15 @@ import styles from "./answerview.module.scss";
  * shared state (ExplorationProvider). Hovering a citation lights its nodes in the graph; clicking
  * a node reframes the left pane to that entity. The answer column scrolls; the graph stays in view.
  *
- * A full refusal (nothing grounded) renders as an honest, full-width refusal panel instead.
+ * An answer that grounded nothing renders as a full-width panel instead — but WHICH panel
+ * depends on `verdict`, not on counting empty lists. A VERIFIED_NEGATIVE ("the graph records no
+ * connection") is a correct answer and says so; only UNGROUNDED is a coverage refusal.
  */
 export function AnswerView({ answer }: { answer: RouterAnswer }) {
-  const isFullRefusal = !answer.answered && answer.claims.length === 0 && answer.figures.length === 0;
+  // Branch on the verdict the router computed — never re-infer it from empty payloads.
+  const nothingRendered = answer.claims.length === 0 && answer.figures.length === 0;
 
-  if (isFullRefusal) {
+  if (nothingRendered && answer.verdict !== "GROUNDED") {
     return (
       <div className={styles.wrap}>
         <QuestionEcho question={answer.question} />
@@ -43,21 +46,32 @@ export function AnswerView({ answer }: { answer: RouterAnswer }) {
 /** The two co-equal panes. The left swaps to the entity view when a graph node is in focus. */
 function Workspace({ answer }: { answer: RouterAnswer }) {
   const { focusEntity } = useExploration();
-  const { graph, nodeMeta } = useGraphData();
+  const { graph, nodeMeta, graphError } = useGraphData();
 
   return (
-    <div className={styles.workspace}>
-      <div className={styles.answerCol}>
-        {focusEntity ? (
-          <EntityView entityId={focusEntity} graph={graph} nodeMeta={nodeMeta} />
-        ) : (
-          <AnswerPane answer={answer} />
-        )}
+    <>
+      {/* A graph that failed to load is stated, not shown as an empty stage. The commonest
+          cause is a knowledge base the server could not locate (WDB_KB) — see lib/kbRoot.ts.
+          It sits ABOVE the two-column grid so it spans the full width. */}
+      {graphError && (
+        <div role="status" className={styles.graphNotice}>
+          <strong>Knowledge graph unavailable.</strong> {graphError} The answer and its citations
+          are unaffected.
+        </div>
+      )}
+      <div className={styles.workspace}>
+        <div className={styles.answerCol}>
+          {focusEntity ? (
+            <EntityView entityId={focusEntity} graph={graph} nodeMeta={nodeMeta} />
+          ) : (
+            <AnswerPane answer={answer} />
+          )}
+        </div>
+        <div className={styles.graphCol}>
+          <AssociationsPane associations={answer.associations} graph={graph} nodeMeta={nodeMeta} />
+        </div>
       </div>
-      <div className={styles.graphCol}>
-        <AssociationsPane associations={answer.associations} graph={graph} nodeMeta={nodeMeta} />
-      </div>
-    </div>
+    </>
   );
 }
 

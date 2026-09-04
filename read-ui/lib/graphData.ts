@@ -41,23 +41,48 @@ export interface NodeMeta {
   source_file?: string;
 }
 
-/** Fetch graph.json once and expose it + a fast id→meta lookup. */
-export function useGraphData(): { graph: GraphJson | null; nodeMeta: Map<string, NodeMeta> } {
+/**
+ * Fetch graph.json once and expose it + a fast id→meta lookup.
+ *
+ * `error` is not decoration. Every failure here used to be discarded — the `d.error` branch, the
+ * `JSON.parse` throw and the network rejection all returned quietly — so a knowledge base that
+ * could not be located rendered as a graph with no nodes, indistinguishable from a graph that
+ * genuinely had none. The stage can still degrade to the edge list, but the reason is now
+ * available to say out loud.
+ */
+export function useGraphData(): {
+  graph: GraphJson | null;
+  nodeMeta: Map<string, NodeMeta>;
+  graphError: string | null;
+} {
   const [graph, setGraph] = useState<GraphJson | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let alive = true;
     fetch("/api/source?path=graphify-out/graph.json")
-      .then((r) => r.json())
-      .then((d) => {
-        if (!alive || !d || d.error || !d.text) return;
+      .then(async (r) => ({ ok: r.ok, body: await r.json() }))
+      .then(({ ok, body }) => {
+        if (!alive) return;
+        if (!ok || !body || body.error) {
+          // a 503 carries the KB-root message from lib/kbRoot.ts; anything else is the file
+          setError(body?.error ?? "Could not load graphify-out/graph.json.");
+          return;
+        }
+        if (!body.text) {
+          setError("graphify-out/graph.json is empty.");
+          return;
+        }
         try {
-          setGraph(JSON.parse(d.text) as GraphJson);
-        } catch {
-          /* leave graph null — the stage falls back to the edge list */
+          setGraph(JSON.parse(body.text) as GraphJson);
+          setError(null);
+        } catch (e) {
+          setError(`graphify-out/graph.json is not valid JSON: ${(e as Error).message}`);
         }
       })
-      .catch(() => {});
+      .catch((e) => {
+        if (alive) setError(`Could not reach the source route: ${(e as Error).message}`);
+      });
     return () => {
       alive = false;
     };
@@ -76,7 +101,7 @@ export function useGraphData(): { graph: GraphJson | null; nodeMeta: Map<string,
     return map;
   }, [graph]);
 
-  return { graph, nodeMeta };
+  return { graph, nodeMeta, graphError: error };
 }
 
 /** A readable fallback label when graph.json hasn't loaded (or a node is missing from it). */

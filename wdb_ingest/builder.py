@@ -7,7 +7,7 @@ run a headless build and call it faithful. Instead it:
 
   1. ``start_build`` — snapshots ``graphify-out/graph.json`` as a baseline, records which QUEUED
      contributions are handed off, and surfaces the **exact pinned command** for the maintainer to run
-     (``/graphify . --update`` in a pinned session — the only place the guards + remap apply).
+     (``/graphify knowledge_base --update`` in a pinned session — the only place the guards + remap apply).
   2. ``poll`` / ``confirm`` — when the real build has run (graph.json changed vs. baseline, or the
      operator confirms), advances the handed-off contributions QUEUED → BUILT → LIVE.
 
@@ -20,9 +20,9 @@ from __future__ import annotations
 import json
 import threading
 
-from . import config
+from . import config, gate
 from .models import WorkflowState
-from .ops import advance, now_iso
+from .ops import now_iso
 from .store import WorkflowStore
 
 _BUILD_KEY = "build"
@@ -73,8 +73,10 @@ def _finish(store: WorkflowStore, state: dict) -> dict:
     for sub_id in state.get("handed_off_ids", []):
         sub = store.get(sub_id)
         if sub and sub.state == WorkflowState.QUEUED:
-            sub = advance(sub, WorkflowState.BUILT, "Single-builder build")
-            sub = advance(sub, WorkflowState.LIVE, "Single-builder build")
+            # both moves are declared SystemTransitions; the gate is the only thing that can
+            # reach BUILT/LIVE, so this path cannot skip a state or run out of order
+            sub = gate.apply(sub, "build_built", actor="Single-builder build")
+            sub = gate.apply(sub, "build_live", actor="Single-builder build")
             store.upsert(sub)
     state.update(
         status="DONE",
@@ -100,7 +102,8 @@ def start_build(store: WorkflowStore) -> dict:
         baseline = _snapshot()
         ids = [s.id for s in queued]
         for s in queued:  # annotate the audit trail; state stays QUEUED until the build completes
-            store.upsert(advance(s, WorkflowState.QUEUED, "Build orchestrator", "Handed off to single-builder build"))
+            store.upsert(gate.apply(s, "handoff", actor="Build orchestrator",
+                                     note="Handed off to single-builder build"))
         state = {
             "status": "AWAITING_BUILD",
             "command": config.PINNED_BUILD_COMMAND,
@@ -118,13 +121,19 @@ def start_build(store: WorkflowStore) -> dict:
         return state
 
 
-def poll(store: WorkflowStore) -> dict:
-    """Return the build status, auto-detecting completion (the real build rewrote the graph)."""
+def poll(store: WorkflowStore, *, promote: bool = False) -> dict:
+    """Return the build status. With ``promote``, auto-detect completion and publish.
+
+    ``promote`` is the write half and is gated to the curator at the endpoint. Without it this is
+    a pure read: a plain unauthenticated ``GET /build/status`` used to run :func:`_finish` and
+    move every handed-off contribution to LIVE, which made publishing reachable without the
+    curator role that ``POST /build`` and ``POST /build/confirm`` both require.
+    """
     with _lock:
         state = _read(store)
         if state.get("status") != "AWAITING_BUILD":
             return state
-        if _baseline_changed(state.get("baseline"), _snapshot()):
+        if promote and _baseline_changed(state.get("baseline"), _snapshot()):
             return _finish(store, state)
         return state
 

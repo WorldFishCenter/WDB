@@ -41,7 +41,7 @@ def answer_question(question: str, retriever: Retriever, synthesizer: Synthesize
 
     verdict = refuse_when_thin(question, passages, known_initiatives=known_initiatives)
     if not verdict.ok:
-        return contract.refusal(question, f"not available: {verdict.reason}")
+        return contract.refusal(question, f"not available: {verdict.reason}", verdict.code)
 
     synthesis_text = synthesizer.synthesize(question, passages)
     return contract.assemble(question, passages, synthesis_text, nodes, links, root)

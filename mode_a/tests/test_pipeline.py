@@ -13,6 +13,7 @@ from mode_a.contract import Answer
 from mode_a.fixtures import RECORDED
 from mode_a.pipeline import answer_question
 from mode_a.reasoner import ReplayReasoner
+from wdb_contract import UnansweredCode, Verdict
 
 Q1 = "What is Peskas connected to?"
 Q2 = "How does Peskas relate to the WIO data harmonization work, and why?"
@@ -50,17 +51,18 @@ def test_direct_question_uses_enumeration_no_model(graph):
 def test_multihop_question_uses_reasoning_and_is_cited(graph):
     ans = answer_question(Q2, ReplayReasoner(RECORDED), graph)
     assert ans.path == "reasoning"
-    assert ans.connected is True
+    assert ans.verdict is Verdict.GROUNDED
     assert ans.answered and len(ans.claims) == 1
     assert ans.claims[0].citations  # the gated reasoned claim ships real-edge citations
 
 
 def test_not_connected_case_returns_verified_negative(graph):
     ans = answer_question(Q4, ReplayReasoner(RECORDED), graph)
-    assert ans.connected is False
+    assert ans.verdict is Verdict.VERIFIED_NEGATIVE
     assert ans.claims == []
     assert ans.answered                      # a verified "no" is a correct answer
-    assert any("no connection" in u.lower() for u in ans.unanswered)
+    assert ans.unanswered[0].code is UnansweredCode.NOT_CONNECTED
+    assert "no connection" in ans.unanswered[0].text.lower()
 
 
 def test_failed_cite_check_downgrades_and_never_surfaces_fabrication(graph):

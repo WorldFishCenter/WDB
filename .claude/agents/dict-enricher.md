@@ -114,7 +114,7 @@ Exit codes: **0** = valid (domains **and a `grain` block** in the JSON), **2** =
 5. **Hand back.** Summarize what you validated and which `_dict.md` you updated; note that domains
    are **maintainer-reviewed** (the single-builder protocol) and remind the user of the steps you
    don't do: commit **source files only**, open a **pull request**; the maintainer rebuilds with
-   `/graphify . --update`.
+   `/graphify knowledge_base --update`.
 
 ## Hard rules
 

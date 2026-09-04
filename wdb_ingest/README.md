@@ -51,7 +51,7 @@ extraction subagents (see `../graphify-out/BUILD_INFO.md`). They are
 
 Therefore [`builder.py`](builder.py) does **not** run a headless build and call it faithful. `POST /build`
 snapshots the graph, marks the QUEUED items handed off, and surfaces the **exact pinned command**
-(`/graphify . --update`). It then detects completion (graph.json changed vs. the baseline) — or
+(`/graphify knowledge_base --update`). It then detects completion (graph.json changed vs. the baseline) — or
 `POST /build/confirm` confirms manually — and advances the handed-off items to `LIVE`. A module lock
 makes it single-builder. Nothing is auto-committed: the maintainer reviews the git diff and opens a PR.
 

@@ -10,10 +10,49 @@
  *   A — a graph edge triple + EXTRACTED/INFERRED confidence
  *   B — a verbatim passage quote + its span + the graph node(s) it resolves to
  *   C — the SQL + the result rows it computed
+ *
+ * `verdict` is the field that distinguishes a VERIFIED_NEGATIVE — "we checked the graph and it
+ * records no connection", a correct answer — from an UNGROUNDED refusal. The two are identical
+ * on every other field (no claims, no figures), so before `verdict` existed the UI could only
+ * infer refusal from empty lists, and rendered Mode A's honest negative as "the knowledge base
+ * doesn't cover this".
  */
 
 export type Mode = "A" | "B" | "C";
 export type Confidence = "EXTRACTED" | "INFERRED" | "";
+
+/** What the answer actually determined (wdb_contract.Verdict). */
+export type Verdict = "GROUNDED" | "VERIFIED_NEGATIVE" | "UNGROUNDED";
+
+/**
+ * Why a part could not be grounded — the stable key, distinct from its prose.
+ * Branch on `code`; display `text`. Mirrors wdb_contract.UnansweredCode.
+ */
+export type UnansweredCode =
+  | "NO_ENTITY_MATCH"
+  | "NO_RELATIONSHIP"
+  | "NOT_CONNECTED"
+  | "CITE_CHECK_DOWNGRADE"
+  | "NO_PASSAGE"
+  | "THIN_RETRIEVAL"
+  | "NO_COVERAGE"
+  | "NO_CITABLE_PASSAGE"
+  | "NO_TABLE_RESOLVED"
+  | "NEEDS_DISAMBIGUATION"
+  | "OUT_OF_BAND"
+  | "EMPTY_RESULT"
+  | "EXECUTION_FAILED"
+  | "NO_RECORDED_REPLAY"
+  | "UNSPECIFIED";
+
+export interface UnansweredDetail {
+  part: string;
+  mode: Mode;
+  code: UnansweredCode;
+  detail: string;
+  text: string; // "{part} — {detail}", the string `unanswered[]` carries
+  candidates: string[]; // NEEDS_DISAMBIGUATION carries the sister tables here
+}
 
 /** Mode A citation — the graph edge that grounds the relationship. */
 export interface CitationA {
@@ -84,18 +123,39 @@ export interface RouterAnswer {
   associations: Association[];
   figures: Figure[];
   unanswered: string[]; // parts no mode could ground — stated, never hidden (§6 r4)
+  verdict: Verdict; // GROUNDED | VERIFIED_NEGATIVE | UNGROUNDED
+  unanswered_detail: UnansweredDetail[]; // the same parts, with a code to branch on
 }
 
-// ---- narrowing helpers (citation shape is keyed off the owning claim's mode) ----
+// ---- narrowing (citation shape is keyed off the owning claim's mode) ----
+//
+// These were three unchecked `as` casts behind a comment that said "narrowing". They are real
+// type guards now: each checks the field that actually distinguishes its shape, so a server
+// whose citation shape has drifted is caught at the point of use instead of throwing a
+// TypeError deep inside a render.
 
+export function isCitationA(c: Citation): c is CitationA {
+  return typeof (c as CitationA).locator === "string";
+}
+export function isCitationB(c: Citation): c is CitationB {
+  return Array.isArray((c as CitationB).nodes) && typeof (c as CitationB).quote === "string";
+}
+export function isCitationC(c: Citation): c is CitationC {
+  return typeof (c as CitationC).sql === "string";
+}
+
+/** Narrow or throw — use where the owning claim's mode already promises the shape. */
 export function citationA(c: Citation): CitationA {
-  return c as CitationA;
+  if (!isCitationA(c)) throw new TypeError("Mode-A citation is missing `locator`");
+  return c;
 }
 export function citationB(c: Citation): CitationB {
-  return c as CitationB;
+  if (!isCitationB(c)) throw new TypeError("Mode-B citation is missing `nodes`/`quote`");
+  return c;
 }
 export function citationC(c: Citation): CitationC {
-  return c as CitationC;
+  if (!isCitationC(c)) throw new TypeError("Mode-C citation is missing `sql`");
+  return c;
 }
 
 export const MODE_LABEL: Record<Mode, string> = {

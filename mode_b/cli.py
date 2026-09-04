@@ -22,25 +22,21 @@ from .contract import Answer
 from .index import DEFAULT_INDEX_DIR, build_index, open_collection
 from .model import RERANK_TOP_K, SYNTH_MODEL
 from .pipeline import DEFAULT_ROOT, answer_question, load_graph_default
+from wdb_contract import association_lines, claim_lines, unanswered_lines
+
 from .retrieve import LiveRetriever
 
 
 def _render_answer(answer: Answer) -> str:
     out: list[str] = []
     for claim in answer.claims:
-        out.append(f"CLAIM [{claim.mode}]: {claim.text}")
-        for k, cit in enumerate(claim.citations, 1):
-            out.append(f"  [{k}] source : {cit.source_file}  ({cit.location})")
-            if cit.note:
-                out.append(f"      note   : {cit.note}")
-            out.append(f"      quote  : {cit.quote[:240].replace(chr(10), ' ')}…")
-            out.append(f"      nodes  : {', '.join(cit.nodes) or '—'}")
+        out.extend(claim_lines(claim))
     if answer.associations:
-        out.append(f"\nASSOCIATIONS ({len(answer.associations)} edge(s) touch the cited nodes):")
-        for e in answer.associations[:8]:
-            out.append(f"  {e.get('source')}  --{e.get('relation', '?')}-->  {e.get('target')}")
-    for u in answer.unanswered:
-        out.append(f"NOT AVAILABLE: {u}")
+        out.append("")
+        out.extend(association_lines(answer.associations))
+    if answer.unanswered:
+        out.append("")
+        out.extend(unanswered_lines(answer.unanswered))
     return "\n".join(out) if out else "(empty answer)"
 
 

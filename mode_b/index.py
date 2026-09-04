@@ -29,8 +29,11 @@ from .corpus import walk_corpus
 from .embed import Embedder, collection_metadata
 from .extract import extract_with_location, sub_chunk
 
+from wdb_paths import INDEX_DIR
+
 COLLECTION = "wdb_passages"
-DEFAULT_INDEX_DIR = str(Path(__file__).resolve().parent / ".index")
+# Resolved in wdb_paths (override with WDB_INDEX), not derived from __file__ here.
+DEFAULT_INDEX_DIR = str(INDEX_DIR)
 
 
 def chunk_metadata(source_file: str, location: str, chunk_idx: int) -> dict:

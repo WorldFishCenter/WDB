@@ -13,6 +13,8 @@ empty. This wrapper is the entire reason the LLM is safe to use here (``proof_a/
 
 from __future__ import annotations
 
+from wdb_contract import UnansweredCode
+
 from . import contract, extract, route
 from .citecheck import cite_check
 from .contract import Answer
@@ -27,7 +29,8 @@ def _extract_for(r: route.Route, g: extract.Graph) -> extract.SubGraph:
     return extract.relate(g, r.entities[0], r.entities[1])
 
 
-def _downgrade(question: str, r: route.Route, g: extract.Graph, why: str) -> Answer:
+def _downgrade(question: str, r: route.Route, g: extract.Graph, why: str,
+               code: UnansweredCode = UnansweredCode.CITE_CHECK_DOWNGRADE) -> Answer:
     """Failed cite-check (or no offline answer): downgrade to enumeration, else not-available."""
     sub = extract.neighborhood(g, r.entities[0])
     sub.question = question
@@ -35,7 +38,7 @@ def _downgrade(question: str, r: route.Route, g: extract.Graph, why: str) -> Ans
         ans = contract.from_enumeration(question, sub, g)
         ans.path = f"reasoning→enumeration (downgraded: {why})"
         return ans
-    return contract.refusal(question, f"not available (downgraded: {why})")
+    return contract.refusal(question, f"not available (downgraded: {why})", code)
 
 
 def answer_question(question: str, reasoner: Reasoner, g: extract.Graph | None = None) -> Answer:
@@ -45,7 +48,8 @@ def answer_question(question: str, reasoner: Reasoner, g: extract.Graph | None =
 
     r = route.route(question, g)
     if r.path == "unresolved":
-        return contract.refusal(question, "no graph entity in this question matched a committed node")
+        return contract.refusal(question, "no graph entity in this question matched a committed node",
+                                UnansweredCode.NO_ENTITY_MATCH)
 
     sub = _extract_for(r, g)
     sub.question = question
@@ -53,7 +57,8 @@ def answer_question(question: str, reasoner: Reasoner, g: extract.Graph | None =
     # --- cheap deterministic enumeration path -------------------------------- #
     if r.path == "enumeration":
         if not sub.edges:
-            return contract.refusal(question, "graph has the entity but records no relationship for it")
+            return contract.refusal(question, "graph has the entity but records no relationship for it",
+                                    UnansweredCode.NO_RELATIONSHIP)
         return contract.from_enumeration(question, sub, g)
 
     # --- reasoning path ------------------------------------------------------ #
@@ -64,7 +69,8 @@ def answer_question(question: str, reasoner: Reasoner, g: extract.Graph | None =
     try:
         ans = reasoner.reason(sub.serialize())
     except NoRecordedAnswer:
-        return _downgrade(question, r, g, "reasoning unavailable offline")
+        return _downgrade(question, r, g, "reasoning unavailable offline",
+                          UnansweredCode.NO_RECORDED_REPLAY)
 
     verdict = cite_check(sub.edges, sub.disconnected, ans)
     if not verdict.honest:

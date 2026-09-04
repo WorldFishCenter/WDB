@@ -9,8 +9,9 @@ embedder matches before searching, and embeds the query with the SAME
 Two backends share one ``Retriever`` interface, the same Live/Replay split Mode C
 uses for its resolver so the suite runs offline/deterministically:
 
-* :class:`LiveRetriever` — real Chroma + embedder (+ optional cross-encoder
-  reranker; degrades to embedding-only ranking when it cannot load).
+* :class:`LiveRetriever` — real Chroma + embedder + a :class:`~mode_b.rerank.Reranker`
+  adapter (see that module: the reranker is passed in, not constructed here, because
+  which reranker is in force decides which floor the honesty gate judges).
 * :class:`ReplayRetriever` — returns recorded :class:`Passage` lists keyed by
   question, so the gate → join → synthesize → contract pipeline is tested with no
   model and no network.
@@ -22,7 +23,8 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from .embed import Embedder, verify_collection_model
-from .model import RERANK_MODEL, RERANK_TOP_K, RETRIEVAL_K
+from .model import RERANK_TOP_K, RETRIEVAL_K
+from .rerank import NullReranker, Reranker, load_reranker
 
 
 @dataclass(frozen=True)
@@ -62,14 +64,29 @@ def _to_passages(res) -> list[Passage]:
 
 
 class LiveRetriever:
-    """Production retriever — locked-model Chroma search + optional rerank."""
+    """Production retriever — locked-model Chroma search + a declared reranker adapter.
 
-    def __init__(self, collection, embedder: Embedder | None = None, use_reranker: bool = True):
+    ``reranker`` is the seam. Pass one explicitly; omit it and ``use_reranker`` decides which
+    default is built — ``True`` loads the cross-encoder (non-strict, so an environment without
+    the model still runs, but warns), ``False`` selects :class:`~mode_b.rerank.NullReranker`
+    deliberately. Either way ``self.reranker.kind`` records which floor the gate will judge.
+    """
+
+    def __init__(self, collection, embedder: Embedder | None = None,
+                 use_reranker: bool = True, reranker: Reranker | None = None):
         # query-model lock: refuse to query an index built with another embedder (#3)
         verify_collection_model(getattr(collection, "metadata", None))
         self.collection = collection
         self.embedder = embedder or Embedder()
-        self.reranker = _load_reranker() if use_reranker else None
+        if reranker is not None:
+            self.reranker = reranker
+        else:
+            self.reranker = load_reranker(strict=False) if use_reranker else NullReranker()
+
+    @property
+    def ranking_kind(self) -> str:
+        """Which score the gate judges — read this instead of sniffing for a reranker."""
+        return self.reranker.kind
 
     def retrieve(self, question: str, k: int = RERANK_TOP_K) -> list[Passage]:
         n = min(max(RETRIEVAL_K, k * 3), self.collection.count())
@@ -82,26 +99,7 @@ class LiveRetriever:
         passages = _to_passages(res)
         if not passages:
             return []
-        if self.reranker is not None:
-            scores = self.reranker.predict([(question, p.text) for p in passages])
-            passages = [
-                Passage(p.text, p.source_file, p.location, p.initiative,
-                        p.cos_score, float(s))
-                for p, s in zip(passages, scores)
-            ]
-            passages.sort(key=lambda p: p.rerank_score, reverse=True)
-        return passages[:k]
-
-
-def _load_reranker():
-    """The cross-encoder, or None (retrieval degrades to embedding-only ranking)."""
-    try:
-        from sentence_transformers import CrossEncoder
-
-        return CrossEncoder(RERANK_MODEL)
-    except Exception as e:  # pragma: no cover - environment dependent
-        print(f"  [!] reranker unavailable ({e}) — using embedding scores only.")
-        return None
+        return self.reranker.rank(question, passages)[:k]
 
 
 class ReplayRetriever:

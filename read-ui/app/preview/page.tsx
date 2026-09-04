@@ -3,7 +3,8 @@
 /**
  * DEV-ONLY fixtures preview — renders the captured /answer fixtures through the real AnswerView,
  * with no backend running. Each fixture is one honesty state (single A, computed C, full blend,
- * partial blend, refusal), so the redesign can be verified offline against the EXACT API shapes.
+ * partial blend, refusal, verified negative, disambiguation), so the redesign can be verified
+ * offline against the EXACT API shapes.
  * Not linked from the app; reachable at /preview.
  */
 
@@ -17,6 +18,8 @@ import quantitative_c from "@/fixtures/quantitative_c.json";
 import blended_abc from "@/fixtures/blended_abc.json";
 import partial_blend from "@/fixtures/partial_blend.json";
 import refusal from "@/fixtures/refusal.json";
+import verified_negative from "@/fixtures/verified_negative.json";
+import disambiguation_c from "@/fixtures/disambiguation_c.json";
 
 const FIXTURES: { key: string; label: string; data: RouterAnswer }[] = [
   { key: "single_mode_a", label: "Single · Mode A", data: single_mode_a as RouterAnswer },
@@ -24,6 +27,17 @@ const FIXTURES: { key: string; label: string; data: RouterAnswer }[] = [
   { key: "blended_abc", label: "Full blend · A+B+C", data: blended_abc as RouterAnswer },
   { key: "partial_blend", label: "Partial blend", data: partial_blend as RouterAnswer },
   { key: "refusal", label: "Honest refusal", data: refusal as RouterAnswer },
+  // the two states that had no fixture at all — and the two the router used to flatten
+  {
+    key: "verified_negative",
+    label: "Verified negative · Mode A",
+    data: verified_negative as RouterAnswer,
+  },
+  {
+    key: "disambiguation_c",
+    label: "Needs disambiguation · Mode C",
+    data: disambiguation_c as RouterAnswer,
+  },
 ];
 
 export default function PreviewPage() {

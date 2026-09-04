@@ -1,21 +1,15 @@
-"""Small shared helpers used by both the service and the build orchestrator."""
+"""One shared helper: the timestamp format the whole workflow records history in.
+
+``advance`` used to live here — the function that actually moved a contribution between states
+and appended its history entry. It accepted any ``(from, to)`` pair and had six callers, five of
+which never consulted the gate, which is how ``BUILT`` and ``LIVE`` were reachable without a
+declared transition. It is now :func:`wdb_ingest.gate.apply`, private to the gate that checks it.
+"""
 
 from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from .models import HistoryEntry, Submission, WorkflowState
-
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
-def advance(sub: Submission, to: WorkflowState, actor: str, note: str | None = None) -> Submission:
-    """Return a copy of ``sub`` moved to ``to`` with an appended (append-only) history entry."""
-    return sub.model_copy(
-        update={
-            "state": to,
-            "history": [*sub.history, HistoryEntry(state=to, at=now_iso(), actor=actor, note=note)],
-        }
-    )

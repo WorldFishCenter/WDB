@@ -1,3 +1,119 @@
+# WDB 0.0.5
+
+The release where the system's own contracts get an owner. 0.0.4 built three answering modes, a
+router, a read UI and a write-side service; each declared the shapes it shared with the others, and
+the copies drifted. This release collapses them — one answer contract, one state machine, one path
+resolver, one reranker seam — and fixes what the drift was costing: a **correct answer that reached
+the user as a refusal**, two ways to publish a contribution without the curator role, and an upload
+that could be written outside the knowledge base.
+
+No new capability. The suite goes from 158 to **211 tests** because most of what changed here was
+previously unstated rather than untested.
+
+## Application
+
+* **NEW `wdb_contract` — the §6 answer contract, declared once**
+  ([`wdb_contract/`](wdb_contract/)). `Citation` / `Claim` / `Figure` / `Answer` / `Verdict` /
+  `Unanswered` lived in six places: three near-copy `mode_*/contract.py` files, the router, the API
+  serializer and a hand-typed TypeScript mirror. The modes now alias the citation shape they
+  produce, and `RouterAnswer` **inherits** from `Answer` rather than re-listing its fields — which
+  is what let the router drop three of them by omission. Merging is one shared `merge()`, not three
+  hand-written blocks each reading a different subset.
+* **FIXED A verified negative reached the user as a coverage failure.** Mode A can determine that
+  the graph records no connection between two entities — no direct edge, no ≤2-hop path — and
+  [`mode_a/contract.py`](mode_a/contract.py) calls that a correct answer. The router's merge never
+  read the field carrying it, recomputed `answered` from the empty claim list, and the UI rendered
+  *"The knowledge base doesn't cover this."* The contract now carries a **`Verdict`** —
+  `GROUNDED` / `VERIFIED_NEGATIVE` / `UNGROUNDED` — end to end, and the UI branches on it instead
+  of inferring meaning from three empty lists.
+* **FIXED Mode C's disambiguation candidates survived only as prose.** When a question matches
+  three sister tables, the resolver returns them as a typed list; the merge dropped it, so the
+  candidate tables existed on the wire only inside an English sentence. They now ride on the
+  `Unanswered` entry that reports the ambiguity.
+* **FIXED An un-sourced claim could be emitted.** §6 rule 1 says a claim with zero citations is not
+  emitted, but the mechanical cite-check's C1 passes **vacuously** when the reasoner cited nothing
+  at all — an empty `cited_edges` list contains no fabrication. `Claim` now refuses construction
+  without a citation, so the contract cannot represent the violation, and the reasoning path
+  downgrades to a stated refusal.
+* **CHANGED Every refusal carries an `UnansweredCode`.** `unanswered` was a list of strings, so the
+  only thing downstream could assert on was wording — refusal prose authored in
+  [`mode_b/gate.py`](mode_b/gate.py) was pinned by tests in **two other packages**, and editing a
+  message broke them. Tests now assert the refusal *arm* (`THIN_RETRIEVAL`, `NOT_CONNECTED`,
+  `OUT_OF_BAND`, …). The wire keeps `unanswered` as rendered strings and adds `unanswered_detail`.
+* **CHANGED The reranker is an adapter at the retriever seam**
+  ([`mode_b/rerank.py`](mode_b/rerank.py)). `LiveRetriever` built its cross-encoder inside
+  `__init__` behind a bare `except Exception` that printed a line and returned `None` — which
+  silently moved Mode B's refusal floor from the model-calibrated rerank logit to the uncalibrated
+  cosine threshold that `gate.py`'s own docstring records as unable to refuse an off-topic question
+  (a Norway salmon-farming query scored ~59% against Timor-Leste nutrition passages).
+  `CrossEncoderReranker` now **raises** rather than degrading; `NullReranker` makes degrading an
+  explicit choice; and `retriever.ranking_kind` states which floor is in force instead of two other
+  packages sniffing a private attribute.
+* **CHANGED The ingestion gate is the only thing that moves a contribution between states**
+  ([`wdb_ingest/gate.py`](wdb_ingest/gate.py)). The gate *decided* a transition and a separate
+  `ops.advance` *applied* it, accepting any `(from, to)` pair — so five of six state changes never
+  consulted the gate, and the `AUTODRAFT` / `BUILD_TRANSITIONS` tables describing exactly those
+  moves had **zero references** in the repo. They are now `SYSTEM_TRANSITIONS`, enforced:
+  `gate.apply()` resolves every move against a declared table, refuses a role on a system
+  transition and refuses a system action from the wrong state. `BUILT` and `LIVE` are unreachable
+  except along the declared path.
+* **FIXED `GET /build/status` published contributions, unauthenticated.** The poll auto-detected a
+  completed build and advanced every handed-off contribution `QUEUED → BUILT → LIVE`, with no role
+  check — unlike `POST /build` and `POST /build/confirm`, which both require the curator. Reading
+  the status is now a pure read for everyone; only a curator's poll publishes.
+* **FIXED `POST /reset` wiped the workflow store with no role check.**
+* **FIXED An upload could be written outside the knowledge base.**
+  [`config.INITIATIVES`](wdb_ingest/config.py) carried a comment describing a real past bug — a
+  bogus initiative folder getting minted — while having **no uses**: `initiative` arrived as an
+  unvalidated query parameter and the promote step called `mkdir(parents=True)` on it. `filename`
+  was equally unchecked, so `../../etc/passwd` would have been copied clear of `KB_ROOT`.
+  `validate_placement()` now refuses both, before anything is staged.
+* **CHANGED The write side resolves paths through [`wdb_paths`](wdb_paths.py) like every reader.**
+  `wdb_ingest/config.py` re-derived both roots with the `Path(__file__).parent.parent` climb that
+  module exists to replace, and diverged twice: its `WDB_KB` read used a `dict.get` default, so
+  `WDB_KB=""` made the **current working directory** the knowledge base on the only side that
+  creates directories; and it introduced a second override, `WDB_ROOT`, that no reader knew about,
+  so setting it sent approved notes to one knowledge base while the modes read another.
+* **CHANGED Mode B's passage index follows the knowledge base it indexes.** It lived inside the
+  installed package (`mode_b/.index`) while the corpus walk and the graph join both derive from
+  `KB_ROOT` — so pointing `WDB_KB` at a second knowledge base silently kept the first one's index,
+  retrieving KB-A's passages and joining them against KB-B's `graph.json`. It is now
+  `$WDB_KB/.index`, overridable with **`WDB_INDEX`**, matching
+  [`docs/production-stack-design.md`](docs/production-stack-design.md), which already lists the
+  Chroma index as a knowledge-base runtime artifact.
+* **CHANGED A misconfigured knowledge base is now visible in the read UI.** The source route
+  derived its root from the working directory, and every failure path in the graph loader —
+  the error field, the JSON parse, the network rejection — was discarded, so a knowledge base the
+  server could not locate rendered as a graph with no nodes. `read-ui/lib/kbRoot.ts` resolves the
+  root once (validating `WDB_KB`, else searching upward), the route answers **503** with what to
+  set, and the answer view states that the graph is unavailable while making clear the answer and
+  its citations are not.
+* **CHANGED `POST /answer` gains `verdict` and `unanswered_detail`; `/health` gains `rerank_kind`.**
+  Additive: every key the UI already read keeps its exact meaning, so the committed
+  `read-ui/fixtures/*.json` needed one line each. Two new fixtures cover the verified-negative and
+  disambiguation states, which had no offline coverage at all.
+
+## Automated Tooling
+
+* **FIXED `/curate` and `/enrich` instructed the wrong build.** Both agents told the maintainer to
+  run `/graphify . --update`, which 0.0.4 recorded as wrong rather than merely noisy — the first
+  path segment is read as an initiative name throughout the system. The handoff test asserted only
+  that the command contained `/graphify`, so the drift was invisible; it now pins the exact string.
+
+## Documentation
+
+* **CHANGED [`CLAUDE.md`](CLAUDE.md) follows the documented Claude Code standard** — under 200
+  lines, organised by topic, and carrying only what cannot be derived from the codebase. It now
+  states the two-tree split and the application invariants it was silent on, having documented only
+  `/graphify` while the repo grew a nine-thousand-line application.
+* **NEW Path-scoped rules** ([`.claude/rules/`](.claude/rules/)) — the answer contract and the
+  ingestion workflow, loaded on demand when a matching package is opened rather than on every turn.
+* **CHANGED [`RUNNING.md`](RUNNING.md) documents the passage-index location** and `WDB_INDEX`;
+  `read-ui/.env.local.example` documents `WDB_KB` as validated-when-set.
+* **FIXED [`pyproject.toml`](pyproject.toml)'s version was `0.1.0`** while the release counter,
+  the tags and the badges were on `0.0.x`. The release workflow reads the version from this
+  changelog and never touched the manifest, so it drifted from the start. All four now agree.
+
 # WDB 0.0.4
 
 The release where WDB stops being a knowledge-graph repo you read and becomes a **system you

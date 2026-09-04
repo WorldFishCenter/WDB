@@ -16,33 +16,16 @@ decision without dispatching.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
+
+from wdb_contract import (
+    Verdict, association_lines, claim_lines, figure_lines, unanswered_lines,
+)
 
 from .backends import live_backends, replay_backends
 from .contract import RouterAnswer
 from .dispatch import answer
 from .routing import route
-
-
-def _render_citation(mode: str, cit) -> list[str]:
-    """Per-mode citation formatting — each mode's citation IS a different artifact."""
-    out = [f"      source : {cit.source_file}"]
-    if mode == "A":
-        out.append(f"      edge   : {cit.locator}  [{cit.confidence}]")
-        if cit.note:
-            out.append(f"      at     : {cit.note}")
-    elif mode == "B":
-        if getattr(cit, "note", ""):
-            out.append(f"      note   : {cit.note}")
-        out.append(f"      span   : {cit.location}")
-        out.append(f"      quote  : {cit.quote[:200].replace(chr(10), ' ').strip()}…")
-        out.append(f"      nodes  : {', '.join(cit.nodes) or '—'}")
-    elif mode == "C":
-        out.append(f"      note   : {cit.note}")
-        out.append("      sql    : " + cit.sql.replace("\n", "\n               "))
-        out.append("      result : " + json.dumps(cit.result))
-    return out
 
 
 def render(ans: RouterAnswer) -> str:
@@ -52,26 +35,24 @@ def render(ans: RouterAnswer) -> str:
     out.append(f"GROUNDED BY → {', '.join(ans.modes_grounded) or '— (nothing)'}\n")
 
     for i, claim in enumerate(ans.claims, 1):
-        out.append(f"CLAIM {i} [{claim.mode}]: {claim.text}")
-        for cit in claim.citations:
-            out.extend(_render_citation(claim.mode, cit))
+        out.extend(claim_lines(claim, index=i))
 
     if ans.associations:
-        out.append(f"\nASSOCIATIONS ({len(ans.associations)} edge(s)):")
-        for e in ans.associations[:12]:
-            conf = e.get("confidence", "")
-            out.append(f"  {e.get('source')} --{e.get('relation', '?')}--> "
-                       f"{e.get('target')}  [{conf}]")
+        out.append("")
+        out.extend(association_lines(ans.associations, limit=12))
 
     for fig in ans.figures:
-        out.append(f"\nFIGURE {fig.spec}")
-        out.append("  query  : " + fig.query.replace("\n", "\n           "))
-        out.append("  result : " + json.dumps(fig.result))
+        out.append("")
+        out.extend(figure_lines(fig))
+
+    if ans.verdict is Verdict.VERIFIED_NEGATIVE:
+        # the graph was consulted and records no connection — a correct answer, not a
+        # coverage failure. Before the shared contract this verdict died at the merge.
+        out.append("\nVERDICT: verified negative (checked, and the answer is no)")
 
     if ans.unanswered:
-        out.append("\nUNANSWERED (no mode could ground — stated, not hidden):")
-        for u in ans.unanswered:
-            out.append(f"  • {u}")
+        out.append("")
+        out.extend(unanswered_lines(ans.unanswered))
 
     return "\n".join(out)
 

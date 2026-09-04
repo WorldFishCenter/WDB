@@ -10,6 +10,7 @@ from mode_b import answer_question
 from mode_b.fixtures import Q_COVERED, Q_UNCOVERED, RECORDED_PASSAGES, RECORDED_SYNTHESIS
 from mode_b.retrieve import ReplayRetriever
 from mode_b.synth import ReplaySynthesizer
+from wdb_contract import UnansweredCode
 
 
 def _wire():
@@ -36,5 +37,7 @@ def test_uncovered_question_is_refused_not_synthesised(graph, wdb_root):
 
     assert not answer.answered
     assert answer.claims == []
-    assert answer.unanswered and Q_UNCOVERED in answer.unanswered[0]
-    assert "not available" in answer.unanswered[0]
+    assert answer.unanswered and answer.unanswered[0].part == Q_UNCOVERED
+    assert answer.unanswered[0].code in (UnansweredCode.NO_COVERAGE,
+                                         UnansweredCode.THIN_RETRIEVAL,
+                                         UnansweredCode.NO_PASSAGE)

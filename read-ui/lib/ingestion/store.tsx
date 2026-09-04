@@ -60,7 +60,7 @@ export function IngestionProvider({ children }: { children: React.ReactNode }) {
     try {
       const r = roleRef.current;
       const user = r === "curator" ? "curator" : "amina.k";
-      const [subs, bs] = await Promise.all([api.listSubmissions(r, user), api.buildStatus()]);
+      const [subs, bs] = await Promise.all([api.listSubmissions(r, user), api.buildStatus(r, user)]);
       setSubmissions(subs);
       setBuild(bs);
       setBackendOnline(true);

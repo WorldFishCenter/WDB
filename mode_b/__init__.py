@@ -16,11 +16,16 @@ from .index import build_index, open_collection
 from .join import associations, doc_stem, load_graph, nodes_for_source, passages_for_node
 from .model import EMBED_MODEL, RERANK_MODEL, SYNTH_MODEL
 from .pipeline import answer_question, load_graph_default
+from .rerank import CrossEncoderReranker, NullReranker, Reranker, load_reranker
 from .retrieve import LiveRetriever, Passage, ReplayRetriever, Retriever
 from .synth import LiveSynthesizer, ReplaySynthesizer, Synthesizer
 
 __all__ = [
     "Answer",
+    "Reranker",
+    "CrossEncoderReranker",
+    "NullReranker",
+    "load_reranker",
     "Claim",
     "Citation",
     "refusal",

@@ -13,7 +13,7 @@ import json
 import subprocess
 from pathlib import Path
 
-from .config import ENRICHER, WDB_ROOT
+from . import config
 from .models import ColumnEntry, DraftedNote, SubmissionInput
 
 
@@ -46,8 +46,8 @@ def _domain(col: dict) -> str:
 def _run_enricher(path: Path) -> dict | None:
     try:
         proc = subprocess.run(
-            ["uv", "run", str(ENRICHER), str(path), "--json"],
-            cwd=str(WDB_ROOT),
+            ["uv", "run", str(config.ENRICHER), str(path), "--json"],
+            cwd=str(config.WDB_ROOT),
             capture_output=True,
             text=True,
             timeout=180,

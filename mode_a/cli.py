@@ -12,6 +12,8 @@ from __future__ import annotations
 import argparse
 import sys
 
+from wdb_contract import Verdict, association_lines, claim_lines, unanswered_lines
+
 from . import extract
 from .contract import Answer
 from .fixtures import RECORDED
@@ -21,22 +23,18 @@ from .reasoner import LiveReasoner, ReplayReasoner
 
 
 def _render(answer: Answer) -> str:
-    out: list[str] = []
-    out.append(f"[path: {answer.path or '—'}]")
+    out: list[str] = [f"[path: {answer.path or '—'}]"]
     for claim in answer.claims:
-        out.append(f"CLAIM [{claim.mode}]: {claim.text}")
-        for k, cit in enumerate(claim.citations, 1):
-            note = f"  ({cit.note})" if cit.note else ""
-            out.append(f"  [{k}] {cit.locator}  [{cit.confidence}]")
-            out.append(f"      source : {cit.source_file}{note}")
+        out.extend(claim_lines(claim))
     if answer.associations:
-        out.append(f"\nASSOCIATIONS ({len(answer.associations)} edge(s) in the subgraph):")
-        for e in answer.associations[:8]:
-            out.append(f"  {e.get('source')}  --{e.get('relation', '?')}[{e.get('confidence')}]-->  {e.get('target')}")
-    if answer.connected is False:
-        out.append("\nCONNECTED: false (the graph records no connection)")
-    for u in answer.unanswered:
-        out.append(f"NOT AVAILABLE: {u}")
+        out.append("")
+        out.extend(association_lines(answer.associations))
+    if answer.verdict is Verdict.VERIFIED_NEGATIVE:
+        # a verified negative is a correct answer, not a coverage failure — say so plainly
+        out.append("\nVERDICT: verified negative (the graph records no connection)")
+    if answer.unanswered:
+        out.append("")
+        out.extend(unanswered_lines(answer.unanswered))
     return "\n".join(out) if out else "(empty answer)"
 
 

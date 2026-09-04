@@ -16,6 +16,7 @@ from mode_c.fixtures.resolutions import OUT_OF_BAND_GILLNET
 
 from wdb_router import answer
 from wdb_router.backends import replay_backends
+from wdb_contract import UnansweredCode
 
 
 # --- Mode C: vetted-band gate ------------------------------------------------- #
@@ -27,8 +28,7 @@ def test_mode_c_out_of_band_is_refused_not_computed():
     assert not ans.answered                                  # no fabricated number
     assert not ans.claims and not ans.figures
     assert ans.unanswered                                    # stated (§6 r4)
-    reason = " ".join(ans.unanswered).lower()
-    assert "vetted band" in reason or "distinctive" in reason
+    assert any(u.code is UnansweredCode.OUT_OF_BAND for u in ans.unanswered)
 
 
 # --- Mode A: cite-check downgrade --------------------------------------------- #
@@ -57,7 +57,7 @@ def test_mode_a_failed_cite_check_never_surfaces_fabrication():
     blob = " ".join(
         [c.text for c in ans.claims]
         + [cit.locator for c in ans.claims for cit in c.citations]
-        + ans.unanswered
+        + [u.text for u in ans.unanswered]
     )
     assert "fake_node_xyz" not in blob            # the fabricated edge never surfaces
     assert "totally_made_up" not in blob

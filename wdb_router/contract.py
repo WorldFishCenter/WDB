@@ -1,5 +1,4 @@
-"""The unified answer contract (three-mode architecture doc §6) + the routing-seam
-decision type.
+"""The routing-seam decision type, and the router's view of the §6 contract.
 
 Two things live here, deliberately together because they bound the router's seam:
 
@@ -10,25 +9,32 @@ Two things live here, deliberately together because they bound the router's seam
   deliberately minimal — just the routes, no agent state — so "leave room for an agent"
   stays a clean boundary, not speculative machinery.
 
-* :class:`RouterAnswer` — the router's view of §6: one response that merges the fragments
-  each mode returned — ``claims`` (each carrying its own ``mode`` tag and ≥1 citation), a
-  typed ``associations`` payload (graph edges, from Mode A and Mode B), ``figures`` (Mode C
-  only), and an ``unanswered`` list for any part no mode could ground.
+* :class:`RouterAnswer` — a :class:`wdb_contract.Answer` plus the question it answers and the
+  routes that were fired. It is **not** a re-declaration of the contract: it inherits every
+  field, so a field added to the shared ``Answer`` cannot be dropped here by omission. That is
+  precisely what used to happen — this class had its own field list and its own ``answered``
+  rule, so Mode A's ``connected`` verdict and Mode C's ``disambiguation`` candidates died at
+  the merge and a verified negative was re-rendered as a coverage refusal.
 
 Faithful reuse, not flattening: the merged ``claims`` hold the **native** ``Claim`` objects
-each mode produced — ``mode_a.contract.Claim`` (its citation IS the graph edge),
-``mode_b.contract.Claim`` (its citation IS the passage span + quote + nodes), and
-``mode_c.contract.Claim`` (its citation IS the SQL + result rows). They share one duck-typed
-interface — ``.text``, ``.mode``, ``.citations`` — so the router never collapses a mode's
-citation richness; it concatenates and renders per ``claim.mode``. The §6 invariants the
-router relies on are already enforced inside each mode (rule 1: no claim without a citation;
-rule 4: ungrounded parts go to ``unanswered``, never back-filled) — so merging is
-concatenation + de-duplication, nothing more.
+each mode produced — each with its own citation shape (Mode A's IS the graph edge, Mode B's IS
+the passage span + quote + nodes, Mode C's IS the SQL + result rows). They now share one
+declared shape (``wdb_contract.Claim`` with a ``mode`` tag), so the router never collapses a
+mode's citation richness; it concatenates and renders per ``claim.mode``. The §6 invariants are
+enforced in the contract itself (rule 1: ``Claim`` cannot be built without a citation; rule 4:
+ungrounded parts go to ``unanswered``), so merging is concatenation + de-duplication.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+
+from wdb_contract import Answer, Unanswered, UnansweredCode, Verdict, add_associations, merge
+
+__all__ = [
+    "Route", "RoutingDecision", "RouterAnswer",
+    "Answer", "Unanswered", "UnansweredCode", "Verdict", "add_associations", "merge",
+]
 
 
 @dataclass(frozen=True)
@@ -61,24 +67,15 @@ class RoutingDecision:
 
 
 @dataclass
-class RouterAnswer:
+class RouterAnswer(Answer):
     """The unified §6 answer a question's routed modes compose into.
 
-    ``claims`` are heterogeneous native ``Claim`` objects (Mode A/B/C); each has ``.text``,
-    ``.mode`` and a non-empty ``.citations`` tuple. ``unanswered`` is every part a dispatched
-    mode could not ground — stated, never hidden (§6 r4).
+    Inherits ``claims`` / ``associations`` / ``figures`` / ``unanswered`` / ``negative`` /
+    ``path`` — and therefore ``verdict`` and ``answered`` — from :class:`wdb_contract.Answer`.
     """
 
-    question: str
+    question: str = ""
     routes: list[Route] = field(default_factory=list)
-    claims: list = field(default_factory=list)         # native A/B/C Claim objects
-    associations: list = field(default_factory=list)   # graph edges (Mode A + Mode B)
-    figures: list = field(default_factory=list)        # Mode C only
-    unanswered: list[str] = field(default_factory=list)
-
-    @property
-    def answered(self) -> bool:
-        return bool(self.claims) or bool(self.figures)
 
     @property
     def modes_fired(self) -> list[str]:
@@ -91,21 +88,3 @@ class RouterAnswer:
         if self.figures:
             m.add("C")
         return sorted(m)
-
-
-def _edge_key(e: dict) -> tuple:
-    return (e.get("source"), e.get("relation"), e.get("target"))
-
-
-def add_associations(answer: RouterAnswer, edges: list) -> None:
-    """Merge graph edges into ``answer.associations``, de-duplicated by triple.
-
-    Mode A's subgraph edges and Mode B's document-grain associations are the same
-    graph.json link shape, so this de-dups cleanly across both.
-    """
-    seen = {_edge_key(e) for e in answer.associations}
-    for e in edges:
-        k = _edge_key(e)
-        if k not in seen:
-            seen.add(k)
-            answer.associations.append(e)

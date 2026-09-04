@@ -47,7 +47,10 @@ build/
 dist/
 
 # Mode B passage index — a regenerable artifact (rebuild with `python -m mode_b --ingest`),
-# never committed (keeps the PR diff code + tests; same stance as a re-derived graph).
+# never committed (keeps the PR diff code + tests; same stance as a re-derived graph). It lives
+# at `knowledge_base/.index/` (already covered by the `knowledge_base/` rule above) because the
+# index is derived from a specific KB's corpus and must follow it — see wdb_paths.INDEX_DIR.
+# The old in-package location stays listed so a leftover from before the move is never committed.
 mode_b/.index/
 
 # docs/ holds local-only POC design docs (untracked). Exclude its contents but keep
@@ -70,4 +73,16 @@ model_eval/
 
 .env
 /civ-kb
-commands
+# Anchored to the root: a bare `commands` would also match .claude/commands/, silently
+# ignoring any new /curate-style command file added there.
+/commands
+# Third-party agent skills, installed by tool and pinned by skills-lock.json (committed).
+# .agents/skills/ holds the one real copy of each skill; .claude/skills/ is only Claude Code's
+# discovery path — 37 symlinks into .agents/. Both are reinstallable from the lockfile, so
+# neither is committed: it keeps 37 vendored upstream skills out of WDB's diff and avoids
+# committing symlinks (which break for contributors on Windows without core.symlinks).
+# .claude/ itself is NOT ignored — agents/, commands/, rules/ and scripts/ there are WDB's own
+# and committed (CLAUDE.md requires the pinned model: in both .claude/agents/*.md to be
+# reviewable, and rules/ carries the path-scoped application invariants).
+/.agents/
+/.claude/skills/
